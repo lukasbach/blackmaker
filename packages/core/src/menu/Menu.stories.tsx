@@ -21,6 +21,16 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
       <MenuItem>
         Hello World
       </MenuItem>
+      <MenuItem selected={true}>
+        Selected Item
+      </MenuItem>
+      <MenuItem>
+        Hello World
+      </MenuItem>
+      <MenuItem disabled={true}>
+        Disabled item
+      </MenuItem>
+      <MenuBreak />
       <MenuItem intent={Intent.Primary} icon={IconName.Accessibility}>
         Hello World
       </MenuItem>
@@ -33,7 +43,6 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
       <MenuItem intent={Intent.Warning} icon={IconName.Accessibility} iconRight={IconName.AddCircle}>
         Hello World
       </MenuItem>
-      <MenuBreak />
       <MenuHeader>
         Other options
       </MenuHeader>

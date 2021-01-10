@@ -28,6 +28,7 @@ export const Button: React.FC<ButtonProps> = props => {
   const theme = useTheme();
 
   const Element = props.asAnchor ? 'a' : 'button';
+  const hasContent = !!props.children;
 
   return (
     <Element
@@ -40,22 +41,23 @@ export const Button: React.FC<ButtonProps> = props => {
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
         boxShadow: !props.minimal && !props.outlined && `0 2px 0 0px ${theme.getColorDarken(props.intent ?? Intent.Default, .4)}`,
         color: !props.minimal && !props.outlined ? theme.definition.textHightlightColor : (!props.intent || props.intent === Intent.Default ? theme.definition.textHightlightColor : theme.getColor(props.intent)),
-        fontSize: props.small ? '.7em' : '.8em',
+        fontSize: props.small ? '.7em' : props.large ? '.9em' : '.8em',
         fontWeight: 'bold',
         cursor: 'pointer',
         transition: '.1s background-color ease',
         outline: 'none',
         textAlign: props.textAlignment as Property.TextAlign,
-        display: props.fill ? 'block' : 'inline-block',
+        display: props.fill ? 'flex' : 'inline-flex',
+        alignItems: 'center',
         width: props.fill ? '100%' : undefined,
         margin: '2px 4px',
         padding: (
           props.large ? (
-            '14px'
+            hasContent  ? '14px 16px' : '14px'
           ) : props.small ? (
-            '6px 12px'
+            hasContent  ? '6px 12px' : '6px'
           ) : (
-            '8px 16px'
+            hasContent  ? '8px 16px' : '8px'
           )
         ),
         ':hover': {
@@ -80,9 +82,9 @@ export const Button: React.FC<ButtonProps> = props => {
           <RenderMaybeIcon
             icon={props.icon}
             iconProps={{
-              marginRight: true,
+              marginRight: hasContent,
               css: {
-                marginLeft: '-.3em'
+                marginLeft: hasContent && '-.3em'
               }
             }}
           />
@@ -90,9 +92,9 @@ export const Button: React.FC<ButtonProps> = props => {
           <RenderMaybeIcon
             icon={props.rightIcon}
             iconProps={{
-              marginLeft: true,
+              marginLeft: hasContent,
               css: {
-                marginRight: '-.3em'
+                marginRight: hasContent && '-.3em'
               }
             }}
           />

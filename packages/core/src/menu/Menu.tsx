@@ -3,6 +3,11 @@ import { noSelect, useTheme } from '..';
 import cxs from 'cxs';
 
 export interface MenuProps {
+  background?: boolean;
+  small?: boolean;
+  large?: boolean;
+  fill?: boolean;
+  // TODO
 }
 
 export const Menu: React.FC<MenuProps> = props => {

@@ -55,7 +55,8 @@ export const TextInput: React.FC<TextInputProps> = props => {
       <RenderMaybeIcon
         icon={props.leftElement}
         iconProps={{
-          marginRight: true
+          marginRight: true,
+          color: theme.getColor(props.intent)
         }}
       />
       <input
@@ -86,7 +87,7 @@ export const TextInput: React.FC<TextInputProps> = props => {
       <RenderMaybeIcon
         icon={props.rightElement}
         iconProps={{
-          marginLeft: true
+          marginLeft: true,
         }}
       />
     </div>

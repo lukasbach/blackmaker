@@ -27,7 +27,6 @@ const OverlayInner: React.FC<OverlayProps> = props => {
   }
 
   let className = '';
-  let TransitionContainer: React.FC;
 
   if (props.renderBackdrop) {
     className = cxs({
@@ -37,12 +36,6 @@ const OverlayInner: React.FC<OverlayProps> = props => {
       right: '0px',
       bottom: '0px',
       overflow: 'hidden',
-      backgroundColor: props.backdropColor ?? 'transparent',
-      ...(props.centerWithinBackdrop ? {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      } : {})
     });
   }
 
@@ -62,38 +55,65 @@ const OverlayInner: React.FC<OverlayProps> = props => {
 
   if (props.transition) {
     return (
-      <CSSTransition
-        in={props.isOpen}
-        timeout={{
-          enter: props.transition.enter.duration,
-          exit: props.transition.exit.duration
-        }}
-        onEnter={() => console.log("Enter")}
-        onExit={() => console.log("Exit")}
-        unmountOnExit={true}
-        classNames={{
-          enter: cxs({
-            opacity: props.transition.enter.opacity ? 0 : undefined,
-            transform: props.transition.enter.transform ?? undefined,
-          }),
-          enterActive: cxs({
-            opacity: props.transition.enter.opacity ? 1 : undefined,
-            transition: `${props.transition.enter.duration}ms all ease`,
-            transform: props.transition.enter.transform ? 'translateY(0) scale(1) !important' : undefined,
-          }),
-          exit: cxs({
-            opacity: props.transition.exit.opacity ? 1 : undefined,
-            transform: props.transition.exit.transform ? 'translateY(0) scale(1)' : undefined,
-          }),
-          exitActive: cxs({
-            opacity: props.transition.exit.opacity ? '0 !important' : undefined,
-            transform: props.transition.exit.transform ? props.transition.exit.transform + ' !important' : undefined,
-            transition: `${props.transition.exit.duration}ms all ease`
-          })
-        }}
-      >
-        { content }
-      </CSSTransition>
+      <div className={cxs({
+        height: '100%',
+        '> div': {
+          height: '100%',
+          backgroundColor: (props.backdropColor ?? 'rgba(0, 0, 0, 0)'),
+          ...(props.centerWithinBackdrop ? {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          } : {})
+        }
+      })}>
+        <CSSTransition
+          in={props.isOpen}
+          timeout={{
+            enter: props.transition.enter.duration,
+            exit: props.transition.exit.duration
+          }}
+          onEnter={() => console.log("Enter")}
+          onExit={() => console.log("Exit")}
+          unmountOnExit={true}
+          classNames={{
+            enter: cxs({
+              '> div': {
+                opacity: props.transition.enter.opacity ? 0 : undefined,
+                transform: props.transition.enter.transform ?? undefined,
+              },
+              backgroundColor: 'rgba(0, 0, 0, 0) !important'
+            }),
+            enterActive: cxs({
+              '> div': {
+                opacity: props.transition.enter.opacity ? 1 : undefined,
+                transition: `${props.transition.enter.duration}ms all ease`,
+                transform: props.transition.enter.transform ? 'translateY(0) scale(1) !important' : undefined,
+              },
+              transition: `${props.transition.enter.duration}ms all ease`,
+              backgroundColor: (props.backdropColor ?? 'rgba(0, 0, 0, 0)') + ' !important',
+            }),
+            exit: cxs({
+              '> div': {
+                opacity: props.transition.exit.opacity ? 1 : undefined,
+                transform: props.transition.exit.transform ? 'translateY(0) scale(1)' : undefined,
+              },
+              backgroundColor: (props.backdropColor ?? 'rgba(0, 0, 0, 0)'),
+            }),
+            exitActive: cxs({
+              '> div': {
+                opacity: props.transition.exit.opacity ? '0 !important' : undefined,
+                transform: props.transition.exit.transform ? props.transition.exit.transform + ' !important' : undefined,
+                transition: `${props.transition.exit.duration}ms all ease`
+              },
+              backgroundColor: 'rgba(0, 0, 0, 0) !important',
+              transition: `${props.transition.enter.duration}ms all ease`,
+            })
+          }}
+        >
+          { content }
+        </CSSTransition>
+      </div>
     )
   } else {
     return content;

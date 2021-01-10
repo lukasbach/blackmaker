@@ -65,6 +65,45 @@ export const AllButtons = () => {
         loading={true}
         icon={IconName.AddCircle}
       />
+      <AllIntents
+        icon={IconName.AddCircle}
+        small={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        large={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        small={true}
+        minimal={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        minimal={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        large={true}
+        minimal={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        small={true}
+        outlined={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        outlined={true}
+      />
+      <AllIntents
+        icon={IconName.AddCircle}
+        large={true}
+        outlined={true}
+      />
       <p>
         <Button fill>Filled Button</Button>
       </p>

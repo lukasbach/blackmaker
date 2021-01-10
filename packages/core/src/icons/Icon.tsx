@@ -17,15 +17,16 @@ export interface IconProps {
 
 export const Icon: React.FC<IconProps> = props => {
   const theme = useTheme();
+  const color = props.color || (props.intent ? theme.getColor(props.intent) : undefined);
 
   return (
     <span className={cxs({
       fontFamily: 'Material Icons Outlined',
       // fontWeight: 'normal',
       fontStyle: 'normal',
-      fontSize: props.size || '1.2em',
+      fontSize: props.size || '1.5em',
       fontWeight: 'normal',
-      color: props.color || props.intent ? theme.getColor(props.intent) : undefined,
+      color: color && `${color} !important`,
       display: 'inline-block',
       lineHeight: 1,
       textTransform: 'none',

@@ -9,10 +9,11 @@ export const MenuBreak: React.FC<MenuBreakProps> = props => {
   const theme = useTheme();
 
   return (
-    <div
-      className={ cxs({}) }
-    >
-      { props.children }
-    </div>
+    <hr
+      className={ cxs({
+        border: 'none',
+        borderBottom: `1px solid ${theme.definition.textDisabledColor}`,
+      }) }
+    />
   );
 };
