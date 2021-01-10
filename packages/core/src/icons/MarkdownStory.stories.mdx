@@ -1,0 +1,38 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Icon } from "./Icon";
+import { IconName } from "./IconName";
+import { Intent } from "..";
+
+<Meta title="Core/Icons/Icons" component={Icon} />
+
+# Icons
+
+<Canvas>
+  <Story name="Icon Example">
+    <Icon name={IconName.AddCircle} />
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="All Icons">
+    {
+      Object.keys(IconName).filter(name => !name.startsWith('_')).map(name => (
+        <div key={name}>
+          { [
+            Intent.Default,
+            Intent.Primary,
+            Intent.Info,
+            Intent.Warning,
+            Intent.Danger,
+            Intent.Success,
+          ].map(i => <Icon key={i} name={IconName[name]} intent={i} marginRight={true} /> ) }
+          <tt>IconName.{ name } ("{IconName[name]}")</tt>
+        </div>
+      ))
+    }
+  </Story>
+</Canvas>
+
+## Arguments
+
+<ArgsTable of={Icon} />

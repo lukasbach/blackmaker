@@ -1,0 +1,3 @@
+/packages/*/out
+node_modules
+storybook-static
