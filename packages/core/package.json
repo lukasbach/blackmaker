@@ -14,7 +14,7 @@
   "scripts": {
     "start": "tsc -w",
     "build": "yarn build-icons && yarn build-package",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "build-icons": "node ./scripts/compileIcons.js",
     "build-package": "tsc"
   },

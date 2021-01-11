@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { StatusBox } from './StatusBox';
 import { Button } from '../button/Button';
-import { IconName } from '../../out';
+import { IconName } from '..';
 
 export default {
   title: 'Core/Components/Status Box',
