@@ -8,19 +8,22 @@ export default {
   title: 'Core/Overlays/Overlay',
 } as Meta;
 
-const OverlayContent = (props) => (
-  <div {...props} className={cxs({
-    width: '400px',
-    height: '400px',
-    backgroundColor: 'rgba(125, 125, 125, .5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-  })}>
+const OverlayContent = props => (
+  <div
+    {...props}
+    className={cxs({
+      width: '400px',
+      height: '400px',
+      backgroundColor: 'rgba(125, 125, 125, .5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'white',
+    })}
+  >
     Hello!
   </div>
-)
+);
 
 export const Overlays: React.FC = () => {
   const [overlayId, setOverlayId] = useState<number>();
@@ -39,7 +42,7 @@ export const Overlays: React.FC = () => {
           renderBackdrop={true}
           centerWithinBackdrop={true}
           closeOnClickBackdrop={true}
-          renderContent={(p) => <OverlayContent {...p} />}
+          renderContent={p => <OverlayContent {...p} />}
           isOpen={overlayId === 0}
           onClose={() => setOverlayId(undefined)}
           transition={{
@@ -52,7 +55,7 @@ export const Overlays: React.FC = () => {
           renderBackdrop={true}
           centerWithinBackdrop={true}
           closeOnClickBackdrop={true}
-          renderContent={(p) => <OverlayContent {...p} />}
+          renderContent={p => <OverlayContent {...p} />}
           isOpen={overlayId === 1}
           onClose={() => setOverlayId(undefined)}
           transition={{
@@ -65,7 +68,7 @@ export const Overlays: React.FC = () => {
           renderBackdrop={true}
           centerWithinBackdrop={true}
           closeOnClickBackdrop={true}
-          renderContent={(p) => <OverlayContent {...p} />}
+          renderContent={p => <OverlayContent {...p} />}
           isOpen={overlayId === 2}
           onClose={() => setOverlayId(undefined)}
           transition={{
@@ -78,7 +81,7 @@ export const Overlays: React.FC = () => {
           renderBackdrop={true}
           centerWithinBackdrop={true}
           closeOnClickBackdrop={true}
-          renderContent={(p) => <OverlayContent {...p} />}
+          renderContent={p => <OverlayContent {...p} />}
           isOpen={overlayId === 3}
           onClose={() => setOverlayId(undefined)}
           transition={{
@@ -88,5 +91,5 @@ export const Overlays: React.FC = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};

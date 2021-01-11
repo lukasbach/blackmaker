@@ -14,5 +14,5 @@ export const brightTheme: ThemeDefinition = {
   textMutedColor: '#7e7e7e',
   textDisabledColor: '#bababa',
 
-  isDark: false
-}
+  isDark: false,
+};

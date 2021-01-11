@@ -36,17 +36,15 @@ export const Dialog: React.FC<DialogProps> = props => {
       centerWithinBackdrop={true}
       renderContent={p => (
         <div {...p}>
-          { props.closeButton && (
-            <OverlayCloseButton onClick={props.onClose} />
-          ) }
+          {props.closeButton && <OverlayCloseButton onClick={props.onClose} />}
           <CardContainer
             css={{
               minWidth: '300px',
-              maxWidth: '600px'
+              maxWidth: '600px',
             }}
             shadow={1}
           >
-            { props.title && (
+            {props.title && (
               <CardArea
                 header={true}
                 highlighted={props.highlightedTitle}
@@ -55,18 +53,18 @@ export const Dialog: React.FC<DialogProps> = props => {
                 content={props.title}
                 subtitle={props.subtitle}
               />
-            ) }
-            { props.children }
-            { props.footer && (
+            )}
+            {props.children}
+            {props.footer && (
               <CardArea
                 muted={true}
                 css={{
-                  textAlign: props.footerAlignRight ? 'right' : undefined
+                  textAlign: props.footerAlignRight ? 'right' : undefined,
                 }}
               >
-                { props.footer }
+                {props.footer}
               </CardArea>
-            ) }
+            )}
           </CardContainer>
         </div>
       )}

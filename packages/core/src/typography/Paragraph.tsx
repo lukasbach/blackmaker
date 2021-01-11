@@ -19,24 +19,32 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
 
   return (
     <p
-      className={ cxs({
+      className={cxs({
         lineHeight: props.running && '1.5em',
         fontSize: props.small ? '.8em' : props.large ? '1.2em' : '1em',
         margin: '0',
-        color: props.muted ? theme.definition.textMutedColor : props.disabled ? theme.definition.textDisabledColor : props.highlighted ? theme.definition.textHightlightColor : theme.definition.textColor,
-        ...(props.truncate ? {
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          wordWrap: 'normal',
-        } : {}),
+        color: props.muted
+          ? theme.definition.textMutedColor
+          : props.disabled
+          ? theme.definition.textDisabledColor
+          : props.highlighted
+          ? theme.definition.textHightlightColor
+          : theme.definition.textColor,
+        ...(props.truncate
+          ? {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              wordWrap: 'normal',
+            }
+          : {}),
         ...(props.noSelect ? noSelect : {}),
         ...props.css,
-      }) }
+      })}
       {...props.elementProps}
     >
-      { props.content }
-      { props.children }
+      {props.content}
+      {props.children}
     </p>
   );
 };

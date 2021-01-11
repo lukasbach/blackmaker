@@ -13,7 +13,7 @@ export const ComplexStatusBox = () => (
   <StatusBox
     title="Status Box title"
     paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    actions={ <Button icon={IconName.ChevronRight}>Do something else</Button> }
+    actions={<Button icon={IconName.ChevronRight}>Do something else</Button>}
     icon={IconName.AddAPhoto}
   />
 );
@@ -22,32 +22,17 @@ export const LoadingStatusBox = () => (
   <StatusBox
     title="Status Box title"
     paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    actions={ <Button icon={IconName.ChevronRight}>Do something else</Button> }
+    actions={<Button icon={IconName.ChevronRight}>Do something else</Button>}
     loading={true}
   />
 );
 
-export const StatusBoxJustTitle = () => (
-  <StatusBox
-    title="Status Box title"
-  />
-);
+export const StatusBoxJustTitle = () => <StatusBox title="Status Box title" />;
 
 export const StatusBoxJustParagraph = () => (
-  <StatusBox
-    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  />
+  <StatusBox paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
 );
 
-export const StatusBoxJustIcon = () => (
-  <StatusBox
-    icon={IconName.AddAPhoto}
-  />
-);
+export const StatusBoxJustIcon = () => <StatusBox icon={IconName.AddAPhoto} />;
 
-export const StatusBoxJustLoading = () => (
-  <StatusBox
-    loading={true}
-  />
-);
-
+export const StatusBoxJustLoading = () => <StatusBox loading={true} />;

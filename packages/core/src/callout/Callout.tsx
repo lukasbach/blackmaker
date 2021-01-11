@@ -27,72 +27,88 @@ export const Callout: React.FC<CalloutProps> = props => {
   const theme = useTheme();
 
   const backgroundColor = switchEnum(props.style ?? CalloutStyle.Minimal, [
-    [ CalloutStyle.Minimal, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2) ],
-    [ CalloutStyle.Outlined, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2) ],
-    [ CalloutStyle.Heavy, theme.getColor(props.intent) ],
-    [ CalloutStyle.LeftBorder, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2) ],
-    [ CalloutStyle.BackgroundColor, (
+    [CalloutStyle.Minimal, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2)],
+    [CalloutStyle.Outlined, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2)],
+    [CalloutStyle.Heavy, theme.getColor(props.intent)],
+    [CalloutStyle.LeftBorder, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2)],
+    [
+      CalloutStyle.BackgroundColor,
       switchEnum(props.backgroundColorStyle ?? 1, [
-        [ 1, theme.definition.primaryBackgroundColor ],
-        [ 2, theme.definition.secondaryBackgroundColor ],
-        [ 3, theme.definition.tertiaryBackgroundColor ],
-      ])
-    ) ],
+        [1, theme.definition.primaryBackgroundColor],
+        [2, theme.definition.secondaryBackgroundColor],
+        [3, theme.definition.tertiaryBackgroundColor],
+      ]),
+    ],
   ]);
 
   const TitleElement = `h${props.headingLevel ?? 1}` as 'h1';
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         backgroundColor: backgroundColor,
         color: theme.definition.textHightlightColor,
-        borderWidth: props.style === CalloutStyle.Outlined || props.style === CalloutStyle.BackgroundColor ? '1px' : '0',
-        borderColor: props.style === CalloutStyle.Outlined ? theme.getColor(props.intent) : new Color(backgroundColor).darken(.35).toString(),
+        borderWidth:
+          props.style === CalloutStyle.Outlined || props.style === CalloutStyle.BackgroundColor ? '1px' : '0',
+        borderColor:
+          props.style === CalloutStyle.Outlined
+            ? theme.getColor(props.intent)
+            : new Color(backgroundColor).darken(0.35).toString(),
         borderStyle: 'solid',
         marginBottom: '.8em',
         padding: '.8em',
         borderRadius: theme.definition.borderRadiusRegular,
         display: 'flex',
         borderLeft: props.style === CalloutStyle.LeftBorder && `6px solid ${theme.getColor(props.intent)}`,
-        fontSize: switchEnum(props.size, [
-          ['tiny', '.7em'],
-          ['small', '.85em'],
-          ['normal', '1em'],
-          ['large', '1.2em'],
-          ['x-large', '1.4em'],
-        ], '1em')
-      }) }
+        fontSize: switchEnum(
+          props.size,
+          [
+            ['tiny', '.7em'],
+            ['small', '.85em'],
+            ['normal', '1em'],
+            ['large', '1.2em'],
+            ['x-large', '1.4em'],
+          ],
+          '1em'
+        ),
+      })}
     >
-      { props.icon && (
+      {props.icon && (
         <div>
           <RenderMaybeIcon
             icon={props.icon}
             iconProps={{
               size: '2em',
               marginRight: '.4em',
-              color: props.style === CalloutStyle.Heavy ? theme.definition.textHightlightColor : theme.getColor(props.intent, theme.definition.textHightlightColor)
+              color:
+                props.style === CalloutStyle.Heavy
+                  ? theme.definition.textHightlightColor
+                  : theme.getColor(props.intent, theme.definition.textHightlightColor),
             }}
           />
         </div>
-      ) }
-      <div className={cxs({
-        flexGrow: 1
-      })}>
-        { props.title && (
+      )}
+      <div
+        className={cxs({
+          flexGrow: 1,
+        })}
+      >
+        {props.title && (
           <TitleElement
             className={cxs({
               fontSize: '1.4em',
               margin: '.1em 0 .4em 0',
-              color: props.style !== CalloutStyle.Heavy && theme.getColor(props.intent, theme.definition.textHightlightColor)
+              color:
+                props.style !== CalloutStyle.Heavy &&
+                theme.getColor(props.intent, theme.definition.textHightlightColor),
             })}
           >
-            { props.title }
+            {props.title}
           </TitleElement>
-        ) }
-        { props.children }
+        )}
+        {props.children}
       </div>
-      { props.onClose && (
+      {props.onClose && (
         <div>
           <RoundButton
             icon={IconName.Close}
@@ -100,7 +116,7 @@ export const Callout: React.FC<CalloutProps> = props => {
             intent={props.style !== CalloutStyle.Heavy && props.intent}
           />
         </div>
-      ) }
+      )}
     </div>
   );
 };

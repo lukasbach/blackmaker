@@ -13,7 +13,7 @@ export interface CardContainerProps extends HtmlElementProps {
 }
 
 export const CardContainerContext = React.createContext({
-  hovering: false
+  hovering: false,
 });
 
 export const CardContainer: React.FC<CardContainerProps> = props => {
@@ -34,10 +34,10 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
           setIsHovering(false);
         }
       }}
-      className={ cxs({
+      className={cxs({
         display: 'inline-block',
         backgroundColor: theme.definition.primaryBackgroundColor,
-        border: `1px solid ${new Color(theme.definition.primaryBackgroundColor).darken(.2)}`,
+        border: `1px solid ${new Color(theme.definition.primaryBackgroundColor).darken(0.2)}`,
         borderRadius: theme.definition.borderRadiusRegular,
         cursor: props.interactive && 'pointer',
         '> :first-child': {
@@ -49,17 +49,15 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
           borderBottomRightRadius: theme.definition.borderRadiusRegular,
         },
         ...theme.cssShadow(props.shadow),
-        ...props.css
-      }) }
+        ...props.css,
+      })}
       {...props.elementProps}
     >
-      { props.interactive ? (
-        <CardContainerContext.Provider value={{ hovering: isHovering }}>
-          { props.children }
-        </CardContainerContext.Provider>
+      {props.interactive ? (
+        <CardContainerContext.Provider value={{ hovering: isHovering }}>{props.children}</CardContainerContext.Provider>
       ) : (
         props.children
-      ) }
+      )}
     </div>
   );
 };

@@ -18,12 +18,12 @@ interface State {
   isOpen: boolean;
 }
 
-export class ContextMenuComponent extends React.Component<ContextMenuComponentProps, State>{
+export class ContextMenuComponent extends React.Component<ContextMenuComponentProps, State> {
   constructor(props) {
     super(props);
     this.state = {
       ...props,
-      isOpen: true
+      isOpen: true,
     };
   }
 
@@ -32,7 +32,7 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
   }
 
   public close() {
-    this.setState({ isOpen: false })
+    this.setState({ isOpen: false });
   }
 
   public isOpen() {
@@ -55,8 +55,8 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
               // https://github.com/palantir/blueprint/blob/develop/packages/core/src/components/context-menu/contextMenu.tsx#L107
               const newTarget = document.elementFromPoint(e.clientX, e.clientY);
               const { view, ...newEventInit } = e;
-              newTarget?.dispatchEvent(new MouseEvent("contextmenu", newEventInit));
-            })
+              newTarget?.dispatchEvent(new MouseEvent('contextmenu', newEventInit));
+            });
           }
         }}
         renderContent={props => (
@@ -64,7 +64,7 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
             style={{
               position: 'fixed',
               top: this.state.offset[0],
-              left: this.state.offset[1]
+              left: this.state.offset[1],
             }}
             {...props}
           >
@@ -74,17 +74,23 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
               placement={TooltipPlacement.BottomStart}
               offset={[0, 0]}
               noLeftPadding={true}
-              content={this.state.theme ? (
-                <ThemeProvider themeDefinition={this.state.theme}>
-                  <div className={cxs({
-                    width: 'max-content',
-                  })}>
-                    { this.state.menu }
-                  </div>
-                </ThemeProvider>
-              ) : this.state.menu}
+              content={
+                this.state.theme ? (
+                  <ThemeProvider themeDefinition={this.state.theme}>
+                    <div
+                      className={cxs({
+                        width: 'max-content',
+                      })}
+                    >
+                      {this.state.menu}
+                    </div>
+                  </ThemeProvider>
+                ) : (
+                  this.state.menu
+                )
+              }
             >
-              <div/>
+              <div />
             </Popover>
           </div>
         )}

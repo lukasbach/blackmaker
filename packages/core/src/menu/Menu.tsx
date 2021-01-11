@@ -15,16 +15,16 @@ export const Menu: React.FC<MenuProps> = props => {
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         display: 'inline-block',
         backgroundColor: theme.definition.menuBackgroundColor,
         borderRadius: theme.definition.borderRadiusSmall,
         padding: '8px',
         minWidth: '120px',
-        ...noSelect
-      }) }
+        ...noSelect,
+      })}
     >
-      { props.children }
+      {props.children}
     </div>
   );
 };

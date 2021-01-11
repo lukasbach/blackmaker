@@ -14,14 +14,8 @@ export const RenderMaybeIcon: React.FC<RenderMaybeIconProps> = props => {
 
   return (
     <>
-      { props.icon && (typeof props.icon === 'string' ? (
-        <Icon
-          name={props.icon}
-          {...(props.iconProps ?? {})}
-        />
-      ) : (
-        props.icon
-      )) }
+      {props.icon &&
+        (typeof props.icon === 'string' ? <Icon name={props.icon} {...(props.iconProps ?? {})} /> : props.icon)}
     </>
   );
 };

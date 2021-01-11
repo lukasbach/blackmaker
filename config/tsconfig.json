@@ -9,5 +9,12 @@
     "moduleResolution": "Node",
     "allowJs": false
   },
-  "exclude": ["node_modules", "../**/*.spec.ts", "../**/*.spec.tsx", "../**/*.stories.ts", "../**/*.stories.tsx", "../**/out"]
+  "exclude": [
+    "node_modules",
+    "../**/*.spec.ts",
+    "../**/*.spec.tsx",
+    "../**/*.stories.ts",
+    "../**/*.stories.tsx",
+    "../**/out"
+  ]
 }

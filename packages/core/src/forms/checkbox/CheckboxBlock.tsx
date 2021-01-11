@@ -34,14 +34,14 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         position: 'relative',
         display: 'inline-block',
         width: '1em',
         height: '1em',
         fontSize: size,
-        border: `1px solid ${darken(theme.definition.primaryBackgroundColor, .2)}`,
-        backgroundColor: checked ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, .08),
+        border: `1px solid ${darken(theme.definition.primaryBackgroundColor, 0.2)}`,
+        backgroundColor: checked ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
         borderRadius: theme.definition.borderRadiusSmall,
         textAlign: 'center',
         cursor: 'pointer',
@@ -51,15 +51,19 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
           top: '0',
           left: '0',
           zIndex: -1,
-          opacity: 0
+          opacity: 0,
         },
         ':hover': {
-          backgroundColor: checked ? theme.getColorDarken(intent, .05) : darken(theme.definition.primaryBackgroundColor, .12),
+          backgroundColor: checked
+            ? theme.getColorDarken(intent, 0.05)
+            : darken(theme.definition.primaryBackgroundColor, 0.12),
         },
         ':active': {
-        backgroundColor: checked ? theme.getColorDarken(intent, .1) : darken(theme.definition.primaryBackgroundColor, .2),
-      },
-      }) }
+          backgroundColor: checked
+            ? theme.getColorDarken(intent, 0.1)
+            : darken(theme.definition.primaryBackgroundColor, 0.2),
+        },
+      })}
       onClick={() => {
         props.onChange?.(!checked);
         setChecked(!checked);
@@ -79,7 +83,7 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
         size=".9em"
         css={{
           marginTop: '-.4em',
-          opacity: checked === false ? 0 : 1
+          opacity: checked === false ? 0 : 1,
         }}
       />
     </div>

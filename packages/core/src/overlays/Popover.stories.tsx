@@ -13,147 +13,159 @@ export default {
 export const PopoverMenu: React.FC<Partial<PopoverProps>> = props => {
   return (
     <Menu>
-      <MenuItem>
-        Hello World
-      </MenuItem>
-      <MenuItem>
-        Hello World
-      </MenuItem>
+      <MenuItem>Hello World</MenuItem>
+      <MenuItem>Hello World</MenuItem>
       <Popover
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
-        content={(
+        content={
           <Menu>
-            <MenuItem>
-              Hello World
-            </MenuItem>
+            <MenuItem>Hello World</MenuItem>
             <Popover
               trigger={PopoverOpenTrigger.HoverReference}
               placement={TooltipPlacement.RightStart}
-              content={(
+              content={
                 <Menu>
-                  <MenuItem>
-                    Hello World
-                  </MenuItem>
-                  <MenuItem>
-                    Hello World
-                  </MenuItem>
+                  <MenuItem>Hello World</MenuItem>
+                  <MenuItem>Hello World</MenuItem>
                 </Menu>
-              )}
+              }
             >
-              <MenuItem iconRight={IconName.ChevronRight}>
-                Hello World
-              </MenuItem>
+              <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
             </Popover>
           </Menu>
-        )}
+        }
       >
-        <MenuItem iconRight={IconName.ChevronRight}>
-          Hello World
-        </MenuItem>
+        <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
       </Popover>
     </Menu>
   );
-}
+};
 
 export const PopoverMenuClickTrigger: React.FC<Partial<PopoverProps>> = props => {
   return (
     <Menu>
-      <MenuItem>
-        Hello World
-      </MenuItem>
-      <MenuItem>
-        Hello World
-      </MenuItem>
+      <MenuItem>Hello World</MenuItem>
+      <MenuItem>Hello World</MenuItem>
       <Popover
         trigger={PopoverOpenTrigger.ClickReference}
         placement={TooltipPlacement.RightStart}
-        content={(
+        content={
           <Menu>
-            <MenuItem>
-              Hello World
-            </MenuItem>
+            <MenuItem>Hello World</MenuItem>
             <Popover
               trigger={PopoverOpenTrigger.ClickReference}
               placement={TooltipPlacement.RightStart}
-              content={(
+              content={
                 <Menu>
-                  <MenuItem>
-                    Hello World
-                  </MenuItem>
-                  <MenuItem>
-                    Hello World
-                  </MenuItem>
+                  <MenuItem>Hello World</MenuItem>
+                  <MenuItem>Hello World</MenuItem>
                 </Menu>
-              )}
+              }
             >
-              <MenuItem iconRight={IconName.ChevronRight}>
-                Hello World
-              </MenuItem>
+              <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
             </Popover>
           </Menu>
-        )}
+        }
       >
-        <MenuItem iconRight={IconName.ChevronRight}>
-          Hello World
-        </MenuItem>
+        <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
       </Popover>
     </Menu>
   );
-}
+};
 
 export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
   return (
     <Menu>
-      <MenuItem>
-        Hello World
-      </MenuItem>
-      <MenuItem>
-        Hello World
-      </MenuItem>
+      <MenuItem>Hello World</MenuItem>
+      <MenuItem>Hello World</MenuItem>
       <Popover
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
-        content={(
+        content={
           <Menu>
-            <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
-              <Menu>
-                <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
-                  <Menu>
-                    <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
+            <Popover
+              trigger={PopoverOpenTrigger.HoverReference}
+              placement={TooltipPlacement.RightStart}
+              content={
+                <Menu>
+                  <Popover
+                    trigger={PopoverOpenTrigger.HoverReference}
+                    placement={TooltipPlacement.RightStart}
+                    content={
                       <Menu>
-                        <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
-                          <Menu>
-                            <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
-                              <Menu>
-                                <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
+                        <Popover
+                          trigger={PopoverOpenTrigger.HoverReference}
+                          placement={TooltipPlacement.RightStart}
+                          content={
+                            <Menu>
+                              <Popover
+                                trigger={PopoverOpenTrigger.HoverReference}
+                                placement={TooltipPlacement.RightStart}
+                                content={
                                   <Menu>
-                                    <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
-                                      <Menu>
-                                        <Popover trigger={PopoverOpenTrigger.HoverReference} placement={TooltipPlacement.RightStart} content={(
-                                          <div>Bonjour!</div>
-                                        )}><MenuItem>Recurse me!</MenuItem></Popover>
-                                      </Menu>
-                                    )}><MenuItem>Recurse me!</MenuItem></Popover>
+                                    <Popover
+                                      trigger={PopoverOpenTrigger.HoverReference}
+                                      placement={TooltipPlacement.RightStart}
+                                      content={
+                                        <Menu>
+                                          <Popover
+                                            trigger={PopoverOpenTrigger.HoverReference}
+                                            placement={TooltipPlacement.RightStart}
+                                            content={
+                                              <Menu>
+                                                <Popover
+                                                  trigger={PopoverOpenTrigger.HoverReference}
+                                                  placement={TooltipPlacement.RightStart}
+                                                  content={
+                                                    <Menu>
+                                                      <Popover
+                                                        trigger={PopoverOpenTrigger.HoverReference}
+                                                        placement={TooltipPlacement.RightStart}
+                                                        content={<div>Bonjour!</div>}
+                                                      >
+                                                        <MenuItem>Recurse me!</MenuItem>
+                                                      </Popover>
+                                                    </Menu>
+                                                  }
+                                                >
+                                                  <MenuItem>Recurse me!</MenuItem>
+                                                </Popover>
+                                              </Menu>
+                                            }
+                                          >
+                                            <MenuItem>Recurse me!</MenuItem>
+                                          </Popover>
+                                        </Menu>
+                                      }
+                                    >
+                                      <MenuItem>Recurse me!</MenuItem>
+                                    </Popover>
                                   </Menu>
-                                )}><MenuItem>Recurse me!</MenuItem></Popover>
-                              </Menu>
-                            )}><MenuItem>Recurse me!</MenuItem></Popover>
-                          </Menu>
-                        )}><MenuItem>Recurse me!</MenuItem></Popover>
+                                }
+                              >
+                                <MenuItem>Recurse me!</MenuItem>
+                              </Popover>
+                            </Menu>
+                          }
+                        >
+                          <MenuItem>Recurse me!</MenuItem>
+                        </Popover>
                       </Menu>
-                    )}><MenuItem>Recurse me!</MenuItem></Popover>
-                  </Menu>
-                )}><MenuItem>Recurse me!</MenuItem></Popover>
-              </Menu>
-            )}><MenuItem>Recurse me!</MenuItem></Popover>
+                    }
+                  >
+                    <MenuItem>Recurse me!</MenuItem>
+                  </Popover>
+                </Menu>
+              }
+            >
+              <MenuItem>Recurse me!</MenuItem>
+            </Popover>
           </Menu>
-        )}
+        }
       >
-        <MenuItem iconRight={IconName.ChevronRight}>
-          Recurse me!
-        </MenuItem>
+        <MenuItem iconRight={IconName.ChevronRight}>Recurse me!</MenuItem>
       </Popover>
     </Menu>
   );
-}
+};

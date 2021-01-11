@@ -27,15 +27,13 @@ export const TextInput: React.FC<TextInputProps> = props => {
   const theme = useTheme();
   const [hasFocus, setHasFocus] = useState(false);
 
-  const borderColor = hasFocus ? (
-    theme.getColor(props.intent ?? Intent.Primary)
-  ) : (
-    new Color(theme.definition.primaryBackgroundColor).darken(theme.isDark ? .3 : .3).toString()
-  );
+  const borderColor = hasFocus
+    ? theme.getColor(props.intent ?? Intent.Primary)
+    : new Color(theme.definition.primaryBackgroundColor).darken(theme.isDark ? 0.3 : 0.3).toString();
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         display: props.fill ? 'flex' : 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -43,20 +41,22 @@ export const TextInput: React.FC<TextInputProps> = props => {
         borderRadius: props.round ? '999px' : theme.definition.borderRadiusSmall,
         border: `1px solid ${borderColor}`,
         transition: '.2s border-color ease',
-        backgroundColor: new Color(theme.definition.primaryBackgroundColor).darken(theme.isDark ? .1 : -.1).toString(),
+        backgroundColor: new Color(theme.definition.primaryBackgroundColor)
+          .darken(theme.isDark ? 0.1 : -0.1)
+          .toString(),
         margin: '4px',
         padding: '0 .8em',
         fontSize: props.small ? '.85em' : props.large ? '1.2em' : '1em',
         color: theme.getColor(props.intent, theme.definition.textHightlightColor),
-        ...props.css
-      }) }
+        ...props.css,
+      })}
       {...props.elementProps}
     >
       <RenderMaybeIcon
         icon={props.leftElement}
         iconProps={{
           marginRight: true,
-          color: theme.getColor(props.intent)
+          color: theme.getColor(props.intent),
         }}
       />
       <input
@@ -77,10 +77,12 @@ export const TextInput: React.FC<TextInputProps> = props => {
           backgroundColor: 'transparent',
           border: 'none',
           outline: 'none',
-          color: props.disabled ? theme.definition.textMutedColor : theme.getColor(props.intent, theme.definition.textHightlightColor),
+          color: props.disabled
+            ? theme.definition.textMutedColor
+            : theme.getColor(props.intent, theme.definition.textHightlightColor),
           fontSize: '1em',
           cursor: props.disabled && 'not-allowed',
-          ...props.inputCss
+          ...props.inputCss,
         })}
         {...props.inputElementProps}
       />

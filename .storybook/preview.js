@@ -21,9 +21,7 @@ function ThemeWrapper(props) {
         `}
       </style>
       <ThemeProvider themeDefinition={useDarkMode() ? darkTheme : brightTheme}>
-        <div className="story-inner">
-          {props.children}
-        </div>
+        <div className="story-inner">{props.children}</div>
       </ThemeProvider>
     </>
   );
@@ -31,9 +29,13 @@ function ThemeWrapper(props) {
 
 addParameters({
   // viewMode: 'docs', // Remove if default view should be canvas mode
-  viewMode: 'canvas'
+  viewMode: 'canvas',
 });
 
 export const decorators = [
-  Story => <ThemeWrapper><Story/></ThemeWrapper>
+  Story => (
+    <ThemeWrapper>
+      <Story />
+    </ThemeWrapper>
+  ),
 ];

@@ -19,5 +19,5 @@ export enum TooltipPlacement {
 // https://github.com/palantir/blueprint/blob/develop/packages/core/src/components/popover/popperUtils.ts
 /** Converts a full placement to one of the four positions by stripping text after the `-`. */
 export function getTooltipPlacementPosition(placement: TooltipPlacement) {
-  return placement.split("-")[0] as TooltipPlacement;
+  return placement.split('-')[0] as TooltipPlacement;
 }

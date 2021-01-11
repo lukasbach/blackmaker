@@ -15,32 +15,22 @@ export default {
 
 const MenuExample = (props: { text: string }) => (
   <Menu>
-    <MenuItem>
-      { props.text }
-    </MenuItem>
-    <MenuItem>
-      { props.text }
-    </MenuItem>
+    <MenuItem>{props.text}</MenuItem>
+    <MenuItem>{props.text}</MenuItem>
     <Popover
       trigger={PopoverOpenTrigger.HoverReference}
       placement={TooltipPlacement.RightStart}
-      content={(
+      content={
         <Menu>
-          <MenuItem>
-            { props.text }
-          </MenuItem>
-          <MenuItem>
-            { props.text }
-          </MenuItem>
+          <MenuItem>{props.text}</MenuItem>
+          <MenuItem>{props.text}</MenuItem>
         </Menu>
-      )}
+      }
     >
-      <MenuItem iconRight={IconName.ChevronRight}>
-        { props.text }
-      </MenuItem>
+      <MenuItem iconRight={IconName.ChevronRight}>{props.text}</MenuItem>
     </Popover>
   </Menu>
-)
+);
 
 export const ContextMenuImperative: React.FC = props => {
   return (
@@ -51,11 +41,9 @@ export const ContextMenuImperative: React.FC = props => {
       <Button onClick={() => ContextMenuManager.show(<MenuExample text="Hello World" />, [200, 500], darkTheme)}>
         Open at 200, 500
       </Button>
-      <Button onClick={() => ContextMenuManager.hide()}>
-        Hide
-      </Button>
+      <Button onClick={() => ContextMenuManager.hide()}>Hide</Button>
     </div>
-  )
+  );
 };
 
 export const ContextMenuHook: React.FC = () => {
@@ -63,22 +51,28 @@ export const ContextMenuHook: React.FC = () => {
   const { contextMenuProps: contextMenuPropsOuter } = useContextMenu(<MenuExample text="Outer Context Menu" />);
 
   return (
-    <div className={cxs({
-      width: '400px',
-      height: '300px',
-      border: '2px solid black',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    })} {...contextMenuPropsOuter}>
-      <div className={cxs({
-        width: '50px',
-        height: '50px',
-        padding: '10px',
-        backgroundColor: 'rgba(255, 255, 255, .1)'
-      })} {...contextMenuPropsInner}>
+    <div
+      className={cxs({
+        width: '400px',
+        height: '300px',
+        border: '2px solid black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      })}
+      {...contextMenuPropsOuter}
+    >
+      <div
+        className={cxs({
+          width: '50px',
+          height: '50px',
+          padding: '10px',
+          backgroundColor: 'rgba(255, 255, 255, .1)',
+        })}
+        {...contextMenuPropsInner}
+      >
         Right click!
       </div>
     </div>
-  )
-}
+  );
+};

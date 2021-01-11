@@ -15,7 +15,7 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
   return (
     <button
       onClick={props.onClick}
-      className={ cxs({
+      className={cxs({
         outline: 'none',
         display: 'inline-block',
         borderRadius: '9999px',
@@ -33,17 +33,15 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
         transition: '.2s background-color ease',
         cursor: 'pointer',
         ':hover': {
-          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2),
+          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2),
         },
         ':active': {
           transition: '.05s background-color ease',
-          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .35),
+          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.35),
         },
-      }) }
+      })}
     >
-      <Icon
-        name={props.icon}
-      />
+      <Icon name={props.icon} />
     </button>
   );
 };

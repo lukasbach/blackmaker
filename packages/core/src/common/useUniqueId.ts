@@ -15,4 +15,4 @@ export const useUniqueId = (name = '__blackmaker_element') => {
   }, [name]);
 
   return id;
-}
+};

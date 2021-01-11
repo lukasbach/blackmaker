@@ -1,5 +1,5 @@
-import {Intent} from "..";
-import Color from "color";
+import { Intent } from '..';
+import Color from 'color';
 import { ThemeDefinition } from './ThemeDefinition';
 
 export class Theme {
@@ -70,7 +70,7 @@ export class Theme {
   public switchByDarkness(switchColor: string, ifDarkColor: string, ifLightColor: string) {
     const col = new Color(switchColor);
     const [r, g, b] = [col.red(), col.green(), col.blue()];
-    const hsp = Math.sqrt(.299 * r * r + .587 * g * g + .114 * b * b);
+    const hsp = Math.sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
     return hsp > 127.5 ? ifLightColor : ifDarkColor;
   }
 

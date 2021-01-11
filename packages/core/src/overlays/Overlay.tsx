@@ -41,40 +41,47 @@ const OverlayInner: React.FC<OverlayProps> = props => {
 
   const content = (
     <div
-      className={ className }
-      onMouseDown={useCallback((e) => {
-        if (props.closeOnClickBackdrop) {
-          props.onClose();
-        }
-        props.handleBackdropMouseDown?.(e);
-      }, [props.closeOnClickBackdrop, props.onClose, props.handleBackdropMouseDown])}
+      className={className}
+      onMouseDown={useCallback(
+        e => {
+          if (props.closeOnClickBackdrop) {
+            props.onClose();
+          }
+          props.handleBackdropMouseDown?.(e);
+        },
+        [props.closeOnClickBackdrop, props.onClose, props.handleBackdropMouseDown]
+      )}
     >
-      { props.renderContent({ onMouseDown: e => e.stopPropagation() }) }
+      {props.renderContent({ onMouseDown: e => e.stopPropagation() })}
     </div>
   );
 
   if (props.transition) {
     return (
-      <div className={cxs({
-        height: '100%',
-        '> div': {
+      <div
+        className={cxs({
           height: '100%',
-          backgroundColor: (props.backdropColor ?? 'rgba(0, 0, 0, 0)'),
-          ...(props.centerWithinBackdrop ? {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          } : {})
-        }
-      })}>
+          '> div': {
+            height: '100%',
+            backgroundColor: props.backdropColor ?? 'rgba(0, 0, 0, 0)',
+            ...(props.centerWithinBackdrop
+              ? {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }
+              : {}),
+          },
+        })}
+      >
         <CSSTransition
           in={props.isOpen}
           timeout={{
             enter: props.transition.enter.duration,
-            exit: props.transition.exit.duration
+            exit: props.transition.exit.duration,
           }}
-          onEnter={() => console.log("Enter")}
-          onExit={() => console.log("Exit")}
+          onEnter={() => console.log('Enter')}
+          onExit={() => console.log('Exit')}
           unmountOnExit={true}
           classNames={{
             enter: cxs({
@@ -82,7 +89,7 @@ const OverlayInner: React.FC<OverlayProps> = props => {
                 opacity: props.transition.enter.opacity ? 0 : undefined,
                 transform: props.transition.enter.transform ?? undefined,
               },
-              backgroundColor: 'rgba(0, 0, 0, 0) !important'
+              backgroundColor: 'rgba(0, 0, 0, 0) !important',
             }),
             enterActive: cxs({
               '> div': {
@@ -98,28 +105,29 @@ const OverlayInner: React.FC<OverlayProps> = props => {
                 opacity: props.transition.exit.opacity ? 1 : undefined,
                 transform: props.transition.exit.transform ? 'translateY(0) scale(1)' : undefined,
               },
-              backgroundColor: (props.backdropColor ?? 'rgba(0, 0, 0, 0)'),
+              backgroundColor: props.backdropColor ?? 'rgba(0, 0, 0, 0)',
             }),
             exitActive: cxs({
               '> div': {
                 opacity: props.transition.exit.opacity ? '0 !important' : undefined,
-                transform: props.transition.exit.transform ? props.transition.exit.transform + ' !important' : undefined,
-                transition: `${props.transition.exit.duration}ms all ease`
+                transform: props.transition.exit.transform
+                  ? props.transition.exit.transform + ' !important'
+                  : undefined,
+                transition: `${props.transition.exit.duration}ms all ease`,
               },
               backgroundColor: 'rgba(0, 0, 0, 0) !important',
               transition: `${props.transition.enter.duration}ms all ease`,
-            })
+            }),
           }}
         >
-          { content }
+          {content}
         </CSSTransition>
       </div>
-    )
+    );
   } else {
     return content;
   }
 };
-
 
 export const Overlay: React.FC<OverlayProps> = props => {
   const theme = useTheme();
@@ -131,9 +139,10 @@ export const Overlay: React.FC<OverlayProps> = props => {
     document.body.appendChild(el);
   }
 
-  return ReactDOM.createPortal((
+  return ReactDOM.createPortal(
     <ThemeProvider themeDefinition={theme.definition} noRoot={true}>
       <OverlayInner {...props} />
-    </ThemeProvider>
-  ), el);
+    </ThemeProvider>,
+    el
+  );
 };

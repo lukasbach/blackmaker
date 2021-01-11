@@ -1,18 +1,18 @@
-import {ThemeContext} from './ThemeContext';
-import * as React from "react";
-import {Theme} from "./Theme";
+import { ThemeContext } from './ThemeContext';
+import * as React from 'react';
+import { Theme } from './Theme';
 import cxs from 'cxs';
 import { ThemeDefinition } from './ThemeDefinition';
 import { useEffect, useState } from 'react';
 
 export const ThemeProvider: React.FC<{
-  themeDefinition: ThemeDefinition,
-  noRoot?: boolean,
+  themeDefinition: ThemeDefinition;
+  noRoot?: boolean;
 }> = props => {
   const [theme, setTheme] = useState(props.themeDefinition);
   useEffect(() => {
     setTheme(props.themeDefinition);
-  }, [props.themeDefinition])
+  }, [props.themeDefinition]);
 
   if (!theme) {
     return null;
@@ -29,19 +29,18 @@ export const ThemeProvider: React.FC<{
         @import "https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700,800&display=swap";
         @import '~tippy.js/dist/svg-arrow.css';`}
       </style>
-      <div className={cxs({
-        backgroundColor: !props.noRoot && theme.primaryBackgroundColor,
-        width: !props.noRoot && '100%',
-        height: !props.noRoot && '100%',
-        overflow: !props.noRoot && 'auto',
-        color: !props.noRoot && theme.textColor,
-        fontFamily: '\'Montserrat\', sans-serif'
-      })}>
-        <ThemeContext.Provider value={theme}>
-          {props.children}
-        </ThemeContext.Provider>
+      <div
+        className={cxs({
+          backgroundColor: !props.noRoot && theme.primaryBackgroundColor,
+          width: !props.noRoot && '100%',
+          height: !props.noRoot && '100%',
+          overflow: !props.noRoot && 'auto',
+          color: !props.noRoot && theme.textColor,
+          fontFamily: "'Montserrat', sans-serif",
+        })}
+      >
+        <ThemeContext.Provider value={theme}>{props.children}</ThemeContext.Provider>
       </div>
     </>
   );
 };
-

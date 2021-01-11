@@ -18,55 +18,51 @@ export const StatusBox: React.FC<StatusBoxProps> = props => {
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         width: '100%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
-      }) }
+        alignItems: 'center',
+      })}
     >
-      { (!!props.icon || props.loading) ? (
+      {!!props.icon || props.loading ? (
         <div>
-          { !props.loading ? (
+          {!props.loading ? (
             <RenderMaybeIcon
               icon={props.icon}
               iconProps={{
                 size: '6em',
-                color: theme.definition.textMutedColor
+                color: theme.definition.textMutedColor,
               }}
             />
           ) : (
-            <Spinner
-              size={64}
-            />
+            <Spinner size={64} />
           )}
         </div>
-      ) : undefined }
-      { props.title && (
-        <Heading css={{ marginTop: '.4em', maxWidth: '280px' }}>
-          { props.title }
-        </Heading>
-      ) }
-      { props.paragraph && (
+      ) : undefined}
+      {props.title && <Heading css={{ marginTop: '.4em', maxWidth: '280px' }}>{props.title}</Heading>}
+      {props.paragraph && (
         <Paragraph
           content={props.paragraph}
           small={true}
           css={{
             maxWidth: '280px',
             textAlign: 'center',
-            marginTop: '.8em'
+            marginTop: '.8em',
           }}
         />
-      ) }
-      { props.actions && (
-        <div className={cxs({
-          marginTop: '2em'
-        })}>
-          { props.actions }
+      )}
+      {props.actions && (
+        <div
+          className={cxs({
+            marginTop: '2em',
+          })}
+        >
+          {props.actions}
         </div>
-      ) }
+      )}
     </div>
   );
 };

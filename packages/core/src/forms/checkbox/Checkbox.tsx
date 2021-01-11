@@ -13,36 +13,30 @@ export interface CheckboxProps extends CheckboxBlockProps {
 export const Checkbox: React.FC<CheckboxProps> = props => {
   const theme = useTheme();
 
-  const box = (
-    <div>
-      { props.slider ? (
-        <Slider {...props} />
-      ) : (
-        <CheckboxBlock {...props} />
-      ) }
-    </div>
-  );
+  const box = <div>{props.slider ? <Slider {...props} /> : <CheckboxBlock {...props} />}</div>;
 
   return (
     <label
-      className={ cxs({
+      className={cxs({
         display: 'flex',
         alignItems: 'center',
         margin: '.4em 0',
-        cursor: 'pointer'
-      }) }
+        cursor: 'pointer',
+      })}
     >
-      { !props.alignBoxRight && box }
-      <p className={cxs({
-        margin: '0 .6em',
-        fontSize: props.large ? '1.2em' : '1em',
-        flexGrow: 1,
-        ...noSelect
-      })}>
-        { props.label }
-        { props.children }
+      {!props.alignBoxRight && box}
+      <p
+        className={cxs({
+          margin: '0 .6em',
+          fontSize: props.large ? '1.2em' : '1em',
+          flexGrow: 1,
+          ...noSelect,
+        })}
+      >
+        {props.label}
+        {props.children}
       </p>
-      { props.alignBoxRight && box }
+      {props.alignBoxRight && box}
     </label>
   );
 };

@@ -33,27 +33,18 @@ export const Playground = () => (
     <div>
       <TextInput
         leftElement={IconName.AccessAlarm}
-        rightElement={(
-          <Button
-            icon={IconName.ChevronRight}
-            minimal={true}
-            small={true}
-          />
-        )}
+        rightElement={<Button icon={IconName.ChevronRight} minimal={true} small={true} />}
         defaultValue="Input with button"
       />
     </div>
     <div>
       <TextInput
         leftElement={IconName.AccessAlarm}
-        rightElement={(
-          <Button
-            icon={IconName.ChevronRight}
-            minimal={true}
-          >
+        rightElement={
+          <Button icon={IconName.ChevronRight} minimal={true}>
             Start!
           </Button>
-        )}
+        }
         defaultValue="Input with button"
       />
     </div>
@@ -72,11 +63,11 @@ export const Playground = () => (
     <div>
       <TextInput leftElement={IconName.AccessAlarm} defaultValue="Readonly Input" readonly={true} />
     </div>
-    { intents.map(i => (
+    {intents.map(i => (
       <div>
         <TextInput leftElement={IconName.AccessAlarm} defaultValue={`Intent ${i}`} key={i} intent={i} />
       </div>
-    )) }
+    ))}
     <div>
       <TextInput leftElement={IconName.AccessAlarm} defaultValue="Filled Input" fill={true} />
     </div>

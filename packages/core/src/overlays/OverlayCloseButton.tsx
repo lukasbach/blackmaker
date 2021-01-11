@@ -10,23 +10,19 @@ export interface OverlayCloseButtonProps {
 export const OverlayCloseButton: React.FC<OverlayCloseButtonProps> = props => {
   return (
     <div
-      className={ cxs({
+      className={cxs({
         position: 'relative',
-        overflow: 'visible'
-      }) }
+        overflow: 'visible',
+      })}
     >
       <div
-        className={ cxs({
+        className={cxs({
           position: 'absolute',
           right: '-60px',
-          top: '0px'
-        }) }
+          top: '0px',
+        })}
       >
-        <RoundButton
-          icon={IconName.Close}
-          size={2}
-          onClick={props.onClick}
-        />
+        <RoundButton icon={IconName.Close} size={2} onClick={props.onClick} />
       </div>
     </div>
   );

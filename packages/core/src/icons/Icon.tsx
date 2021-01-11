@@ -20,32 +20,34 @@ export const Icon: React.FC<IconProps> = props => {
   const color = props.color || (props.intent ? theme.getColor(props.intent) : undefined);
 
   return (
-    <span className={cxs({
-      fontFamily: 'Material Icons Outlined',
-      // fontWeight: 'normal',
-      fontStyle: 'normal',
-      fontSize: props.size || '1.5em',
-      fontWeight: 'normal',
-      color: color && `${color} !important`,
-      display: 'inline-block',
-      lineHeight: 1,
-      textTransform: 'none',
-      letterSpacing: 'normal',
-      wordWrap: 'normal',
-      whiteSpace: 'nowrap',
-      direction: 'ltr',
-      verticalAlign: 'middle',
-      padding: props.padding,
-      marginLeft: props.marginLeft && (typeof props.marginLeft === "boolean" ? '.2em' : props.marginLeft),
-      marginRight: props.marginRight && (typeof props.marginRight === "boolean" ? '.2em' : props.marginRight),
-      ['-webkit-font-smoothing']: 'antialiased',
-      ['text-rendering']: 'optimizeLegibility',
-      ['-moz-osx-font-smoothing']: 'grayscale',
-      ['font-feature-settings']: 'liga',
-      ...noSelect,
-      ...(props.css ?? {})
-    })}>
-      { props.name }
+    <span
+      className={cxs({
+        fontFamily: 'Material Icons Outlined',
+        // fontWeight: 'normal',
+        fontStyle: 'normal',
+        fontSize: props.size || '1.5em',
+        fontWeight: 'normal',
+        color: color && `${color} !important`,
+        display: 'inline-block',
+        lineHeight: 1,
+        textTransform: 'none',
+        letterSpacing: 'normal',
+        wordWrap: 'normal',
+        whiteSpace: 'nowrap',
+        direction: 'ltr',
+        verticalAlign: 'middle',
+        padding: props.padding,
+        marginLeft: props.marginLeft && (typeof props.marginLeft === 'boolean' ? '.2em' : props.marginLeft),
+        marginRight: props.marginRight && (typeof props.marginRight === 'boolean' ? '.2em' : props.marginRight),
+        ['-webkit-font-smoothing']: 'antialiased',
+        ['text-rendering']: 'optimizeLegibility',
+        ['-moz-osx-font-smoothing']: 'grayscale',
+        ['font-feature-settings']: 'liga',
+        ...noSelect,
+        ...(props.css ?? {}),
+      })}
+    >
+      {props.name}
     </span>
   );
 };

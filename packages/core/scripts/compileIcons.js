@@ -1,5 +1,5 @@
 const fs = require('fs');
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
 const numberAlts = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
 const warning = `/************************
@@ -14,47 +14,50 @@ const warning = `/************************
 
 let names = [];
 
-fetch('https://raw.githubusercontent.com/google/material-design-icons/master/font/MaterialIconsOutlined-Regular.codepoints')
-    .then(result => result.text())
-    .then(text => {
-        const icons = text
-            .split('\n')
-            .filter(line => !!line)
-            .map(line => line.split(' '))
-            .map(([iconName, codePoint]) => {
-                let newIconName = '';
-                let i = 0;
+fetch(
+  'https://raw.githubusercontent.com/google/material-design-icons/master/font/MaterialIconsOutlined-Regular.codepoints'
+)
+  .then(result => result.text())
+  .then(text => {
+    const icons = text
+      .split('\n')
+      .filter(line => !!line)
+      .map(line => line.split(' '))
+      .map(([iconName, codePoint]) => {
+        let newIconName = '';
+        let i = 0;
 
-                if (parseInt(iconName[i]) > -1) {
-                    // If starting with a number, replace with matching text
-                    // e.g. One instead of 1
-                    newIconName += numberAlts[parseInt(iconName[0])];
-                    i++;
-                }
+        if (parseInt(iconName[i]) > -1) {
+          // If starting with a number, replace with matching text
+          // e.g. One instead of 1
+          newIconName += numberAlts[parseInt(iconName[0])];
+          i++;
+        }
 
-                newIconName += iconName[i].toUpperCase(); // Make first letter uppercase
-                i++;
+        newIconName += iconName[i].toUpperCase(); // Make first letter uppercase
+        i++;
 
-                for (; i < iconName.length; i++) {
-                    if (iconName[i] === '_') { // Encountered _ symbol in icon name
-                        newIconName += iconName[i + 1].toUpperCase(); // Make next letter uppercase
-                        // newIconName += iconName.substring(0, i) + iconName.substring(i + 1, iconName.length); // Remove _ char
-                        i++; // Next char
-                    } else {
-                        newIconName += iconName[i];
-                    }
-                }
+        for (; i < iconName.length; i++) {
+          if (iconName[i] === '_') {
+            // Encountered _ symbol in icon name
+            newIconName += iconName[i + 1].toUpperCase(); // Make next letter uppercase
+            // newIconName += iconName.substring(0, i) + iconName.substring(i + 1, iconName.length); // Remove _ char
+            i++; // Next char
+          } else {
+            newIconName += iconName[i];
+          }
+        }
 
-                if (names.includes(newIconName)) {
-                  return '';
-                }
+        if (names.includes(newIconName)) {
+          return '';
+        }
 
-                names.push(newIconName);
+        names.push(newIconName);
 
-                return `  ${newIconName} = '${iconName}',`;
-            })
-            .join('\n');
+        return `  ${newIconName} = '${iconName}',`;
+      })
+      .join('\n');
 
-        const fileContents = `${warning}export enum IconName {\n${icons}\n}\n`;
-        fs.writeFileSync(__dirname + '/../src/IconName.ts', fileContents, { encoding: 'utf8' });
-    });
+    const fileContents = `${warning}export enum IconName {\n${icons}\n}\n`;
+    fs.writeFileSync(__dirname + '/../src/IconName.ts', fileContents, { encoding: 'utf8' });
+  });

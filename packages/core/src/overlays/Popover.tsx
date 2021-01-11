@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { useTheme } from '..';
 import cxs from 'cxs';
-import Tippy from "@tippyjs/react";
+import Tippy from '@tippyjs/react';
 import { TooltipPlacement } from '../common';
 import Color from 'color';
 import { useEffect, useState } from 'react';
 import { Overlay } from './Overlay';
 
-
 export enum PopoverOpenTrigger {
   HoverReference,
   ClickReference,
-  Manually
+  Manually,
 }
 
 export interface PopoverProps {
@@ -34,11 +33,11 @@ export const Popover: React.FC<PopoverProps> = props => {
     <div
       onMouseEnter={() => props.trigger === PopoverOpenTrigger.HoverReference && setIsOpen(true)}
       onMouseLeave={() => props.trigger === PopoverOpenTrigger.HoverReference && setIsOpen(false)}
-      className={ cxs({
+      className={cxs({
         '& .tippy-svg-arrow path': {
-          fill: new Color(theme.definition.menuBackgroundColor).darken(.2).toString(),
+          fill: new Color(theme.definition.menuBackgroundColor).darken(0.2).toString(),
         },
-      }) }
+      })}
     >
       <Tippy
         arrow={false}
@@ -54,19 +53,19 @@ export const Popover: React.FC<PopoverProps> = props => {
         offset={props.offset ?? [5, 0]}
         animation={true}
         className={cxs({ outline: 'none' })}
-        content={(
+        content={
           <div
             className={cxs({
-              paddingLeft: !props.noLeftPadding && '12px'
+              paddingLeft: !props.noLeftPadding && '12px',
             })}
           >
-            { props.content }
+            {props.content}
           </div>
-        )}
+        }
       >
         <span onClick={() => props.trigger === PopoverOpenTrigger.ClickReference && toggleIsOpen()}>
           {/*<ButtonPropsContext.Provider value={{ active: isOpen }}>*/}
-            { props.children }
+          {props.children}
           {/*</ButtonPropsContext.Provider>*/}
         </span>
       </Tippy>

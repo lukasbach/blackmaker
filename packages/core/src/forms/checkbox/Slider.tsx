@@ -27,7 +27,7 @@ export const Slider: React.FC<CheckboxBlockProps> = props => {
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         position: 'relative',
         display: 'inline-flex',
         alignItems: 'center',
@@ -37,7 +37,10 @@ export const Slider: React.FC<CheckboxBlockProps> = props => {
         width: '1.6em',
         height: '1em',
         fontSize: props.large ? '1.4em' : '1em',
-        border: `1px solid ${darken(checked ? theme.getColor(intent) : darken(theme.definition.tertiaryBackgroundColor, 0), .5)}`,
+        border: `1px solid ${darken(
+          checked ? theme.getColor(intent) : darken(theme.definition.tertiaryBackgroundColor, 0),
+          0.5
+        )}`,
         backgroundColor: checked ? theme.getColor(intent) : darken(theme.definition.tertiaryBackgroundColor, 0),
         borderRadius: '9999px',
         textAlign: 'center',
@@ -48,15 +51,19 @@ export const Slider: React.FC<CheckboxBlockProps> = props => {
           top: '0',
           left: '0',
           zIndex: -1,
-          opacity: 0
+          opacity: 0,
         },
         ':hover': {
-          backgroundColor: checked ? theme.getColorDarken(intent, .15) : darken(theme.definition.tertiaryBackgroundColor, .15),
+          backgroundColor: checked
+            ? theme.getColorDarken(intent, 0.15)
+            : darken(theme.definition.tertiaryBackgroundColor, 0.15),
         },
         ':active': {
-          backgroundColor: checked ? theme.getColorDarken(intent, .25) : darken(theme.definition.tertiaryBackgroundColor, .25),
+          backgroundColor: checked
+            ? theme.getColorDarken(intent, 0.25)
+            : darken(theme.definition.tertiaryBackgroundColor, 0.25),
         },
-      }) }
+      })}
       onClick={() => {
         props.onChange?.(!checked);
         setChecked(!checked);
@@ -73,11 +80,11 @@ export const Slider: React.FC<CheckboxBlockProps> = props => {
       />
       <div
         className={cxs({
-          backgroundColor: lighten(theme.definition.primaryBackgroundColor, .2),
-          border: `1px solid ${lighten(theme.definition.primaryBackgroundColor, -.2)}`,
+          backgroundColor: lighten(theme.definition.primaryBackgroundColor, 0.2),
+          border: `1px solid ${lighten(theme.definition.primaryBackgroundColor, -0.2)}`,
           borderRadius: '9999px',
           width: '.6em',
-          height: '.6em'
+          height: '.6em',
         })}
       />
     </div>

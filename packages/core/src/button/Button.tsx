@@ -36,12 +36,18 @@ export const Button: React.FC<ButtonProps> = props => {
       onClick={props.onClick}
       href={props.href}
       target={props.target}
-      className={ cxs({
+      className={cxs({
         backgroundColor: !props.minimal && !props.outlined ? theme.getColor(props.intent) : 'transparent',
         borderRadius: theme.definition.borderRadiusSmall,
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
-        boxShadow: !props.minimal && !props.outlined && `0 2px 0 0px ${theme.getColorDarken(props.intent ?? Intent.Default, .4)}`,
-        color: !props.minimal && !props.outlined ? theme.definition.textHightlightColor : theme.getBrandTextColor(props.intent),
+        boxShadow:
+          !props.minimal &&
+          !props.outlined &&
+          `0 2px 0 0px ${theme.getColorDarken(props.intent ?? Intent.Default, 0.4)}`,
+        color:
+          !props.minimal && !props.outlined
+            ? theme.definition.textHightlightColor
+            : theme.getBrandTextColor(props.intent),
         fontSize: props.small ? '.7em' : props.large ? '1em' : '.8em',
         fontWeight: 'bold',
         cursor: 'pointer',
@@ -52,58 +58,56 @@ export const Button: React.FC<ButtonProps> = props => {
         alignItems: 'center',
         width: props.fill ? '100%' : undefined,
         margin: '2px 4px',
-        padding: (
-          props.large ? (
-            hasContent  ? '10px 14px' : '10px'
-          ) : props.small ? (
-            hasContent  ? '6px 12px' : '6px'
-          ) : (
-            hasContent  ? '8px 16px' : '8px'
-          )
-        ),
+        padding: props.large
+          ? hasContent
+            ? '10px 14px'
+            : '10px'
+          : props.small
+          ? hasContent
+            ? '6px 12px'
+            : '6px'
+          : hasContent
+          ? '8px 16px'
+          : '8px',
         ':hover': {
-          backgroundColor: !props.minimal && !props.outlined ? (
-            theme.getColorLighten(props.intent ?? Intent.Default, .07)
-          ) : (
-            theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2)
-          ),
+          backgroundColor:
+            !props.minimal && !props.outlined
+              ? theme.getColorLighten(props.intent ?? Intent.Default, 0.07)
+              : theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2),
         },
         ':active': {
           transitionDuration: '.02s',
-          backgroundColor: !props.minimal && !props.outlined ? (
-            theme.getColorLighten(props.intent, .11)
-          ) : (
-            theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .3)
-          ),
+          backgroundColor:
+            !props.minimal && !props.outlined
+              ? theme.getColorLighten(props.intent, 0.11)
+              : theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.3),
         },
-      }) }
+      })}
     >
-      { !props.loading && (
+      {!props.loading && (
         <>
           <RenderMaybeIcon
             icon={props.icon}
             iconProps={{
               marginRight: hasContent,
               css: {
-                marginLeft: hasContent && '-.3em'
-              }
+                marginLeft: hasContent && '-.3em',
+              },
             }}
           />
-          { props.children }
+          {props.children}
           <RenderMaybeIcon
             icon={props.rightIcon}
             iconProps={{
               marginLeft: hasContent,
               css: {
-                marginRight: hasContent && '-.3em'
-              }
+                marginRight: hasContent && '-.3em',
+              },
             }}
           />
         </>
-      ) }
-      { props.loading && (
-        <Spinner />
       )}
+      {props.loading && <Spinner />}
     </Element>
   );
 };

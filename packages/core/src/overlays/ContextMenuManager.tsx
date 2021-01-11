@@ -13,13 +13,10 @@ class ContextMenuManagerClass {
       this.ctxPositionElement.classList.add('blackmaker-contextmenu');
       document.body.appendChild(this.ctxPositionElement);
 
-      this.component = ReactDOM.render<ContextMenuComponentProps>((
-        <ContextMenuComponent
-          offset={offset}
-          menu={menu}
-          theme={theme}
-        />
-      ), this.ctxPositionElement) as ContextMenuComponent;
+      this.component = ReactDOM.render<ContextMenuComponentProps>(
+        <ContextMenuComponent offset={offset} menu={menu} theme={theme} />,
+        this.ctxPositionElement
+      ) as ContextMenuComponent;
     }
 
     this.component.open(menu, theme, offset);
@@ -35,4 +32,4 @@ class ContextMenuManagerClass {
 }
 
 export const ContextMenuManager = new ContextMenuManagerClass();
-console.log("!!?")
+console.log('!!?');
