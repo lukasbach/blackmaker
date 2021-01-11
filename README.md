@@ -1,29 +1,13 @@
-# Typed React Package Starter
+# Blackmaker UI
 
-![Testing](https://github.com/lukasbach/typed-react-package-starter/workflows/Testing/badge.svg)
-![Pretty](https://github.com/lukasbach/typed-react-package-starter/workflows/Pretty/badge.svg)
-![Storybook Deployment](https://github.com/lukasbach/typed-react-package-starter/workflows/Storybook%20Deployment/badge.svg)
+![Testing](https://github.com/lukasbach/blackmaker/workflows/Testing/badge.svg)
+![Pretty](https://github.com/lukasbach/blackmaker/workflows/Pretty/badge.svg)
+![Storybook Deployment](https://github.com/lukasbach/blackmaker/workflows/Storybook%20Deployment/badge.svg)
 
-A template for repositories of custom React components and hooks, properly typed with Typescript, divided
-into sub packages with Lerna and visually testable with Storybook. `packages/` includes two examples for
-subpackages that you can build upon: `packages/component-package` with a sample implementation of a custom
-react component, including a _spec_ test-file, a storybook story and a MDX-based storybook documentation; And
-`packages/hook-package` with a sample implementation of a custom react hook, including a hook test implementation
-and a storybook story.
-
-It also automatically deploys the storybook to GitHub Pages. You can view the default storybook here:
-
-https://lukasbach.github.io/typed-react-package-starter
+WIP React-based UI framework. Current storybook available at 
+https://lukasbach.github.io/blackmaker/
 
 ## Setup
-
-- Create a new repo based off this template by [by clicking here](https://github.com/lukasbach/typed-react-package-starter/generate)
-- Deployment automatically happens. Initialize GitHub Pages by going to the Repo's settings, scrolling down to
-  _GitHub Pages_, selecting the `gh-pages` branch and click on _Save_ (root directory is fine).
-- Implement your components and hooks by copying the template packages. Make sure to adapt the package names, repository
-  url and author in the respective `package.json` files.
-- Make sure to remove the template packages if you don't need them anymore. You can always copy them from the original
-  template repo again.
 
 When developing locally, run in the root directory...
 
