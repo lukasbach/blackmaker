@@ -11,6 +11,7 @@ jobs:
       - name: Install and Build 🔧
         run: | # Install npm packages and build the Storybook files
           yarn
+          yarn build
           yarn build-storybook
           mv ./storybook-static/index.html ./storybook-static/index.htm
       - name: Deploy 🚀
