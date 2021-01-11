@@ -39,8 +39,15 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
         backgroundColor: theme.definition.primaryBackgroundColor,
         border: `1px solid ${new Color(theme.definition.primaryBackgroundColor).darken(.2)}`,
         borderRadius: theme.definition.borderRadiusRegular,
-        overflow: 'hidden',
         cursor: props.interactive && 'pointer',
+        '> :first-child': {
+          borderTopLeftRadius: theme.definition.borderRadiusRegular,
+          borderTopRightRadius: theme.definition.borderRadiusRegular,
+        },
+        '> :last-child': {
+          borderBottomLeftRadius: theme.definition.borderRadiusRegular,
+          borderBottomRightRadius: theme.definition.borderRadiusRegular,
+        },
         ...theme.cssShadow(props.shadow),
         ...props.css
       }) }

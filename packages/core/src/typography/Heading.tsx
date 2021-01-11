@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Intent, switchEnum, ThemeContext, useTheme } from '..';
+import { HtmlElementProps, Intent, switchEnum, ThemeContext, useTheme } from '..';
 import cxs from 'cxs';
 import { useContext } from 'react';
 
-export interface HeadingProps {
+export interface HeadingProps extends HtmlElementProps {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   intent?: Intent;
 }
@@ -12,9 +12,6 @@ export const Heading: React.FC<HeadingProps> = props => {
   const theme = useTheme();
   const level = props.level ?? 1;
   const Tag = `h${level}` as any;
-
-  console.log(theme.definition.isDark, "...")
-  console.log(useContext(ThemeContext).isDark, "...")
 
   return (
     <Tag
@@ -36,7 +33,9 @@ export const Heading: React.FC<HeadingProps> = props => {
           [ 6, '.8em 0 .2em 0' ],
         ]),
         color: !props.intent || props.intent === Intent.Default ? theme.definition.textHightlightColor : theme.getColor(props.intent),
+        ...props.css
       }) }
+      {...props.elementProps}
     >
       { props.children }
     </Tag>

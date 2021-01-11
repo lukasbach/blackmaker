@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { HtmlElementProps, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
+import { darken, HtmlElementProps, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 import { Heading } from '../typography/Heading';
 import { Paragraph } from '../typography/Paragraph';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CardContainerContext } from './CardContainer';
 import Color from 'color';
 
@@ -15,31 +15,67 @@ export interface CardAreaProps extends HtmlElementProps {
   icon?: MaybeIcon;
   content?: string | JSX.Element;
   subtitle?: string | JSX.Element;
+  interactive?: boolean;
+  onClick?: () => any;
+  actions?: JSX.Element; // TODO Button Group
 }
 
 export const CardArea: React.FC<CardAreaProps> = props => {
+  const { hovering } = useContext(CardContainerContext);
+  const [hoveringActions, setHoveringActions] = useState(false);
   const theme = useTheme();
   const Element = props.headingLevel ? `h${props.headingLevel}` as any : 'div';
-  const { hovering } = useContext(CardContainerContext);
 
   const backgroundColor = props.muted ? theme.definition.secondaryBackgroundColor : props.highlighted ? theme.definition.tertiaryBackgroundColor : theme.definition.primaryBackgroundColor;
+  const backgroundColorHover = new Color(backgroundColor).lighten(theme.isDark ? .1 : -.05).toString();
 
   return (
     <Element
+      onClick={props.onClick}
       className={ cxs({
         display: 'block',
+        position: 'relative',
         padding: (props.header && !props.highlighted) ? '1.8em 1.6em 1.2em 1.6em' : '1.2em 1.6em',
         margin: '0',
         fontSize: '1em',
         fontWeight: props.header && 'bold' as any,
         color: props.header ? theme.definition.textHightlightColor : props.muted ? theme.definition.textMutedColor : undefined,
-        backgroundColor: hovering ? new Color(backgroundColor).lighten(theme.isDark ? .1 : -.05).toString() : backgroundColor,
+        backgroundColor: hovering ? backgroundColorHover : backgroundColor,
         textAlign: (props.header && !props.highlighted) ? 'center' : undefined,
         transition: '.1s background-color ease',
+        cursor: props.onClick && props.interactive && 'pointer',
+        ':hover': {
+          backgroundColor: props.interactive ? backgroundColorHover : undefined,
+        },
+        ':hover div:first-child': {
+          transition: '.1s opacity ease',
+          opacity: '1 !important',
+        },
+        ...(!hoveringActions && {
+          ':active': {
+            transition: '.01s background-color ease',
+            backgroundColor: props.onClick && props.interactive && lighten(backgroundColorHover, theme.isDark ? .1 : -.05),
+          },
+        }),
         ...props.css
       }) }
       {...props.elementProps}
     >
+      { props.actions && (
+        <div
+          className={cxs({
+            position: 'absolute',
+            top: '-10px',
+            right: '10px',
+            opacity: 0
+          })}
+          onClick={e => e.stopPropagation()}
+          onMouseEnter={() => setHoveringActions(true)}
+          onMouseLeave={() => setHoveringActions(false)}
+        >
+          { props.actions }
+        </div>
+      ) }
       <RenderMaybeIcon
         icon={props.icon}
         iconProps={{
