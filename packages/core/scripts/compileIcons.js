@@ -59,5 +59,5 @@ fetch(
       .join('\n');
 
     const fileContents = `${warning}export enum IconName {\n${icons}\n}\n`;
-    fs.writeFileSync(__dirname + '/../src/IconName.ts', fileContents, { encoding: 'utf8' });
+    fs.writeFileSync(__dirname + '/../src/icons/IconName.ts', fileContents, { encoding: 'utf8' });
   });
