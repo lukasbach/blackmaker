@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { Callout, CalloutProps, CalloutStyle } from './Callout';
 import { intents } from '../common/intents';
-import { IconName } from '../../out';
+import { IconName } from '..';
 
 export default {
   title: 'Core/Components/Callout',

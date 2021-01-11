@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 import { Dialog } from './Dialog';
-import { IconName } from '../../out';
+import { IconName } from '..';
 import { Button } from '../button/Button';
 import { Intent } from '../common';
 import { CardArea } from '../card/CardArea';

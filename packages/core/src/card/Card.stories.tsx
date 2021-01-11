@@ -4,7 +4,7 @@ import { CardContainer } from './CardContainer';
 import { CardArea } from './CardArea';
 import { Button } from '../button/Button';
 import { Intent } from '../common';
-import { IconName } from '../../out';
+import { IconName } from '..';
 
 export default {
   title: 'Core/Components/Cards',
