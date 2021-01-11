@@ -12,18 +12,54 @@ export class Theme {
   public getColor(intent?: Intent, defaultColor?: string) {
     switch (intent) {
       case Intent.Primary:
-        return this.definition.primaryColor;
+        return this.definition.brandColors.primary;
       case Intent.Warning:
-        return this.definition.warningColor;
+        return this.definition.brandColors.warning;
       case Intent.Danger:
-        return this.definition.dangerColor;
+        return this.definition.brandColors.danger;
       case Intent.Info:
-        return this.definition.infoColor;
+        return this.definition.brandColors.info;
       case Intent.Success:
-        return this.definition.successColor;
+        return this.definition.brandColors.success;
       case Intent.Default:
       default:
-        return defaultColor ?? this.definition.defaultColor;
+        return defaultColor ?? this.definition.brandColors.default;
+    }
+  }
+
+  public getBrandTextColor(intent?: Intent, defaultColor?: string) {
+    switch (intent) {
+      case Intent.Primary:
+        return this.definition.brandTextColors.primary;
+      case Intent.Warning:
+        return this.definition.brandTextColors.warning;
+      case Intent.Danger:
+        return this.definition.brandTextColors.danger;
+      case Intent.Info:
+        return this.definition.brandTextColors.info;
+      case Intent.Success:
+        return this.definition.brandTextColors.success;
+      case Intent.Default:
+      default:
+        return defaultColor ?? this.definition.brandTextColors.default;
+    }
+  }
+
+  public getMinimalBrandBaseColor(intent?: Intent, defaultColor?: string) {
+    switch (intent) {
+      case Intent.Primary:
+        return this.definition.minimalBrandBaseColors.primary;
+      case Intent.Warning:
+        return this.definition.minimalBrandBaseColors.warning;
+      case Intent.Danger:
+        return this.definition.minimalBrandBaseColors.danger;
+      case Intent.Info:
+        return this.definition.minimalBrandBaseColors.info;
+      case Intent.Success:
+        return this.definition.minimalBrandBaseColors.success;
+      case Intent.Default:
+      default:
+        return defaultColor ?? this.definition.minimalBrandBaseColors.default;
     }
   }
 

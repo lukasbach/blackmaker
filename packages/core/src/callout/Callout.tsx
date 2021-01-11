@@ -27,10 +27,10 @@ export const Callout: React.FC<CalloutProps> = props => {
   const theme = useTheme();
 
   const backgroundColor = switchEnum(props.style ?? CalloutStyle.Minimal, [
-    [ CalloutStyle.Minimal, theme.colorWithAlpha(theme.getColor(props.intent), .2) ],
-    [ CalloutStyle.Outlined, theme.colorWithAlpha(theme.getColor(props.intent), .2) ],
+    [ CalloutStyle.Minimal, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2) ],
+    [ CalloutStyle.Outlined, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2) ],
     [ CalloutStyle.Heavy, theme.getColor(props.intent) ],
-    [ CalloutStyle.LeftBorder, theme.colorWithAlpha(theme.getColor(props.intent), .2) ],
+    [ CalloutStyle.LeftBorder, theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2) ],
     [ CalloutStyle.BackgroundColor, (
       switchEnum(props.backgroundColorStyle ?? 1, [
         [ 1, theme.definition.primaryBackgroundColor ],

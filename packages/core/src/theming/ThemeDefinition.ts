@@ -1,10 +1,16 @@
+export interface BrandColorSet {
+  primary: string;
+  danger: string;
+  warning: string;
+  success: string;
+  info: string;
+  default: string;
+}
+
 export interface ThemeDefinition {
-  primaryColor: string;
-  dangerColor: string;
-  warningColor: string;
-  successColor: string;
-  infoColor: string;
-  defaultColor: string;
+  brandColors: BrandColorSet;
+  brandTextColors: BrandColorSet;
+  minimalBrandBaseColors: BrandColorSet;
 
   primaryBackgroundColor: string;
   secondaryBackgroundColor: string;

@@ -14,7 +14,9 @@ function ThemeWrapper(props) {
           }
           
           .story-inner {
-            margin: 24px;
+            padding: 24px;
+            height: 100%;
+            box-sizing: border-box;
           }
         `}
       </style>

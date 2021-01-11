@@ -4,6 +4,7 @@ import cxs from 'cxs';
 import { Alignment } from '../common/Alignment';
 import { IconName, Icon } from '..';
 import { Property } from 'csstype';
+import { Spinner } from '../spinner/Spinner';
 
 export interface ButtonProps {
   asAnchor?: boolean;
@@ -40,8 +41,8 @@ export const Button: React.FC<ButtonProps> = props => {
         borderRadius: theme.definition.borderRadiusSmall,
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
         boxShadow: !props.minimal && !props.outlined && `0 2px 0 0px ${theme.getColorDarken(props.intent ?? Intent.Default, .4)}`,
-        color: !props.minimal && !props.outlined ? theme.definition.textHightlightColor : (!props.intent || props.intent === Intent.Default ? theme.definition.textHightlightColor : theme.getColor(props.intent)),
-        fontSize: props.small ? '.7em' : props.large ? '.9em' : '.8em',
+        color: !props.minimal && !props.outlined ? theme.definition.textHightlightColor : theme.getBrandTextColor(props.intent),
+        fontSize: props.small ? '.7em' : props.large ? '1em' : '.8em',
         fontWeight: 'bold',
         cursor: 'pointer',
         transition: '.1s background-color ease',
@@ -53,7 +54,7 @@ export const Button: React.FC<ButtonProps> = props => {
         margin: '2px 4px',
         padding: (
           props.large ? (
-            hasContent  ? '14px 16px' : '14px'
+            hasContent  ? '10px 14px' : '10px'
           ) : props.small ? (
             hasContent  ? '6px 12px' : '6px'
           ) : (
@@ -64,7 +65,7 @@ export const Button: React.FC<ButtonProps> = props => {
           backgroundColor: !props.minimal && !props.outlined ? (
             theme.getColorLighten(props.intent ?? Intent.Default, .07)
           ) : (
-            theme.colorWithAlpha(theme.getColor(props.intent), .2)
+            theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2)
           ),
         },
         ':active': {
@@ -72,7 +73,7 @@ export const Button: React.FC<ButtonProps> = props => {
           backgroundColor: !props.minimal && !props.outlined ? (
             theme.getColorLighten(props.intent, .11)
           ) : (
-            theme.colorWithAlpha(theme.getColor(props.intent), .3)
+            theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .3)
           ),
         },
       }) }
@@ -101,10 +102,7 @@ export const Button: React.FC<ButtonProps> = props => {
         </>
       ) }
       { props.loading && (
-        <Icon
-          name={IconName.CheckCircleOutline}
-          marginRight={true}
-        />
+        <Spinner />
       )}
     </Element>
   );

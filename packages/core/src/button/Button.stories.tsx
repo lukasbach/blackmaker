@@ -38,7 +38,7 @@ export const AllButtons = () => {
       />
       <AllIntents
         children="Create Account"
-        rightIcon={IconName.AddCircle}
+        rightIcon={IconName.ChevronRight}
       />
       <AllIntents
         children="Create Account"

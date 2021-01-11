@@ -19,7 +19,7 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
         outline: 'none',
         display: 'inline-block',
         borderRadius: '9999px',
-        color: (!props.intent || props.intent === Intent.Default) ? theme.definition.textHightlightColor : theme.getColor(props.intent),
+        color: theme.getBrandTextColor(props.intent),
         backgroundColor: 'transparent',
         border: 'none',
         padding: '.6em',
@@ -33,11 +33,11 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
         transition: '.2s background-color ease',
         cursor: 'pointer',
         ':hover': {
-          backgroundColor: theme.colorWithAlpha(theme.getColor(props.intent), .2),
+          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .2),
         },
         ':active': {
           transition: '.05s background-color ease',
-          backgroundColor: theme.colorWithAlpha(theme.getColor(props.intent), .35),
+          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), .35),
         },
       }) }
     >
