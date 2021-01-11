@@ -1,11 +1,12 @@
 import { addParameters } from '@storybook/client-api';
 import { useDarkMode } from 'storybook-dark-mode';
 import { brightTheme, darkTheme, ThemeProvider } from '@blackmaker/core';
-import { ThemeContext } from "@blackmaker/core/src";
-import * as React from "react";
-import cxs from "cxs";
+import { ThemeContext } from '@blackmaker/core/src';
+import * as React from 'react';
+import cxs from 'cxs';
 
 function ThemeWrapper(props) {
+  const theme = useDarkMode() ? darkTheme : brightTheme;
   return (
     <>
       <style>
@@ -28,20 +29,18 @@ function ThemeWrapper(props) {
           }
         `}
       </style>
-      <ThemeContext.Provider value={useDarkMode() ? darkTheme : brightTheme}>
+      <ThemeContext.Provider value={theme}>
         <div
           className={cxs({
-            backgroundColor: (useDarkMode() ? darkTheme : brightTheme).primaryBackgroundColor,
-            color: (useDarkMode() ? darkTheme : brightTheme).textColor,
+            backgroundColor: theme.primaryBackgroundColor,
+            color: theme.textColor,
             width: '100%',
             height: '100%',
             overflow: 'auto',
             fontFamily: "'Montserrat', sans-serif",
           })}
         >
-          <div className="story-inner">
-            {props.children}
-          </div>
+          <div className="story-inner">{props.children}</div>
         </div>
       </ThemeContext.Provider>
     </>
@@ -52,8 +51,8 @@ addParameters({
   // viewMode: 'docs', // Remove if default view should be canvas mode
   viewMode: 'canvas',
   darkMode: {
-    current: 'dark'
-  }
+    current: 'dark',
+  },
 });
 
 export const decorators = [
