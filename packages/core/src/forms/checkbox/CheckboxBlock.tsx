@@ -15,7 +15,7 @@ export interface CheckboxBlockProps extends HtmlElementProps<HTMLInputElement> {
 export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
   const theme = useTheme();
   const ctxProps = useFormInputProps();
-  const props: CheckboxBlockProps = {...ctxProps, ...componentProps};
+  const props: CheckboxBlockProps = { ...ctxProps, ...componentProps };
   const checkbox = useRef<HTMLInputElement>();
   const [checked, setChecked] = useState(props.checked);
 

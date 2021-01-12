@@ -20,14 +20,20 @@ export interface TagProps {
 export const Tag: React.FC<TagProps> = props => {
   const theme = useTheme();
 
-  const backgroundColor = !props.minimal && !props.outlined ? theme.getColor(props.intent) : theme.colorWithAlpha(theme.getColor(props.intent), .2);
+  const backgroundColor =
+    !props.minimal && !props.outlined
+      ? theme.getColor(props.intent)
+      : theme.colorWithAlpha(theme.getColor(props.intent), 0.2);
 
   return (
     <div
-      className={ cxs({
+      className={cxs({
         display: 'inline-flex',
         backgroundColor: backgroundColor,
-        color: !props.minimal && !props.outlined ? theme.definition.textHightlightColor : theme.getBrandTextColor(props.intent),
+        color:
+          !props.minimal && !props.outlined
+            ? theme.definition.textHightlightColor
+            : theme.getBrandTextColor(props.intent),
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
         fontSize: props.small ? '.7em' : props.large ? '1.2em' : '.9em',
         verticalAlign: 'middle',
@@ -52,49 +58,55 @@ export const Tag: React.FC<TagProps> = props => {
               !props.minimal && !props.outlined
                 ? theme.getColorLighten(props.intent, 0.2)
                 : theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.4),
-          }
-        })
-      }) }
+          },
+        }),
+      })}
     >
       <RenderMaybeIcon
         icon={props.icon}
         iconProps={{
           size: '18px',
-          marginRight: true
+          marginRight: true,
         }}
       />
-      { props.children }
-      { props.content }
+      {props.children}
+      {props.content}
       <RenderMaybeIcon
         icon={props.rightIcon}
         iconProps={{
           size: '18px',
-          marginLeft: true
+          marginLeft: true,
         }}
       />
-      { props.onRemove && (
-        <button onClick={props.onRemove} className={cxs({
-          backgroundColor: 'transparent',
-          border: 'none',
-          borderRadius: '9999px',
-          width: '16px',
-          height: '16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          marginLeft: '4px',
-          outline: 'none',
-          ':hover': {
-            backgroundColor: lighten(backgroundColor, .2),
-            color: theme.definition.textHightlightColor + ' !important',
-          }
-        })}>
+      {props.onRemove && (
+        <button
+          onClick={props.onRemove}
+          className={cxs({
+            backgroundColor: 'transparent',
+            border: 'none',
+            borderRadius: '9999px',
+            width: '16px',
+            height: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            marginLeft: '4px',
+            outline: 'none',
+            ':hover': {
+              backgroundColor: lighten(backgroundColor, 0.2),
+              color: theme.definition.textHightlightColor + ' !important',
+            },
+          })}
+        >
           <RenderMaybeIcon
             icon={IconName.Close}
             iconProps={{
               size: '.9em',
-              color: !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, .7) : theme.colorWithAlpha(theme.getColor(props.intent), .85)
+              color:
+                !props.minimal && !props.outlined
+                  ? theme.getColorLighten(props.intent, 0.7)
+                  : theme.colorWithAlpha(theme.getColor(props.intent), 0.85),
             }}
           />
         </button>

@@ -21,11 +21,11 @@ export const Radio: React.FC<RadioProps> = props => {
   const radioInnerSize = props.large ? '16px' : props.small ? '8px' : '10px';
   const checked = containerProps.currentValue === props.value;
   const intent = Intent.Primary;
-  const disabledBoxColor = darken(theme.definition.textDisabledColor, .3);
+  const disabledBoxColor = darken(theme.definition.textDisabledColor, 0.3);
 
   return (
     <label
-      className={ cxs({
+      className={cxs({
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
@@ -40,7 +40,7 @@ export const Radio: React.FC<RadioProps> = props => {
           zIndex: -1,
           opacity: 0,
         },
-      }) }
+      })}
     >
       <input
         ref={radioButton}
@@ -63,15 +63,23 @@ export const Radio: React.FC<RadioProps> = props => {
           alignItems: 'center',
           borderRadius: '9999px',
           border: `1px solid ${darken(theme.definition.primaryBackgroundColor, 0.2)}`,
-          backgroundColor: props.disabled ? disabledBoxColor : checked ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
+          backgroundColor: props.disabled
+            ? disabledBoxColor
+            : checked
+            ? theme.getColor(intent)
+            : darken(theme.definition.primaryBackgroundColor, 0.08),
           transition: '.15s background-color ease',
           ':hover': {
-            backgroundColor: props.disabled ? disabledBoxColor : checked
+            backgroundColor: props.disabled
+              ? disabledBoxColor
+              : checked
               ? theme.getColorDarken(intent, 0.05)
               : darken(theme.definition.primaryBackgroundColor, 0.12),
           },
           ':active': {
-            backgroundColor: props.disabled ? disabledBoxColor : checked
+            backgroundColor: props.disabled
+              ? disabledBoxColor
+              : checked
               ? theme.getColorDarken(intent, 0.1)
               : darken(theme.definition.primaryBackgroundColor, 0.2),
           },
@@ -99,8 +107,8 @@ export const Radio: React.FC<RadioProps> = props => {
           })}
         />
       </div>
-      { props.children }
-      { props.label }
+      {props.children}
+      {props.label}
     </label>
   );
 };

@@ -13,7 +13,7 @@ export interface CheckboxProps extends CheckboxBlockProps {
 
 export const Checkbox: React.FC<CheckboxProps> = componentProps => {
   const ctxProps = useFormInputProps();
-  const props: CheckboxProps = {...ctxProps, ...componentProps};
+  const props: CheckboxProps = { ...ctxProps, ...componentProps };
 
   const box = <div>{props.switch ? <Slider {...props} /> : <CheckboxBlock {...props} />}</div>;
 

@@ -15,20 +15,22 @@ export const RadioContainer: React.FC<RadioContainerProps> = props => {
   const groupName = useUniqueId(props.groupNamePrefix ?? '__blackmaker_radiogroup');
   useEffect(() => {
     if (props.value) {
-      setValue(props.value)
+      setValue(props.value);
     }
   }, [props.value]);
   return (
-    <RadioContainerContext.Provider value={{
-      ...props,
-      groupName,
-      currentValue: value,
-      onChange: (e, v) => {
-        setValue(v);
-        props.onChange?.(e, v);
-      }
-    }}>
-      { props.children }
+    <RadioContainerContext.Provider
+      value={{
+        ...props,
+        groupName,
+        currentValue: value,
+        onChange: (e, v) => {
+          setValue(v);
+          props.onChange?.(e, v);
+        },
+      }}
+    >
+      {props.children}
     </RadioContainerContext.Provider>
   );
 };

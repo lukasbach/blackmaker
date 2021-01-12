@@ -30,7 +30,7 @@ export interface ButtonProps {
 export const Button: React.FC<ButtonProps> = componentProps => {
   const theme = useTheme();
   const ctxProps = useContext(ButtonGroupContext) ?? {};
-  const props = {...ctxProps, ...componentProps};
+  const props = { ...ctxProps, ...componentProps };
   const grouped = !!props.grouped;
 
   const Element = props.asAnchor ? 'a' : 'button';
@@ -97,8 +97,8 @@ export const Button: React.FC<ButtonProps> = componentProps => {
           ':last-child': {
             borderBottomRightRadius: theme.definition.borderRadiusSmall,
             borderTopRightRadius: theme.definition.borderRadiusSmall,
-          }
-        })
+          },
+        }),
       })}
     >
       {!props.loading && (

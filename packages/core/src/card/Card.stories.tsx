@@ -53,16 +53,11 @@ export const CardWithIntentAreas: React.FC = () => (
   <CardContainer css={{ minWidth: '400px' }}>
     <CardArea header={true}>Header Area</CardArea>
     <CardArea>Regular Area</CardArea>
-    { intents.map(intent => (
-      <CardArea
-        key={intent}
-        intent={intent}
-        interactive={true}
-        icon={IconName.Dashboard}
-      >
+    {intents.map(intent => (
+      <CardArea key={intent} intent={intent} interactive={true} icon={IconName.Dashboard}>
         {intent}
       </CardArea>
-    )) }
+    ))}
   </CardContainer>
 );
 

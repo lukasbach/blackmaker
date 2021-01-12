@@ -31,12 +31,12 @@ export const PopoverMenu: React.FC<Partial<PopoverProps>> = props => {
                 </Menu>
               }
             >
-              <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
+              <MenuItem text="Hello World!" iconRight={IconName.ChevronRight} />
             </Popover>
           </Menu>
         }
       >
-        <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
+        <MenuItem text="Hello World!" iconRight={IconName.ChevronRight} />
       </Popover>
     </Menu>
   );
@@ -63,12 +63,12 @@ export const PopoverMenuClickTrigger: React.FC<Partial<PopoverProps>> = props =>
                 </Menu>
               }
             >
-              <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
+              <MenuItem text="Hello World!" iconRight={IconName.ChevronRight} />
             </Popover>
           </Menu>
         }
       >
-        <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
+        <MenuItem text="Hello World!" iconRight={IconName.ChevronRight} />
       </Popover>
     </Menu>
   );
@@ -164,7 +164,7 @@ export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
           </Menu>
         }
       >
-        <MenuItem iconRight={IconName.ChevronRight} text="Recurse me!"/>
+        <MenuItem iconRight={IconName.ChevronRight} text="Recurse me!" />
       </Popover>
     </Menu>
   );

@@ -104,7 +104,7 @@ export const ButtonGroups: React.FC = () => (
       </ButtonGroup>
     </p>
   </div>
-)
+);
 
 export const RoundButtons: React.FC = () => (
   <div>
@@ -130,4 +130,3 @@ export const RoundButtons: React.FC = () => (
     </div>
   </div>
 );
-

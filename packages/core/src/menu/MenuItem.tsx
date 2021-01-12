@@ -87,17 +87,13 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
   if (props.children) {
     return (
       <Popover
-        content={(
-          <Menu>
-            {props.children}
-          </Menu>
-        )}
+        content={<Menu>{props.children}</Menu>}
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
       >
         {itemContent}
       </Popover>
-    )
+    );
   } else {
     return itemContent;
   }

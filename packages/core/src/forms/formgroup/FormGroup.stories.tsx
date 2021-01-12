@@ -13,7 +13,11 @@ export default {
 
 export const SimpleFormGroup = () => (
   <div>
-    <FormGroup label="Label text" labelInfo="(label info)" helperText="Helper text bla bla bla bla bla bla bla bla bla bla ">
+    <FormGroup
+      label="Label text"
+      labelInfo="(label info)"
+      helperText="Helper text bla bla bla bla bla bla bla bla bla bla "
+    >
       <TextInput defaultValue="Default value" />
     </FormGroup>
   </div>
@@ -51,12 +55,15 @@ export const FormGroupsProps = () => (
 
 export const FromGroupPassInputProps = () => (
   <div>
-    <FormGroup dontAutomapLabel={true} inputProps={{
-      intent: Intent.Primary,
-      fill: true,
-      round: true,
-      switch: true
-    }}>
+    <FormGroup
+      dontAutomapLabel={true}
+      inputProps={{
+        intent: Intent.Primary,
+        fill: true,
+        round: true,
+        switch: true,
+      }}
+    >
       <TextInput defaultValue="Default value" />
       <TextInput defaultValue="Default value" intent={Intent.Danger} />
       <Checkbox label="Checkbox label" checked={false} />

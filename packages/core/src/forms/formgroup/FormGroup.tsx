@@ -36,34 +36,34 @@ export const FormGroup: React.FC<FormGroupProps> = props => {
 
   return (
     <div
-      className={ cxs({
-        margin: '.5em 0 1.75em 0'
-      }) }
+      className={cxs({
+        margin: '.5em 0 1.75em 0',
+      })}
     >
-      { props.label && (
+      {props.label && (
         <label
           htmlFor={!props.dontAutomapLabel && automapLabel}
           className={cxs({
             cursor: formInputProps.disabled ? 'not-allowed' : !props.dontAutomapLabel ? 'pointer' : undefined,
             display: 'block',
-            color: formInputProps.disabled && `${theme.definition.textDisabledColor} !important`
+            color: formInputProps.disabled && `${theme.definition.textDisabledColor} !important`,
           })}
         >
-          { props.label }
-          { props.labelInfo && (
-            <span className={cxs({
-              color: theme.definition.textMutedColor,
-              marginLeft: '.5em'
-            })}>
-              { props.labelInfo }
+          {props.label}
+          {props.labelInfo && (
+            <span
+              className={cxs({
+                color: theme.definition.textMutedColor,
+                marginLeft: '.5em',
+              })}
+            >
+              {props.labelInfo}
             </span>
-          ) }
+          )}
         </label>
-      ) }
-      <FormInputPropsContext.Provider value={formInputProps}>
-        { props.children }
-      </FormInputPropsContext.Provider>
-      { props.helperText && (
+      )}
+      <FormInputPropsContext.Provider value={formInputProps}>{props.children}</FormInputPropsContext.Provider>
+      {props.helperText && (
         <Paragraph
           content={props.helperText}
           small={true}
@@ -72,7 +72,7 @@ export const FormGroup: React.FC<FormGroupProps> = props => {
           disabled={formInputProps.disabled}
           intent={formInputProps.intent === Intent.Default ? undefined : formInputProps.intent}
         />
-      ) }
+      )}
     </div>
   );
 };

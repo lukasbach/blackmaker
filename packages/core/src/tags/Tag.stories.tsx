@@ -13,29 +13,10 @@ export const TagExamples = () => (
   <div>
     {intents.map(intent => (
       <div key={intent}>
-        <Tag
-          intent={intent}
-          content="Simple"
-          interactive={true}
-        />
-        <Tag
-          intent={intent}
-          content="Removable"
-          onRemove={() => alert("Remove!")}
-          interactive={true}
-        />
-        <Tag
-          intent={intent}
-          content="Left Icon"
-          icon={IconName.Dashboard}
-          interactive={true}
-        />
-        <Tag
-          intent={intent}
-          content="Right Icon"
-          rightIcon={IconName.Dashboard}
-          interactive={true}
-        />
+        <Tag intent={intent} content="Simple" interactive={true} />
+        <Tag intent={intent} content="Removable" onRemove={() => alert('Remove!')} interactive={true} />
+        <Tag intent={intent} content="Left Icon" icon={IconName.Dashboard} interactive={true} />
+        <Tag intent={intent} content="Right Icon" rightIcon={IconName.Dashboard} interactive={true} />
         <Tag
           intent={intent}
           content="Both Icons"
@@ -66,7 +47,7 @@ export const TagExamples = () => (
           rightIcon={IconName.Dashboard}
           outlined={true}
           large={true}
-          onRemove={() => alert("Remove!")}
+          onRemove={() => alert('Remove!')}
           interactive={true}
         />
         <Tag
@@ -76,7 +57,7 @@ export const TagExamples = () => (
           rightIcon={IconName.Dashboard}
           minimal={true}
           large={true}
-          onRemove={() => alert("Remove!")}
+          onRemove={() => alert('Remove!')}
           interactive={true}
         />
         <Tag
@@ -96,7 +77,7 @@ export const TagExamples = () => (
           minimal={true}
           small={true}
           interactive={true}
-          onRemove={() => alert("Remove!")}
+          onRemove={() => alert('Remove!')}
         />
         <Tag
           intent={intent}
@@ -104,7 +85,7 @@ export const TagExamples = () => (
           content="Round"
           icon={IconName.Dashboard}
           interactive={true}
-          onRemove={() => alert("Remove!")}
+          onRemove={() => alert('Remove!')}
         />
       </div>
     ))}

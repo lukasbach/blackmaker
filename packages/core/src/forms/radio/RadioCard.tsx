@@ -6,7 +6,10 @@ import { RadioProps } from './Radio';
 import { CardContainer, CardContainerProps } from '../../card/CardContainer';
 import { RadioContainerContext } from './RadioContainerContext';
 
-export interface RadioCardProps extends Omit<RadioProps, 'elementProps' | 'css'>, Omit<CardContainerProps, 'elementProps' | 'css'>, HtmlElementProps<HTMLLabelElement> {
+export interface RadioCardProps
+  extends Omit<RadioProps, 'elementProps' | 'css'>,
+    Omit<CardContainerProps, 'elementProps' | 'css'>,
+    HtmlElementProps<HTMLLabelElement> {
   renderContent?: (checked: boolean) => JSX.Element;
 }
 
@@ -18,7 +21,7 @@ export const RadioCard: React.FC<RadioCardProps> = props => {
 
   return (
     <label
-      className={ cxs({
+      className={cxs({
         position: 'relative',
         display: 'block',
         cursor: props.disabled ? 'not-allowed' : 'pointer',
@@ -30,8 +33,8 @@ export const RadioCard: React.FC<RadioCardProps> = props => {
           zIndex: -1,
           opacity: 0,
         },
-        ...props.css
-      }) }
+        ...props.css,
+      })}
       {...props.elementProps}
     >
       <input
@@ -52,28 +55,26 @@ export const RadioCard: React.FC<RadioCardProps> = props => {
           display: 'block',
         }}
       >
-        { props.children }
-        { props.renderContent?.(checked) }
+        {props.children}
+        {props.renderContent?.(checked)}
       </CardContainer>
-      <div className={cxs({
-        position: 'absolute',
-        top: '-.5em',
-        right: '-.5em',
-        opacity: checked ? 1 : 0,
-        transition: '.2s opacity ease',
-        width: '3em',
-        height: '3em',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: '9999px',
-        backgroundColor: darken(theme.definition.primaryBackgroundColor, .3)
-      })}>
-        <Icon
-          name={IconName.Check}
-          color={theme.definition.textHightlightColor}
-          size="2.5em"
-        />
+      <div
+        className={cxs({
+          position: 'absolute',
+          top: '-.5em',
+          right: '-.5em',
+          opacity: checked ? 1 : 0,
+          transition: '.2s opacity ease',
+          width: '3em',
+          height: '3em',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '9999px',
+          backgroundColor: darken(theme.definition.primaryBackgroundColor, 0.3),
+        })}
+      >
+        <Icon name={IconName.Check} color={theme.definition.textHightlightColor} size="2.5em" />
       </div>
     </label>
   );

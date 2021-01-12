@@ -28,7 +28,7 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
 export const TextInput: React.FC<TextInputProps> = componentProps => {
   const theme = useTheme();
   const ctxProps = useFormInputProps();
-  const props: TextInputProps = {...ctxProps, ...componentProps};
+  const props: TextInputProps = { ...ctxProps, ...componentProps };
   const [hasFocus, setHasFocus] = useState(false);
 
   // TODO we dont need logic for that, do it in css

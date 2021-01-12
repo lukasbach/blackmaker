@@ -4,7 +4,7 @@
 ![Pretty](https://github.com/lukasbach/blackmaker/workflows/Pretty/badge.svg)
 ![Storybook Deployment](https://github.com/lukasbach/blackmaker/workflows/Storybook%20Deployment/badge.svg)
 
-WIP React-based UI framework. Current storybook available at 
+WIP React-based UI framework. Current storybook available at
 https://lukasbach.github.io/blackmaker/
 
 ## Setup

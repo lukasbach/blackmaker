@@ -33,7 +33,7 @@ export const PredefinedValue = () => (
 );
 
 export const OnChangeEvents = () => (
-  <RadioContainer onChange={(e, v) => alert("Changed to " + v)}>
+  <RadioContainer onChange={(e, v) => alert('Changed to ' + v)}>
     <Radio value="vader" label="Darth Vader" />
     <Radio value="luke" label="Luke Skywalker" />
     <Radio value="sidious" label="Palpatine" />
