@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { Falsy, HtmlElementProps, IconName, Intent, RenderMaybeIcon, useTheme } from '../..';
 import cxs from 'cxs';
 import Color from 'color';
+import { useFormInputProps } from '../useFormInputProps';
 
 export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   leftElement?: JSX.Element | IconName;
@@ -17,16 +18,20 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   fill?: boolean;
   inputElementProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> | Falsy;
   inputCss?: cxs.CSSObject | Falsy;
+  inputId?: string;
   placeholder?: string | number;
   value?: string | number;
   defaultValue?: string | number;
   onChange?: (e: ChangeEvent<HTMLInputElement>, value: string, valueAsNumber: number) => any;
 }
 
-export const TextInput: React.FC<TextInputProps> = props => {
+export const TextInput: React.FC<TextInputProps> = componentProps => {
   const theme = useTheme();
+  const ctxProps = useFormInputProps();
+  const props: TextInputProps = {...ctxProps, ...componentProps};
   const [hasFocus, setHasFocus] = useState(false);
 
+  // TODO we dont need logic for that, do it in css
   const borderColor = hasFocus
     ? theme.getColor(props.intent ?? Intent.Primary)
     : new Color(theme.definition.primaryBackgroundColor).darken(theme.isDark ? 0.3 : 0.3).toString();
@@ -45,8 +50,8 @@ export const TextInput: React.FC<TextInputProps> = props => {
           .darken(theme.isDark ? 0.1 : -0.1)
           .toString(),
         margin: '4px',
-        padding: '0 .8em',
-        fontSize: props.small ? '.85em' : props.large ? '1.2em' : '1em',
+        padding: '0 .1em',
+        fontSize: props.small ? '.75em' : props.large ? '1.2em' : '1em',
         color: theme.getColor(props.intent, theme.definition.textHightlightColor),
         ...props.css,
       })}
@@ -56,10 +61,12 @@ export const TextInput: React.FC<TextInputProps> = props => {
         icon={props.leftElement}
         iconProps={{
           marginRight: true,
+          marginLeft: true,
           color: theme.getColor(props.intent),
         }}
       />
       <input
+        id={props.inputId}
         onChange={e => {
           props.onChange?.(e, e.target.value, parseFloat(e.target.value));
         }}
@@ -89,7 +96,9 @@ export const TextInput: React.FC<TextInputProps> = props => {
       <RenderMaybeIcon
         icon={props.rightElement}
         iconProps={{
+          marginRight: true,
           marginLeft: true,
+          color: theme.getColor(props.intent),
         }}
       />
     </div>

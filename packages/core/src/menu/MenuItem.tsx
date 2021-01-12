@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Falsy, IconName, Intent, RenderMaybeIcon, useTheme } from '..';
+import { Falsy, IconName, Intent, RenderMaybeIcon, TooltipPlacement, useTheme } from '..';
 import cxs from 'cxs';
+import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
+import { Menu } from './Menu';
 
 export interface MenuItemProps {
   intent?: Intent;
@@ -9,12 +11,13 @@ export interface MenuItemProps {
   selected?: boolean;
   disabled?: boolean;
   onClick?: () => any;
+  text?: string | JSX.Element;
 }
 
 export const MenuItem: React.FC<MenuItemProps> = props => {
   const theme = useTheme();
 
-  return (
+  const itemContent = (
     <div
       onClick={!props.disabled && !props.selected ? props.onClick : undefined}
       className={cxs({
@@ -30,7 +33,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         color:
           props.intent === Intent.Default || !props.intent
             ? theme.definition.textHightlightColor
-            : theme.getColor(props.intent),
+            : theme.getBrandTextColor(props.intent),
         ...(props.selected
           ? {
               backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
@@ -67,7 +70,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           marginRight: '1em',
         })}
       >
-        {props.children}
+        {props.text}
       </div>
       <RenderMaybeIcon
         icon={props.iconRight}
@@ -80,4 +83,22 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
       />
     </div>
   );
+
+  if (props.children) {
+    return (
+      <Popover
+        content={(
+          <Menu>
+            {props.children}
+          </Menu>
+        )}
+        trigger={PopoverOpenTrigger.HoverReference}
+        placement={TooltipPlacement.RightStart}
+      >
+        {itemContent}
+      </Popover>
+    )
+  } else {
+    return itemContent;
+  }
 };

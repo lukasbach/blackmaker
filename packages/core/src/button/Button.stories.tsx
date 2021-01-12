@@ -2,8 +2,9 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { Button, ButtonProps } from './Button';
 import { intents } from '../common/intents';
-import { IconName } from '..';
+import { IconName, Intent } from '..';
 import { RoundButton } from './RoundButton';
+import { ButtonGroup } from './ButtonGroup';
 
 export default {
   title: 'Core/Components/Button',
@@ -72,6 +73,39 @@ export const AllButtons = () => {
   );
 };
 
+export const ButtonGroups: React.FC = () => (
+  <div>
+    <p>
+      <ButtonGroup intent={Intent.Primary}>
+        <Button icon={IconName.Dashboard}>Hello</Button>
+        <Button>From some</Button>
+        <Button intent={Intent.Danger}>Buttons</Button>
+      </ButtonGroup>
+    </p>
+    <p>
+      <ButtonGroup large={true} minimal={true}>
+        <Button>Hello</Button>
+        <Button icon={IconName.AddLocation}>From some</Button>
+        <Button icon={IconName.AddLocation}>Buttons</Button>
+      </ButtonGroup>
+    </p>
+    <p>
+      <ButtonGroup small={true} outlined={true} rightIcon={IconName.Dashboard}>
+        <Button>Hello</Button>
+        <Button icon={IconName.AddLocation}>From some</Button>
+        <Button>Buttons</Button>
+      </ButtonGroup>
+    </p>
+    <p>
+      <ButtonGroup fill={true}>
+        <Button>Filled</Button>
+        <Button>Buttons</Button>
+        <Button>Yay</Button>
+      </ButtonGroup>
+    </p>
+  </div>
+)
+
 export const RoundButtons: React.FC = () => (
   <div>
     <div>
@@ -96,3 +130,4 @@ export const RoundButtons: React.FC = () => (
     </div>
   </div>
 );
+

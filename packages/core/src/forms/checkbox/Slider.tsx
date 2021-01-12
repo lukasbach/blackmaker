@@ -3,9 +3,12 @@ import { darken, Icon, IconName, Intent, lighten, useTheme } from '../..';
 import cxs from 'cxs';
 import { useEffect, useRef, useState } from 'react';
 import { CheckboxBlockProps } from './CheckboxBlock';
+import { useFormInputProps } from '../useFormInputProps';
 
-export const Slider: React.FC<CheckboxBlockProps> = props => {
+export const Slider: React.FC<CheckboxBlockProps> = componentProps => {
   const theme = useTheme();
+  const ctxProps = useFormInputProps();
+  const props: CheckboxBlockProps = {...ctxProps, ...componentProps};
   const checkbox = useRef<HTMLInputElement>();
   const [checked, setChecked] = useState(props.checked);
 
@@ -77,6 +80,8 @@ export const Slider: React.FC<CheckboxBlockProps> = props => {
           props.onChange?.(value, e);
           setChecked(value);
         }}
+        id={props.inputId}
+        {...props.elementProps}
       />
       <div
         className={cxs({

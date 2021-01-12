@@ -3,17 +3,19 @@ import { noSelect, useTheme } from '../..';
 import cxs from 'cxs';
 import { CheckboxBlock, CheckboxBlockProps } from './CheckboxBlock';
 import { Slider } from './Slider';
+import { useFormInputProps } from '../useFormInputProps';
 
 export interface CheckboxProps extends CheckboxBlockProps {
   label: JSX.Element | string;
-  slider?: boolean;
+  switch?: boolean;
   alignBoxRight?: boolean;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = props => {
-  const theme = useTheme();
+export const Checkbox: React.FC<CheckboxProps> = componentProps => {
+  const ctxProps = useFormInputProps();
+  const props: CheckboxProps = {...ctxProps, ...componentProps};
 
-  const box = <div>{props.slider ? <Slider {...props} /> : <CheckboxBlock {...props} />}</div>;
+  const box = <div>{props.switch ? <Slider {...props} /> : <CheckboxBlock {...props} />}</div>;
 
   return (
     <label
@@ -34,7 +36,7 @@ export const Checkbox: React.FC<CheckboxProps> = props => {
         })}
       >
         {props.label}
-        {props.children}
+        {componentProps.children}
       </p>
       {props.alignBoxRight && box}
     </label>

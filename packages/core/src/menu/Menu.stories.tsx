@@ -15,28 +15,33 @@ export default {
 export const MenuExample: React.FC<Partial<MenuProps>> = props => {
   return (
     <Menu>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem selected={true}>Selected Item</MenuItem>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem disabled={true}>Disabled item</MenuItem>
+      <MenuItem text="Hello World"/>
+      <MenuItem text="Hello World"/>
+      <MenuItem text="Hello World" selected={true}/>
+      <MenuItem text="Hello World"/>
+      <MenuItem text="Hover me!" iconRight={IconName.ChevronRight}>
+        <MenuItem text="Hello World"/>
+        <MenuItem text="Hello World"/>
+        <MenuItem text="Hello World" iconRight={IconName.ChevronRight}>
+          <MenuItem text="Hello World"/>
+          <MenuItem text="Hello World" iconRight={IconName.ChevronRight}>
+            <MenuItem text="Hello World"/>
+            <MenuItem text="Hello World"/>
+          </MenuItem>
+          <MenuItem text="Hello World"/>
+        </MenuItem>
+      </MenuItem>
+      <MenuItem text="Hello World" disabled={true}/>
       <MenuBreak />
-      <MenuItem intent={Intent.Primary} icon={IconName.Accessibility}>
-        Hello World
-      </MenuItem>
-      <MenuItem intent={Intent.Info} icon={IconName.Accessibility}>
-        Hello World
-      </MenuItem>
-      <MenuItem intent={Intent.Success} icon={IconName.Accessibility} iconRight={<>3</>}>
-        Hello World
-      </MenuItem>
-      <MenuItem intent={Intent.Warning} icon={IconName.Accessibility} iconRight={IconName.AddCircle}>
-        Hello World
-      </MenuItem>
+      <MenuItem text="Hello World" intent={Intent.Primary} icon={IconName.Accessibility}/>
+      <MenuItem text="Hello World" intent={Intent.Info} icon={IconName.Accessibility}/>
+      <MenuItem text="Hello World" intent={Intent.Success} icon={IconName.Accessibility} iconRight={<>3</>}/>
+      <MenuItem text="Hello World" intent={Intent.Warning} icon={IconName.Accessibility} iconRight={IconName.AddCircle}/>
       <MenuHeader>Other options</MenuHeader>
-      <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem intent={Intent.Danger}>Hello World</MenuItem>
+      <MenuItem text="Hello World"/>
+      <MenuItem text="Hello World" iconRight={IconName.CheckBoxOutlineBlank}/>
+      <MenuItem text="Hello World" iconRight={IconName.CheckBox}/>
+      <MenuItem text="Hello World" intent={Intent.Danger}/>
     </Menu>
   );
 };

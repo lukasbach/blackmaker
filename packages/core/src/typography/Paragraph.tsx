@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HtmlElementProps, noSelect, useTheme } from '..';
+import { HtmlElementProps, Intent, noSelect, useTheme } from '..';
 import cxs from 'cxs';
 
 export interface ParagraphProps extends HtmlElementProps<HTMLParagraphElement> {
@@ -12,6 +12,7 @@ export interface ParagraphProps extends HtmlElementProps<HTMLParagraphElement> {
   content?: string | JSX.Element;
   running?: boolean;
   noSelect?: boolean;
+  intent?: Intent;
 }
 
 export const Paragraph: React.FC<ParagraphProps> = props => {
@@ -29,6 +30,8 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
           ? theme.definition.textDisabledColor
           : props.highlighted
           ? theme.definition.textHightlightColor
+          : props.intent
+          ? theme.getColor(props.intent)
           : theme.definition.textColor,
         ...(props.truncate
           ? {

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { darken, HtmlElementProps, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
+import { darken, HtmlElementProps, Intent, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 import { Heading } from '../typography/Heading';
 import { Paragraph } from '../typography/Paragraph';
 import { useContext, useState } from 'react';
 import { CardContainerContext } from './CardContainer';
 import Color from 'color';
+import { ButtonGroup } from '../button/ButtonGroup';
 
 export interface CardAreaProps extends HtmlElementProps {
   muted?: boolean;
@@ -18,6 +19,7 @@ export interface CardAreaProps extends HtmlElementProps {
   interactive?: boolean;
   onClick?: () => any;
   actions?: JSX.Element; // TODO Button Group
+  intent?: Intent;
 }
 
 export const CardArea: React.FC<CardAreaProps> = props => {
@@ -30,6 +32,8 @@ export const CardArea: React.FC<CardAreaProps> = props => {
     ? theme.definition.secondaryBackgroundColor
     : props.highlighted
     ? theme.definition.tertiaryBackgroundColor
+    : props.intent
+    ? theme.getColor(props.intent)
     : theme.definition.primaryBackgroundColor;
   const backgroundColorHover = new Color(backgroundColor).lighten(theme.isDark ? 0.1 : -0.05).toString();
 

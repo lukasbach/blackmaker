@@ -2,16 +2,20 @@ import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { darken, HtmlElementProps, Icon, IconName, Intent, useTheme } from '../..';
 import cxs from 'cxs';
+import { useFormInputProps } from '../useFormInputProps';
 
 export interface CheckboxBlockProps extends HtmlElementProps<HTMLInputElement> {
   intent?: Intent;
   large?: boolean;
   checked?: boolean;
   onChange?: (checked: boolean | undefined, e?: React.ChangeEvent<HTMLInputElement> | undefined) => any;
+  inputId?: string;
 }
 
-export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
+export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
   const theme = useTheme();
+  const ctxProps = useFormInputProps();
+  const props: CheckboxBlockProps = {...ctxProps, ...componentProps};
   const checkbox = useRef<HTMLInputElement>();
   const [checked, setChecked] = useState(props.checked);
 
@@ -77,6 +81,8 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
           props.onChange?.(value, e);
           setChecked(value);
         }}
+        id={props.inputId}
+        {...props.elementProps}
       />
       <Icon
         name={checked ? IconName.Check : IconName.HorizontalRule}

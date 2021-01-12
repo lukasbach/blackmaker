@@ -13,30 +13,30 @@ export default {
 export const PopoverMenu: React.FC<Partial<PopoverProps>> = props => {
   return (
     <Menu>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem>Hello World</MenuItem>
+      <MenuItem text="Hello World!" />
+      <MenuItem text="Hello World!" />
       <Popover
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
         content={
           <Menu>
-            <MenuItem>Hello World</MenuItem>
+            <MenuItem text="Hello World!" />
             <Popover
               trigger={PopoverOpenTrigger.HoverReference}
               placement={TooltipPlacement.RightStart}
               content={
                 <Menu>
-                  <MenuItem>Hello World</MenuItem>
-                  <MenuItem>Hello World</MenuItem>
+                  <MenuItem text="Hello World!" />
+                  <MenuItem text="Hello World!" />
                 </Menu>
               }
             >
-              <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
+              <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
             </Popover>
           </Menu>
         }
       >
-        <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
+        <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
       </Popover>
     </Menu>
   );
@@ -45,30 +45,30 @@ export const PopoverMenu: React.FC<Partial<PopoverProps>> = props => {
 export const PopoverMenuClickTrigger: React.FC<Partial<PopoverProps>> = props => {
   return (
     <Menu>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem>Hello World</MenuItem>
+      <MenuItem text="Hello World!" />
+      <MenuItem text="Hello World!" />
       <Popover
         trigger={PopoverOpenTrigger.ClickReference}
         placement={TooltipPlacement.RightStart}
         content={
           <Menu>
-            <MenuItem>Hello World</MenuItem>
+            <MenuItem text="Hello World!" />
             <Popover
               trigger={PopoverOpenTrigger.ClickReference}
               placement={TooltipPlacement.RightStart}
               content={
                 <Menu>
-                  <MenuItem>Hello World</MenuItem>
-                  <MenuItem>Hello World</MenuItem>
+                  <MenuItem text="Hello World!" />
+                  <MenuItem text="Hello World!" />
                 </Menu>
               }
             >
-              <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
+              <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
             </Popover>
           </Menu>
         }
       >
-        <MenuItem iconRight={IconName.ChevronRight}>Hello World</MenuItem>
+        <MenuItem text="Hello World!" iconRight={IconName.ChevronRight}/>
       </Popover>
     </Menu>
   );
@@ -77,8 +77,8 @@ export const PopoverMenuClickTrigger: React.FC<Partial<PopoverProps>> = props =>
 export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
   return (
     <Menu>
-      <MenuItem>Hello World</MenuItem>
-      <MenuItem>Hello World</MenuItem>
+      <MenuItem text="Hello World!" />
+      <MenuItem text="Hello World!" />
       <Popover
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
@@ -124,47 +124,47 @@ export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
                                                         placement={TooltipPlacement.RightStart}
                                                         content={<div>Bonjour!</div>}
                                                       >
-                                                        <MenuItem>Recurse me!</MenuItem>
+                                                        <MenuItem text="Recurse me!" />
                                                       </Popover>
                                                     </Menu>
                                                   }
                                                 >
-                                                  <MenuItem>Recurse me!</MenuItem>
+                                                  <MenuItem text="Recurse me!" />
                                                 </Popover>
                                               </Menu>
                                             }
                                           >
-                                            <MenuItem>Recurse me!</MenuItem>
+                                            <MenuItem text="Recurse me!" />
                                           </Popover>
                                         </Menu>
                                       }
                                     >
-                                      <MenuItem>Recurse me!</MenuItem>
+                                      <MenuItem text="Recurse me!" />
                                     </Popover>
                                   </Menu>
                                 }
                               >
-                                <MenuItem>Recurse me!</MenuItem>
+                                <MenuItem text="Recurse me!" />
                               </Popover>
                             </Menu>
                           }
                         >
-                          <MenuItem>Recurse me!</MenuItem>
+                          <MenuItem text="Recurse me!" />
                         </Popover>
                       </Menu>
                     }
                   >
-                    <MenuItem>Recurse me!</MenuItem>
+                    <MenuItem text="Recurse me!" />
                   </Popover>
                 </Menu>
               }
             >
-              <MenuItem>Recurse me!</MenuItem>
+              <MenuItem text="Recurse me!" />
             </Popover>
           </Menu>
         }
       >
-        <MenuItem iconRight={IconName.ChevronRight}>Recurse me!</MenuItem>
+        <MenuItem iconRight={IconName.ChevronRight} text="Recurse me!"/>
       </Popover>
     </Menu>
   );

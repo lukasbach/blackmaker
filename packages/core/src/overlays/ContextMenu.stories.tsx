@@ -15,15 +15,15 @@ export default {
 
 const MenuExample = (props: { text: string }) => (
   <Menu>
-    <MenuItem>{props.text}</MenuItem>
-    <MenuItem>{props.text}</MenuItem>
+    <MenuItem text={props.text} />
+    <MenuItem text={props.text} />
     <Popover
       trigger={PopoverOpenTrigger.HoverReference}
       placement={TooltipPlacement.RightStart}
       content={
         <Menu>
-          <MenuItem>{props.text}</MenuItem>
-          <MenuItem>{props.text}</MenuItem>
+          <MenuItem text={props.text} />
+          <MenuItem text={props.text} />
         </Menu>
       }
     >

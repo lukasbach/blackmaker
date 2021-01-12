@@ -5,6 +5,7 @@ import { CardArea } from './CardArea';
 import { Button } from '../button/Button';
 import { Intent } from '../common';
 import { IconName } from '..';
+import { intents } from '../common/intents';
 
 export default {
   title: 'Core/Components/Cards',
@@ -45,6 +46,23 @@ export const ComplexCard: React.FC = () => (
       <Button>Abort</Button>
       <Button intent={Intent.Primary}>Okay</Button>
     </CardArea>
+  </CardContainer>
+);
+
+export const CardWithIntentAreas: React.FC = () => (
+  <CardContainer css={{ minWidth: '400px' }}>
+    <CardArea header={true}>Header Area</CardArea>
+    <CardArea>Regular Area</CardArea>
+    { intents.map(intent => (
+      <CardArea
+        key={intent}
+        intent={intent}
+        interactive={true}
+        icon={IconName.Dashboard}
+      >
+        {intent}
+      </CardArea>
+    )) }
   </CardContainer>
 );
 

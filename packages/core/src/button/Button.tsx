@@ -5,6 +5,8 @@ import { Alignment } from '../common/Alignment';
 import { IconName, Icon } from '..';
 import { Property } from 'csstype';
 import { Spinner } from '../spinner/Spinner';
+import { useContext } from 'react';
+import { ButtonGroupContext } from './ButtonGroup';
 
 export interface ButtonProps {
   asAnchor?: boolean;
@@ -25,8 +27,11 @@ export interface ButtonProps {
   target?: string;
 }
 
-export const Button: React.FC<ButtonProps> = props => {
+export const Button: React.FC<ButtonProps> = componentProps => {
   const theme = useTheme();
+  const ctxProps = useContext(ButtonGroupContext) ?? {};
+  const props = {...ctxProps, ...componentProps};
+  const grouped = !!props.grouped;
 
   const Element = props.asAnchor ? 'a' : 'button';
   const hasContent = !!props.children;
@@ -38,7 +43,7 @@ export const Button: React.FC<ButtonProps> = props => {
       target={props.target}
       className={cxs({
         backgroundColor: !props.minimal && !props.outlined ? theme.getColor(props.intent) : 'transparent',
-        borderRadius: theme.definition.borderRadiusSmall,
+        borderRadius: !grouped && theme.definition.borderRadiusSmall,
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
         boxShadow:
           !props.minimal &&
@@ -57,15 +62,17 @@ export const Button: React.FC<ButtonProps> = props => {
         display: props.fill ? 'flex' : 'inline-flex',
         alignItems: 'center',
         width: props.fill ? '100%' : undefined,
-        margin: '2px 4px',
+        margin: !grouped ? '2px 4px' : '2px 0 0 1px',
+        verticalAlign: 'middle',
+        height: props.small ? '2.2em' : '2.8em',
         padding: props.large
           ? hasContent
             ? '10px 14px'
             : '10px'
           : props.small
           ? hasContent
-            ? '6px 12px'
-            : '6px'
+            ? '4px 10px'
+            : '4px'
           : hasContent
           ? '8px 16px'
           : '8px',
@@ -82,6 +89,16 @@ export const Button: React.FC<ButtonProps> = props => {
               ? theme.getColorLighten(props.intent, 0.11)
               : theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.3),
         },
+        ...(grouped && {
+          ':first-child': {
+            borderBottomLeftRadius: theme.definition.borderRadiusSmall,
+            borderTopLeftRadius: theme.definition.borderRadiusSmall,
+          },
+          ':last-child': {
+            borderBottomRightRadius: theme.definition.borderRadiusSmall,
+            borderTopRightRadius: theme.definition.borderRadiusSmall,
+          }
+        })
       })}
     >
       {!props.loading && (

@@ -90,9 +90,9 @@ export const CheckboxLinesSwitches = () => (
   <div>
     {intents.map(intent => (
       <div key={intent}>
-        <Checkbox label="Checkbox label" checked={true} intent={intent} slider={true} />
-        <Checkbox label="Checkbox label" checked={undefined} intent={intent} slider={true} />
-        <Checkbox label="Checkbox label" checked={false} intent={intent} slider={true} />
+        <Checkbox label="Checkbox label" checked={true} intent={intent} switch={true} />
+        <Checkbox label="Checkbox label" checked={undefined} intent={intent} switch={true} />
+        <Checkbox label="Checkbox label" checked={false} intent={intent} switch={true} />
       </div>
     ))}
   </div>
@@ -102,9 +102,9 @@ export const CheckboxLinesSwitchesLarge = () => (
   <div>
     {intents.map(intent => (
       <div key={intent}>
-        <Checkbox label="Checkbox label" checked={true} intent={intent} slider={true} large={true} />
-        <Checkbox label="Checkbox label" checked={undefined} intent={intent} slider={true} large={true} />
-        <Checkbox label="Checkbox label" checked={false} intent={intent} slider={true} large={true} />
+        <Checkbox label="Checkbox label" checked={true} intent={intent} switch={true} large={true} />
+        <Checkbox label="Checkbox label" checked={undefined} intent={intent} switch={true} large={true} />
+        <Checkbox label="Checkbox label" checked={false} intent={intent} switch={true} large={true} />
       </div>
     ))}
   </div>
@@ -115,15 +115,15 @@ export const CheckboxLinesRightAligned = () => (
     <Checkbox label="Checkbox label" checked={true} alignBoxRight={true} />
     <Checkbox label="Checkbox label" checked={undefined} alignBoxRight={true} />
     <Checkbox label="Checkbox label" checked={false} alignBoxRight={true} />
-    <Checkbox label="Checkbox label" checked={true} slider={true} alignBoxRight={true} />
-    <Checkbox label="Checkbox label" checked={undefined} slider={true} alignBoxRight={true} />
-    <Checkbox label="Checkbox label" checked={false} slider={true} alignBoxRight={true} />
+    <Checkbox label="Checkbox label" checked={true} switch={true} alignBoxRight={true} />
+    <Checkbox label="Checkbox label" checked={undefined} switch={true} alignBoxRight={true} />
+    <Checkbox label="Checkbox label" checked={false} switch={true} alignBoxRight={true} />
 
     <Checkbox label="Checkbox label" checked={true} alignBoxRight={true} large={true} />
     <Checkbox label="Checkbox label" checked={undefined} alignBoxRight={true} large={true} />
     <Checkbox label="Checkbox label" checked={false} alignBoxRight={true} large={true} />
-    <Checkbox label="Checkbox label" checked={true} slider={true} alignBoxRight={true} large={true} />
-    <Checkbox label="Checkbox label" checked={undefined} slider={true} alignBoxRight={true} large={true} />
-    <Checkbox label="Checkbox label" checked={false} slider={true} alignBoxRight={true} large={true} />
+    <Checkbox label="Checkbox label" checked={true} switch={true} alignBoxRight={true} large={true} />
+    <Checkbox label="Checkbox label" checked={undefined} switch={true} alignBoxRight={true} large={true} />
+    <Checkbox label="Checkbox label" checked={false} switch={true} alignBoxRight={true} large={true} />
   </div>
 );

@@ -29,7 +29,6 @@ export const Icon: React.FC<IconProps> = props => {
         fontWeight: 'normal',
         color: color && `${color} !important`,
         display: 'inline-block',
-        lineHeight: 1,
         textTransform: 'none',
         letterSpacing: 'normal',
         wordWrap: 'normal',
