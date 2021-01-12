@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Falsy, Intent, RenderMaybeIcon, useTheme } from '..';
+import { Falsy, HtmlElementProps, Intent, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 import { Alignment } from '../common/Alignment';
 import { IconName, Icon } from '..';
@@ -8,7 +8,7 @@ import { Spinner } from '../spinner/Spinner';
 import { useContext } from 'react';
 import { ButtonGroupContext } from './ButtonGroup';
 
-export interface ButtonProps {
+export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   asAnchor?: boolean;
   textAlignment?: Alignment;
   disabled?: boolean;
@@ -99,7 +99,9 @@ export const Button: React.FC<ButtonProps> = componentProps => {
             borderTopRightRadius: theme.definition.borderRadiusSmall,
           },
         }),
+        ...props.css
       })}
+      {...props.elementProps}
     >
       {!props.loading && (
         <>
