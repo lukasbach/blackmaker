@@ -1,6 +1,7 @@
 import * as React from 'react';
 import cxs from 'cxs';
-import { Intent, useTheme } from '@blackmaker/core';
+import { useTheme } from '../theming';
+import { Intent } from '../common';
 
 export const HotKeySingleKeyPreview: React.FC<{}> = props => {
   const theme = useTheme();

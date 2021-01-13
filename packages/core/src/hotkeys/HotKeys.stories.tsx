@@ -1,14 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { Meta } from '@storybook/react';
 import { HotKeyPreview } from './HotKeyPreview';
-import { useHotKey } from './useHotKey';
-import { useRecordHotKey } from './useRecordHotKey';
-import { Button, IconName, Intent } from '@blackmaker/core';
-import { GlobalHotKeyProvider } from './GlobalHotKeyProvider';
 import { Hotkey } from '@react-hook/hotkey/src/index';
-import { CardContainer } from '@blackmaker/core/out/card/CardContainer';
-import { CardArea } from '@blackmaker/core/out/card/CardArea';
-import { HotKeyConfiguration } from './HotKeyConfiguration';
+import { GlobalHotKeyProvider, useRecordHotKey, useHotKey, HotKeyConfiguration } from '@blackmaker/hotkeys';
+import { Intent } from '../common';
+import { Button } from '../button';
+import { IconName } from '../icons';
+import { CardContainer } from '../card/CardContainer';
+import { CardArea } from '../card/CardArea';
 
 export default {
   title: 'HotKeys/HotKeys',
