@@ -5,7 +5,7 @@ import cxs from 'cxs';
 import { RadioProps } from './Radio';
 import { CardContainer, CardContainerProps } from '../../card/CardContainer';
 import { RadioContainerContext } from './RadioContainerContext';
-import { VisuallyHidden } from '../../common/VisuallyHidden';
+import { VisuallyHidden } from '../../common/components/VisuallyHidden';
 
 export interface RadioCardProps
   extends Omit<RadioProps, 'elementProps' | 'css'>,

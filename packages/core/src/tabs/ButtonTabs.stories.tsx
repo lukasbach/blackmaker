@@ -4,6 +4,7 @@ import { Tabs } from './Tabs';
 import { TabsStyle } from './TabsStyle';
 import { Tab } from './Tab';
 import { IconName, Intent } from '../../out';
+import { ButtonGroup } from '../button';
 
 export default {
   title: 'Core/Components/Tabs/Button Tabs',
@@ -57,5 +58,29 @@ export const CustomActiveButton = () => {
         <Tab id="tab3" title="Tab 3" />
       </Tabs>
     </div>
+  );
+};
+
+export const GroupedButtons = () => {
+  const [tab, setTab] = useState('tab1');
+  return (
+    <ButtonGroup>
+      <Tabs
+        tabStyle={TabsStyle.Buttons}
+        currentTab={tab}
+        onChangeTab={setTab}
+        buttonProps={{
+          small: false,
+          minimal: false,
+        }}
+        activeButtonProps={{
+          intent: Intent.Primary,
+        }}
+      >
+        <Tab id="tab1" title="Tab 1" />
+        <Tab id="tab2" title="Tab 2" />
+        <Tab id="tab3" title="Tab 3" />
+      </Tabs>
+    </ButtonGroup>
   );
 };

@@ -3,7 +3,7 @@ import { useContext, useRef } from 'react';
 import { darken, HtmlElementProps, Intent, useTheme } from '../..';
 import cxs from 'cxs';
 import { RadioContainerContext } from './RadioContainerContext';
-import { VisuallyHidden } from '../../common/VisuallyHidden';
+import { VisuallyHidden } from '../../common/components/VisuallyHidden';
 
 export interface RadioProps extends HtmlElementProps<HTMLInputElement> {
   disabled?: boolean;

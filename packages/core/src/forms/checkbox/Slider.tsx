@@ -4,7 +4,7 @@ import cxs from 'cxs';
 import { useEffect, useRef, useState } from 'react';
 import { CheckboxBlockProps } from './CheckboxBlock';
 import { useFormInputProps } from '../useFormInputProps';
-import { VisuallyHidden } from '../../common/VisuallyHidden';
+import { VisuallyHidden } from '../../common/components/VisuallyHidden';
 
 export const Slider: React.FC<CheckboxBlockProps> = componentProps => {
   const theme = useTheme();

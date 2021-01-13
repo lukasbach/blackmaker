@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTheme } from '..';
+import { useTheme } from '../../index';
 import cxs from 'cxs';
 
 export const VisuallyHidden: React.FC = props => {

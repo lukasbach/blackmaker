@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { darken, HtmlElementProps, Icon, IconName, Intent, useTheme } from '../..';
 import cxs from 'cxs';
 import { useFormInputProps } from '../useFormInputProps';
-import { VisuallyHidden } from '../../common/VisuallyHidden';
+import { VisuallyHidden } from '../../common/components/VisuallyHidden';
 
 export interface CheckboxBlockProps extends HtmlElementProps<HTMLInputElement> {
   intent?: Intent;
