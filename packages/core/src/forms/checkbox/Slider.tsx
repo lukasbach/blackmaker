@@ -4,6 +4,7 @@ import cxs from 'cxs';
 import { useEffect, useRef, useState } from 'react';
 import { CheckboxBlockProps } from './CheckboxBlock';
 import { useFormInputProps } from '../useFormInputProps';
+import { VisuallyHidden } from '../../common/VisuallyHidden';
 
 export const Slider: React.FC<CheckboxBlockProps> = componentProps => {
   const theme = useTheme();
@@ -31,7 +32,6 @@ export const Slider: React.FC<CheckboxBlockProps> = componentProps => {
   return (
     <div
       className={cxs({
-        position: 'relative',
         display: 'inline-flex',
         alignItems: 'center',
         // justifyContent: checked === undefined ? 'center' : checked ? 'flex-end' : 'flex-start',
@@ -49,13 +49,6 @@ export const Slider: React.FC<CheckboxBlockProps> = componentProps => {
         textAlign: 'center',
         cursor: 'pointer',
         transition: '.2s all ease',
-        '> input': {
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          zIndex: -1,
-          opacity: 0,
-        },
         ':hover': {
           backgroundColor: checked
             ? theme.getColorDarken(intent, 0.15)
@@ -72,17 +65,19 @@ export const Slider: React.FC<CheckboxBlockProps> = componentProps => {
         setChecked(!checked);
       }}
     >
-      <input
-        type="checkbox"
-        ref={checkbox}
-        onChange={e => {
-          const value = e.target.indeterminate ? undefined : e.target.checked;
-          props.onChange?.(value, e);
-          setChecked(value);
-        }}
-        id={props.inputId}
-        {...props.elementProps}
-      />
+      <VisuallyHidden>
+        <input
+          type="checkbox"
+          ref={checkbox}
+          onChange={e => {
+            const value = e.target.indeterminate ? undefined : e.target.checked;
+            props.onChange?.(value, e);
+            setChecked(value);
+          }}
+          id={props.inputId}
+          {...props.elementProps}
+        />
+      </VisuallyHidden>
       <div
         className={cxs({
           backgroundColor: lighten(theme.definition.primaryBackgroundColor, 0.2),

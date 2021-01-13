@@ -3,6 +3,7 @@ import { useContext, useRef } from 'react';
 import { darken, HtmlElementProps, Intent, useTheme } from '../..';
 import cxs from 'cxs';
 import { RadioContainerContext } from './RadioContainerContext';
+import { VisuallyHidden } from '../../common/VisuallyHidden';
 
 export interface RadioProps extends HtmlElementProps<HTMLInputElement> {
   disabled?: boolean;
@@ -26,33 +27,27 @@ export const Radio: React.FC<RadioProps> = props => {
   return (
     <label
       className={cxs({
-        position: 'relative',
         display: 'flex',
         alignItems: 'center',
         cursor: props.disabled ? 'not-allowed' : 'pointer',
         marginBottom: '.4em',
         fontSize: props.large ? '1.4em' : props.small ? '.8em' : '1em',
         color: props.disabled ? theme.definition.textDisabledColor : undefined,
-        '> input': {
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          zIndex: -1,
-          opacity: 0,
-        },
       })}
     >
-      <input
-        ref={radioButton}
-        type="radio"
-        name={containerProps.groupName}
-        value={props.value}
-        disabled={props.disabled}
-        onChange={e => {
-          containerProps.onChange?.(e, e.target.value);
-        }}
-        {...props.elementProps}
-      />
+      <VisuallyHidden>
+        <input
+          ref={radioButton}
+          type="radio"
+          name={containerProps.groupName}
+          value={props.value}
+          disabled={props.disabled}
+          onChange={e => {
+            containerProps.onChange?.(e, e.target.value);
+          }}
+          {...props.elementProps}
+        />
+      </VisuallyHidden>
       <div
         className={cxs({
           marginRight: '.5em',

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { darken, HtmlElementProps, Icon, IconName, Intent, useTheme } from '../..';
 import cxs from 'cxs';
 import { useFormInputProps } from '../useFormInputProps';
+import { VisuallyHidden } from '../../common/VisuallyHidden';
 
 export interface CheckboxBlockProps extends HtmlElementProps<HTMLInputElement> {
   intent?: Intent;
@@ -39,7 +40,6 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
   return (
     <div
       className={cxs({
-        position: 'relative',
         display: 'inline-block',
         width: '1em',
         height: '1em',
@@ -50,13 +50,6 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
         textAlign: 'center',
         cursor: 'pointer',
         transition: '.15s background-color ease',
-        '> input': {
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          zIndex: -1,
-          opacity: 0,
-        },
         ':hover': {
           backgroundColor: checked
             ? theme.getColorDarken(intent, 0.05)
@@ -73,17 +66,19 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
         setChecked(!checked);
       }}
     >
-      <input
-        type="checkbox"
-        ref={checkbox}
-        onChange={e => {
-          const value = e.target.indeterminate ? undefined : e.target.checked;
-          props.onChange?.(value, e);
-          setChecked(value);
-        }}
-        id={props.inputId}
-        {...props.elementProps}
-      />
+      <VisuallyHidden>
+        <input
+          type="checkbox"
+          ref={checkbox}
+          onChange={e => {
+            const value = e.target.indeterminate ? undefined : e.target.checked;
+            props.onChange?.(value, e);
+            setChecked(value);
+          }}
+          id={props.inputId}
+          {...props.elementProps}
+        />
+      </VisuallyHidden>
       <Icon
         name={checked ? IconName.Check : IconName.HorizontalRule}
         size=".9em"
