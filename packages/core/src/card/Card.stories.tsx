@@ -61,6 +61,18 @@ export const CardWithIntentAreas: React.FC = () => (
   </CardContainer>
 );
 
+export const CardWithIntentHeaderAreas: React.FC = () => (
+  <CardContainer css={{ minWidth: '400px' }}>
+    <CardArea header={true}>Header Area</CardArea>
+    <CardArea>Regular Area</CardArea>
+    {intents.map(intent => (
+      <CardArea key={intent} intent={intent} interactive={true} header={true} highlighted={true} icon={IconName.Dashboard} subtitle="Some additional details">
+        {intent}
+      </CardArea>
+    ))}
+  </CardContainer>
+);
+
 export const CardWithHeader: React.FC = () => (
   <CardContainer css={{ minWidth: '400px' }}>
     <CardArea header={true}>Header Area</CardArea>

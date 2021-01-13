@@ -30,10 +30,10 @@ export const CardArea: React.FC<CardAreaProps> = props => {
 
   const backgroundColor = props.muted
     ? theme.definition.secondaryBackgroundColor
-    : props.highlighted
-    ? theme.definition.tertiaryBackgroundColor
     : props.intent
     ? theme.getColor(props.intent)
+    : props.highlighted
+    ? theme.definition.tertiaryBackgroundColor
     : theme.definition.primaryBackgroundColor;
   const backgroundColorHover = new Color(backgroundColor).lighten(theme.isDark ? 0.1 : -0.05).toString();
 
@@ -104,11 +104,12 @@ export const CardArea: React.FC<CardAreaProps> = props => {
       {props.subtitle && (
         <Paragraph
           content={props.subtitle}
-          muted={true}
+          muted={!props.intent}
           small={true}
           css={{
             fontWeight: 'normal',
             marginTop: '.3em',
+            color: props.intent ? theme.getTextColorOnBrandColors(props.intent) : undefined
           }}
         />
       )}
