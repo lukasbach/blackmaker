@@ -8,29 +8,27 @@ export default {
   component: ProgressBar,
 } as Meta;
 
-export const SimpleProgressBar = () => (
-  <ProgressBar value={.42} />
-);
+export const SimpleProgressBar = () => <ProgressBar value={0.42} />;
 
 export const InlineProgressBar = () => (
   <div>
     Tasks: 5 of 7 done&nbsp;
-    <ProgressBar value={5/7} inlineWidth={240} />
+    <ProgressBar value={5 / 7} inlineWidth={240} />
   </div>
 );
 
 export const ProgressBarWithIntents = () => (
   <div>
     {intents.map((i, v) => (
-      <ProgressBar value={v * 0.1 + .2} key={i} intent={i} css={{ marginBottom: '10px', width: '200px' }} />
+      <ProgressBar value={v * 0.1 + 0.2} key={i} intent={i} css={{ marginBottom: '10px', width: '200px' }} />
     ))}
   </div>
 );
 
 export const ProgressBarSizes = () => (
   <div>
-    <ProgressBar css={{ marginBottom: '10px', width: '200px' }} value={.42} small={true} />
-    <ProgressBar css={{ marginBottom: '10px', width: '200px' }} value={.42} />
-    <ProgressBar css={{ marginBottom: '10px', width: '200px' }} value={.42} large={true} />
+    <ProgressBar css={{ marginBottom: '10px', width: '200px' }} value={0.42} small={true} />
+    <ProgressBar css={{ marginBottom: '10px', width: '200px' }} value={0.42} />
+    <ProgressBar css={{ marginBottom: '10px', width: '200px' }} value={0.42} large={true} />
   </div>
 );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MaybeIcon } from '..';
+import { HtmlElementProps, Intent, MaybeIcon } from '..';
 import { Overlay, OverlayProps } from './Overlay';
 import { CardContainer } from '../card/CardContainer';
 import { CardArea } from '../card/CardArea';
@@ -7,11 +7,12 @@ import { dialogTransition } from './transitions/dialogTransition';
 import { OverlayTransition } from './transitions/OverlayTransition';
 import { OverlayCloseButton } from './OverlayCloseButton';
 
-export interface DialogProps {
+export interface DialogProps extends HtmlElementProps {
   isOpen: boolean;
   title?: string | JSX.Element;
   subtitle?: string | JSX.Element;
   highlightedTitle?: boolean;
+  titleIntent?: Intent;
   icon?: MaybeIcon;
   closeButton?: boolean;
   closeOnEscape?: boolean;
@@ -41,11 +42,14 @@ export const Dialog: React.FC<DialogProps> = props => {
             css={{
               minWidth: '300px',
               maxWidth: '600px',
+              ...props.css,
             }}
             shadow={1}
+            elementProps={props.elementProps}
           >
             {props.title && (
               <CardArea
+                intent={props.titleIntent}
                 header={true}
                 highlighted={props.highlightedTitle}
                 headingLevel={1}

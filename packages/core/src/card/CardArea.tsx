@@ -109,7 +109,7 @@ export const CardArea: React.FC<CardAreaProps> = props => {
           css={{
             fontWeight: 'normal',
             marginTop: '.3em',
-            color: props.intent ? theme.getTextColorOnBrandColors(props.intent) : undefined
+            color: props.intent ? theme.getTextColorOnBrandColors(props.intent) : undefined,
           }}
         />
       )}

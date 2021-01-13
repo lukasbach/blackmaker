@@ -22,12 +22,12 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
   const color = props.muted
     ? theme.definition.textMutedColor
     : props.disabled
-      ? theme.definition.textDisabledColor
-      : props.highlighted
-        ? theme.definition.textHightlightColor
-        : props.intent
-          ? theme.getBrandTextColor(props.intent)
-          : theme.definition.textColor;
+    ? theme.definition.textDisabledColor
+    : props.highlighted
+    ? theme.definition.textHightlightColor
+    : props.intent
+    ? theme.getBrandTextColor(props.intent)
+    : theme.definition.textColor;
 
   return (
     <p

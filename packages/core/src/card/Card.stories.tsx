@@ -66,7 +66,15 @@ export const CardWithIntentHeaderAreas: React.FC = () => (
     <CardArea header={true}>Header Area</CardArea>
     <CardArea>Regular Area</CardArea>
     {intents.map(intent => (
-      <CardArea key={intent} intent={intent} interactive={true} header={true} highlighted={true} icon={IconName.Dashboard} subtitle="Some additional details">
+      <CardArea
+        key={intent}
+        intent={intent}
+        interactive={true}
+        header={true}
+        highlighted={true}
+        icon={IconName.Dashboard}
+        subtitle="Some additional details"
+      >
         {intent}
       </CardArea>
     ))}
@@ -136,9 +144,7 @@ export const InteractiveCardAreas: React.FC = () => (
     <CardArea actions={actions} onClick={() => {}} icon={IconName.Dashboard} interactive={true}>
       Regular Area
     </CardArea>
-    <CardArea actions={actions} onClick={() => {}} icon={IconName.Dashboard} interactive={true}>
-      Regular Area
-    </CardArea>
+    <CardArea icon={IconName.Dashboard}>Regular Area</CardArea>
     <CardArea actions={actions} onClick={() => {}} icon={IconName.Dashboard} interactive={true}>
       Regular Area
     </CardArea>

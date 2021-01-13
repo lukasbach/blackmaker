@@ -35,7 +35,7 @@ export const ThemeProvider: React.FC<{
           width: !props.noRoot && '100%',
           height: !props.noRoot && '100%',
           overflow: !props.noRoot && 'auto',
-          color: !props.noRoot && theme.textColor,
+          color: theme.textColor,
           fontFamily: "'Montserrat', sans-serif",
         })}
       >
