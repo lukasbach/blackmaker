@@ -47,12 +47,12 @@ export const CardArea: React.FC<CardAreaProps> = props => {
         margin: '0',
         fontSize: '1em',
         fontWeight: props.header && ('bold' as any),
-        color: props.header
+        color: props.intent
+          ? theme.getTextColorOnBrandColors(props.intent)
+          : props.header
           ? theme.definition.textHightlightColor
           : props.muted
           ? theme.definition.textMutedColor
-          : props.intent
-          ? theme.getTextColorOnBrandColors(props.intent)
           : undefined,
         backgroundColor: hovering ? backgroundColorHover : backgroundColor,
         textAlign: props.header && !props.highlighted ? 'center' : undefined,

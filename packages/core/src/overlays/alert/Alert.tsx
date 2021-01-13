@@ -41,23 +41,26 @@ export const Alert: React.FC<AlertProps> = props => {
       footer={
         <>
           <Button
-            minimal={true}
+            minimal={!!props.onConfirm}
+            intent={!props.onConfirm && Intent.Primary}
             onClick={() => {
               props.onClose?.();
               props.onCancel?.();
             }}
           >
-            {props.cancelButtonText ?? 'Cancel'}
+            {props.cancelButtonText ?? (props.onConfirm ? 'Cancel' : 'Okay')}
           </Button>
-          <Button
-            intent={props.intent ?? Intent.Primary}
-            onClick={() => {
-              props.onClose?.();
-              props.onConfirm?.();
-            }}
-          >
-            {props.confirmButtonText ?? 'Confirm'}
-          </Button>
+          {props.onConfirm && (
+            <Button
+              intent={props.intent ?? Intent.Primary}
+              onClick={() => {
+                props.onClose?.();
+                props.onConfirm?.();
+              }}
+            >
+              {props.confirmButtonText ?? 'Confirm'}
+            </Button>
+          )}
         </>
       }
     >
