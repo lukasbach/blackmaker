@@ -1,10 +1,10 @@
 import { Hotkey } from '@react-hook/hotkey/src/index';
 import React from 'react';
-import { Falsy } from '../common';
+import { Falsy } from '@blackmaker/core';
 
 interface HotKeyConfigurationBase<T = HTMLElement> {
   combination?: Hotkey | Hotkey[];
-  globalHandler?: () => any;
+  globalHandler?: (e: KeyboardEvent) => any;
   title?: string;
   description?: string;
 }

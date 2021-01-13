@@ -101,7 +101,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
         }),
         ...props.css
       })}
-      {...props.elementProps}
+      {...props.elementProps as any}
     >
       {!props.loading && (
         <>

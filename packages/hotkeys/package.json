@@ -1,10 +1,10 @@
 {
-  "name": "@blackmaker/core",
+  "name": "@blackmaker/hotkeys",
   "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git@github.com:lukasbach/blackmaker.git",
-    "directory": "packages/core"
+    "directory": "packages/hotkeys"
   },
   "author": "Lukas Bach",
   "license": "MIT",
@@ -13,10 +13,8 @@
   "typings": "out/index.d.ts",
   "scripts": {
     "start": "tsc -w",
-    "build": "yarn build-icons && yarn build-package",
-    "test": "jest --passWithNoTests",
-    "build-icons": "node ./scripts/compileIcons.js",
-    "build-package": "tsc"
+    "build": "tsc",
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
@@ -41,6 +39,7 @@
     "@react-hook/event": "^1.2.3",
     "@react-hook/hotkey": "^3.1.0",
     "@tippyjs/react": "^4.2.0",
+    "@blackmaker/core": "^0.0.1",
     "classnames": "^2.2.6",
     "color": "^3.1.3",
     "cxs": "^6.2.0",

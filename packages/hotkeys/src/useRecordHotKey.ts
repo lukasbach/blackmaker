@@ -1,4 +1,3 @@
-import useEvent from '@react-hook/event';
 import { useRef, useState } from 'react';
 import { Hotkey } from '@react-hook/hotkey';
 import { useGlobalHotKeys } from './useGlobalHotKeys';
@@ -30,6 +29,8 @@ export const useRecordHotKey = (
 
       const keyUpListener = (e: KeyboardEvent) => {
         if (isRecording.current) {
+          e.preventDefault();
+          e.stopPropagation();
           isRecording.current = false;
           setIsRecordingState(false);
           document.removeEventListener('keydown', keydownListener);

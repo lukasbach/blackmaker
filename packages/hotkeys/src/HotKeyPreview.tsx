@@ -1,24 +1,22 @@
 import * as React from 'react';
-import { useTheme } from '..';
-import cxs from 'cxs';
 import { Hotkey } from '@react-hook/hotkey';
 import { HotKeySingleKeyPreview } from './HotKeySingleKeyPreview';
 
 export interface HotKeyPreviewProps {
-  combination: Hotkey[];
+  combination: Hotkey[] | Hotkey;
 }
 
 export const HotKeyPreview: React.FC<HotKeyPreviewProps> = props => {
-  const theme = useTheme();
+  const combination = Array.isArray(props.combination) ? props.combination : [props.combination];
 
   return (
-    <div className={cxs({})}>
-      { props.combination.map(key => (
+    <>
+      { combination.map(key => (
         <HotKeySingleKeyPreview
           key={key}
           children={key}
         />
       )) }
-    </div>
+    </>
   );
 };
