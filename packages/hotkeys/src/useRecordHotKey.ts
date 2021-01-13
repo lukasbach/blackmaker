@@ -2,10 +2,7 @@ import { useRef, useState } from 'react';
 import { Hotkey } from '@react-hook/hotkey';
 import { useGlobalHotKeys } from './useGlobalHotKeys';
 
-export const useRecordHotKey = (
-  onRecord?: (hotkey: Hotkey[]) => any,
-  storeUnderHotKeyId?: string,
-) => {
+export const useRecordHotKey = (onRecord?: (hotkey: Hotkey[]) => any, storeUnderHotKeyId?: string) => {
   const globalHotKeys = useGlobalHotKeys();
   const isRecording = useRef(false);
   const [isRecordingState, setIsRecordingState] = useState(false);
@@ -46,6 +43,6 @@ export const useRecordHotKey = (
       document.addEventListener('keydown', keydownListener);
       document.addEventListener('keyup', keyUpListener);
     },
-    isRecordingState
+    isRecordingState,
   ] as const;
-}
+};

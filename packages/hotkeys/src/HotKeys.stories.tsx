@@ -16,25 +16,29 @@ export default {
 } as Meta;
 
 export const useHotKeyExample: React.FC = () => {
-  const [_, ctrlc] = useHotKey({ combination: [ 'ctrl', 'c' ] });
-  const [_2, ctrlaltc] = useHotKey({ combination: [ 'ctrl', 'alt', 'c' ] });
+  const [_, ctrlc] = useHotKey({ combination: ['ctrl', 'c'] });
+  const [_2, ctrlaltc] = useHotKey({ combination: ['ctrl', 'alt', 'c'] });
   return (
     <div>
       <Button intent={ctrlc ? Intent.Success : Intent.Default}>CTRL + C</Button>
       <Button intent={ctrlaltc ? Intent.Success : Intent.Default}>CTRL + ALT + C</Button>
     </div>
-  )
+  );
 };
 
 export const localHotkeyExample: React.FC = () => {
   const ref = useRef();
-  const [_, up] = useHotKey({ combination: [ 'up' ], ref });
+  const [_, up] = useHotKey({ combination: ['up'], ref });
   return (
     <div>
-      <Button intent={up ? Intent.Success : Intent.Default} elementProps={{ ref }}>Press up while focusing this button</Button>
-      <p>Hotkey only works when the button above is focused. Focus it (e.g. by clicking on it), then press the up-key.</p>
+      <Button intent={up ? Intent.Success : Intent.Default} elementProps={{ ref }}>
+        Press up while focusing this button
+      </Button>
+      <p>
+        Hotkey only works when the button above is focused. Focus it (e.g. by clicking on it), then press the up-key.
+      </p>
     </div>
-  )
+  );
 };
 
 export const useRecordHotKeyExample: React.FC = () => {
@@ -43,19 +47,27 @@ export const useRecordHotKeyExample: React.FC = () => {
   return (
     <div>
       <Button onClick={record} intent={recording ? Intent.Success : Intent.Default} icon={IconName.Keyboard}>
-        { recording ? 'Recording...' : 'Start recording' }
+        {recording ? 'Recording...' : 'Start recording'}
       </Button>
       <HotKeyPreview combination={lastHotkeys} />
     </div>
-  )
+  );
 };
 
 export const HotKeyPreviewExample: React.FC = () => (
   <div>
-    <div><HotKeyPreview combination={[ 'shift', 'c' ]} /></div>
-    <div><HotKeyPreview combination={[ 'shift', 'alt', 'enter' ]} /></div>
-    <div><HotKeyPreview combination={[ 'pagedown' ]} /></div>
-    <div><HotKeyPreview combination={[ 'alt', 'down' ]} /></div>
+    <div>
+      <HotKeyPreview combination={['shift', 'c']} />
+    </div>
+    <div>
+      <HotKeyPreview combination={['shift', 'alt', 'enter']} />
+    </div>
+    <div>
+      <HotKeyPreview combination={['pagedown']} />
+    </div>
+    <div>
+      <HotKeyPreview combination={['alt', 'down']} />
+    </div>
   </div>
 );
 
@@ -70,24 +82,21 @@ export const GlobalHotKeyStore: React.FC = () => {
     return (
       <CardContainer css={{ marginRight: '1em' }}>
         <CardArea header={true} intent={isPressed ? Intent.Primary : undefined}>
-          { hotkey.title }
+          {hotkey.title}
         </CardArea>
         <CardArea>
           <HotKeyPreview combination={hotkey.combination} />
         </CardArea>
         <CardArea muted={true}>
-          <Button
-            intent={isRecording ? Intent.Primary : Intent.Default}
-            onClick={record}
-          >
-            { isRecording ? 'Press new hotkeys...' : 'Click to change' }
+          <Button intent={isRecording ? Intent.Primary : Intent.Default} onClick={record}>
+            {isRecording ? 'Press new hotkeys...' : 'Click to change'}
           </Button>
         </CardArea>
       </CardContainer>
-    )
+    );
   };
 
-  const [userSetting, setUserSetting] = useState<{[ hotkeyId: string ]: Hotkey | Hotkey[]}>({});
+  const [userSetting, setUserSetting] = useState<{ [hotkeyId: string]: Hotkey | Hotkey[] }>({});
   const hotkeys: HotKeyConfiguration[] = [
     {
       id: 'copy',
@@ -113,11 +122,13 @@ export const GlobalHotKeyStore: React.FC = () => {
     <GlobalHotKeyProvider
       userSetting={userSetting}
       onChange={(id, combination) => {
-        setUserSetting({...userSetting, [id]: combination});
+        setUserSetting({ ...userSetting, [id]: combination });
       }}
       hotkeys={hotkeys}
     >
-      { hotkeys.map(hotkey => <Child keyId={hotkey.id} />) }
+      {hotkeys.map(hotkey => (
+        <Child keyId={hotkey.id} />
+      ))}
     </GlobalHotKeyProvider>
-  )
+  );
 };

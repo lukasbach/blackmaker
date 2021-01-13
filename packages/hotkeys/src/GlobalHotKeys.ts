@@ -3,5 +3,5 @@ import { Hotkey } from '@react-hook/hotkey/src/index';
 
 export interface GlobalHotKeys {
   hotkeys: HotKeyConfiguration[];
-  userSetting?: {[ hotkeyId: string ]: Hotkey | Hotkey[]};
+  userSetting?: { [hotkeyId: string]: Hotkey | Hotkey[] };
 }

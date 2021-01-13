@@ -99,9 +99,9 @@ export const Button: React.FC<ButtonProps> = componentProps => {
             borderTopRightRadius: theme.definition.borderRadiusSmall,
           },
         }),
-        ...props.css
+        ...props.css,
       })}
-      {...props.elementProps as any}
+      {...(props.elementProps as any)}
     >
       {!props.loading && (
         <>

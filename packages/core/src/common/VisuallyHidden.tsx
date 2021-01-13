@@ -5,7 +5,7 @@ import cxs from 'cxs';
 export const VisuallyHidden: React.FC = props => {
   return (
     <div
-      className={ cxs({
+      className={cxs({
         display: 'inline-block',
         position: 'relative',
         '> *': {
@@ -15,9 +15,9 @@ export const VisuallyHidden: React.FC = props => {
           zIndex: -1,
           opacity: 0,
         },
-      }) }
+      })}
     >
-      { props.children }
+      {props.children}
     </div>
   );
 };

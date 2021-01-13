@@ -11,12 +11,9 @@ export const HotKeyPreview: React.FC<HotKeyPreviewProps> = props => {
 
   return (
     <>
-      { combination.map(key => (
-        <HotKeySingleKeyPreview
-          key={key}
-          children={key}
-        />
-      )) }
+      {combination.map(key => (
+        <HotKeySingleKeyPreview key={key} children={key} />
+      ))}
     </>
   );
 };
