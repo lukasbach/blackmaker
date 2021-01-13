@@ -27,6 +27,24 @@ export class Theme {
     }
   }
 
+  public getTextColorOnBrandColors(intent?: Intent, defaultColor?: string) {
+    switch (intent) {
+      case Intent.Primary:
+        return this.definition.textColorOnBrandColors.primary;
+      case Intent.Warning:
+        return this.definition.textColorOnBrandColors.warning;
+      case Intent.Danger:
+        return this.definition.textColorOnBrandColors.danger;
+      case Intent.Info:
+        return this.definition.textColorOnBrandColors.info;
+      case Intent.Success:
+        return this.definition.textColorOnBrandColors.success;
+      case Intent.Default:
+      default:
+        return defaultColor ?? this.definition.textColorOnBrandColors.default;
+    }
+  }
+
   public getBrandTextColor(intent?: Intent, defaultColor?: string) {
     switch (intent) {
       case Intent.Primary:

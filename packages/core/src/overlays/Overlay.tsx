@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { MouseEvent, useCallback } from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import { OverlayTransition } from './transitions/OverlayTransition';
+import { useHotKey } from '@blackmaker/hotkeys/out/useHotKey';
 
 const OVERLAY_ELEMENT_ID = 'blackmaker-overlay';
 
@@ -14,7 +15,7 @@ export interface OverlayProps {
   backdropColor?: string;
   handleBackdropMouseDown?: (e: React.MouseEvent<HTMLDivElement>) => void;
   closeOnClickBackdrop?: boolean;
-  closeOnEscape?: boolean; // TODO
+  closeOnEscape?: boolean;
   isOpen?: boolean;
   onClose?: () => any;
   renderContent: (props: React.HTMLAttributes<HTMLDivElement>) => React.ReactNode;
@@ -22,6 +23,19 @@ export interface OverlayProps {
 }
 
 const OverlayInner: React.FC<OverlayProps> = props => {
+  useHotKey(
+    {
+      global: true,
+      combination: 'esc',
+      id: 'close',
+    },
+    () => {
+      if (props.closeOnEscape ?? true) {
+        props.onClose();
+      }
+    }
+  );
+
   if (!props.transition && !props.isOpen) {
     return null;
   }

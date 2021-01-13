@@ -47,7 +47,10 @@ export const Callout: React.FC<CalloutProps> = props => {
     <div
       className={cxs({
         backgroundColor: backgroundColor,
-        color: theme.definition.textHightlightColor,
+        color:
+          props.style === CalloutStyle.Heavy
+            ? theme.getTextColorOnBrandColors(props.intent)
+            : theme.definition.textHightlightColor,
         borderWidth:
           props.style === CalloutStyle.Outlined || props.style === CalloutStyle.BackgroundColor ? '1px' : '0',
         borderColor:
@@ -82,7 +85,7 @@ export const Callout: React.FC<CalloutProps> = props => {
               marginRight: '.4em',
               color:
                 props.style === CalloutStyle.Heavy
-                  ? theme.definition.textHightlightColor
+                  ? theme.getTextColorOnBrandColors(props.intent)
                   : theme.getColor(props.intent, theme.definition.textHightlightColor),
             }}
           />
@@ -100,7 +103,7 @@ export const Callout: React.FC<CalloutProps> = props => {
               margin: '.1em 0 .4em 0',
               color:
                 props.style !== CalloutStyle.Heavy &&
-                theme.getColor(props.intent, theme.definition.textHightlightColor),
+                theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor),
             })}
           >
             {props.title}

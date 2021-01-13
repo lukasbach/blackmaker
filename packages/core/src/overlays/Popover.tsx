@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { useTheme } from '..';
+import { useContext, useEffect, useState } from 'react';
+import { ButtonGroupContext, TooltipPlacement, useTheme } from '..';
 import cxs from 'cxs';
 import Tippy from '@tippyjs/react';
-import { TooltipPlacement } from '../common';
 import Color from 'color';
-import { useEffect, useState } from 'react';
-import { Overlay } from './Overlay';
+import { useHotKey } from '@blackmaker/hotkeys/out/useHotKey';
 
 export enum PopoverOpenTrigger {
   HoverReference,
@@ -17,23 +16,39 @@ export interface PopoverProps {
   isOpen?: boolean;
   trigger?: PopoverOpenTrigger;
   placement?: TooltipPlacement;
-  padded?: boolean;
-  content: React.ReactNode;
+  content: React.ReactNode | string;
   offset?: [number, number];
   noLeftPadding?: boolean;
+  autoFocus?: boolean;
+  closeOnEscape?: boolean;
+  inline?: boolean;
 }
 
 export const Popover: React.FC<PopoverProps> = props => {
   const theme = useTheme();
-  const [isOpen, setIsOpen] = useState(props.isOpen || false);
+  const buttonContextProps = useContext(ButtonGroupContext) ?? {};
+  const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
   useEffect(() => setIsOpen(props.isOpen), [props.isOpen]);
+  useHotKey(
+    {
+      global: true,
+      combination: 'esc',
+      id: 'close',
+    },
+    () => {
+      if (props.closeOnEscape ?? true) {
+        setIsOpen(false);
+      }
+    }
+  );
 
   return (
     <div
       onMouseEnter={() => props.trigger === PopoverOpenTrigger.HoverReference && setIsOpen(true)}
       onMouseLeave={() => props.trigger === PopoverOpenTrigger.HoverReference && setIsOpen(false)}
       className={cxs({
+        display: props.inline && 'inline-block',
         '& .tippy-svg-arrow path': {
           fill: new Color(theme.definition.menuBackgroundColor).darken(0.2).toString(),
         },
@@ -45,16 +60,17 @@ export const Popover: React.FC<PopoverProps> = props => {
         // hideOnClick={true}
         inertia={false}
         visible={isOpen}
-        placement={props.placement}
+        placement={props.placement ?? TooltipPlacement.Auto}
         onClickOutside={() => props.trigger === PopoverOpenTrigger.ClickReference && setIsOpen(false)}
         interactive={true}
         interactiveDebounce={0}
         interactiveBorder={30}
-        offset={props.offset ?? [5, 0]}
-        animation={true}
+        offset={props.offset ?? [0, 0]}
+        // animation={true}
         className={cxs({ outline: 'none' })}
         content={
           <div
+            ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
             className={cxs({
               paddingLeft: !props.noLeftPadding && '12px',
             })}
@@ -64,9 +80,11 @@ export const Popover: React.FC<PopoverProps> = props => {
         }
       >
         <span onClick={() => props.trigger === PopoverOpenTrigger.ClickReference && toggleIsOpen()}>
-          {/*<ButtonPropsContext.Provider value={{ active: isOpen }}>*/}
-          {props.children}
-          {/*</ButtonPropsContext.Provider>*/}
+          <ButtonGroupContext.Provider
+            value={{ active: isOpen && props.trigger !== PopoverOpenTrigger.HoverReference, ...buttonContextProps }}
+          >
+            {props.children}
+          </ButtonGroupContext.Provider>
         </span>
       </Tippy>
     </div>

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Falsy, IconName, Intent, RenderMaybeIcon, TooltipPlacement, useTheme } from '..';
-import cxs from 'cxs';
+import cxs, { CSSObject } from 'cxs';
 import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
 import { Menu } from './Menu';
+import { MaybeTruncate } from '../common/MaybeTruncate';
 
 export interface MenuItemProps {
   intent?: Intent;
@@ -12,7 +13,16 @@ export interface MenuItemProps {
   disabled?: boolean;
   onClick?: () => any;
   text?: string | JSX.Element;
+  subText?: string | JSX.Element;
+  dontTruncate?: boolean;
 }
+
+const truncateCode: CSSObject = {
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  wordWrap: 'normal',
+};
 
 export const MenuItem: React.FC<MenuItemProps> = props => {
   const theme = useTheme();
@@ -30,24 +40,21 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         display: 'flex',
         alignItems: 'center',
         justifyItems: 'center',
-        color:
-          props.intent === Intent.Default || !props.intent
-            ? theme.definition.textHightlightColor
-            : theme.getBrandTextColor(props.intent),
+        color: theme.getBrandTextColor(props.intent),
         ...(props.selected
           ? {
               backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
-              color: theme.definition.textHightlightColor,
+              color: theme.getTextColorOnBrandColors(props.intent),
             }
           : !props.disabled
           ? {
               ':hover': {
                 backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
-                color: theme.definition.textHightlightColor,
+                color: theme.getTextColorOnBrandColors(props.intent),
               },
               ':active': {
                 backgroundColor: theme.getColorLighten(props.intent ?? Intent.Primary, 0.15),
-                color: theme.definition.textHightlightColor,
+                color: theme.getTextColorOnBrandColors(props.intent),
               },
             }
           : {
@@ -68,9 +75,21 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         className={cxs({
           flexGrow: 1,
           marginRight: '1em',
+          maxWidth: '100%',
         })}
       >
-        {props.text}
+        <div className={!props.dontTruncate && cxs(truncateCode)}>{props.text}</div>
+        {props.subText && (
+          <div
+            className={cxs({
+              ...(!props.dontTruncate && truncateCode),
+              color: theme.definition.textMutedColor, // TODO is not overwritten by parent hover and looks bad in bright ui
+              fontSize: '.8em',
+            })}
+          >
+            {props.subText}
+          </div>
+        )}
       </div>
       <RenderMaybeIcon
         icon={props.iconRight}

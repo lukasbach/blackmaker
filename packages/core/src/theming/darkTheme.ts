@@ -12,6 +12,14 @@ const brandColors: BrandColorSet = {
 
 export const darkTheme: ThemeDefinition = {
   brandColors: brandColors,
+  textColorOnBrandColors: {
+    default: '#ffffff',
+    primary: '#ffffff',
+    info: '#ffffff',
+    success: '#ffffff',
+    warning: '#ffffff',
+    danger: '#ffffff',
+  },
   brandTextColors: {
     ...brandColors,
     default: '#ffffff',

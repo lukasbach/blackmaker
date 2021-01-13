@@ -51,6 +51,8 @@ export const CardArea: React.FC<CardAreaProps> = props => {
           ? theme.definition.textHightlightColor
           : props.muted
           ? theme.definition.textMutedColor
+          : props.intent
+          ? theme.getTextColorOnBrandColors(props.intent)
           : undefined,
         backgroundColor: hovering ? backgroundColorHover : backgroundColor,
         textAlign: props.header && !props.highlighted ? 'center' : undefined,

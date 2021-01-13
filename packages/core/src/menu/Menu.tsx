@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { noSelect, useTheme } from '..';
+import { HtmlElementProps, noSelect, useTheme } from '..';
 import cxs from 'cxs';
 
-export interface MenuProps {
+export interface MenuProps extends HtmlElementProps {
   background?: boolean;
   small?: boolean;
   large?: boolean;
@@ -16,13 +16,17 @@ export const Menu: React.FC<MenuProps> = props => {
   return (
     <div
       className={cxs({
-        display: 'inline-block',
-        backgroundColor: theme.definition.menuBackgroundColor,
-        borderRadius: theme.definition.borderRadiusSmall,
+        display: props.fill ? 'block' : 'inline-block',
+        backgroundColor: (props.background ?? true) && theme.definition.menuBackgroundColor,
+        borderRadius: (props.background ?? true) && theme.definition.borderRadiusSmall,
         padding: '8px',
         minWidth: '120px',
+        maxWidth: !props.fill && '240px',
+        fontSize: props.small ? '.85em' : props.large ? '1.2em' : '1em',
         ...noSelect,
+        ...props.css,
       })}
+      {...props.elementProps}
     >
       {props.children}
     </div>

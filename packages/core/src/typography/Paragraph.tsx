@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { HtmlElementProps, Intent, noSelect, useTheme } from '..';
 import cxs from 'cxs';
+import { MaybeTruncate } from '../common/MaybeTruncate';
 
 export interface ParagraphProps extends HtmlElementProps<HTMLParagraphElement> {
   small?: boolean;
@@ -31,23 +32,17 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
           : props.highlighted
           ? theme.definition.textHightlightColor
           : props.intent
-          ? theme.getColor(props.intent)
+          ? theme.getBrandTextColor(props.intent)
           : theme.definition.textColor,
-        ...(props.truncate
-          ? {
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              wordWrap: 'normal',
-            }
-          : {}),
         ...(props.noSelect ? noSelect : {}),
         ...props.css,
       })}
       {...props.elementProps}
     >
-      {props.content}
-      {props.children}
+      <MaybeTruncate content={typeof props.content === 'string' && props.content} truncate={props.truncate}>
+        {props.content}
+        {props.children}
+      </MaybeTruncate>
     </p>
   );
 };

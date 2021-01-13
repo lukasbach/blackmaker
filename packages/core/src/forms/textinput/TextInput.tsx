@@ -45,14 +45,15 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
         width: !props.fill && '340px',
         borderRadius: props.round ? '999px' : theme.definition.borderRadiusSmall,
         border: `1px solid ${borderColor}`,
-        transition: '.2s border-color ease',
+        boxShadow: hasFocus && `0 0 0 1px ${borderColor}`,
+        transition: '.2s border-color ease, .2s box-shadow ease',
         backgroundColor: new Color(theme.definition.primaryBackgroundColor)
           .darken(theme.isDark ? 0.1 : -0.1)
           .toString(),
         margin: '4px',
         padding: '0 .1em',
         fontSize: props.small ? '.75em' : props.large ? '1.2em' : '1em',
-        color: theme.getColor(props.intent, theme.definition.textHightlightColor),
+        color: theme.getBrandTextColor(props.intent),
         ...props.css,
       })}
       {...props.elementProps}
@@ -86,7 +87,7 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
           outline: 'none',
           color: props.disabled
             ? theme.definition.textMutedColor
-            : theme.getColor(props.intent, theme.definition.textHightlightColor),
+            : theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor),
           fontSize: '1em',
           cursor: props.disabled && 'not-allowed',
           ...props.inputCss,

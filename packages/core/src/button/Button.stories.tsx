@@ -33,6 +33,12 @@ export const AllButtons = () => {
       <AllIntents children="Create Account" small={true} icon={IconName.AddCircle} />
       <AllIntents children="Create Account" minimal={true} icon={IconName.AddCircle} />
       <AllIntents children="Create Account" outlined={true} icon={IconName.AddCircle} />
+      <AllIntents children="Disabled Button" disabled={true} icon={IconName.AddCircle} />
+      <AllIntents children="Disabled Button" disabled={true} outlined={true} icon={IconName.AddCircle} />
+      <AllIntents children="Disabled Button" disabled={true} minimal={true} icon={IconName.AddCircle} />
+      <AllIntents children="Active Button" active={true} icon={IconName.AddCircle} />
+      <AllIntents children="Active Button" active={true} outlined={true} icon={IconName.AddCircle} />
+      <AllIntents children="Active Button" active={true} minimal={true} icon={IconName.AddCircle} />
       <AllIntents children="Create Account" loading={true} icon={IconName.AddCircle} />
       <AllIntents icon={IconName.AddCircle} small={true} />
       <AllIntents icon={IconName.AddCircle} />
@@ -80,6 +86,14 @@ export const ButtonGroups: React.FC = () => (
         <Button icon={IconName.Dashboard}>Hello</Button>
         <Button>From some</Button>
         <Button intent={Intent.Danger}>Buttons</Button>
+      </ButtonGroup>
+    </p>
+    <p>
+      <ButtonGroup>
+        <Button>About me</Button>
+        <Button>My projects</Button>
+        <Button intent={Intent.Primary}>My Github</Button>
+        <Button>More</Button>
       </ButtonGroup>
     </p>
     <p>
