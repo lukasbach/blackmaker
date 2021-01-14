@@ -46,7 +46,7 @@ export const Spinner: React.FC<SpinnerProps> = props => {
         </defs>
         <g fill="none" fillRule="evenodd">
           <g transform="translate(1 1)">
-            <path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke={`url(#${gradientId})`} strokeWidth={strokeWidth}>
+            <path d="M36 18c0-9.94-8.06-18-18-18" stroke={`url(#${gradientId})`} strokeWidth={strokeWidth}>
               <animateTransform
                 attributeName="transform"
                 type="rotate"

@@ -13,6 +13,9 @@ export interface AlertProps {
   isOpen: boolean;
   onCancel?: () => any;
   onConfirm?: () => any;
+  onConfirmTextInput?: (value: string) => any; // TODO
+  onConfirmNumberInput?: (value: number) => any; // TODO
+  onConfirmBooleanInput?: (value: boolean) => any; // TODO
   onClose?: () => any;
   cancelButtonText?: string;
   confirmButtonText?: string;

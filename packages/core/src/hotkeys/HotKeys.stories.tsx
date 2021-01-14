@@ -120,6 +120,7 @@ export const GlobalHotKeyStore: React.FC = () => {
   return (
     <GlobalHotKeyProvider
       userSetting={userSetting}
+      onReset={() => setUserSetting({})}
       onChange={(id, combination) => {
         setUserSetting({ ...userSetting, [id]: combination });
       }}

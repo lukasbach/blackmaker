@@ -15,6 +15,7 @@ export const UnderlinedTab: React.FC<TabProps> = props => {
       className={cxs({
         backgroundColor: 'transparent',
         fontSize: '.9em',
+        fontWeight: 'bold',
         border: 'none',
         borderBottom: '4px solid transparent',
         cursor: props.id !== currentTab && 'pointer',
