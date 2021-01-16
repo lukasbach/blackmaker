@@ -3,7 +3,6 @@ import { Falsy, IconName, Intent, RenderMaybeIcon, TooltipPlacement, useTheme } 
 import cxs, { CSSObject } from 'cxs';
 import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
 import { Menu } from './Menu';
-import { MaybeTruncate } from '../common/MaybeTruncate';
 
 export interface MenuItemProps {
   intent?: Intent;

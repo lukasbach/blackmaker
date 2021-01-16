@@ -22,6 +22,8 @@ export interface PopoverProps {
   autoFocus?: boolean;
   closeOnEscape?: boolean;
   inline?: boolean;
+  onOpen?: () => any;
+  onClose?: () => any;
 }
 
 export const Popover: React.FC<PopoverProps> = props => {
@@ -30,6 +32,7 @@ export const Popover: React.FC<PopoverProps> = props => {
   const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
   useEffect(() => setIsOpen(props.isOpen), [props.isOpen]);
+  useEffect(() => (isOpen ? props.onOpen?.() : props.onClose?.()), [isOpen]);
   useHotKey(
     {
       global: true,
@@ -61,7 +64,11 @@ export const Popover: React.FC<PopoverProps> = props => {
         inertia={false}
         visible={isOpen}
         placement={props.placement ?? TooltipPlacement.Auto}
-        onClickOutside={() => props.trigger === PopoverOpenTrigger.ClickReference && setIsOpen(false)}
+        onClickOutside={() => {
+          if (props.trigger === PopoverOpenTrigger.ClickReference) {
+            setIsOpen(false);
+          }
+        }}
         interactive={true}
         interactiveDebounce={0}
         interactiveBorder={30}

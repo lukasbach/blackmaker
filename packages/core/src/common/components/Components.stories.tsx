@@ -15,7 +15,7 @@ export const BoxComponent = () => (
 );
 
 export const CustomElementType = () => (
-  <Box element="a" color="blue" elementProps={{ href: "https://google.com", target: "_blank" } as any}>
+  <Box element="a" color="blue" elementProps={{ href: 'https://google.com', target: '_blank' } as any}>
     Link
   </Box>
 );

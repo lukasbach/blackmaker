@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ResizeObserverLib from "resize-observer-polyfill";
 import { useEffect, useRef, useState } from 'react';
 
 export interface ResizeSensorProps {
@@ -10,10 +9,12 @@ export interface ResizeSensorProps {
 export const ResizeSensor: React.FC<ResizeSensorProps> = props => {
   const [currentSize, setCurrentSize] = useState<ResizeObserverEntry>();
   const ref = useRef<HTMLElement>();
-  const observer = useRef(new ResizeObserverLib((entries, observer) => {
-    props.onResize?.(entries, observer);
-    setCurrentSize(entries[0]);
-  }));
+  const observer = useRef(
+    new ResizeObserver((entries, observer) => {
+      props.onResize?.(entries, observer);
+      setCurrentSize(entries[0]);
+    })
+  );
   useEffect(() => {
     if (ref.current) {
       observer.current.observe(ref.current);

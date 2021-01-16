@@ -10,5 +10,5 @@ export interface GlobalHotKeysContextValue extends GlobalHotKeys {
 export const GlobalHotKeyContext = React.createContext<GlobalHotKeysContextValue>({
   hotkeys: [],
   onChange: () => {},
-  onReset: () => {}
+  onReset: () => {},
 });
