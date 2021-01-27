@@ -1,6 +1,7 @@
 import { Intent } from '..';
 import Color from 'color';
 import { ThemeDefinition } from './ThemeDefinition';
+import { BackgroundColor } from './BackgroundColor';
 
 export class Theme {
   public readonly definition: ThemeDefinition;
@@ -112,5 +113,20 @@ export class Theme {
   public cssShadow(level?: number) {
     if (!level) return {};
     return { boxShadow: `rgba(0, 0, 0, .1) 0 ${level + 1}px ${level * 2}px ${level}px` };
+  }
+
+  public getBackgroundColor(backgroundColor: BackgroundColor) {
+    switch (backgroundColor) {
+      case BackgroundColor.Primary:
+        return this.definition.primaryBackgroundColor;
+      case BackgroundColor.Secondary:
+        return this.definition.secondaryBackgroundColor;
+      case BackgroundColor.Tertiary:
+        return this.definition.tertiaryBackgroundColor;
+      case BackgroundColor.Menu:
+        return this.definition.menuBackgroundColor;
+      default:
+        throw Error(`Unknown backgroundcolor code ${backgroundColor}`);
+    }
   }
 }

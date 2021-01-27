@@ -49,10 +49,10 @@ function ThemeWrapper(props) {
 
 addParameters({
   // viewMode: 'docs', // Remove if default view should be canvas mode
-  viewMode: 'canvas',
-  darkMode: {
-    current: 'dark',
-  },
+  // viewMode: 'canvas',
+  // darkMode: {
+  //   current: 'dark',
+  // },
 });
 
 export const decorators = [

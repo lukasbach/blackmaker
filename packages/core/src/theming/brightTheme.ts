@@ -29,7 +29,7 @@ export const brightTheme: ThemeDefinition = {
   primaryBackgroundColor: '#ffffff',
   secondaryBackgroundColor: '#eeeff1',
   tertiaryBackgroundColor: '#d2d2d2',
-  menuBackgroundColor: '#e7e7e7',
+  menuBackgroundColor: '#f8f8f8',
 
   textColor: '#515151',
   textHightlightColor: '#3c3c3c',

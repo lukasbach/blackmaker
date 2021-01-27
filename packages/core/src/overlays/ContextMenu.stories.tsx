@@ -17,18 +17,10 @@ const MenuExample = (props: { text: string }) => (
   <Menu>
     <MenuItem text={props.text} />
     <MenuItem text={props.text} />
-    <Popover
-      trigger={PopoverOpenTrigger.HoverReference}
-      placement={TooltipPlacement.RightStart}
-      content={
-        <Menu>
-          <MenuItem text={props.text} />
-          <MenuItem text={props.text} />
-        </Menu>
-      }
-    >
-      <MenuItem iconRight={IconName.ChevronRight}>{props.text}</MenuItem>
-    </Popover>
+    <MenuItem iconRight={IconName.ChevronRight} text={props.text}>
+      <MenuItem text={props.text} />
+      <MenuItem text={props.text} />
+    </MenuItem>
   </Menu>
 );
 

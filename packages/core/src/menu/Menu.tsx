@@ -19,6 +19,7 @@ export const Menu: React.FC<MenuProps> = props => {
         display: props.fill ? 'block' : 'inline-block',
         backgroundColor: (props.background ?? true) && theme.definition.menuBackgroundColor,
         borderRadius: (props.background ?? true) && theme.definition.borderRadiusSmall,
+        boxShadow: (props.background ?? true) && 'rgba(0, 0, 0, 0.15) 0px 2px 6px 2px',
         padding: '8px',
         minWidth: '120px',
         maxWidth: !props.fill && '240px',

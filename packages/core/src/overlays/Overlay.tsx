@@ -36,6 +36,16 @@ const OverlayInner: React.FC<OverlayProps> = props => {
     }
   );
 
+  const onMouseDown = useCallback(
+    e => {
+      if (props.closeOnClickBackdrop) {
+        props.onClose();
+      }
+      props.handleBackdropMouseDown?.(e);
+    },
+    [props.closeOnClickBackdrop, props.onClose, props.handleBackdropMouseDown]
+  );
+
   if (!props.transition && !props.isOpen) {
     return null;
   }
@@ -56,15 +66,7 @@ const OverlayInner: React.FC<OverlayProps> = props => {
   const content = (
     <div
       className={className}
-      onMouseDown={useCallback(
-        e => {
-          if (props.closeOnClickBackdrop) {
-            props.onClose();
-          }
-          props.handleBackdropMouseDown?.(e);
-        },
-        [props.closeOnClickBackdrop, props.onClose, props.handleBackdropMouseDown]
-      )}
+      onMouseDown={onMouseDown}
     >
       {props.renderContent({ onMouseDown: e => e.stopPropagation() })}
     </div>

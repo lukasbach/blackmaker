@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { darken, Falsy, HtmlElementProps, Intent, RenderMaybeIcon, useTheme } from '..';
+import { darken, Falsy, HtmlElementProps, Intent, lighten, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 import { Alignment } from '../common/Alignment';
 import { IconName, Icon } from '..';
@@ -95,13 +95,13 @@ export const Button: React.FC<ButtonProps> = componentProps => {
             ':hover': {
               backgroundColor:
                 !props.minimal && !props.outlined
-                  ? theme.getColorLighten(props.intent ?? Intent.Default, 0.07)
+                  ? theme.getColorLighten(props.intent ?? Intent.Default, 0.09)
                   : minimalHoverBg,
             },
             ':active': {
               transitionDuration: '.02s',
               backgroundColor:
-                !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, 0.11) : minimalActiveBg,
+                !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, 0.13) : minimalActiveBg,
             },
           }),
         ...(grouped && {

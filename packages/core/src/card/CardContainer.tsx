@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { MouseEvent, useState } from 'react';
 import { HtmlElementProps, useTheme } from '..';
 import cxs from 'cxs';
 import Color from 'color';
-import { MouseEvent, useState } from 'react';
+import { BackgroundColor } from '../theming/BackgroundColor';
 
 export interface CardContainerProps extends HtmlElementProps {
   shadow?: number;
@@ -10,6 +11,7 @@ export interface CardContainerProps extends HtmlElementProps {
   onClick?: () => any;
   onMouseOver?: (e: MouseEvent<HTMLDivElement>) => any;
   onMouseOut?: (e: MouseEvent<HTMLDivElement>) => any;
+  background?: BackgroundColor;
 }
 
 export const CardContainerContext = React.createContext({
@@ -19,6 +21,8 @@ export const CardContainerContext = React.createContext({
 export const CardContainer: React.FC<CardContainerProps> = props => {
   const theme = useTheme();
   const [isHovering, setIsHovering] = useState(false);
+
+  const backgroundColor = theme.getBackgroundColor(props.background ?? BackgroundColor.Primary);
 
   return (
     <div
@@ -36,8 +40,8 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
       }}
       className={cxs({
         display: 'inline-block',
-        backgroundColor: theme.definition.primaryBackgroundColor,
-        border: `1px solid ${new Color(theme.definition.primaryBackgroundColor).darken(0.2)}`,
+        backgroundColor: backgroundColor,
+        border: `1px solid ${new Color(backgroundColor).darken(0.2)}`,
         borderRadius: theme.definition.borderRadiusRegular,
         cursor: props.interactive && 'pointer',
         '> :first-child': {

@@ -34,7 +34,7 @@ export const CardArea: React.FC<CardAreaProps> = props => {
     ? theme.getColor(props.intent)
     : props.highlighted
     ? theme.definition.tertiaryBackgroundColor
-    : theme.definition.primaryBackgroundColor;
+    : 'transparent';
   const backgroundColorHover = new Color(backgroundColor).lighten(theme.isDark ? 0.1 : -0.05).toString();
 
   return (
