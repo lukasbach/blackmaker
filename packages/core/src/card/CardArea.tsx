@@ -20,13 +20,14 @@ export interface CardAreaProps extends HtmlElementProps {
   onClick?: () => any;
   actions?: JSX.Element; // TODO Button Group
   intent?: Intent;
+  as?: string;
 }
 
 export const CardArea: React.FC<CardAreaProps> = props => {
   const { hovering } = useContext(CardContainerContext);
   const [hoveringActions, setHoveringActions] = useState(false);
   const theme = useTheme();
-  const Element = props.headingLevel ? (`h${props.headingLevel}` as any) : 'div';
+  const Element = props.as ?? (props.headingLevel ? (`h${props.headingLevel}` as any) : 'div');
 
   const backgroundColor = props.muted
     ? theme.definition.secondaryBackgroundColor

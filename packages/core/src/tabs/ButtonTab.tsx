@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Button, Intent } from '..';
 import { TabProps } from './Tab';
 import { TabsContext } from './TabsContext';
 
 export const ButtonTab: React.FC<TabProps> = props => {
-  const { onChangeTab, currentTab } = useContext(TabsContext);
+  const { onChangeTab, currentTab, onRegisterTab } = useContext(TabsContext);
+  useEffect(() => onRegisterTab(props.id), [props.id, onRegisterTab]);
   return (
     <Button
       small={true}

@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Intent, useTheme } from '..';
 import cxs from 'cxs';
 import { TabProps } from './Tab';
 import { TabsContext } from './TabsContext';
 
 export const UnderlinedTab: React.FC<TabProps> = props => {
-  const { onChangeTab, currentTab } = useContext(TabsContext);
+  const { onChangeTab, currentTab, onRegisterTab } = useContext(TabsContext);
+  useEffect(() => onRegisterTab(props.id), [props.id, onRegisterTab]);
   const theme = useTheme();
   const intent = props.intent ?? Intent.Primary;
 

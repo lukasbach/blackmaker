@@ -31,6 +31,8 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = props => {
     ? theme.definition.textHightlightColor
     : theme.definition.textMutedColor;
 
+  // TODO render as ol/li list
+
   return (
     <>
       <Element

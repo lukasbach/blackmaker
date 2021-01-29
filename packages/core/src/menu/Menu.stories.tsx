@@ -6,6 +6,7 @@ import { MenuBreak } from './MenuBreak';
 import { MenuHeader } from './MenuHeader';
 import { Intent } from '../common';
 import { Icon, IconName } from '..';
+import { Tag } from '../tags/Tag';
 
 export default {
   title: 'Core/Components/Menu',
@@ -32,6 +33,24 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
         </MenuItem>
       </MenuItem>
       <MenuItem text="Hello World" disabled={true} />
+      <MenuItem
+        text="Hello World"
+        iconRight={(
+          <Tag small={true}>New!</Tag>
+        )}
+      />
+      <MenuItem
+        text="Hello World"
+        iconRight={(
+          <Tag small={true}>4</Tag>
+        )}
+      />
+      <MenuItem
+        text="Hello World"
+        iconRight={(
+          <Tag small={true} intent={Intent.Info} icon={IconName.AttachFile}>attached</Tag>
+        )}
+      />
       <MenuBreak />
       <MenuItem text="Hello World" intent={Intent.Primary} icon={IconName.Accessibility} />
       <MenuItem text="Hello World" intent={Intent.Info} icon={IconName.Accessibility} />

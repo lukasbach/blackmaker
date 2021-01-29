@@ -36,7 +36,7 @@ export const Dialog: React.FC<DialogProps> = props => {
       backdropColor="rgba(0, 0, 0, .2)"
       centerWithinBackdrop={true}
       renderContent={p => (
-        <div {...p}>
+        <section {...p}>
           {props.closeButton && <OverlayCloseButton onClick={props.onClose} />}
           <CardContainer
             css={{
@@ -61,6 +61,7 @@ export const Dialog: React.FC<DialogProps> = props => {
             {props.children}
             {props.footer && (
               <CardArea
+                as="footer"
                 muted={true}
                 css={{
                   textAlign: props.footerAlignRight ? 'right' : undefined,
@@ -70,7 +71,7 @@ export const Dialog: React.FC<DialogProps> = props => {
               </CardArea>
             )}
           </CardContainer>
-        </div>
+        </section>
       )}
       {...props.overlayProps}
     />

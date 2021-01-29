@@ -32,7 +32,7 @@ export const Tag: React.FC<TagProps> = props => {
         backgroundColor: backgroundColor,
         color:
           !props.minimal && !props.outlined
-            ? theme.definition.textHightlightColor
+            ? theme.getTextColorOnBrandColors(props.intent)
             : theme.getBrandTextColor(props.intent),
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
         fontSize: props.small ? '.7em' : props.large ? '1.2em' : '.9em',

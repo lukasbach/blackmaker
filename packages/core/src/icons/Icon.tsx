@@ -21,6 +21,7 @@ export const Icon: React.FC<IconProps> = props => {
 
   return (
     <span
+      aria-hidden="true"
       className={cxs({
         fontFamily: 'Material Icons Outlined',
         // fontWeight: 'normal',
