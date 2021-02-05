@@ -15,7 +15,11 @@ export default {
 
 export const SimplePopover: React.FC = () => (
   <div>
-    <Popover content={<div>Hello on Hover</div>} trigger={PopoverOpenTrigger.HoverReference} inline={true}>
+    <Popover
+      content={<div>Hello on Hover</div>}
+      trigger={PopoverOpenTrigger.HoverReference}
+      inline={true}
+    >
       <Button>Hover over me!</Button>
     </Popover>
   </div>
@@ -24,8 +28,9 @@ export const SimplePopover: React.FC = () => (
 export const PopoverWithCard: React.FC = () => (
   <div>
     <Popover
-      placement={TooltipPlacement.Bottom}
-      offset={[30, 15]}
+      inline={true}
+      placement={TooltipPlacement.BottomEnd}
+      // offset={[30, 15]}
       content={
         <CardContainer shadow={1}>
           <CardArea highlighted={true} header={true}>

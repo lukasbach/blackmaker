@@ -6,6 +6,7 @@ import { Button } from '../button/Button';
 import { Intent } from '../common';
 import { IconName } from '..';
 import { intents } from '../common/intents';
+import { BackgroundColor } from '../theming/BackgroundColor';
 
 export default {
   title: 'Core/Components/Cards',
@@ -188,5 +189,55 @@ export const InteractiveCard: React.FC = () => (
     <CardArea header={true} highlighted={true} content="Header Area" subtitle="Subtitle" />
     <CardArea>Regular Area</CardArea>
     <CardArea muted={true}>Muted area</CardArea>
+  </CardContainer>
+);
+
+export const NestedCard: React.FC = () => (
+  <CardContainer css={{ minWidth: '400px' }}>
+    <CardArea
+      header={true}
+      highlighted={true}
+      actions={<Button icon={IconName.Close} intent={Intent.Danger} />}
+      subtitle="Subtitle"
+      icon={IconName.AddLocation}
+    >
+      Header Area
+    </CardArea>
+    <CardArea>
+      <CardContainer fill={true}>
+        <CardArea>Complex Card</CardArea>
+        <CardArea css={{ textAlign: 'right' }} muted={true}>
+          <Button>Abort</Button>
+          <Button intent={Intent.Primary}>Okay</Button>
+        </CardArea>
+      </CardContainer>
+    </CardArea>
+    <CardArea>
+      <CardContainer fill={true}>
+        <CardArea>Plain Card</CardArea>
+      </CardContainer>
+    </CardArea>
+    <CardArea>
+      <CardContainer fill={true} css={{ marginBottom: '.8em' }}>
+        <CardArea>Two plain card containers within one card area</CardArea>
+      </CardContainer>
+      <CardContainer fill={true}>
+        <CardArea>Two plain card containers within one card area</CardArea>
+      </CardContainer>
+    </CardArea>
+    <CardArea>
+      <CardContainer fill={true} css={{ marginBottom: '.8em' }} background={BackgroundColor.Primary}>
+        <CardArea>Background Primary</CardArea>
+      </CardContainer>
+      <CardContainer fill={true} css={{ marginBottom: '.8em' }} background={BackgroundColor.Secondary}>
+        <CardArea>Background Secondary</CardArea>
+      </CardContainer>
+      <CardContainer fill={true} css={{ marginBottom: '.8em' }} background={BackgroundColor.Tertiary}>
+        <CardArea>Background Tertiary</CardArea>
+      </CardContainer>
+      <CardContainer fill={true} css={{ marginBottom: '.8em' }} background={BackgroundColor.Menu}>
+        <CardArea>Background Menu</CardArea>
+      </CardContainer>
+    </CardArea>
   </CardContainer>
 );

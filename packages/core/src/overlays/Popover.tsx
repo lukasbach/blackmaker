@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useContext, useEffect, useState } from 'react';
-import { ButtonGroupContext, TooltipPlacement, useTheme } from '..';
+import { ButtonGroupContext, HtmlElementProps, TooltipPlacement, useTheme } from '..';
 import cxs from 'cxs';
 import Tippy from '@tippyjs/react';
 import Color from 'color';
@@ -12,7 +12,7 @@ export enum PopoverOpenTrigger {
   Manually,
 }
 
-export interface PopoverProps {
+export interface PopoverProps extends HtmlElementProps {
   isOpen?: boolean;
   trigger?: PopoverOpenTrigger;
   placement?: TooltipPlacement;
@@ -24,13 +24,20 @@ export interface PopoverProps {
   inline?: boolean;
   onOpen?: () => any;
   onClose?: () => any;
+  animated?: boolean;
+  animationHiddenStyles?: cxs.CSSObject;
+  animationDisplayStyles?: cxs.CSSObject;
+  animationDefaultStyles?: cxs.CSSObject;
+  animationDuration?: number,
 }
 
 export const Popover: React.FC<PopoverProps> = props => {
   const theme = useTheme();
   const buttonContextProps = useContext(ButtonGroupContext) ?? {};
   const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
+  const [isOpenDelayed, setIsOpenDelayed] = useState(isOpen);
   const toggleIsOpen = () => setIsOpen(!isOpen);
+  useEffect(() => setIsOpenDelayed(isOpen), [isOpen]);
   useEffect(() => setIsOpen(props.isOpen), [props.isOpen]);
   useEffect(() => (isOpen ? props.onOpen?.() : props.onClose?.()), [isOpen]);
   useHotKey(
@@ -45,6 +52,51 @@ export const Popover: React.FC<PopoverProps> = props => {
       }
     }
   );
+
+  const animated = props.animated ?? true;
+  const animationDuration = props.animationDuration ?? 80;
+  const animationHiddenStyles = props.animationHiddenStyles ?? {
+    opacity: 0,
+    transform: (() => {
+      switch (props.placement) {
+        case TooltipPlacement.AutoStart:
+          return 'scale(.95)';
+        case TooltipPlacement.Auto:
+          return 'scale(.95)';
+        case TooltipPlacement.AutoEnd:
+          return 'scale(.95)';
+        case TooltipPlacement.TopStart:
+          return 'translateY(5px) translateX(-5px) scale(.95)';
+        case TooltipPlacement.Top:
+          return 'translateY(5px) scale(.95)';
+        case TooltipPlacement.TopEnd:
+          return 'translateY(5px) translateX(5px) scale(.95)';
+        case TooltipPlacement.RightStart:
+          return 'translateY(-5px) translateX(-5px) scale(.95)';
+        case TooltipPlacement.Right:
+          return 'translateX(-5px) scale(.95)';
+        case TooltipPlacement.RightEnd:
+          return 'translateY(5px) translateX(-5px) scale(.95)';
+        case TooltipPlacement.BottomEnd:
+          return 'translateY(-5px) translateX(5px) scale(.95)';
+        case TooltipPlacement.Bottom:
+          return 'translateY(-5px) scale(.95)';
+        case TooltipPlacement.BottomStart:
+          return 'translateY(-5px) translateX(-5px) scale(.95)';
+        case TooltipPlacement.LeftEnd:
+          return 'translateY(5px) translateX(5px) scale(.95)';
+        case TooltipPlacement.Left:
+          return 'translateX(5px) scale(.95)';
+        case TooltipPlacement.LeftStart:
+          return 'translateY(-5px) translateX(5px) scale(.95)';
+
+      }
+    })()
+  };
+  const animationDisplayStyles = props.animationDisplayStyles ?? {
+    opacity: 1,
+    transform: 'none'
+  };
 
   return (
     <div
@@ -61,38 +113,44 @@ export const Popover: React.FC<PopoverProps> = props => {
         arrow={false}
         // trigger={'manual'}
         // hideOnClick={true}
-        inertia={false}
+        inertia={true}
         visible={isOpen}
-        placement={props.placement ?? TooltipPlacement.Auto}
+        placement={props.placement ?? TooltipPlacement.Bottom}
         onClickOutside={() => {
           if (props.trigger === PopoverOpenTrigger.ClickReference) {
             setIsOpen(false);
           }
         }}
         interactive={true}
-        interactiveDebounce={0}
+        interactiveDebounce={75}
         interactiveBorder={30}
-        offset={props.offset ?? [0, 0]}
+        offset={props.offset ?? [5, 5]}
         // animation={true}
         className={cxs({ outline: 'none' })}
+        duration={animationDuration}
         content={
           <div
             ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
             className={cxs({
-              paddingLeft: !props.noLeftPadding && '12px',
+              // paddingLeft: !props.noLeftPadding && '12px',
+              ...(animated && (props.animationDefaultStyles ?? {
+                transition: `${animationDuration}ms all ease`,
+              })),
+              ...(animated && animationHiddenStyles),
+              ...(animated && isOpenDelayed ? animationDisplayStyles : animationHiddenStyles)
             })}
           >
             {props.content}
           </div>
         }
       >
-        <span onClick={() => props.trigger === PopoverOpenTrigger.ClickReference && toggleIsOpen()}>
+        <div onClick={() => props.trigger === PopoverOpenTrigger.ClickReference && toggleIsOpen()}>
           <ButtonGroupContext.Provider
             value={{ active: isOpen && props.trigger !== PopoverOpenTrigger.HoverReference, ...buttonContextProps }}
           >
             {props.children}
           </ButtonGroupContext.Provider>
-        </span>
+        </div>
       </Tippy>
     </div>
   );

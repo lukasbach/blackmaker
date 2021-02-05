@@ -12,6 +12,7 @@ export interface CardContainerProps extends HtmlElementProps {
   onMouseOver?: (e: MouseEvent<HTMLDivElement>) => any;
   onMouseOut?: (e: MouseEvent<HTMLDivElement>) => any;
   background?: BackgroundColor;
+  fill?: boolean;
 }
 
 export const CardContainerContext = React.createContext({
@@ -39,7 +40,7 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
         }
       }}
       className={cxs({
-        display: 'inline-block',
+        display: props.fill ? 'block' :  'inline-block',
         backgroundColor: backgroundColor,
         border: `1px solid ${new Color(backgroundColor).darken(0.2)}`,
         borderRadius: theme.definition.borderRadiusRegular,
