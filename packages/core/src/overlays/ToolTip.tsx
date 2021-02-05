@@ -12,11 +12,12 @@ export const ToolTip: React.FC<ToolTipProps> = props => {
 
   return (
     <Popover
-      {...props}
       inline={props.inline ?? true}
       trigger={PopoverOpenTrigger.HoverReference}
       placement={props.placement ?? TooltipPlacement.Bottom}
       // offset={[0, 20]} // TODO
+      interactiveDebounce={0}
+      {...props}
       content={
         <div
           className={cxs({

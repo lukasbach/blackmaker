@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import { Button, IconName, TooltipPlacement } from '..';
+import { Button, darkTheme, IconName, ThemeProvider, TooltipPlacement } from '..';
 import { Popover, PopoverOpenTrigger, PopoverProps } from './Popover';
 import { MenuItem } from '../menu/MenuItem';
 import { Menu } from '../menu/Menu';
@@ -206,3 +206,33 @@ export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
     </Menu>
   );
 };
+
+export const PopoverInteractiveBorderDefinedInTheme: React.FC = () => (
+  <div>
+    <ThemeProvider themeDefinition={{
+      ...darkTheme,
+      popoverInteractiveBorder: 100
+    }}>
+      <Popover
+        content={<div>I've got a 100px interactive border</div>}
+      >
+        <Button>Hover over me!</Button>
+      </Popover>
+    </ThemeProvider>
+  </div>
+);
+
+export const PopoverInteractiveDebounceDefinedInTheme: React.FC = () => (
+  <div>
+    <ThemeProvider themeDefinition={{
+      ...darkTheme,
+      popoverInteractiveDebounce: 2000
+    }}>
+      <Popover
+        content={<div>I've got a 2s interactive debounce</div>}
+      >
+        <Button>Hover over me!</Button>
+      </Popover>
+    </ThemeProvider>
+  </div>
+);

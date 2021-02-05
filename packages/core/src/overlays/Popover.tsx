@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { ButtonGroupContext, HtmlElementProps, TooltipPlacement, useTheme } from '..';
 import cxs from 'cxs';
-import Tippy from '@tippyjs/react';
-import Color from 'color';
+import Tippy, { TippyProps } from '@tippyjs/react';
 import { useHotKey } from '@blackmaker/hotkeys/out/useHotKey';
+import { Instance } from 'tippy.js';
 
 export enum PopoverOpenTrigger {
   HoverReference,
@@ -17,10 +17,10 @@ export interface PopoverProps extends HtmlElementProps {
   trigger?: PopoverOpenTrigger;
   placement?: TooltipPlacement;
   content: React.ReactNode | string;
-  offset?: [number, number];
   noLeftPadding?: boolean;
   autoFocus?: boolean;
   closeOnEscape?: boolean;
+  closeOnClick?: boolean;
   inline?: boolean;
   onOpen?: () => any;
   onClose?: () => any;
@@ -29,17 +29,18 @@ export interface PopoverProps extends HtmlElementProps {
   animationDisplayStyles?: cxs.CSSObject;
   animationDefaultStyles?: cxs.CSSObject;
   animationDuration?: number,
+  tippyProps?: Partial<TippyProps>,
+  interactiveDebounce?: number;
+  interactiveBorder?: number;
 }
 
 export const Popover: React.FC<PopoverProps> = props => {
   const theme = useTheme();
+  const instance = useRef<Instance>();
   const buttonContextProps = useContext(ButtonGroupContext) ?? {};
-  const [isOpen, setIsOpen] = useState(props.isOpen ?? false);
-  const [isOpenDelayed, setIsOpenDelayed] = useState(isOpen);
-  const toggleIsOpen = () => setIsOpen(!isOpen);
-  useEffect(() => setIsOpenDelayed(isOpen), [isOpen]);
-  useEffect(() => setIsOpen(props.isOpen), [props.isOpen]);
-  useEffect(() => (isOpen ? props.onOpen?.() : props.onClose?.()), [isOpen]);
+  const [visible, setVisible] = useState(false);
+  const [visibleDelayed, setVisibleDelayed] = useState(false);
+  useEffect(() => setVisibleDelayed(visible), [visible]);
   useHotKey(
     {
       global: true,
@@ -48,7 +49,7 @@ export const Popover: React.FC<PopoverProps> = props => {
     },
     () => {
       if (props.closeOnEscape ?? true) {
-        setIsOpen(false);
+        instance.current?.hide();
       }
     }
   );
@@ -99,59 +100,64 @@ export const Popover: React.FC<PopoverProps> = props => {
   };
 
   return (
-    <div
-      onMouseEnter={() => props.trigger === PopoverOpenTrigger.HoverReference && setIsOpen(true)}
-      onMouseLeave={() => props.trigger === PopoverOpenTrigger.HoverReference && setIsOpen(false)}
-      className={cxs({
-        display: props.inline && 'inline-block',
-        '& .tippy-svg-arrow path': {
-          fill: new Color(theme.definition.menuBackgroundColor).darken(0.2).toString(),
-        },
-      })}
-    >
-      <Tippy
-        arrow={false}
-        // trigger={'manual'}
-        // hideOnClick={true}
-        inertia={true}
-        visible={isOpen}
-        placement={props.placement ?? TooltipPlacement.Bottom}
-        onClickOutside={() => {
-          if (props.trigger === PopoverOpenTrigger.ClickReference) {
-            setIsOpen(false);
-          }
-        }}
-        interactive={true}
-        interactiveDebounce={75}
-        interactiveBorder={30}
-        offset={props.offset ?? [5, 5]}
-        // animation={true}
-        className={cxs({ outline: 'none' })}
-        duration={animationDuration}
-        content={
-          <div
-            ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
-            className={cxs({
-              // paddingLeft: !props.noLeftPadding && '12px',
-              ...(animated && (props.animationDefaultStyles ?? {
-                transition: `${animationDuration}ms all ease`,
-              })),
-              ...(animated && animationHiddenStyles),
-              ...(animated && isOpenDelayed ? animationDisplayStyles : animationHiddenStyles)
-            })}
-          >
-            {props.content}
-          </div>
+    <Tippy
+      onMount={i => instance.current = i}
+      arrow={false}
+      trigger={(() => {
+        switch (props.trigger) {
+          case PopoverOpenTrigger.Manually:
+            return 'manual';
+          case PopoverOpenTrigger.ClickReference:
+            return 'click';
+          case PopoverOpenTrigger.HoverReference:
+          default:
+            return 'mouseenter focus';
         }
-      >
-        <div onClick={() => props.trigger === PopoverOpenTrigger.ClickReference && toggleIsOpen()}>
-          <ButtonGroupContext.Provider
-            value={{ active: isOpen && props.trigger !== PopoverOpenTrigger.HoverReference, ...buttonContextProps }}
-          >
-            {props.children}
-          </ButtonGroupContext.Provider>
+      })()}
+      onShow={(instance) => {
+        setVisible(true);
+        props.tippyProps?.onShow?.(instance);
+      }}
+      onHide={(instance) => {
+        setVisible(false);
+        props.tippyProps?.onHide?.(instance);
+      }}
+      placement={props.placement ?? TooltipPlacement.Bottom}
+      hideOnClick={props.closeOnClick}
+      interactive={true}
+      interactiveDebounce={props.interactiveDebounce ?? theme.definition.popoverInteractiveDebounce ?? 75}
+      interactiveBorder={props.interactiveBorder ?? theme.definition.popoverInteractiveBorder ?? 20}
+      className={cxs({ outline: 'none' })}
+      duration={animationDuration}
+      content={
+        <div
+          ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
+          className={cxs({
+            ...(animated && (props.animationDefaultStyles ?? {
+              transition: `${animationDuration}ms all ease`,
+            })),
+            ...(animated && !visibleDelayed && animationHiddenStyles),
+            ...(animated && visibleDelayed && animationDisplayStyles)
+          })}
+        >
+          {props.content}
         </div>
-      </Tippy>
-    </div>
+      }
+      {...props.tippyProps}
+    >
+      <div
+        className={cxs({
+          display: (props.inline ?? true) ? 'inline-block' : 'block',
+          ...props.css
+        })}
+        {...props.elementProps}
+      >
+        <ButtonGroupContext.Provider
+          value={{ active: visible && props.trigger !== PopoverOpenTrigger.HoverReference, ...buttonContextProps }}
+        >
+          {props.children}
+        </ButtonGroupContext.Provider>
+      </div>
+    </Tippy>
   );
 };

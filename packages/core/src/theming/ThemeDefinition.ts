@@ -28,4 +28,7 @@ export interface ThemeDefinition {
   borderRadiusBig: string;
 
   isDark: boolean;
+
+  popoverInteractiveDebounce?: number;
+  popoverInteractiveBorder?: number;
 }
