@@ -5,7 +5,7 @@ import cxs from 'cxs';
 export interface RoundButtonProps {
   icon: IconName;
   intent?: Intent;
-  size?: 1 | 2 | 3 | 4;
+  size?: string | 1 | 2 | 3 | 4;
   onClick?: () => any;
 }
 
@@ -24,12 +24,15 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
         border: 'none',
         padding: '.6em',
         margin: '.2em',
-        fontSize: switchEnum(props.size ?? 1, [
-          [1, '1em'],
-          [2, '1.2em'],
-          [3, '1.6em'],
-          [4, '2em'],
-        ]),
+        fontSize:
+          typeof props.size === 'string'
+            ? props.size
+            : switchEnum(props.size ?? 1, [
+                [1, '1em'],
+                [2, '1.2em'],
+                [3, '1.6em'],
+                [4, '2em'],
+              ]),
         transition: '.2s background-color ease',
         cursor: 'pointer',
         ':hover': {

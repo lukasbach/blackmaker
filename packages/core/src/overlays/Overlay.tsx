@@ -64,10 +64,7 @@ const OverlayInner: React.FC<OverlayProps> = props => {
   }
 
   const content = (
-    <div
-      className={className}
-      onMouseDown={onMouseDown}
-    >
+    <div className={className} onMouseDown={onMouseDown}>
       {props.renderContent({ onMouseDown: e => e.stopPropagation() })}
     </div>
   );

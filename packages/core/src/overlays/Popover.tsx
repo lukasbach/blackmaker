@@ -28,8 +28,8 @@ export interface PopoverProps extends HtmlElementProps {
   animationHiddenStyles?: cxs.CSSObject;
   animationDisplayStyles?: cxs.CSSObject;
   animationDefaultStyles?: cxs.CSSObject;
-  animationDuration?: number,
-  tippyProps?: Partial<TippyProps>,
+  animationDuration?: number;
+  tippyProps?: Partial<TippyProps>;
   interactiveDebounce?: number;
   interactiveBorder?: number;
 }
@@ -90,18 +90,17 @@ export const Popover: React.FC<PopoverProps> = props => {
           return 'translateX(5px) scale(.95)';
         case TooltipPlacement.LeftStart:
           return 'translateY(-5px) translateX(5px) scale(.95)';
-
       }
-    })()
+    })(),
   };
   const animationDisplayStyles = props.animationDisplayStyles ?? {
     opacity: 1,
-    transform: 'none'
+    transform: 'none',
   };
 
   return (
     <Tippy
-      onMount={i => instance.current = i}
+      onMount={i => (instance.current = i)}
       arrow={false}
       trigger={(() => {
         switch (props.trigger) {
@@ -114,11 +113,11 @@ export const Popover: React.FC<PopoverProps> = props => {
             return 'mouseenter focus';
         }
       })()}
-      onShow={(instance) => {
+      onShow={instance => {
         setVisible(true);
         props.tippyProps?.onShow?.(instance);
       }}
-      onHide={(instance) => {
+      onHide={instance => {
         setVisible(false);
         props.tippyProps?.onHide?.(instance);
       }}
@@ -133,11 +132,12 @@ export const Popover: React.FC<PopoverProps> = props => {
         <div
           ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
           className={cxs({
-            ...(animated && (props.animationDefaultStyles ?? {
-              transition: `${animationDuration}ms all ease`,
-            })),
+            ...(animated &&
+              (props.animationDefaultStyles ?? {
+                transition: `${animationDuration}ms all ease`,
+              })),
             ...(animated && !visibleDelayed && animationHiddenStyles),
-            ...(animated && visibleDelayed && animationDisplayStyles)
+            ...(animated && visibleDelayed && animationDisplayStyles),
           })}
         >
           {props.content}
@@ -147,8 +147,8 @@ export const Popover: React.FC<PopoverProps> = props => {
     >
       <div
         className={cxs({
-          display: (props.inline ?? true) ? 'inline-block' : 'block',
-          ...props.css
+          display: props.inline ?? true ? 'inline-block' : 'block',
+          ...props.css,
         })}
         {...props.elementProps}
       >

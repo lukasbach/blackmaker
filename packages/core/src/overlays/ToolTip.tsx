@@ -3,7 +3,16 @@ import { Intent, TooltipPlacement, useTheme } from '..';
 import cxs from 'cxs';
 import { Popover, PopoverOpenTrigger, PopoverProps } from './Popover';
 
-export interface ToolTipProps extends Omit<PopoverProps, 'noLeftPadding' | 'trigger' | 'isOpen' | 'animationDefaultStyles' | 'animationDisplayStyles' | 'animationHiddenStyles'> {
+export interface ToolTipProps
+  extends Omit<
+    PopoverProps,
+    | 'noLeftPadding'
+    | 'trigger'
+    | 'isOpen'
+    | 'animationDefaultStyles'
+    | 'animationDisplayStyles'
+    | 'animationHiddenStyles'
+  > {
   intent?: Intent;
 }
 

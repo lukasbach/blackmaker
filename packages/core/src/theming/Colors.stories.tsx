@@ -13,10 +13,10 @@ export default {
 } as Meta;
 
 const backgrounds = [
-  [ BackgroundColor.Primary, 'Primary' ],
-  [ BackgroundColor.Secondary, 'Secondary' ],
-  [ BackgroundColor.Tertiary, 'Tertiary' ],
-  [ BackgroundColor.Menu, 'Menu' ],
+  [BackgroundColor.Primary, 'Primary'],
+  [BackgroundColor.Secondary, 'Secondary'],
+  [BackgroundColor.Tertiary, 'Tertiary'],
+  [BackgroundColor.Menu, 'Menu'],
 ] as const;
 
 export const TextColors = () => {
@@ -24,15 +24,13 @@ export const TextColors = () => {
   return (
     <div>
       <Heading>Text Colors</Heading>
-      { backgrounds.map(([color, colorName]) => (
+      {backgrounds.map(([color, colorName]) => (
         <CardContainer background={color} key={color} css={{ marginBottom: '1em' }}>
           <CardArea header={true} headingLevel={2}>
-            On { colorName } Background
+            On {colorName} Background
           </CardArea>
           <CardArea>
-            <span>
-              Lorem Ipsum
-            </span>
+            <span>Lorem Ipsum</span>
             {intents.map(i => (
               <span className={cxs({ color: theme.getBrandTextColor(i) })} key={i}>
                 Lorem Ipsum
@@ -40,7 +38,7 @@ export const TextColors = () => {
             ))}
           </CardArea>
         </CardContainer>
-      )) }
+      ))}
     </div>
   );
 };
@@ -51,11 +49,11 @@ export const ColorsOnIntentBackgrounds = () => {
     <div>
       <Heading>Colors on Intent Backgrounds</Heading>
       <CardContainer>
-        { intents.map(i => (
+        {intents.map(i => (
           <CardArea intent={i} key={i}>
             Lorem Ipsum
           </CardArea>
-        )) }
+        ))}
       </CardContainer>
     </div>
   );

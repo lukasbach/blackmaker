@@ -33,23 +33,15 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
         </MenuItem>
       </MenuItem>
       <MenuItem text="Hello World" disabled={true} />
+      <MenuItem text="Hello World" iconRight={<Tag small={true}>New!</Tag>} />
+      <MenuItem text="Hello World" iconRight={<Tag small={true}>4</Tag>} />
       <MenuItem
         text="Hello World"
-        iconRight={(
-          <Tag small={true}>New!</Tag>
-        )}
-      />
-      <MenuItem
-        text="Hello World"
-        iconRight={(
-          <Tag small={true}>4</Tag>
-        )}
-      />
-      <MenuItem
-        text="Hello World"
-        iconRight={(
-          <Tag small={true} intent={Intent.Info} icon={IconName.AttachFile}>attached</Tag>
-        )}
+        iconRight={
+          <Tag small={true} intent={Intent.Info} icon={IconName.AttachFile}>
+            attached
+          </Tag>
+        }
       />
       <MenuBreak />
       <MenuItem text="Hello World" intent={Intent.Primary} icon={IconName.Accessibility} />

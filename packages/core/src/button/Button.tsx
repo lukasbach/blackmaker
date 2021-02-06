@@ -7,6 +7,7 @@ import { Property } from 'csstype';
 import { Spinner } from '../spinner/Spinner';
 import { useContext } from 'react';
 import { ButtonGroupContext } from './ButtonGroup';
+import Color from 'color';
 
 export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   asAnchor?: boolean;
@@ -53,6 +54,18 @@ export const Button: React.FC<ButtonProps> = componentProps => {
     ? theme.getColor(props.intent)
     : 'transparent';
 
+  let color =
+    !props.minimal && !props.outlined
+      ? theme.getTextColorOnBrandColors(props.intent)
+      : theme.getBrandTextColor(props.intent);
+
+  if (props.disabled) {
+    color = new Color(color).mix(new Color(backgroundColor), 0.3).toString();
+  }
+  if (props.active) {
+    color = new Color(color).mix(new Color(backgroundColor), 0.15).toString();
+  }
+
   return (
     <Element
       onClick={props.onClick}
@@ -60,13 +73,11 @@ export const Button: React.FC<ButtonProps> = componentProps => {
       target={props.target}
       className={cxs({
         backgroundColor: backgroundColor,
+        color: color,
         borderRadius: !grouped && theme.definition.borderRadiusSmall,
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
-        boxShadow: !props.minimal && !props.outlined && `0 2px 0 0px ${darken(backgroundColor, 0.4)}`,
-        color:
-          !props.minimal && !props.outlined
-            ? theme.getTextColorOnBrandColors(props.intent)
-            : theme.getBrandTextColor(props.intent),
+        boxShadow:
+          !props.minimal && !props.outlined && `0 2px 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`,
         fontSize: props.small ? '.7em' : props.large ? '1em' : '.8em',
         fontWeight: 'bold',
         cursor: props.disabled ? 'not-allowed' : 'pointer',
@@ -102,6 +113,11 @@ export const Button: React.FC<ButtonProps> = componentProps => {
               transitionDuration: '.02s',
               backgroundColor:
                 !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, 0.13) : minimalActiveBg,
+              ...(!props.minimal &&
+                !props.outlined && {
+                  boxShadow: 'none',
+                  transform: 'translateY(2px)',
+                }),
             },
           }),
         ...(grouped && {

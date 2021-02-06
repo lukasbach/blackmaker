@@ -8,7 +8,7 @@ export const brightTheme: ThemeDefinition = {
   ...darkTheme,
 
   brandTextColors: {
-    ...brandColors,
+    ...darkTheme.brandTextColors,
     default: '#3c3c3c',
     primary: darken(brandColors.primary, 0.2),
     info: darken(brandColors.info, 0),
@@ -17,13 +17,7 @@ export const brightTheme: ThemeDefinition = {
     danger: darken(brandColors.danger, 0),
   },
   minimalBrandBaseColors: {
-    ...brandColors,
-    default: '#5f6570',
-    primary: '#6C5FC7',
-    info: '#3498db',
-    success: '#27ae60',
-    warning: '#e8a318',
-    danger: '#e74c3c',
+    ...darkTheme.minimalBrandBaseColors,
   },
 
   primaryBackgroundColor: '#ffffff',

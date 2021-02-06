@@ -40,7 +40,7 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
         }
       }}
       className={cxs({
-        display: props.fill ? 'block' :  'inline-block',
+        display: props.fill ? 'block' : 'inline-block',
         backgroundColor: backgroundColor,
         border: `1px solid ${new Color(backgroundColor).darken(0.2)}`,
         borderRadius: theme.definition.borderRadiusRegular,

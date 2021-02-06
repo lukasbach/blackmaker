@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { IconName, Intent, MaybeIcon, RenderMaybeIcon, switchEnum, useTheme } from '..';
+import { Intent, switchEnum, useTheme } from '..';
 import cxs from 'cxs';
 import Color from 'color';
-import { RoundButton } from '../button/RoundButton';
+import { NotificationContent, NotificationContentProps } from '../notificationContent/NotificationContent';
 
 export enum CalloutStyle {
   Heavy,
@@ -12,15 +12,10 @@ export enum CalloutStyle {
   BackgroundColor,
 }
 
-export interface CalloutProps {
+export interface CalloutProps extends NotificationContentProps {
   style: CalloutStyle;
   backgroundColorStyle?: 1 | 2 | 3;
   intent?: Intent;
-  icon?: MaybeIcon;
-  title?: string | JSX.Element;
-  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
-  onClose?: () => any;
-  size?: 'tiny' | 'small' | 'normal' | 'large' | 'x-large';
 }
 
 export const Callout: React.FC<CalloutProps> = props => {
@@ -41,16 +36,10 @@ export const Callout: React.FC<CalloutProps> = props => {
     ],
   ]);
 
-  const TitleElement = `h${props.headingLevel ?? 1}` as 'h1';
-
   return (
     <div
       className={cxs({
         backgroundColor: backgroundColor,
-        color:
-          props.style === CalloutStyle.Heavy
-            ? theme.getTextColorOnBrandColors(props.intent)
-            : theme.definition.textHightlightColor,
         borderWidth:
           props.style === CalloutStyle.Outlined || props.style === CalloutStyle.BackgroundColor ? '1px' : '0',
         borderColor:
@@ -59,9 +48,7 @@ export const Callout: React.FC<CalloutProps> = props => {
             : new Color(backgroundColor).darken(0.35).toString(),
         borderStyle: 'solid',
         marginBottom: '.8em',
-        padding: '.8em',
         borderRadius: theme.definition.borderRadiusRegular,
-        display: 'flex',
         borderLeft: props.style === CalloutStyle.LeftBorder && `6px solid ${theme.getColor(props.intent)}`,
         fontSize: switchEnum(
           props.size,
@@ -76,50 +63,27 @@ export const Callout: React.FC<CalloutProps> = props => {
         ),
       })}
     >
-      {props.icon && (
-        <div>
-          <RenderMaybeIcon
-            icon={props.icon}
-            iconProps={{
-              size: '2em',
-              marginRight: '.4em',
-              color:
-                props.style === CalloutStyle.Heavy
-                  ? theme.getTextColorOnBrandColors(props.intent)
-                  : theme.getColor(props.intent, theme.definition.textHightlightColor),
-            }}
-          />
-        </div>
-      )}
-      <div
-        className={cxs({
-          flexGrow: 1,
-        })}
+      <NotificationContent
+        {...props}
+        closeButtonIntent={props.style !== CalloutStyle.Heavy && props.intent}
+        iconColor={
+          props.style === CalloutStyle.Heavy
+            ? theme.getTextColorOnBrandColors(props.intent)
+            : theme.getColor(props.intent, theme.definition.textHightlightColor)
+        }
+        titleColor={
+          props.style !== CalloutStyle.Heavy &&
+          theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor)
+        }
+        textColor={
+          props.style === CalloutStyle.Heavy
+            ? theme.getTextColorOnBrandColors(props.intent)
+            : theme.definition.textHightlightColor
+        }
+        size={'normal'}
       >
-        {props.title && (
-          <TitleElement
-            className={cxs({
-              fontSize: '1.4em',
-              margin: '.1em 0 .4em 0',
-              color:
-                props.style !== CalloutStyle.Heavy &&
-                theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor),
-            })}
-          >
-            {props.title}
-          </TitleElement>
-        )}
         {props.children}
-      </div>
-      {props.onClose && (
-        <div>
-          <RoundButton
-            icon={IconName.Close}
-            onClick={props.onClose}
-            intent={props.style !== CalloutStyle.Heavy && props.intent}
-          />
-        </div>
-      )}
+      </NotificationContent>
     </div>
   );
 };

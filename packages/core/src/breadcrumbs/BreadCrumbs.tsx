@@ -18,7 +18,7 @@ export const BreadCrumbs: React.FC<BreadCrumbsProps> = props => {
         flexWrap: 'nowrap',
         overflowX: 'auto',
         fontSize: props.small ? '.8em' : props.large ? '1.2em' : '1em',
-        ...props.css
+        ...props.css,
       })}
       {...props.elementProps}
     >

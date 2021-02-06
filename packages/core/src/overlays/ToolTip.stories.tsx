@@ -50,9 +50,17 @@ export const TooltipsWithIntents = () => (
   </div>
 );
 
-const toolTipContent = (<div>Tooltip content yay<br />Next Line<br />Yup</div>);
+const toolTipContent = (
+  <div>
+    Tooltip content yay
+    <br />
+    Next Line
+    <br />
+    Yup
+  </div>
+);
 const ToolTipButton = () => <Button>XXXXXX</Button>;
-const remainingProps = {}
+const remainingProps = {};
 
 export const TooltipDirections = () => (
   <div className={cxs({ margin: '200px' })}>

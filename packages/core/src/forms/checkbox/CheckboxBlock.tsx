@@ -45,20 +45,23 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
         height: '1em',
         fontSize: size,
         border: `1px solid ${darken(theme.definition.primaryBackgroundColor, 0.2)}`,
-        backgroundColor: (checked !== false) ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
+        backgroundColor:
+          checked !== false ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
         borderRadius: theme.definition.borderRadiusSmall,
         textAlign: 'center',
         cursor: 'pointer',
         transition: '.15s background-color ease',
         ':hover': {
-          backgroundColor: (checked !== false)
-            ? theme.getColorDarken(intent, 0.05)
-            : darken(theme.definition.primaryBackgroundColor, 0.12),
+          backgroundColor:
+            checked !== false
+              ? theme.getColorDarken(intent, 0.05)
+              : darken(theme.definition.primaryBackgroundColor, 0.12),
         },
         ':active': {
-          backgroundColor: (checked !== false)
-            ? theme.getColorDarken(intent, 0.1)
-            : darken(theme.definition.primaryBackgroundColor, 0.2),
+          backgroundColor:
+            checked !== false
+              ? theme.getColorDarken(intent, 0.1)
+              : darken(theme.definition.primaryBackgroundColor, 0.2),
         },
       })}
       onClick={() => {

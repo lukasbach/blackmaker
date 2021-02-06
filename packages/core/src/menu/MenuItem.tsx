@@ -108,6 +108,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         content={<Menu>{props.children}</Menu>}
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
+        inline={false}
       >
         {itemContent}
       </Popover>

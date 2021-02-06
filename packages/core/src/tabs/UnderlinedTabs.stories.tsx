@@ -3,7 +3,6 @@ import { Meta } from '@storybook/react';
 import { Tabs } from './Tabs';
 import { TabsStyle } from './TabsStyle';
 import { Tab } from './Tab';
-import { IconName, Intent } from '../../out';
 import { intents } from '../common/intents';
 
 export default {
@@ -13,7 +12,7 @@ export default {
 
 export const StaticTabs = () => (
   <div>
-    <Tabs tabStyle={TabsStyle.Underlined}>
+    <Tabs tabStyle={TabsStyle.Underlined} currentTab="tab1">
       <Tab id="tab1" title="Tab 1" />
       <Tab id="tab2" title="Tab 2" />
       <Tab id="tab3" title="Tab 3" />

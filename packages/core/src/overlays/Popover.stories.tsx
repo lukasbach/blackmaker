@@ -15,11 +15,7 @@ export default {
 
 export const SimplePopover: React.FC = () => (
   <div>
-    <Popover
-      content={<div>Hello on Hover</div>}
-      trigger={PopoverOpenTrigger.HoverReference}
-      inline={true}
-    >
+    <Popover content={<div>Hello on Hover</div>} trigger={PopoverOpenTrigger.HoverReference} inline={true}>
       <Button>Hover over me!</Button>
     </Popover>
   </div>
@@ -209,13 +205,13 @@ export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
 
 export const PopoverInteractiveBorderDefinedInTheme: React.FC = () => (
   <div>
-    <ThemeProvider themeDefinition={{
-      ...darkTheme,
-      popoverInteractiveBorder: 100
-    }}>
-      <Popover
-        content={<div>I've got a 100px interactive border</div>}
-      >
+    <ThemeProvider
+      themeDefinition={{
+        ...darkTheme,
+        popoverInteractiveBorder: 100,
+      }}
+    >
+      <Popover content={<div>I've got a 100px interactive border</div>}>
         <Button>Hover over me!</Button>
       </Popover>
     </ThemeProvider>
@@ -224,13 +220,13 @@ export const PopoverInteractiveBorderDefinedInTheme: React.FC = () => (
 
 export const PopoverInteractiveDebounceDefinedInTheme: React.FC = () => (
   <div>
-    <ThemeProvider themeDefinition={{
-      ...darkTheme,
-      popoverInteractiveDebounce: 2000
-    }}>
-      <Popover
-        content={<div>I've got a 2s interactive debounce</div>}
-      >
+    <ThemeProvider
+      themeDefinition={{
+        ...darkTheme,
+        popoverInteractiveDebounce: 2000,
+      }}
+    >
+      <Popover content={<div>I've got a 2s interactive debounce</div>}>
         <Button>Hover over me!</Button>
       </Popover>
     </ThemeProvider>

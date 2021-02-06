@@ -13,7 +13,7 @@ export default {
 
 export const StaticTabs = () => (
   <div>
-    <Tabs tabStyle={TabsStyle.Buttons}>
+    <Tabs tabStyle={TabsStyle.Buttons} currentTab="tab1">
       <Tab id="tab1" title="Tab 1" />
       <Tab id="tab2" title="Tab 2" />
       <Tab id="tab3" title="Tab 3" />
