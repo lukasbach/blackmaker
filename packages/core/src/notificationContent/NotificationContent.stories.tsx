@@ -15,7 +15,7 @@ export const Example = () => (
     title={'Title content'}
     actions={[
       { text: 'Some action', intent: Intent.Primary },
-      { icon: IconName.DeleteForever, text: 'Danger!', intent: Intent.Danger }
+      { icon: IconName.DeleteForever, text: 'Danger!', intent: Intent.Danger },
     ]}
   >
     Notification Content

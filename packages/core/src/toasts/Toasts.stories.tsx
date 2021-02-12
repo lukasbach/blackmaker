@@ -14,11 +14,11 @@ export default {
   component: ToastProvider,
 } as Meta;
 
-const CreateToastButton: React.FC<{ toast: Omit<ToastData, 'id'>; intent?: Intent, text?: string }> = props => {
+const CreateToastButton: React.FC<{ toast: Omit<ToastData, 'id'>; intent?: Intent; text?: string }> = props => {
   const { toast } = useToast();
   return (
     <Button onClick={() => toast(props.toast)} intent={props.intent}>
-      { props.text }
+      {props.text}
     </Button>
   );
 };
@@ -75,9 +75,9 @@ export const Example = () => {
             text: 'Toast description text',
             icon: IconName.AttachFile,
             actions: [
-              { text: 'Some action', /*intent: Intent.Primary*/ },
+              { text: 'Some action' /*intent: Intent.Primary*/ },
               { text: 'Danger!', intent: Intent.Danger, icon: IconName.DeleteForever },
-            ]
+            ],
           }}
         />
         <CreateToastButton

@@ -8,7 +8,7 @@ export interface ToastData
   customContent?: JSX.Element;
   intent?: Intent;
   closable?: boolean;
-  closeAfter?: number
+  closeAfter?: number;
 }
 
 export interface ToastContextValue {

@@ -8,8 +8,11 @@ import { Toast } from './Toast';
 
 let toastCounter = 0;
 
-export interface ToastProviderProps extends Pick<ToastContextValue, 'verticalOrientation' | 'horizontalOrientation' | 'animationDuration' | 'closeAfter'>{
-}
+export interface ToastProviderProps
+  extends Pick<
+    ToastContextValue,
+    'verticalOrientation' | 'horizontalOrientation' | 'animationDuration' | 'closeAfter'
+  > {}
 
 export const ToastProvider: React.FC<ToastProviderProps> = props => {
   const [toasts, setToasts] = useState<ToastData[]>([]);
@@ -27,7 +30,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = props => {
         animationDuration: props.animationDuration,
         toast: data => {
           const id = (data as any).id ?? `toast${toastCounter++}`;
-          setToasts(t => [...t, {closeAfter: props.closeAfter, ...data, id}]);
+          setToasts(t => [...t, { closeAfter: props.closeAfter, ...data, id }]);
           return id;
         },
         closeToast: toastToRemove => setToasts(t => t.filter(toast => toast.id !== toastToRemove)),

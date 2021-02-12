@@ -1,10 +1,6 @@
 import { TooltipPlacement } from '../common';
 
-export const getPopoverInitialTransform = (
-  placement: TooltipPlacement,
-  translation = 5,
-  scale = .95,
-) => {
+export const getPopoverInitialTransform = (placement: TooltipPlacement, translation = 5, scale = 0.95) => {
   switch (placement) {
     case TooltipPlacement.AutoStart:
       return `scale(${scale})`;

@@ -12,7 +12,12 @@ export interface ToastProps {
 
 export const Toast: React.FC<ToastProps> = ({ data }) => {
   const theme = useTheme();
-  const { verticalOrientation, horizontalOrientation, animationDuration: animationDurationMaybe, closeToast } = useToast();
+  const {
+    verticalOrientation,
+    horizontalOrientation,
+    animationDuration: animationDurationMaybe,
+    closeToast,
+  } = useToast();
   const [isVisibleDelayed, setIsVisibleDelayed] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const animationDuration = animationDurationMaybe ?? 500;
@@ -22,7 +27,7 @@ export const Toast: React.FC<ToastProps> = ({ data }) => {
       setTimeout(() => {
         data.onClose?.();
         closeToast(data.id);
-      }, animationDuration)
+      }, animationDuration);
     }
   }, [isClosing]);
   useEffect(() => {
@@ -36,14 +41,18 @@ export const Toast: React.FC<ToastProps> = ({ data }) => {
 
   let transform = 'none';
   const translation = 20;
-  const scale = .8;
+  const scale = 0.8;
 
   switch (horizontalOrientation) {
     case 'left':
       transform = getPopoverInitialTransform(TooltipPlacement.Right, translation, scale);
       break;
     case 'center':
-      transform = getPopoverInitialTransform(verticalOrientation === 'top' ? TooltipPlacement.Bottom : TooltipPlacement.Top, translation, scale);
+      transform = getPopoverInitialTransform(
+        verticalOrientation === 'top' ? TooltipPlacement.Bottom : TooltipPlacement.Top,
+        translation,
+        scale
+      );
       break;
     case 'right':
       transform = getPopoverInitialTransform(TooltipPlacement.Left, translation, scale);
@@ -64,11 +73,12 @@ export const Toast: React.FC<ToastProps> = ({ data }) => {
         transition: `${animationDuration}ms all ease`,
         opacity: 0,
         transform,
-        ...(isVisibleDelayed && !isClosing && {
-          maxHeight: '9999px',
-          opacity: 1,
-          transform: 'none',
-        }),
+        ...(isVisibleDelayed &&
+          !isClosing && {
+            maxHeight: '9999px',
+            opacity: 1,
+            transform: 'none',
+          }),
         ...(isClosing && {
           maxHeight: '0 !important',
         }),

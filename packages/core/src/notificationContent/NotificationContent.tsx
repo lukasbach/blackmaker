@@ -85,7 +85,7 @@ export const NotificationContent: React.FC<NotificationContentProps> = props => 
               if ((action as JSX.Element).type) {
                 return action;
               } else {
-                return <Button outlined={true} {...action} key={key} />
+                return <Button outlined={true} {...action} key={key} />;
               }
             })}
           </div>
