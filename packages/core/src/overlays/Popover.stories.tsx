@@ -25,13 +25,9 @@ export const PopoverWithCard: React.FC = () => (
   <div>
     <Popover
       inline={true}
-      placement={TooltipPlacement.BottomEnd}
-      // offset={[30, 15]}
+      placement={TooltipPlacement.BottomStart}
       content={
         <CardContainer shadow={1}>
-          <CardArea highlighted={true} header={true}>
-            Card title
-          </CardArea>
           <CardArea>Card Content</CardArea>
           <CardArea muted={true}>Footer</CardArea>
         </CardContainer>

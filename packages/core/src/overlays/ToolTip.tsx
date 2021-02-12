@@ -26,6 +26,8 @@ export const ToolTip: React.FC<ToolTipProps> = props => {
       placement={props.placement ?? TooltipPlacement.Bottom}
       // offset={[0, 20]} // TODO
       interactiveDebounce={0}
+      closeOnClick={false}
+      closeOnEscape={false}
       {...props}
       content={
         <div

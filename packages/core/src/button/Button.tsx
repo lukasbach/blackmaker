@@ -27,6 +27,7 @@ export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   type?: 'submit' | 'reset' | 'button';
   href?: string;
   target?: string;
+  text?: string | JSX.Element;
 }
 
 export const Button: React.FC<ButtonProps> = componentProps => {
@@ -57,12 +58,12 @@ export const Button: React.FC<ButtonProps> = componentProps => {
   let color =
     !props.minimal && !props.outlined
       ? theme.getTextColorOnBrandColors(props.intent)
-      : theme.getBrandTextColor(props.intent);
+      : theme.getBrandTextColor(props.intent, 'inherit');
 
-  if (props.disabled) {
+  if (props.disabled && color !== 'inherit') {
     color = new Color(color).mix(new Color(backgroundColor), 0.3).toString();
   }
-  if (props.active) {
+  if (props.active && color !== 'inherit') {
     color = new Color(color).mix(new Color(backgroundColor), 0.15).toString();
   }
 
@@ -153,6 +154,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
             }}
           />
           {props.children}
+          {props.text}
           <RenderMaybeIcon
             icon={props.rightIcon}
             iconProps={{
