@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HtmlElementProps, useTheme } from '..';
 import cxs from 'cxs';
-import { TabProps } from './Tab';
+import { Tab, TabProps } from './Tab';
 import { TabsContext } from './TabsContext';
 import { useRef, useState } from 'react';
 import { useHotKey } from '@blackmaker/hotkeys';
@@ -65,6 +65,9 @@ export const Tabs: React.FC<TabsProps> = props => {
         className={props.css ? cxs(props.css) : undefined}
       >
         {props.children}
+        {props.tabs?.map(tab => (
+          <Tab {...tab} key={tab.id} />
+        ))}
       </div>
     </TabsContext.Provider>
   );

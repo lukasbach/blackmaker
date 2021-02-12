@@ -17,7 +17,7 @@ export const ButtonTab: React.FC<TabProps> = props => {
       {...(currentTab === props.id && (props.activeButtonProps ?? { intent: Intent.Primary, active: true }))}
     >
       {props.children}
-      {props.title}
+      {props.title ?? props.id}
     </Button>
   );
 };

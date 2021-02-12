@@ -46,7 +46,7 @@ export const UnderlinedTab: React.FC<TabProps> = props => {
       onClick={() => (props.id !== currentTab ? onChangeTab?.(props.id) : {})}
     >
       {props.children}
-      {props.title}
+      {props.title ?? props.id}
     </button>
   );
 };

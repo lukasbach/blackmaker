@@ -1,5 +1,15 @@
 import * as React from 'react';
-import { IconName, Intent, MaybeIcon, RenderMaybeIcon, RoundButton, switchEnum, useTheme } from '..';
+import {
+  Button,
+  ButtonProps,
+  IconName,
+  Intent,
+  MaybeIcon,
+  RenderMaybeIcon,
+  RoundButton,
+  switchEnum,
+  useTheme,
+} from '..';
 import cxs from 'cxs';
 
 export interface NotificationContentProps {
@@ -13,6 +23,7 @@ export interface NotificationContentProps {
   textColor?: string;
   iconColor?: string;
   closeButtonIntent?: Intent;
+  actions?: Array<ButtonProps | JSX.Element>;
 }
 
 export const NotificationContent: React.FC<NotificationContentProps> = props => {
@@ -68,6 +79,17 @@ export const NotificationContent: React.FC<NotificationContentProps> = props => 
         )}
         {props.children}
         {props.text}
+        {props.actions && (
+          <div className={cxs({ marginTop: '.5em' })}>
+            {props.actions.map((action, key) => {
+              if ((action as JSX.Element).type) {
+                return action;
+              } else {
+                return <Button outlined={true} {...action} key={key} />
+              }
+            })}
+          </div>
+        )}
       </div>
       {props.onClose && (
         <div className={cxs({ margin: '-.3em' })}>

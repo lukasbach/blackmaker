@@ -5,6 +5,7 @@ import cxs from 'cxs';
 import Tippy, { TippyProps } from '@tippyjs/react';
 import { useHotKey } from '@blackmaker/hotkeys/out/useHotKey';
 import { Instance } from 'tippy.js';
+import { getPopoverInitialTransform } from './getPopoverInitialTransform';
 
 export enum PopoverOpenTrigger {
   HoverReference,
@@ -58,40 +59,7 @@ export const Popover: React.FC<PopoverProps> = props => {
   const animationDuration = props.animationDuration ?? 80;
   const animationHiddenStyles = props.animationHiddenStyles ?? {
     opacity: 0,
-    transform: (() => {
-      switch (props.placement) {
-        case TooltipPlacement.AutoStart:
-          return 'scale(.95)';
-        case TooltipPlacement.Auto:
-          return 'scale(.95)';
-        case TooltipPlacement.AutoEnd:
-          return 'scale(.95)';
-        case TooltipPlacement.TopStart:
-          return 'translateY(5px) translateX(-5px) scale(.95)';
-        case TooltipPlacement.Top:
-          return 'translateY(5px) scale(.95)';
-        case TooltipPlacement.TopEnd:
-          return 'translateY(5px) translateX(5px) scale(.95)';
-        case TooltipPlacement.RightStart:
-          return 'translateY(-5px) translateX(-5px) scale(.95)';
-        case TooltipPlacement.Right:
-          return 'translateX(-5px) scale(.95)';
-        case TooltipPlacement.RightEnd:
-          return 'translateY(5px) translateX(-5px) scale(.95)';
-        case TooltipPlacement.BottomEnd:
-          return 'translateY(-5px) translateX(5px) scale(.95)';
-        case TooltipPlacement.Bottom:
-          return 'translateY(-5px) scale(.95)';
-        case TooltipPlacement.BottomStart:
-          return 'translateY(-5px) translateX(-5px) scale(.95)';
-        case TooltipPlacement.LeftEnd:
-          return 'translateY(5px) translateX(5px) scale(.95)';
-        case TooltipPlacement.Left:
-          return 'translateX(5px) scale(.95)';
-        case TooltipPlacement.LeftStart:
-          return 'translateY(-5px) translateX(5px) scale(.95)';
-      }
-    })(),
+    transform: getPopoverInitialTransform(props.placement),
   };
   const animationDisplayStyles = props.animationDisplayStyles ?? {
     opacity: 1,

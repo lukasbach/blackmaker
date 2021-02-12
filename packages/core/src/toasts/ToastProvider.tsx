@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { switchEnum, useTheme } from '..';
 import cxs from 'cxs';
-import { ToastContext, ToastData } from './ToastContext';
+import { ToastContext, ToastContextValue, ToastData } from './ToastContext';
 import { useState } from 'react';
 import { Overlay } from '../overlays/Overlay';
 import { Toast } from './Toast';
 
-export interface ToastProviderProps {
-  verticalOrientation?: 'left' | 'center' | 'right';
-  horizontalOrientation?: 'top' | 'bottom';
+let toastCounter = 0;
+
+export interface ToastProviderProps extends Pick<ToastContextValue, 'verticalOrientation' | 'horizontalOrientation' | 'animationDuration' | 'closeAfter'>{
 }
 
 export const ToastProvider: React.FC<ToastProviderProps> = props => {
   const [toasts, setToasts] = useState<ToastData[]>([]);
 
-  const horizontalOrientation = props.horizontalOrientation ?? 'top';
-  const verticalOrientation = props.verticalOrientation ?? 'right';
+  const horizontalOrientation = props.horizontalOrientation ?? 'right';
+  const verticalOrientation = props.verticalOrientation ?? 'top';
 
   return (
     <ToastContext.Provider
@@ -24,8 +24,13 @@ export const ToastProvider: React.FC<ToastProviderProps> = props => {
         openToasts: toasts,
         horizontalOrientation: horizontalOrientation,
         verticalOrientation: verticalOrientation,
-        toast: data => setToasts(t => [...t, data]),
-        closeToast: toastToRemove => setToasts(t => t.filter(toast => toast !== toastToRemove)),
+        animationDuration: props.animationDuration,
+        toast: data => {
+          const id = (data as any).id ?? `toast${toastCounter++}`;
+          setToasts(t => [...t, {closeAfter: props.closeAfter, ...data, id}]);
+          return id;
+        },
+        closeToast: toastToRemove => setToasts(t => t.filter(toast => toast.id !== toastToRemove)),
       }}
     >
       {props.children}
@@ -43,20 +48,22 @@ export const ToastProvider: React.FC<ToastProviderProps> = props => {
               className={cxs({
                 display: 'flex',
                 flexDirection: 'column',
-                margin: '16px 24px',
-                alignItems: switchEnum(verticalOrientation, [
+                padding: '16px 24px',
+                height: '100%',
+                boxSizing: 'border-box',
+                alignItems: switchEnum(horizontalOrientation, [
                   ['left', 'flex-start'],
                   ['center', 'center'],
                   ['right', 'flex-end'],
                 ]),
-                justifyContent: switchEnum(horizontalOrientation, [
+                justifyContent: switchEnum(verticalOrientation, [
                   ['top', 'flex-start'],
                   ['bottom', 'flex-end'],
                 ]),
               })}
             >
               {toasts.map(t => (
-                <Toast data={t} />
+                <Toast data={t} key={t.id} />
               ))}
             </div>
           )}

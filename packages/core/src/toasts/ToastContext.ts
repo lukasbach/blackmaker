@@ -4,24 +4,28 @@ import { Intent } from '../common';
 
 export interface ToastData
   extends Omit<NotificationContentProps, 'closeButtonIntent' | 'textColor' | 'titleColor' | 'iconColor'> {
+  id: string;
   customContent?: JSX.Element;
   intent?: Intent;
   closable?: boolean;
+  closeAfter?: number
 }
 
 export interface ToastContextValue {
-  toast: (data: ToastData) => void;
-  closeToast: (data: ToastData) => void;
-  verticalOrientation: 'left' | 'center' | 'right';
-  horizontalOrientation: 'top' | 'bottom';
+  toast: (data: Omit<ToastData, 'id'>) => string;
+  closeToast: (toastId: string) => void;
+  verticalOrientation: 'top' | 'bottom';
+  horizontalOrientation: 'left' | 'center' | 'right';
   openToasts: ToastData[];
+  animationDuration?: number;
+  closeAfter?: number;
 }
 
 export const ToastContext = React.createContext<ToastContextValue>({
-  toast: () => {},
+  toast: () => '',
   closeToast: () => {},
-  verticalOrientation: 'right',
-  horizontalOrientation: 'top',
+  verticalOrientation: 'top',
+  horizontalOrientation: 'right',
   openToasts: [],
 });
 
