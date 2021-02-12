@@ -16,7 +16,7 @@ export const BreadCrumbs: React.FC<BreadCrumbsProps> = props => {
       className={cxs({
         display: 'flex',
         flexWrap: 'nowrap',
-        overflowX: 'auto',
+        overflow: 'visible',
         fontSize: props.small ? '.8em' : props.large ? '1.2em' : '1em',
         ...props.css,
       })}

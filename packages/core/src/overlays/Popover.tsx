@@ -116,13 +116,15 @@ export const Popover: React.FC<PopoverProps> = props => {
       onShow={instance => {
         setVisible(true);
         props.tippyProps?.onShow?.(instance);
+        props.onOpen?.();
       }}
       onHide={instance => {
         setVisible(false);
         props.tippyProps?.onHide?.(instance);
+        props.onClose?.();
       }}
       placement={props.placement ?? TooltipPlacement.Bottom}
-      hideOnClick={props.closeOnClick}
+      hideOnClick={props.closeOnClick ?? true}
       interactive={true}
       interactiveDebounce={props.interactiveDebounce ?? theme.definition.popoverInteractiveDebounce ?? 75}
       interactiveBorder={props.interactiveBorder ?? theme.definition.popoverInteractiveBorder ?? 20}

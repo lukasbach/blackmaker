@@ -24,7 +24,7 @@ export const BreadCrumbArrow: React.FC<BreadCrumbArrowProps> = props => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '1em',
-        margin: '0 5px',
+        margin: '2px',
         width: '1.4em',
         height: '1.4em',
         border: 'none',
@@ -35,6 +35,7 @@ export const BreadCrumbArrow: React.FC<BreadCrumbArrowProps> = props => {
         ...(props.menu
           ? {
               cursor: 'pointer',
+              transition: '.1s background-color ease',
               ':hover': {
                 backgroundColor: hoverBackground,
               },

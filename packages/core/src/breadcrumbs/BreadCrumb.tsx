@@ -39,20 +39,27 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = props => {
         onClick={props.onClick}
         href={props.href}
         className={cxs({
+          fontFamily: 'inherit',
+          fontWeight: 'bold',
           display: 'inline-block',
           backgroundColor: 'transparent',
           fontSize: '1em',
           border: 'none',
-          padding: '0',
+          overflow: 'overlay',
+          padding: '.3em .4em',
+          margin: '-.3em -.4em',
+          borderRadius: theme.definition.borderRadiusSmall,
           outline: 'none',
           color: color,
           ...((props.href || props.onClick) && {
             cursor: 'pointer',
+            transition: '.1s background-color ease',
             ':hover': {
-              color: lighten(color, 0.2),
+              backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2),
             },
             ':active': {
-              color: lighten(color, 0.3),
+              transitionDuration: '.02s',
+              backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.3),
             },
           }),
         })}

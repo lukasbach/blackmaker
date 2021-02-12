@@ -66,19 +66,25 @@ export const Button: React.FC<ButtonProps> = componentProps => {
     color = new Color(color).mix(new Color(backgroundColor), 0.15).toString();
   }
 
+  const bottomBorderSize = props.large ? '3px' : '2px';
+
   return (
     <Element
       onClick={props.onClick}
       href={props.href}
       target={props.target}
       className={cxs({
+        fontFamily: 'inherit',
         backgroundColor: backgroundColor,
         color: color,
-        borderRadius: !grouped && theme.definition.borderRadiusSmall,
+        borderRadius:
+          !grouped && (props.large ? theme.definition.borderRadiusRegular : theme.definition.borderRadiusSmall),
         border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
         boxShadow:
-          !props.minimal && !props.outlined && `0 2px 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`,
-        fontSize: props.small ? '.7em' : props.large ? '1em' : '.8em',
+          !props.minimal &&
+          !props.outlined &&
+          `0 ${bottomBorderSize} 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`,
+        fontSize: props.small ? '.8em' : props.large ? '1em' : '.8em',
         fontWeight: 'bold',
         cursor: props.disabled ? 'not-allowed' : 'pointer',
         transition: '.1s background-color ease',
@@ -86,6 +92,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
         textAlign: props.textAlignment as Property.TextAlign,
         display: props.fill ? 'flex' : 'inline-flex',
         alignItems: 'center',
+        justifyContent: 'center',
         width: props.fill ? '100%' : undefined,
         margin: !grouped ? '2px 4px' : '2px 0 0 1px',
         verticalAlign: 'middle',
@@ -96,7 +103,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
             : '10px'
           : props.small
           ? hasContent
-            ? '4px 10px'
+            ? '2px 10px'
             : '4px'
           : hasContent
           ? '8px 16px'
@@ -116,7 +123,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
               ...(!props.minimal &&
                 !props.outlined && {
                   boxShadow: 'none',
-                  transform: 'translateY(2px)',
+                  transform: `translateY(${bottomBorderSize})`,
                 }),
             },
           }),

@@ -72,7 +72,6 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
               key={(this.state.offset ?? []).join('_') || '__'}
               isOpen={true}
               placement={TooltipPlacement.BottomStart}
-              offset={[0, 0]}
               noLeftPadding={true}
               content={
                 this.state.theme ? (

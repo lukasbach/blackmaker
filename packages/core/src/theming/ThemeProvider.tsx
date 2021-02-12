@@ -1,6 +1,5 @@
 import { ThemeContext } from './ThemeContext';
 import * as React from 'react';
-import { Theme } from './Theme';
 import cxs from 'cxs';
 import { ThemeDefinition } from './ThemeDefinition';
 import { useEffect, useState } from 'react';
@@ -36,7 +35,7 @@ export const ThemeProvider: React.FC<{
           height: !props.noRoot && '100%',
           overflow: !props.noRoot && 'auto',
           color: theme.textColor,
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "'Manrope', sans-serif",
         })}
       >
         <ThemeContext.Provider value={theme}>{props.children}</ThemeContext.Provider>

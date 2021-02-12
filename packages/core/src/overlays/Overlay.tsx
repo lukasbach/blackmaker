@@ -20,6 +20,7 @@ export interface OverlayProps {
   onClose?: () => any;
   renderContent: (props: React.HTMLAttributes<HTMLDivElement>) => React.ReactNode;
   transition?: OverlayTransition;
+  noPointerEvents?: boolean;
 }
 
 const OverlayInner: React.FC<OverlayProps> = props => {
@@ -60,6 +61,7 @@ const OverlayInner: React.FC<OverlayProps> = props => {
       right: '0px',
       bottom: '0px',
       overflow: 'hidden',
+      pointerEvents: props.noPointerEvents ? 'none' : undefined,
     });
   }
 

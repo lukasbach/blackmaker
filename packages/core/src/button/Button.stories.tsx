@@ -49,6 +49,17 @@ export const AllButtons = () => {
       <AllIntents icon={IconName.AddCircle} small={true} outlined={true} />
       <AllIntents icon={IconName.AddCircle} outlined={true} />
       <AllIntents icon={IconName.AddCircle} large={true} outlined={true} />
+      <AllIntents
+        children={
+          <div>
+            Large text
+            <br />
+            content
+          </div>
+        }
+        large={true}
+        css={{ width: '200px', height: '80px' }}
+      />
       <p>
         <Button fill>Filled Button</Button>
       </p>

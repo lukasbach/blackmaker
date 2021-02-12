@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { IconName, Intent, MaybeIcon, RenderMaybeIcon, RoundButton, switchEnum, useTheme } from '..';
 import cxs from 'cxs';
-import Color from 'color';
-import { CalloutStyle } from '../callout/Callout';
 
 export interface NotificationContentProps {
   icon?: MaybeIcon;
   title?: string | JSX.Element;
+  text?: string | JSX.Element;
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
   onClose?: () => any;
   size?: 'tiny' | 'small' | 'normal' | 'large' | 'x-large';
@@ -68,6 +67,7 @@ export const NotificationContent: React.FC<NotificationContentProps> = props => 
           </TitleElement>
         )}
         {props.children}
+        {props.text}
       </div>
       {props.onClose && (
         <div className={cxs({ margin: '-.3em' })}>
