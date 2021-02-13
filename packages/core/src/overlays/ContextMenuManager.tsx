@@ -32,4 +32,3 @@ class ContextMenuManagerClass {
 }
 
 export const ContextMenuManager = new ContextMenuManagerClass();
-console.log('!!?');

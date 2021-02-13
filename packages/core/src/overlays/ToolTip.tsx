@@ -37,6 +37,7 @@ export const ToolTip: React.FC<ToolTipProps> = props => {
             borderRadius: theme.definition.borderRadiusSmall,
             padding: '.8em',
             fontSize: '.8em',
+            ...theme.cssShadow(1)
           })}
         >
           {props.content}
