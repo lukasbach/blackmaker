@@ -70,7 +70,7 @@ export const Example = () => {
           intent={Intent.Primary}
           text={'With actions'}
           toast={{
-            intent: Intent.Primary,
+            // intent: Intent.Primary,
             title: 'Toast title',
             text: 'Toast description text',
             icon: IconName.AttachFile,
@@ -94,6 +94,23 @@ export const Example = () => {
           toast={{
             intent: Intent.Primary,
             title: 'Toast title',
+            icon: IconName.AttachFile,
+          }}
+        />
+        <CreateToastButton
+          intent={Intent.Primary}
+          text={'Only text'}
+          toast={{
+            intent: Intent.Primary,
+            text: 'Toast description text',
+          }}
+        />
+        <CreateToastButton
+          intent={Intent.Primary}
+          text={'Only text and icon'}
+          toast={{
+            intent: Intent.Primary,
+            text: 'Toast description text',
             icon: IconName.AttachFile,
           }}
         />

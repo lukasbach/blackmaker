@@ -64,13 +64,16 @@ export const NotificationContent: React.FC<NotificationContentProps> = props => 
       <div
         className={cxs({
           flexGrow: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
         })}
       >
         {props.title && (
           <TitleElement
             className={cxs({
               fontSize: '1.4em',
-              margin: '.1em 0 .4em 0',
+              margin: '.1em 0',
               color: props.titleColor,
             })}
           >
@@ -85,14 +88,14 @@ export const NotificationContent: React.FC<NotificationContentProps> = props => 
               if ((action as JSX.Element).type) {
                 return action;
               } else {
-                return <Button outlined={true} {...action} key={key} />;
+                return <Button minimal={true} {...action} key={key} />;
               }
             })}
           </div>
         )}
       </div>
       {props.onClose && (
-        <div className={cxs({ margin: '-.3em' })}>
+        <div /*className={cxs({ margin: '-.3em -.3em 0 0' })}*/>
           <RoundButton icon={IconName.Close} onClick={props.onClose} intent={props.closeButtonIntent} size={'10px'} />
         </div>
       )}

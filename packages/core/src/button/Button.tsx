@@ -58,7 +58,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
   let color =
     !props.minimal && !props.outlined
       ? theme.getTextColorOnBrandColors(props.intent)
-      : theme.getBrandTextColor(props.intent, 'inherit');
+      : theme.getBrandTextColor(props.intent /*, 'inherit'*/);
 
   if (props.disabled && color !== 'inherit') {
     color = new Color(color).mix(new Color(backgroundColor), 0.3).toString();
