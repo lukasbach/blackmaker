@@ -57,14 +57,14 @@ export const Popover: React.FC<PopoverProps> = props => {
 
   const animated = props.animated ?? true;
   const animationDuration = props.animationDuration ?? 80;
-  const animationHiddenStyles = props.animationHiddenStyles ?? {
+  const animationHiddenStyles = animated && (props.animationHiddenStyles ?? {
     opacity: 0,
     transform: getPopoverInitialTransform(props.placement),
-  };
-  const animationDisplayStyles = props.animationDisplayStyles ?? {
+  });
+  const animationDisplayStyles = animated && (props.animationDisplayStyles ?? {
     opacity: 1,
     transform: 'none',
-  };
+  });
 
   return (
     <Tippy
@@ -91,6 +91,7 @@ export const Popover: React.FC<PopoverProps> = props => {
         props.tippyProps?.onHide?.(instance);
         props.onClose?.();
       }}
+      visible={props.isOpen}
       placement={props.placement ?? TooltipPlacement.Bottom}
       hideOnClick={props.closeOnClick ?? true}
       interactive={true}

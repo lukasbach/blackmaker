@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { ThemeDefinition, ThemeProvider, TooltipPlacement } from '..';
-import { Popover } from './Popover';
+import { Popover, PopoverOpenTrigger } from './Popover';
 import { Overlay } from './Overlay';
 import cxs from 'cxs';
-import { useCallback } from 'react';
 
 export interface ContextMenuComponentProps {
   offset: [number, number];
@@ -70,9 +69,13 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
           >
             <Popover
               key={(this.state.offset ?? []).join('_') || '__'}
+              trigger={PopoverOpenTrigger.Manually}
               isOpen={true}
               placement={TooltipPlacement.BottomStart}
               noLeftPadding={true}
+              interactiveDebounce={0}
+              interactiveBorder={0}
+              animationDuration={200}
               content={
                 this.state.theme ? (
                   <ThemeProvider themeDefinition={this.state.theme}>
