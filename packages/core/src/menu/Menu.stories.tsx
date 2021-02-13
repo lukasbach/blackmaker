@@ -7,6 +7,7 @@ import { MenuHeader } from './MenuHeader';
 import { Intent } from '../common';
 import { Icon, IconName } from '..';
 import { Tag } from '../tags/Tag';
+import { intents } from '../common/intents';
 
 export default {
   title: 'Core/Components/Menu',
@@ -63,6 +64,14 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
       <MenuItem text="Hello World" iconRight={IconName.CheckBoxOutlineBlank} />
       <MenuItem text="Hello World" iconRight={IconName.CheckBox} />
       <MenuItem text="Hello World" intent={Intent.Danger} />
+      <MenuBreak />
+      {intents.map(intent => (
+        <MenuItem intent={intent} text={`Intent ${intent}`} key={intent} />
+      ))}
+      <MenuBreak />
+      {intents.map(intent => (
+        <MenuItem intent={intent} text={`Minimal ${intent}`} key={intent} minimal={true} />
+      ))}
     </Menu>
   );
 };

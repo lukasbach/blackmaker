@@ -14,6 +14,7 @@ export interface MenuItemProps {
   text?: string | JSX.Element;
   subText?: string | JSX.Element;
   dontTruncate?: boolean;
+  minimal?: boolean;
 }
 
 const truncateCode: CSSObject = {
@@ -25,6 +26,23 @@ const truncateCode: CSSObject = {
 
 export const MenuItem: React.FC<MenuItemProps> = props => {
   const theme = useTheme();
+
+  const hoverStyles: CSSObject = !props.minimal
+    ? {
+        backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
+        color: theme.getTextColorOnBrandColors(props.intent),
+      }
+    : {
+        backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.2),
+      };
+  const activeStyles: CSSObject = !props.minimal
+    ? {
+        backgroundColor: theme.getColorLighten(props.intent ?? Intent.Primary, 0.15),
+        color: theme.getTextColorOnBrandColors(props.intent),
+      }
+    : {
+        backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.3),
+      };
 
   const itemContent = (
     <div
@@ -41,20 +59,11 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         justifyItems: 'center',
         color: theme.getBrandTextColor(props.intent),
         ...(props.selected
-          ? {
-              backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
-              color: theme.getTextColorOnBrandColors(props.intent),
-            }
+          ? hoverStyles
           : !props.disabled
           ? {
-              ':hover': {
-                backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
-                color: theme.getTextColorOnBrandColors(props.intent),
-              },
-              ':active': {
-                backgroundColor: theme.getColorLighten(props.intent ?? Intent.Primary, 0.15),
-                color: theme.getTextColorOnBrandColors(props.intent),
-              },
+              ':hover': hoverStyles,
+              ':active': activeStyles,
             }
           : {
               color: theme.definition.textMutedColor,
