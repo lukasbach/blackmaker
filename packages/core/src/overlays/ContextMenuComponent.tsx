@@ -3,6 +3,7 @@ import { ThemeDefinition, ThemeProvider, TooltipPlacement } from '..';
 import { Popover, PopoverOpenTrigger } from './Popover';
 import { Overlay } from './Overlay';
 import cxs from 'cxs';
+import FocusTrap from 'focus-trap-react';
 
 export interface ContextMenuComponentProps {
   offset: [number, number];

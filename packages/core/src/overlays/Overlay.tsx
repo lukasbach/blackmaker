@@ -6,6 +6,7 @@ import { MouseEvent, useCallback } from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import { OverlayTransition } from './transitions/OverlayTransition';
 import { useHotKey } from '@blackmaker/hotkeys/out/useHotKey';
+import FocusTrap from 'focus-trap-react';
 
 const OVERLAY_ELEMENT_ID = 'blackmaker-overlay';
 
@@ -21,6 +22,7 @@ export interface OverlayProps {
   renderContent: (props: React.HTMLAttributes<HTMLDivElement>) => React.ReactNode;
   transition?: OverlayTransition;
   noPointerEvents?: boolean;
+  autofocus?: boolean;
 }
 
 const OverlayInner: React.FC<OverlayProps> = props => {
@@ -65,11 +67,17 @@ const OverlayInner: React.FC<OverlayProps> = props => {
     });
   }
 
-  const content = (
+  let content = (
     <div className={className} onMouseDown={onMouseDown}>
-      {props.renderContent({ onMouseDown: e => e.stopPropagation() })}
+      {props.renderContent({
+        onMouseDown: e => e.stopPropagation(),
+      })}
     </div>
   );
+
+  if (props.autofocus ?? false) {
+    content = <FocusTrap>{content}</FocusTrap>;
+  }
 
   if (props.transition) {
     return (
@@ -95,8 +103,6 @@ const OverlayInner: React.FC<OverlayProps> = props => {
             enter: props.transition.enter.duration,
             exit: props.transition.exit.duration,
           }}
-          onEnter={() => console.log('Enter')}
-          onExit={() => console.log('Exit')}
           unmountOnExit={true}
           classNames={{
             enter: cxs({

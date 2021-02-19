@@ -2,13 +2,12 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { ToolTip } from './ToolTip';
 import { Button } from '../button';
-import { Intent } from '../common';
+import { Intent, TooltipPlacement } from '../common';
 import { Tag } from '../tags/Tag';
 import { IconName } from '../icons';
 import { intents } from '../common/intents';
 import { Flex } from '../common/components/Flex';
-import { TooltipPlacement } from '../../out';
-import * as cxs from 'cxs';
+import cxs from 'cxs';
 
 export default {
   title: 'Core/Overlays/Tooltip',

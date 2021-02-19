@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Icon, IconName, Intent, switchEnum, useTheme } from '..';
 import cxs from 'cxs';
+import { useBlackmakerContext } from '../globalProvider/BlackmakerContext';
+import { FocusRing } from 'react-focus-rings';
 
 export interface RoundButtonProps {
   icon: IconName;
@@ -11,40 +13,43 @@ export interface RoundButtonProps {
 
 export const RoundButton: React.FC<RoundButtonProps> = props => {
   const theme = useTheme();
+  const { keyboardMode } = useBlackmakerContext();
 
   return (
-    <button
-      onClick={props.onClick}
-      className={cxs({
-        outline: 'none',
-        display: 'inline-block',
-        borderRadius: '9999px',
-        color: theme.getBrandTextColor(props.intent),
-        backgroundColor: 'transparent',
-        border: 'none',
-        padding: '.6em',
-        margin: '.2em',
-        fontSize:
-          typeof props.size === 'string'
-            ? props.size
-            : switchEnum(props.size ?? 1, [
-                [1, '1em'],
-                [2, '1.2em'],
-                [3, '1.6em'],
-                [4, '2em'],
-              ]),
-        transition: '.2s background-color ease',
-        cursor: 'pointer',
-        ':hover': {
-          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2),
-        },
-        ':active': {
-          transition: '.05s background-color ease',
-          backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.35),
-        },
-      })}
-    >
-      <Icon name={props.icon} />
-    </button>
+    <FocusRing enabled={keyboardMode ? undefined : false} offset={-4}>
+      <button
+        onClick={props.onClick}
+        className={cxs({
+          outline: 'none',
+          display: 'inline-block',
+          borderRadius: '9999px',
+          color: theme.getBrandTextColor(props.intent),
+          backgroundColor: 'transparent',
+          border: 'none',
+          padding: '.6em',
+          margin: '.2em',
+          fontSize:
+            typeof props.size === 'string'
+              ? props.size
+              : switchEnum(props.size ?? 1, [
+                  [1, '1em'],
+                  [2, '1.2em'],
+                  [3, '1.6em'],
+                  [4, '2em'],
+                ]),
+          transition: '.2s background-color ease',
+          cursor: 'pointer',
+          ':hover': {
+            backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.2),
+          },
+          ':active': {
+            transition: '.05s background-color ease',
+            backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.35),
+          },
+        })}
+      >
+        <Icon name={props.icon} />
+      </button>
+    </FocusRing>
   );
 };

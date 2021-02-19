@@ -3,8 +3,8 @@ import { Meta } from '@storybook/react';
 import { Tabs } from './Tabs';
 import { TabsStyle } from './TabsStyle';
 import { Tab } from './Tab';
-import { IconName, Intent } from '../../out';
 import { ButtonGroup } from '../button';
+import { IconName, Intent } from '..';
 
 export default {
   title: 'Core/Components/Tabs/Button Tabs',

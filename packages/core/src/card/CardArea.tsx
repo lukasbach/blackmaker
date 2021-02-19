@@ -38,6 +38,11 @@ export const CardArea: React.FC<CardAreaProps> = props => {
     : 'transparent';
   const backgroundColorHover = new Color(backgroundColor).lighten(theme.isDark ? 0.1 : -0.05).toString();
 
+  const showChilds = {
+    transition: '.1s opacity ease',
+    opacity: '1 !important',
+  };
+
   return (
     <Element
       onClick={props.onClick}
@@ -62,10 +67,8 @@ export const CardArea: React.FC<CardAreaProps> = props => {
         ':hover': {
           backgroundColor: props.interactive ? backgroundColorHover : undefined,
         },
-        ':hover div:first-child': {
-          transition: '.1s opacity ease',
-          opacity: '1 !important',
-        },
+        ':hover div:first-child': showChilds,
+        ':focus-within div:first-child': showChilds,
         ...(!hoveringActions && {
           ':active': {
             transition: '.01s background-color ease',

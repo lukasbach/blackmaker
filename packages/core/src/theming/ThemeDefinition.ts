@@ -18,6 +18,8 @@ export interface ThemeDefinition {
   tertiaryBackgroundColor: string;
   menuBackgroundColor: string;
 
+  focusRingColor: string;
+
   textColor: string;
   textHightlightColor: string;
   textMutedColor: string;

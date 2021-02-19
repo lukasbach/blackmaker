@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 import { NotificationContent } from './NotificationContent';
-import { IconName, Intent } from '../../out';
+import { IconName, Intent } from '..';
 
 export default {
   title: 'Core/Components/NotificationContent',

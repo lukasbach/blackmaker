@@ -44,6 +44,8 @@ export const darkTheme: ThemeDefinition = {
   tertiaryBackgroundColor: '#202225',
   menuBackgroundColor: '#131515',
 
+  focusRingColor: '#3498db',
+
   textColor: '#dedede',
   textHightlightColor: '#ffffff',
   textMutedColor: '#a2a2a2',

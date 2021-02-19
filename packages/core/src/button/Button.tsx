@@ -8,6 +8,10 @@ import { Spinner } from '../spinner/Spinner';
 import { useContext } from 'react';
 import { ButtonGroupContext } from './ButtonGroup';
 import Color from 'color';
+import { useOutline } from '../globalProvider/useOutline';
+import { FocusRing } from 'react-focus-rings';
+import { useBlackmakerContext } from '../globalProvider/BlackmakerContext';
+import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 
 export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   asAnchor?: boolean;
@@ -70,103 +74,105 @@ export const Button: React.FC<ButtonProps> = componentProps => {
   const bottomBorderSize = props.large ? '3px' : '2px';
 
   return (
-    <Element
-      onClick={props.onClick}
-      href={props.href}
-      target={props.target}
-      className={cxs({
-        fontFamily: 'inherit',
-        backgroundColor: backgroundColor,
-        color: color,
-        borderRadius:
-          !grouped && (props.large ? theme.definition.borderRadiusRegular : theme.definition.borderRadiusSmall),
-        border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
-        boxShadow:
-          !props.minimal &&
-          !props.outlined &&
-          `0 ${bottomBorderSize} 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`,
-        fontSize: props.small ? '.8em' : props.large ? '1em' : '.8em',
-        fontWeight: 'bold',
-        cursor: props.disabled ? 'not-allowed' : 'pointer',
-        transition: '.1s background-color ease',
-        outline: 'none',
-        textAlign: props.textAlignment as Property.TextAlign,
-        display: props.fill ? 'flex' : 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: props.fill ? '100%' : undefined,
-        margin: !grouped ? '2px 4px' : '2px 0 0 1px',
-        verticalAlign: 'middle',
-        height: props.small ? '2.2em' : '2.8em',
-        padding: props.large
-          ? hasContent
-            ? '10px 14px'
-            : '10px'
-          : props.small
-          ? hasContent
-            ? '2px 10px'
-            : '4px'
-          : hasContent
-          ? '8px 16px'
-          : '8px',
-        ...(!props.active &&
-          !props.disabled && {
-            ':hover': {
-              backgroundColor:
-                !props.minimal && !props.outlined
-                  ? theme.getColorLighten(props.intent ?? Intent.Default, 0.09)
-                  : minimalHoverBg,
+    <MaybeFocusRing>
+      <Element
+        onClick={props.onClick}
+        href={props.href}
+        target={props.target}
+        className={cxs({
+          fontFamily: 'inherit',
+          backgroundColor: backgroundColor,
+          color: color,
+          borderRadius:
+            !grouped && (props.large ? theme.definition.borderRadiusRegular : theme.definition.borderRadiusSmall),
+          border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
+          boxShadow:
+            !props.minimal &&
+            !props.outlined &&
+            `0 ${bottomBorderSize} 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`,
+          fontSize: props.small ? '.8em' : props.large ? '1em' : '.8em',
+          fontWeight: 'bold',
+          cursor: props.disabled ? 'not-allowed' : 'pointer',
+          transition: '.1s background-color ease',
+          outline: 'none',
+          textAlign: props.textAlignment as Property.TextAlign,
+          display: props.fill ? 'flex' : 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: props.fill ? '100%' : undefined,
+          margin: !grouped ? '2px 4px' : '2px 0 0 1px',
+          verticalAlign: 'middle',
+          height: props.small ? '2.2em' : '2.8em',
+          padding: props.large
+            ? hasContent
+              ? '10px 14px'
+              : '10px'
+            : props.small
+            ? hasContent
+              ? '2px 10px'
+              : '4px'
+            : hasContent
+            ? '8px 16px'
+            : '8px',
+          ...(!props.active &&
+            !props.disabled && {
+              ':hover': {
+                backgroundColor:
+                  !props.minimal && !props.outlined
+                    ? theme.getColorLighten(props.intent ?? Intent.Default, 0.09)
+                    : minimalHoverBg,
+              },
+              ':active': {
+                transitionDuration: '.02s',
+                backgroundColor:
+                  !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, 0.13) : minimalActiveBg,
+                ...(!props.minimal &&
+                  !props.outlined && {
+                    boxShadow: 'none',
+                    transform: `translateY(${bottomBorderSize})`,
+                  }),
+              },
+            }),
+          ...(grouped && {
+            ':first-child': {
+              borderBottomLeftRadius: theme.definition.borderRadiusSmall,
+              borderTopLeftRadius: theme.definition.borderRadiusSmall,
             },
-            ':active': {
-              transitionDuration: '.02s',
-              backgroundColor:
-                !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, 0.13) : minimalActiveBg,
-              ...(!props.minimal &&
-                !props.outlined && {
-                  boxShadow: 'none',
-                  transform: `translateY(${bottomBorderSize})`,
-                }),
+            ':last-child': {
+              borderBottomRightRadius: theme.definition.borderRadiusSmall,
+              borderTopRightRadius: theme.definition.borderRadiusSmall,
             },
           }),
-        ...(grouped && {
-          ':first-child': {
-            borderBottomLeftRadius: theme.definition.borderRadiusSmall,
-            borderTopLeftRadius: theme.definition.borderRadiusSmall,
-          },
-          ':last-child': {
-            borderBottomRightRadius: theme.definition.borderRadiusSmall,
-            borderTopRightRadius: theme.definition.borderRadiusSmall,
-          },
-        }),
-        ...props.css,
-      })}
-      {...(props.elementProps as any)}
-    >
-      {!props.loading && (
-        <>
-          <RenderMaybeIcon
-            icon={props.icon}
-            iconProps={{
-              marginRight: hasContent,
-              css: {
-                marginLeft: hasContent && '-.3em',
-              },
-            }}
-          />
-          {props.children}
-          {props.text}
-          <RenderMaybeIcon
-            icon={props.rightIcon}
-            iconProps={{
-              marginLeft: hasContent,
-              css: {
-                marginRight: hasContent && '-.3em',
-              },
-            }}
-          />
-        </>
-      )}
-      {props.loading && <Spinner color={theme.getTextColorOnBrandColors(props.intent)} />}
-    </Element>
+          ...props.css,
+        })}
+        {...(props.elementProps as any)}
+      >
+        {!props.loading && (
+          <>
+            <RenderMaybeIcon
+              icon={props.icon}
+              iconProps={{
+                marginRight: hasContent,
+                css: {
+                  marginLeft: hasContent && '-.3em',
+                },
+              }}
+            />
+            {props.children}
+            {props.text}
+            <RenderMaybeIcon
+              icon={props.rightIcon}
+              iconProps={{
+                marginLeft: hasContent,
+                css: {
+                  marginRight: hasContent && '-.3em',
+                },
+              }}
+            />
+          </>
+        )}
+        {props.loading && <Spinner color={theme.getTextColorOnBrandColors(props.intent)} />}
+      </Element>
+    </MaybeFocusRing>
   );
 };

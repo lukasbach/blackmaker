@@ -112,7 +112,7 @@ export class Theme {
 
   public cssShadow(level?: number) {
     if (!level) return {};
-    return { boxShadow: `rgba(0, 0, 0, ${this.isDark ? .2 : .1}) 0 ${level + 1}px ${level * 2}px ${level}px` };
+    return { boxShadow: `rgba(0, 0, 0, ${this.isDark ? 0.2 : 0.1}) 0 ${level + 1}px ${level * 2}px ${level}px` };
   }
 
   public getBackgroundColor(backgroundColor: BackgroundColor) {

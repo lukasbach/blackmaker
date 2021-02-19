@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 import { BreadCrumbs } from './BreadCrumbs';
-import { IconName } from '../../out';
 import { Intent } from '../common';
 import { MenuItemProps } from '../menu/MenuItem';
+import { IconName } from '..';
 
 export default {
   title: 'Core/Components/BreadCrumbs',

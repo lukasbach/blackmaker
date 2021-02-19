@@ -57,14 +57,18 @@ export const Popover: React.FC<PopoverProps> = props => {
 
   const animated = props.animated ?? true;
   const animationDuration = props.animationDuration ?? 80;
-  const animationHiddenStyles = animated && (props.animationHiddenStyles ?? {
-    opacity: 0,
-    transform: getPopoverInitialTransform(props.placement),
-  });
-  const animationDisplayStyles = animated && (props.animationDisplayStyles ?? {
-    opacity: 1,
-    transform: 'none',
-  });
+  const animationHiddenStyles =
+    animated &&
+    (props.animationHiddenStyles ?? {
+      opacity: 0,
+      transform: getPopoverInitialTransform(props.placement),
+    });
+  const animationDisplayStyles =
+    animated &&
+    (props.animationDisplayStyles ?? {
+      opacity: 1,
+      transform: 'none',
+    });
 
   return (
     <Tippy

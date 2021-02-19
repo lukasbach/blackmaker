@@ -4,7 +4,7 @@ import { RadioCard } from './RadioCard';
 import { RadioContainer } from './RadioContainer';
 import { CardArea } from '../../card/CardArea';
 import { Intent } from '../../common';
-import { IconName } from '../../../out';
+import { IconName } from '../..';
 
 export default {
   title: 'Core/Components/Forms/Radio Card',

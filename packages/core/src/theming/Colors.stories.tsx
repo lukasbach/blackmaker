@@ -5,8 +5,8 @@ import { CardContainer } from '../card/CardContainer';
 import { CardArea } from '../card/CardArea';
 import { BackgroundColor } from './BackgroundColor';
 import { intents } from '../common/intents';
-import { useTheme } from '../../out';
 import cxs from 'cxs';
+import { useTheme } from '.';
 
 export default {
   title: 'Core/Theming/Color Accessibility',

@@ -22,6 +22,7 @@ export interface DialogProps extends HtmlElementProps {
   onClose?: () => any;
   transition?: OverlayTransition;
   overlayProps?: Partial<OverlayProps>;
+  autofocus?: boolean;
 }
 
 export const Dialog: React.FC<DialogProps> = props => {
@@ -35,6 +36,7 @@ export const Dialog: React.FC<DialogProps> = props => {
       renderBackdrop={true}
       backdropColor="rgba(0, 0, 0, .2)"
       centerWithinBackdrop={true}
+      autofocus={props.autofocus ?? true}
       renderContent={p => (
         <div {...p}>
           {props.closeButton && <OverlayCloseButton onClick={props.onClose} />}

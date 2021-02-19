@@ -34,7 +34,11 @@ export const DialogControlledInterface: React.FC = () => {
   );
 };
 
-export const SimpleDialog: React.FC = () => <Dialog isOpen={true}>Content</Dialog>;
+export const SimpleDialog: React.FC = () => (
+  <Dialog isOpen={true} autofocus={false}>
+    Content
+  </Dialog>
+);
 
 export const ComplexDialog: React.FC = () => (
   <Dialog
