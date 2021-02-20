@@ -8,9 +8,10 @@ export interface MaybeTruncateProps {
 
 export const MaybeTruncate: React.FC<MaybeTruncateProps> = props => {
   return (
-    <div
-      title={props.content}
+    <span
+      title={props.content || undefined}
       className={cxs({
+        display: 'block',
         ...(props.truncate
           ? {
               overflow: 'hidden',
@@ -23,6 +24,6 @@ export const MaybeTruncate: React.FC<MaybeTruncateProps> = props => {
     >
       {props.children}
       {props.content}
-    </div>
+    </span>
   );
 };

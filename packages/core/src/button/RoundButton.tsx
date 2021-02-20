@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Icon, IconName, Intent, switchEnum, useTheme } from '..';
 import cxs from 'cxs';
-import { useBlackmakerContext } from '../globalProvider/BlackmakerContext';
-import { FocusRing } from 'react-focus-rings';
+import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 
 export interface RoundButtonProps {
   icon: IconName;
@@ -13,10 +12,9 @@ export interface RoundButtonProps {
 
 export const RoundButton: React.FC<RoundButtonProps> = props => {
   const theme = useTheme();
-  const { keyboardMode } = useBlackmakerContext();
 
   return (
-    <FocusRing enabled={keyboardMode ? undefined : false} offset={-4}>
+    <MaybeFocusRing>
       <button
         onClick={props.onClick}
         className={cxs({
@@ -50,6 +48,6 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
       >
         <Icon name={props.icon} />
       </button>
-    </FocusRing>
+    </MaybeFocusRing>
   );
 };

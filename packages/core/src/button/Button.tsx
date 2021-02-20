@@ -8,9 +8,6 @@ import { Spinner } from '../spinner/Spinner';
 import { useContext } from 'react';
 import { ButtonGroupContext } from './ButtonGroup';
 import Color from 'color';
-import { useOutline } from '../globalProvider/useOutline';
-import { FocusRing } from 'react-focus-rings';
-import { useBlackmakerContext } from '../globalProvider/BlackmakerContext';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 
 export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {

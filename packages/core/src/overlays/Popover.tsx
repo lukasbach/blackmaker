@@ -82,7 +82,7 @@ export const Popover: React.FC<PopoverProps> = props => {
             return 'click';
           case PopoverOpenTrigger.HoverReference:
           default:
-            return 'mouseenter focus';
+            return 'mouseenter focus focusin';
         }
       })()}
       onShow={instance => {

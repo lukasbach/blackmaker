@@ -15,8 +15,8 @@ export default {
 } as Meta;
 
 export const useHotKeyExample: React.FC = () => {
-  const [_, ctrlc] = useHotKey({ combination: ['ctrl', 'c'] });
-  const [_2, ctrlaltc] = useHotKey({ combination: ['ctrl', 'alt', 'c'] });
+  const [_, ctrlc] = useHotKey({ combination: ['ctrl', 'c'] }, undefined, true);
+  const [_2, ctrlaltc] = useHotKey({ combination: ['ctrl', 'alt', 'c'] }, undefined, true);
   return (
     <div>
       <Button intent={ctrlc ? Intent.Success : Intent.Default}>CTRL + C</Button>
@@ -27,7 +27,7 @@ export const useHotKeyExample: React.FC = () => {
 
 export const localHotkeyExample: React.FC = () => {
   const ref = useRef();
-  const [_, up] = useHotKey({ combination: ['up'], ref });
+  const [_, up] = useHotKey({ combination: ['up'], ref }, undefined, true);
   return (
     <div>
       <Button intent={up ? Intent.Success : Intent.Default} elementProps={{ ref }}>
@@ -42,7 +42,7 @@ export const localHotkeyExample: React.FC = () => {
 
 export const useRecordHotKeyExample: React.FC = () => {
   const [lastHotkeys, setLastHotkeys] = useState([]);
-  const [record, recording] = useRecordHotKey(setLastHotkeys);
+  const [record, recording] = useRecordHotKey(setLastHotkeys, undefined, true);
   return (
     <div>
       <Button onClick={record} intent={recording ? Intent.Success : Intent.Default} icon={IconName.Keyboard}>
@@ -75,7 +75,7 @@ export const GlobalHotKeyStore: React.FC = () => {
     const [hotkey, isPressed] = useHotKey(props.keyId, e => {
       e.preventDefault();
       e.stopPropagation();
-    });
+    }, undefined, true);
     const [record, isRecording] = useRecordHotKey(undefined, props.keyId);
 
     return (

@@ -11,8 +11,6 @@ export const AccessibilityProvider: React.FC<{}> = props => {
   const app = useBlackmakerContext();
   const theme = useTheme();
 
-  console.log(theme);
-
   return (
     <div ref={containerRef} className={cxs({ height: '100%' })}>
       <Helmet>
@@ -28,6 +26,7 @@ export const AccessibilityProvider: React.FC<{}> = props => {
             padding: 0;
             border-radius: ${theme.definition.borderRadiusSmall};
             box-shadow: 0 0 0 4px ${theme.definition.focusRingColor};
+            z-index: 9999;
           }
         `}</style>
       </Helmet>

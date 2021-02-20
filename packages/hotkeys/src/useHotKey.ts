@@ -3,7 +3,7 @@ import { HotKeyConfiguration } from './HotKeyConfiguration';
 import { useGlobalHotKeys } from './useGlobalHotKeys';
 import { useState } from 'react';
 
-export const useHotKey = (hotkey: string | HotKeyConfiguration, handler?: (e: KeyboardEvent) => void) => {
+export const useHotKey = (hotkey: string | HotKeyConfiguration, handler?: (e: KeyboardEvent) => void, recordPressed = false) => {
   const globalHotkeys = useGlobalHotKeys();
   const [currentConfig, setCurrentConfig] = useState<HotKeyConfiguration>();
   const [wasPressed, setWasPressed] = useState(false);
@@ -22,11 +22,13 @@ export const useHotKey = (hotkey: string | HotKeyConfiguration, handler?: (e: Ke
   const combination =
     globalHotkeys.userSetting?.[currentConfigNotUndefined.id] ?? currentConfigNotUndefined.combination;
 
-  useHotkeyHook((currentConfigNotUndefined as any).ref ?? window, combination, e => {
+  useHotkeyHook((currentConfigNotUndefined as any).ref ?? document, combination, e => {
     handler?.(e);
     currentConfigNotUndefined.globalHandler?.(e);
-    setWasPressed(true);
-    setTimeout(() => setWasPressed(false), 500);
+    if (recordPressed) {
+      setWasPressed(true);
+      setTimeout(() => setWasPressed(false), 500);
+    }
   });
 
   return [

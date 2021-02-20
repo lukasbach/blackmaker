@@ -5,12 +5,28 @@ import cxs from 'cxs';
 import { sortStories } from './utils/story-helpers';
 import { storyOrder } from './utils/storyOrder';
 import { BlackmakerProvider } from '../packages/core/src/globalProvider/BlackmakerProvider';
+import { Helmet } from 'react-helmet';
 
 function ThemeWrapper(props) {
   const theme = useDarkMode() ? darkTheme : brightTheme;
   return (
     <>
       <BlackmakerProvider theme={theme}>
+        <Helmet>
+          <style>{`
+            html, body, #root {
+              margin: 0;
+              padding: 0 !important;
+              height: 100%;
+            }
+            
+            .story-inner {
+              padding: 24px;
+              height: 100%;
+              box-sizing: border-box;
+            }
+          `}</style>
+        </Helmet>
         <div
           className={cxs({
             backgroundColor: theme.primaryBackgroundColor,
