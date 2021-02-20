@@ -37,7 +37,7 @@ export const BlackmakerProvider: React.FC<BlackmakerProviderProps> = props => {
     return () => {
       document.body.removeEventListener('pointerdown', onClick);
       document.body.removeEventListener('keydown', onTab);
-    }
+    };
   }, [appContext.keyboardMode]);
 
   return (

@@ -40,7 +40,7 @@ export interface PopoverProps extends HtmlElementProps {
   contentCss?: cxs.CSSObject | Falsy;
 }
 
-export const Popover: React.FC<PopoverProps> = (props) => {
+export const Popover: React.FC<PopoverProps> = props => {
   const theme = useTheme();
   const instance = useRef<Instance>();
   const buttonContextProps = useContext(ButtonGroupContext) ?? {};
@@ -113,9 +113,13 @@ export const Popover: React.FC<PopoverProps> = (props) => {
       content={
         <div
           ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
-          onClick={props.closeOnClickInside ? () => {
-            instance.current?.hide();
-          } : undefined}
+          onClick={
+            props.closeOnClickInside
+              ? () => {
+                  instance.current?.hide();
+                }
+              : undefined
+          }
           className={cxs({
             maxWidth: props.maxContentWidth ? `${props.maxContentWidth}px` : undefined,
             maxHeight: props.maxContentHeight ? `${props.maxContentHeight}px` : undefined,
@@ -127,7 +131,7 @@ export const Popover: React.FC<PopoverProps> = (props) => {
               })),
             ...(animated && !visibleDelayed && animationHiddenStyles),
             ...(animated && visibleDelayed && animationDisplayStyles),
-            ...props.contentCss
+            ...props.contentCss,
           })}
           {...props.contentProps}
         >

@@ -11,22 +11,22 @@ export default {
 } as Meta;
 
 const items = [
-  { value: "Skywalker and Solo families" },
-  { value: "Force-wielders" },
-  { value: "Mandalorians" },
-  { value: "Galactic Republic" },
-  { value: "Confederacy of Independent Systems" },
-  { value: "Rebel Alliance" },
-  { value: "Galactic Empire" },
-  { value: "Resistance" },
-  { value: "New Republic" },
-  { value: "First Order" },
-  { value: "Bounty hunters, mercenaries, and criminals" },
-  { value: "Naboo humans" },
-  { value: "Tatooine humans" },
-  { value: "Sorgan humans" },
-  { value: "Versio family" },
-  { value: "Uncategorized humans" },
+  { value: 'Skywalker and Solo families' },
+  { value: 'Force-wielders' },
+  { value: 'Mandalorians' },
+  { value: 'Galactic Republic' },
+  { value: 'Confederacy of Independent Systems' },
+  { value: 'Rebel Alliance' },
+  { value: 'Galactic Empire' },
+  { value: 'Resistance' },
+  { value: 'New Republic' },
+  { value: 'First Order' },
+  { value: 'Bounty hunters, mercenaries, and criminals' },
+  { value: 'Naboo humans' },
+  { value: 'Tatooine humans' },
+  { value: 'Sorgan humans' },
+  { value: 'Versio family' },
+  { value: 'Uncategorized humans' },
 ] as const;
 
 export const SingleSelect = () => (
@@ -42,11 +42,8 @@ export const SingleSelect = () => (
       </SelectDefaultItemRenderer>
     )}
     renderState={({ selected, isOpen }) => (
-      <Button
-        active={isOpen}
-        rightIcon={isOpen ? IconName.ExpandLess : IconName.ExpandMore}
-      >
-        { selected?.value ?? 'Click to select...' }
+      <Button active={isOpen} rightIcon={isOpen ? IconName.ExpandLess : IconName.ExpandMore}>
+        {selected?.value ?? 'Click to select...'}
       </Button>
     )}
   />
@@ -65,13 +62,9 @@ export const MultiSelect = () => (
       </SelectDefaultItemRenderer>
     )}
     renderState={({ selected, isOpen }) => (
-      <Button
-        active={isOpen}
-        rightIcon={isOpen ? IconName.ExpandLess : IconName.ExpandMore}
-      >
-        { selected.length ? `${selected.length} items selected` : 'Click to select...' }
+      <Button active={isOpen} rightIcon={isOpen ? IconName.ExpandLess : IconName.ExpandMore}>
+        {selected.length ? `${selected.length} items selected` : 'Click to select...'}
       </Button>
     )}
   />
 );
-

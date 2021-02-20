@@ -72,10 +72,15 @@ export const HotKeyPreviewExample: React.FC = () => (
 
 export const GlobalHotKeyStore: React.FC = () => {
   const Child: React.FC<{ keyId: string }> = props => {
-    const [hotkey, isPressed] = useHotKey(props.keyId, e => {
-      e.preventDefault();
-      e.stopPropagation();
-    }, undefined, true);
+    const [hotkey, isPressed] = useHotKey(
+      props.keyId,
+      e => {
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      undefined,
+      true
+    );
     const [record, isRecording] = useRecordHotKey(undefined, props.keyId);
 
     return (

@@ -34,7 +34,13 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
           <MenuItem text="Hello World" />
         </MenuItem>
       </MenuItem>
-      <TextInput fill={true} leftElement={IconName.Search} round={true} rightElement={IconName.ChevronRight} small={true} />
+      <TextInput
+        fill={true}
+        leftElement={IconName.Search}
+        round={true}
+        rightElement={IconName.ChevronRight}
+        small={true}
+      />
       <MenuItem text="Hello World" disabled={true} />
       <MenuItem text="Hello World" iconRight={<Tag small={true}>New!</Tag>} />
       <MenuItem text="Hello World" iconRight={<Tag small={true}>4</Tag>} />
@@ -129,7 +135,13 @@ export const MinimalMenuWithSubtext = () => (
   <Menu>
     <MenuItem intent={Intent.Default} minimal={true} text="Some Text" subText="This is additional info" />
     <MenuItem intent={Intent.Default} minimal={true} text="Some Text" subText="This is additional info" />
-    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.Check} text="Some Text" subText="This is additional info" />
+    <MenuItem
+      intent={Intent.Default}
+      minimal={true}
+      icon={IconName.Check}
+      text="Some Text"
+      subText="This is additional info"
+    />
     <MenuItem
       intent={Intent.Default}
       minimal={true}

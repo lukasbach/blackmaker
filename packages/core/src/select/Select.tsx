@@ -10,7 +10,9 @@ import { AnyElement } from '../common/AnyElement';
 import { useHotKey } from '@blackmaker/hotkeys';
 
 type MaybeUndefined<Type, CanBeUndefined extends boolean> = CanBeUndefined extends true ? Type | undefined : Type;
-export type SingleOrMulti<IsMulti extends boolean, Item, CanBeUndefined extends boolean> = IsMulti extends true ? Item[] : MaybeUndefined<Item, CanBeUndefined>;
+export type SingleOrMulti<IsMulti extends boolean, Item, CanBeUndefined extends boolean> = IsMulti extends true
+  ? Item[]
+  : MaybeUndefined<Item, CanBeUndefined>;
 
 export interface RenderItemProps {
   onClick: React.MouseEventHandler<HTMLElement>;
@@ -56,19 +58,19 @@ const DefaultRenderContentContainer = (itemContent: JSX.Element, embeddedSearch?
   <FocusTrap>
     <Menu>
       {embeddedSearch}
-      <div className={cxs({
-        maxHeight: '400px',
-        overflowY: 'auto',
-      })}>
-          {itemContent}
+      <div
+        className={cxs({
+          maxHeight: '400px',
+          overflowY: 'auto',
+        })}
+      >
+        {itemContent}
       </div>
     </Menu>
   </FocusTrap>
 );
 
-const DefaultRenderNoResults = (query: string) => (
-  <p>No results.</p>
-);
+const DefaultRenderNoResults = (query: string) => <p>No results.</p>;
 
 export const Select: <T extends object, M extends boolean>(props: SelectProps<M, T>) => React.ReactElement = props => {
   const { multi, items } = props;
@@ -96,7 +98,7 @@ export const Select: <T extends object, M extends boolean>(props: SelectProps<M,
     }
   }, [isOpen]);
 
-  const clickItem = (item) => {
+  const clickItem = item => {
     if (!item) return;
 
     const isSelected = selectedItems.includes(item);
@@ -112,55 +114,49 @@ export const Select: <T extends object, M extends boolean>(props: SelectProps<M,
       }
     }
 
-    props.onChange?.(multi ? selectedItems : undefined as any);
-  }
+    props.onChange?.(multi ? selectedItems : (undefined as any));
+  };
 
   useHotKey({ combination: 'enter' }, () => clickItem(activeItem)); // TODO scope to list container ref
 
   let itemsList: JSX.Element[] = [];
 
   if ((isInitial && !props.initialContent) || matchedItems.length > 0) {
-    itemsList = matchedItems.map((item, index) => (
-      props.renderItem(
-        item,
-        {
-          active: activeItem && props.itemsEqual(item, activeItem),
-          selected: selectedItems.includes(item),
-          index: index,
-          matchesQuery: props.isMatching(query, item),
-          onHover: () => setActiveItem(item),
-          onClick: () => clickItem(item),
-          query: query
-        }
-      )
-    ))
+    itemsList = matchedItems.map((item, index) =>
+      props.renderItem(item, {
+        active: activeItem && props.itemsEqual(item, activeItem),
+        selected: selectedItems.includes(item),
+        index: index,
+        matchesQuery: props.isMatching(query, item),
+        onHover: () => setActiveItem(item),
+        onClick: () => clickItem(item),
+        query: query,
+      })
+    );
   }
 
-  const content = !isOpen ? undefined : (renderContentContainer(
-    isInitial ? (
-      props.initialContent ?? itemsList
-    ) : matchedItems.length === 0 ? (
-      NoResults
-    ) : (
-      itemsList
-    ),
-    props.embedSearch && (props.renderEmbeddedSearch?.(query, setQuery) ?? (
-      <TextInput
-        elementProps={{
-          onClick: e => e.stopPropagation(),
-        }}
-        autoFocus={true}
-        round={true}
-        small={true}
-        value={query}
-        onChange={(e, value) => setQuery(value)}
-        leftElement={IconName.Search}
-        fill={true}
-        placeholder="Search for items..."
-        {...props.embeddedSearchProps}
-      />
-    ))
-  ));
+  const content = !isOpen
+    ? undefined
+    : renderContentContainer(
+        isInitial ? props.initialContent ?? itemsList : matchedItems.length === 0 ? NoResults : itemsList,
+        props.embedSearch &&
+          (props.renderEmbeddedSearch?.(query, setQuery) ?? (
+            <TextInput
+              elementProps={{
+                onClick: e => e.stopPropagation(),
+              }}
+              autoFocus={true}
+              round={true}
+              small={true}
+              value={query}
+              onChange={(e, value) => setQuery(value)}
+              leftElement={IconName.Search}
+              fill={true}
+              placeholder="Search for items..."
+              {...props.embeddedSearchProps}
+            />
+          ))
+      );
 
   return (
     <Popover
@@ -174,12 +170,12 @@ export const Select: <T extends object, M extends boolean>(props: SelectProps<M,
       closeOnEscape={true}
       {...props.popoverProps}
     >
-      { props.renderState({
+      {props.renderState({
         onChange: setQuery,
         selected: multi ? selectedItems : selectedItems[0],
         query,
-        isOpen
-      }) }
+        isOpen,
+      })}
     </Popover>
   );
 };

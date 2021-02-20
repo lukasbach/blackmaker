@@ -90,14 +90,14 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
                 color: theme.definition.textMutedColor,
               }),
           [` .${subTextClass}`]: {
-              ...(!props.dontTruncate && truncateCode),
-              color: theme.definition.textMutedColor,
-              fontSize: '.8em',
+            ...(!props.dontTruncate && truncateCode),
+            color: theme.definition.textMutedColor,
+            fontSize: '.8em',
           },
           [`:hover .${subTextClass}`]: !props.minimal && {
             color: theme.getTextColorOnBrandColors(props.intent),
           },
-          ...props.css
+          ...props.css,
         })}
         {...props.elementProps}
       >
@@ -118,11 +118,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           })}
         >
           <div className={!props.dontTruncate && cxs(truncateCode)}>{props.text}</div>
-          {props.subText && (
-            <div className={subTextClass}>
-              {props.subText}
-            </div>
-          )}
+          {props.subText && <div className={subTextClass}>{props.subText}</div>}
         </div>
         <RenderMaybeIcon
           icon={props.iconRight}
