@@ -11,6 +11,7 @@ export const SelectDefaultItemRenderer: React.FC<RenderItemProps & { key: string
       selected={props.active}
       onClick={props.onClick}
       elementProps={{
+        id: props.id,
         onMouseOver: props.onHover,
       }}
       text={props.children}

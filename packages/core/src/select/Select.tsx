@@ -8,6 +8,7 @@ import FocusTrap from 'focus-trap-react';
 import cxs from 'cxs';
 import { AnyElement } from '../common/AnyElement';
 import { useHotKey } from '@blackmaker/hotkeys';
+import { useUniqueId } from '../common/useUniqueId';
 
 type MaybeUndefined<Type, CanBeUndefined extends boolean> = CanBeUndefined extends true ? Type | undefined : Type;
 export type SingleOrMulti<IsMulti extends boolean, Item, CanBeUndefined extends boolean> = IsMulti extends true
@@ -22,6 +23,7 @@ export interface RenderItemProps {
   selected: boolean;
   matchesQuery: boolean;
   index: number;
+  id: string;
 }
 
 export interface RenderStateProps<M extends boolean, T extends object> {
@@ -73,6 +75,7 @@ const DefaultRenderContentContainer = (itemContent: JSX.Element, embeddedSearch?
 const DefaultRenderNoResults = (query: string) => <p>No results.</p>;
 
 export const Select: <T extends object, M extends boolean>(props: SelectProps<M, T>) => React.ReactElement = props => {
+  const childIdPrefix = useUniqueId('__blackmaker_select_child_');
   const { multi, items } = props;
   const [isInitial, setIsInitial] = useState(true);
   const [query, setQuery] = useState('');
@@ -118,6 +121,20 @@ export const Select: <T extends object, M extends boolean>(props: SelectProps<M,
   };
 
   useHotKey({ combination: 'enter' }, () => clickItem(activeItem)); // TODO scope to list container ref
+  useHotKey({ combination: 'down' }, () => {
+    const currentIndex = matchedItems.indexOf(activeItem);
+    const newIndex = (currentIndex + 1) % matchedItems.length;
+    setActiveItem(matchedItems[newIndex]);
+    const activeElement = document.getElementById(childIdPrefix + newIndex);
+    activeElement?.scrollIntoView({ behavior: 'auto', inline: 'nearest' });
+  });
+  useHotKey({ combination: 'up' }, () => {
+    const currentIndex = matchedItems.indexOf(activeItem);
+    const newIndex = currentIndex === 0 ? matchedItems.length - 1 : currentIndex - 1;
+    setActiveItem(matchedItems[newIndex]);
+    const activeElement = document.getElementById(childIdPrefix + newIndex);
+    activeElement?.scrollIntoView({ behavior: 'auto', inline: 'nearest' });
+  })
 
   let itemsList: JSX.Element[] = [];
 
@@ -131,6 +148,7 @@ export const Select: <T extends object, M extends boolean>(props: SelectProps<M,
         onHover: () => setActiveItem(item),
         onClick: () => clickItem(item),
         query: query,
+        id: childIdPrefix + index
       })
     );
   }
