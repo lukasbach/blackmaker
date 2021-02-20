@@ -4,6 +4,7 @@ import cxs, { CSSObject } from 'cxs';
 import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
 import { Menu } from './Menu';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
+import { useState } from 'react';
 
 export interface MenuItemProps {
   intent?: Intent;
@@ -16,6 +17,7 @@ export interface MenuItemProps {
   subText?: string | JSX.Element;
   dontTruncate?: boolean;
   minimal?: boolean;
+  compact?: boolean;
 }
 
 const truncateCode: CSSObject = {
@@ -27,6 +29,7 @@ const truncateCode: CSSObject = {
 
 export const MenuItem: React.FC<MenuItemProps> = props => {
   const theme = useTheme();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const hoverStyles: CSSObject = !props.minimal
     ? {
@@ -45,7 +48,8 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.3),
       };
 
-  const canFocus = !props.disabled && !props.selected;
+  const canFocus = !props.disabled && !props.selected && !isExpanded;
+  const selected = props.selected || isExpanded;
 
   const itemContent = (
     <MaybeFocusRing canFocus={canFocus}>
@@ -60,7 +64,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           fontSize: 'inherit',
           textAlign: 'inherit',
           outline: 'none',
-          padding: '8px 12px',
+          padding: !props.compact ? '8px 12px' : '2px 12px',
           marginBottom: '2px',
           borderRadius: theme.definition.borderRadiusSmall,
           cursor: props.disabled ? 'not-allowed' : !props.selected ? 'pointer' : undefined,
@@ -70,7 +74,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           alignItems: 'center',
           justifyItems: 'center',
           color: theme.getBrandTextColor(props.intent),
-          ...(props.selected
+          ...(selected
             ? hoverStyles
             : !props.disabled
             ? {
@@ -131,6 +135,8 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         trigger={PopoverOpenTrigger.HoverReference}
         placement={TooltipPlacement.RightStart}
         inline={false}
+        onOpen={() => setIsExpanded(true)}
+        onClose={() => setIsExpanded(false)}
       >
         {itemContent}
       </Popover>

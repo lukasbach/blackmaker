@@ -4,8 +4,7 @@ import { Menu, MenuProps } from './Menu';
 import { MenuItem } from './MenuItem';
 import { MenuBreak } from './MenuBreak';
 import { MenuHeader } from './MenuHeader';
-import { Intent } from '../common';
-import { Icon, IconName } from '..';
+import { Icon, IconName, Intent } from '..';
 import { Tag } from '../tags/Tag';
 import { intents } from '../common/intents';
 
@@ -54,6 +53,11 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
         icon={IconName.Accessibility}
         iconRight={IconName.AddCircle}
       />
+      <MenuItem text="Hello World" icon={IconName.Accessibility} compact={true} iconRight={IconName.ChevronRight}>
+        <MenuWithSubtext />
+      </MenuItem>
+      <MenuItem text="Hello World" icon={IconName.Accessibility} compact={true} />
+      <MenuItem text="Hello World" icon={IconName.Accessibility} compact={true} intent={Intent.Danger} />
       <MenuHeader>Other options</MenuHeader>
       <MenuItem text="Hello World" />
       <MenuItem
@@ -65,10 +69,12 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
       <MenuItem text="Hello World" iconRight={IconName.CheckBox} />
       <MenuItem text="Hello World" intent={Intent.Danger} />
       <MenuBreak />
+      <MenuHeader>Intents</MenuHeader>
       {intents.map(intent => (
         <MenuItem intent={intent} text={`Intent ${intent}`} key={intent} />
       ))}
       <MenuBreak />
+      <MenuHeader>Minimal</MenuHeader>
       {intents.map(intent => (
         <MenuItem intent={intent} text={`Minimal ${intent}`} key={intent} minimal={true} />
       ))}
