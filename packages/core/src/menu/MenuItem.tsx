@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Falsy, IconName, Intent, RenderMaybeIcon, TooltipPlacement, useTheme } from '..';
+import { Falsy, HtmlElementProps, IconName, Intent, RenderMaybeIcon, TooltipPlacement, useTheme } from '..';
 import cxs, { CSSObject } from 'cxs';
 import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
 import { Menu } from './Menu';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 import { useState } from 'react';
 
-export interface MenuItemProps {
+export interface MenuItemProps extends HtmlElementProps<HTMLButtonElement> {
   intent?: Intent;
   icon?: IconName | JSX.Element | Falsy;
   iconRight?: IconName | JSX.Element | Falsy;
@@ -48,12 +48,13 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.3),
       };
 
-  const canFocus = !props.disabled && !props.selected && !isExpanded;
+  const canFocus = !props.disabled && !props.selected;
   const selected = props.selected || isExpanded;
 
   const itemContent = (
     <MaybeFocusRing canFocus={canFocus}>
       <button
+        role="listitem"
         tabIndex={!canFocus ? -1 : undefined}
         onClick={!props.disabled && !props.selected ? props.onClick : undefined}
         className={cxs({
@@ -84,7 +85,9 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
             : {
                 color: theme.definition.textMutedColor,
               }),
+          ...props.css
         })}
+        {...props.elementProps}
       >
         <RenderMaybeIcon
           icon={props.icon}

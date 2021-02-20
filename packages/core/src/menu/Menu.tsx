@@ -15,6 +15,7 @@ export const Menu: React.FC<MenuProps> = props => {
 
   return (
     <div
+      role="list"
       className={cxs({
         display: props.fill ? 'block' : 'inline-block',
         backgroundColor: (props.background ?? true) && theme.definition.menuBackgroundColor,
