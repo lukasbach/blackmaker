@@ -122,6 +122,32 @@ export const MenuWithSubtext = () => (
   </Menu>
 );
 
+export const MinimalMenuWithSubtext = () => (
+  <Menu>
+    <MenuItem intent={Intent.Default} minimal={true} text="Some Text" subText="This is additional info" />
+    <MenuItem intent={Intent.Default} minimal={true} text="Some Text" subText="This is additional info" />
+    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.Check} text="Some Text" subText="This is additional info" />
+    <MenuItem
+      intent={Intent.Default}
+      minimal={true}
+      text="Some Text"
+      subText="This text is truncated, which means it is not completely shown which looks much nicer."
+    />
+    <MenuItem intent={Intent.Default} minimal={true} text="Some Text" subText="This is additional info" />
+    <MenuItem
+      intent={Intent.Default}
+      minimal={true}
+      text="Some Text"
+      subText={
+        <>
+          Core <Icon name={IconName.ChevronRight} /> Components <Icon name={IconName.ChevronRight} /> Menu{' '}
+          <Icon name={IconName.ChevronRight} /> Menu With Subtext
+        </>
+      }
+    />
+  </Menu>
+);
+
 export const MenuWithoutBackground = () => (
   <Menu background={false}>
     <MenuItem text="Some Text" />

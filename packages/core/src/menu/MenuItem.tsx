@@ -5,6 +5,7 @@ import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
 import { Menu } from './Menu';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 import { useState } from 'react';
+import { useUniqueId } from '../common/useUniqueId';
 
 export interface MenuItemProps extends HtmlElementProps<HTMLButtonElement> {
   intent?: Intent;
@@ -29,6 +30,7 @@ const truncateCode: CSSObject = {
 
 export const MenuItem: React.FC<MenuItemProps> = props => {
   const theme = useTheme();
+  const subTextClass = useUniqueId();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const hoverStyles: CSSObject = !props.minimal
@@ -85,6 +87,14 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
             : {
                 color: theme.definition.textMutedColor,
               }),
+          [` .${subTextClass}`]: {
+              ...(!props.dontTruncate && truncateCode),
+              color: theme.definition.textMutedColor,
+              fontSize: '.8em',
+          },
+          [`:hover .${subTextClass}`]: !props.minimal && {
+            color: theme.getTextColorOnBrandColors(props.intent),
+          },
           ...props.css
         })}
         {...props.elementProps}
@@ -92,7 +102,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         <RenderMaybeIcon
           icon={props.icon}
           iconProps={{
-            marginRight: true,
+            marginRight: '.4em',
             css: {
               marginLeft: '-.3em',
             },
@@ -107,13 +117,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         >
           <div className={!props.dontTruncate && cxs(truncateCode)}>{props.text}</div>
           {props.subText && (
-            <div
-              className={cxs({
-                ...(!props.dontTruncate && truncateCode),
-                color: theme.definition.textMutedColor, // TODO is not overwritten by parent hover and looks bad in bright ui
-                fontSize: '.8em',
-              })}
-            >
+            <div className={subTextClass}>
               {props.subText}
             </div>
           )}
