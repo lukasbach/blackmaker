@@ -135,31 +135,30 @@ export const Select: <T extends object, M extends boolean>(props: SelectProps<M,
     );
   }
 
-  const content = !isOpen
-    ? undefined
-    : renderContentContainer(
-        isInitial ? props.initialContent ?? itemsList : matchedItems.length === 0 ? NoResults : itemsList,
-        props.embedSearch &&
-          (props.renderEmbeddedSearch?.(query, setQuery) ?? (
-            <TextInput
-              elementProps={{
-                onClick: e => e.stopPropagation(),
-              }}
-              autoFocus={true}
-              round={true}
-              small={true}
-              value={query}
-              onChange={(e, value) => setQuery(value)}
-              leftElement={IconName.Search}
-              fill={true}
-              placeholder="Search for items..."
-              {...props.embeddedSearchProps}
-            />
-          ))
-      );
+  const content = renderContentContainer(
+    isInitial ? props.initialContent ?? itemsList : matchedItems.length === 0 ? NoResults : itemsList,
+    props.embedSearch &&
+      (props.renderEmbeddedSearch?.(query, setQuery) ?? (
+        <TextInput
+          elementProps={{
+            onClick: e => e.stopPropagation(),
+          }}
+          autoFocus={true}
+          round={true}
+          small={true}
+          value={query}
+          onChange={(e, value) => setQuery(value)}
+          leftElement={IconName.Search}
+          fill={true}
+          placeholder="Search for items..."
+          {...props.embeddedSearchProps}
+        />
+      ))
+  );
 
   return (
     <Popover
+      animated={true}
       trigger={PopoverOpenTrigger.ClickReference}
       placement={TooltipPlacement.BottomStart}
       onOpen={() => setIsOpen(true)}
