@@ -7,6 +7,7 @@ import { MenuHeader } from './MenuHeader';
 import { Icon, IconName, Intent } from '..';
 import { Tag } from '../tags/Tag';
 import { intents } from '../common/intents';
+import { TextInput } from '../forms/textinput/TextInput';
 
 export default {
   title: 'Core/Components/Menu',
@@ -20,6 +21,7 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
       <MenuItem text="Hello World" />
       <MenuItem text="Hello World" selected={true} />
       <MenuItem text="Hello World" />
+      <TextInput fill={true} leftElement={IconName.Delete} />
       <MenuItem text="Hover me!" iconRight={IconName.ChevronRight}>
         <MenuItem text="Hello World" />
         <MenuItem text="Hello World" />
@@ -32,6 +34,7 @@ export const MenuExample: React.FC<Partial<MenuProps>> = props => {
           <MenuItem text="Hello World" />
         </MenuItem>
       </MenuItem>
+      <TextInput fill={true} leftElement={IconName.Search} round={true} rightElement={IconName.ChevronRight} small={true} />
       <MenuItem text="Hello World" disabled={true} />
       <MenuItem text="Hello World" iconRight={<Tag small={true}>New!</Tag>} />
       <MenuItem text="Hello World" iconRight={<Tag small={true}>4</Tag>} />

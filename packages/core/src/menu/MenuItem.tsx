@@ -1,24 +1,26 @@
 import * as React from 'react';
-import { Falsy, HtmlElementProps, IconName, Intent, RenderMaybeIcon, TooltipPlacement, useTheme } from '..';
+import { Falsy, HtmlElementProps, IconName, Intent, MaybeIcon, RenderMaybeIcon, TooltipPlacement, useTheme } from '..';
 import cxs, { CSSObject } from 'cxs';
 import { Popover, PopoverOpenTrigger } from '../overlays/Popover';
 import { Menu } from './Menu';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 import { useState } from 'react';
 import { useUniqueId } from '../common/useUniqueId';
+import { AnyElement } from '../common/AnyElement';
 
 export interface MenuItemProps extends HtmlElementProps<HTMLButtonElement> {
   intent?: Intent;
-  icon?: IconName | JSX.Element | Falsy;
-  iconRight?: IconName | JSX.Element | Falsy;
+  icon?: MaybeIcon;
+  iconRight?: MaybeIcon;
   selected?: boolean;
   disabled?: boolean;
-  onClick?: () => any;
-  text?: string | JSX.Element;
-  subText?: string | JSX.Element;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+  text?: string | AnyElement;
+  subText?: string | AnyElement;
   dontTruncate?: boolean;
   minimal?: boolean;
   compact?: boolean;
+  interactive?: boolean;
 }
 
 const truncateCode: CSSObject = {
@@ -50,15 +52,15 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.3),
       };
 
-  const canFocus = !props.disabled && !props.selected;
+  const interactive = props.interactive ?? (!props.disabled && !props.selected);
   const selected = props.selected || isExpanded;
 
   const itemContent = (
-    <MaybeFocusRing canFocus={canFocus}>
+    <MaybeFocusRing canFocus={interactive}>
       <button
         role="listitem"
-        tabIndex={!canFocus ? -1 : undefined}
-        onClick={!props.disabled && !props.selected ? props.onClick : undefined}
+        tabIndex={!interactive ? -1 : undefined}
+        onClick={interactive ? props.onClick : undefined}
         className={cxs({
           border: 'none',
           backgroundColor: 'transparent',
@@ -70,7 +72,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           padding: !props.compact ? '8px 12px' : '2px 12px',
           marginBottom: '2px',
           borderRadius: theme.definition.borderRadiusSmall,
-          cursor: props.disabled ? 'not-allowed' : !props.selected ? 'pointer' : undefined,
+          cursor: props.disabled ? 'not-allowed' : interactive ? 'pointer' : undefined,
           transition: '.05s background-color ease',
           fontWeight: 500,
           display: 'flex',

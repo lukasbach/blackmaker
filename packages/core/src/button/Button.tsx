@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { darken, Falsy, HtmlElementProps, Intent, lighten, RenderMaybeIcon, useTheme } from '..';
+import { darken, Falsy, HtmlElementProps, Intent, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 import { Alignment } from '../common/Alignment';
 import { IconName, Icon } from '..';
@@ -15,8 +15,8 @@ export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   textAlignment?: Alignment;
   disabled?: boolean;
   fill?: boolean;
-  icon?: IconName | JSX.Element | Falsy;
-  rightIcon?: IconName | JSX.Element | Falsy;
+  icon?: MaybeIcon;
+  rightIcon?: MaybeIcon;
   intent?: Intent;
   large?: boolean;
   small?: boolean;

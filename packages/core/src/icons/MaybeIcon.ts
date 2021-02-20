@@ -1,3 +1,4 @@
 import { Falsy, IconName } from '..';
+import { AnyElement } from '../common/AnyElement';
 
-export type MaybeIcon = IconName | JSX.Element | Falsy;
+export type MaybeIcon = IconName | AnyElement | Falsy;

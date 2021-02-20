@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { ButtonGroupContext, HtmlElementProps, TooltipPlacement, useTheme } from '..';
+import { forwardRef, HTMLAttributes, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { ButtonGroupContext, Falsy, HtmlElementProps, TooltipPlacement, useTheme } from '..';
 import cxs from 'cxs';
 import Tippy, { TippyProps } from '@tippyjs/react';
 import { useHotKey } from '@blackmaker/hotkeys/out/useHotKey';
@@ -22,6 +22,7 @@ export interface PopoverProps extends HtmlElementProps {
   autoFocus?: boolean;
   closeOnEscape?: boolean;
   closeOnClick?: boolean;
+  closeOnClickInside?: boolean;
   inline?: boolean;
   onOpen?: () => any;
   onClose?: () => any;
@@ -33,15 +34,21 @@ export interface PopoverProps extends HtmlElementProps {
   tippyProps?: Partial<TippyProps>;
   interactiveDebounce?: number;
   interactiveBorder?: number;
+  maxContentHeight?: number;
+  maxContentWidth?: number;
+  contentProps?: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLDivElement>, HTMLDivElement> | Falsy;
+  contentCss?: cxs.CSSObject | Falsy;
 }
 
-export const Popover: React.FC<PopoverProps> = props => {
+export const Popover: React.FC<PopoverProps> = (props) => {
   const theme = useTheme();
   const instance = useRef<Instance>();
   const buttonContextProps = useContext(ButtonGroupContext) ?? {};
   const [visible, setVisible] = useState(false);
   const [visibleDelayed, setVisibleDelayed] = useState(false);
+
   useEffect(() => setVisibleDelayed(visible), [visible]);
+
   useHotKey(
     {
       global: true,
@@ -106,14 +113,23 @@ export const Popover: React.FC<PopoverProps> = props => {
       content={
         <div
           ref={r => (props.autoFocus ?? true ? r?.focus() : {})}
+          onClick={props.closeOnClickInside ? () => {
+            instance.current?.hide();
+          } : undefined}
           className={cxs({
+            maxWidth: props.maxContentWidth ? `${props.maxContentWidth}px` : undefined,
+            maxHeight: props.maxContentHeight ? `${props.maxContentHeight}px` : undefined,
+            overflowX: props.maxContentWidth ? 'auto' : undefined,
+            overflowY: props.maxContentHeight ? 'auto' : undefined,
             ...(animated &&
               (props.animationDefaultStyles ?? {
                 transition: `${animationDuration}ms all ease`,
               })),
             ...(animated && !visibleDelayed && animationHiddenStyles),
             ...(animated && visibleDelayed && animationDisplayStyles),
+            ...props.contentCss
           })}
+          {...props.contentProps}
         >
           {props.content}
         </div>

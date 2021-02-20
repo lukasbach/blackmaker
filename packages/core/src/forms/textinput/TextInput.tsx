@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { Falsy, HtmlElementProps, IconName, Intent, RenderMaybeIcon, useTheme } from '../..';
 import cxs from 'cxs';
 import Color from 'color';
@@ -23,13 +23,16 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   value?: string | number;
   defaultValue?: string | number;
   onChange?: (e: ChangeEvent<HTMLInputElement>, value: string, valueAsNumber: number) => any;
+  autoFocus?: boolean;
 }
 
 export const TextInput: React.FC<TextInputProps> = componentProps => {
   const theme = useTheme();
   const ctxProps = useFormInputProps();
   const props: TextInputProps = { ...ctxProps, ...componentProps };
+  const inputRef = useRef<HTMLInputElement>();
   const [hasFocus, setHasFocus] = useState(false);
+  useEffect(() => inputRef.current?.focus(), []);
 
   // TODO we dont need logic for that, do it in css
   const borderColor = hasFocus
@@ -68,6 +71,7 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
       />
       <input
         id={props.inputId}
+        ref={inputRef}
         onChange={e => {
           props.onChange?.(e, e.target.value, parseFloat(e.target.value));
         }}
@@ -81,6 +85,7 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
         readOnly={props.readonly}
         className={cxs({
           flexGrow: 1,
+          minWidth: '0',
           padding: '.6em',
           backgroundColor: 'transparent',
           border: 'none',
