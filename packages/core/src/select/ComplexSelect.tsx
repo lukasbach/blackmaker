@@ -9,6 +9,7 @@ import cxs from 'cxs';
 import { AnyElement } from '../common/AnyElement';
 import { useHotKey } from '@blackmaker/hotkeys';
 import { useUniqueId } from '../common/useUniqueId';
+import { Instance } from 'tippy.js';
 
 type MaybeUndefined<Type, CanBeUndefined extends boolean> = CanBeUndefined extends true ? Type | undefined : Type;
 type SingleOrMulti<IsMulti extends boolean, Item, CanBeUndefined extends boolean> = IsMulti extends true
@@ -85,6 +86,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
   const [activeItem, setActiveItem] = useState(items[0]);
   const [isOpen, setIsOpen] = useState(false);
   const embeddedInputRef = useRef<HTMLInputElement>(null);
+  const popoverRef = useRef<Instance>(null);
   const renderContentContainer = props.renderContentContainer ?? DefaultRenderContentContainer;
   const NoResults = props.renderNoResults ? props.renderNoResults(query) : DefaultRenderNoResults;
 
@@ -124,7 +126,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
         newSelectedItems = [...selectedItems, item];
       } else {
         newSelectedItems = [item];
-        // TODO retrieve popover ref and close popover
+        popoverRef.current?.hide();
       }
     }
 
@@ -170,9 +172,6 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
     props.embedSearch &&
       (props.renderEmbeddedSearch?.(query, setQuery) ?? (
         <TextInput
-          elementProps={{
-            onClick: e => e.stopPropagation(),
-          }}
           ref={embeddedInputRef}
           autoFocus={true}
           round={true}
@@ -189,6 +188,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
 
   return (
     <Popover
+      ref={popoverRef}
       animated={true}
       trigger={PopoverOpenTrigger.ClickReference}
       placement={TooltipPlacement.BottomStart}
@@ -200,7 +200,6 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
         setIsOpen(false)
       }}
       content={content}
-      closeOnClickInside={!multi}
       closeOnClick={true}
       closeOnEscape={true}
       {...props.popoverProps}

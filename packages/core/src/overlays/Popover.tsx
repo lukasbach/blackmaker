@@ -41,15 +41,15 @@ export interface PopoverProps extends HtmlElementProps {
   contentCss?: cxs.CSSObject | Falsy;
 }
 
-export const Popover: React.FC<PopoverProps> = props => {
+export const Popover = React.forwardRef<Instance, React.PropsWithChildren<PopoverProps>>((props, ref) => {
   const theme = useTheme();
   const instance = useRef<Instance>();
   const buttonContextProps = useContext(ButtonGroupContext) ?? {};
   const [visible, setVisible] = useState(false);
   const [visibleDelayed, setVisibleDelayed] = useState(false);
 
+  useImperativeHandle(ref, () => instance.current);
   useEffect(() => {setTimeout(() => setVisibleDelayed(visible))}, [visible]);
-
 
   useHotKey(
     {
@@ -147,4 +147,4 @@ export const Popover: React.FC<PopoverProps> = props => {
       </div>
     </Tippy>
   );
-};
+});
