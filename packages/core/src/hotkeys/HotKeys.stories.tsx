@@ -42,7 +42,7 @@ export const localHotkeyExample: React.FC = () => {
 
 export const useRecordHotKeyExample: React.FC = () => {
   const [lastHotkeys, setLastHotkeys] = useState([]);
-  const [record, recording] = useRecordHotKey(setLastHotkeys, undefined, true);
+  const [record, recording] = useRecordHotKey(setLastHotkeys);
   return (
     <div>
       <Button onClick={record} intent={recording ? Intent.Success : Intent.Default} icon={IconName.Keyboard}>
@@ -78,7 +78,6 @@ export const GlobalHotKeyStore: React.FC = () => {
         e.preventDefault();
         e.stopPropagation();
       },
-      undefined,
       true
     );
     const [record, isRecording] = useRecordHotKey(undefined, props.keyId);

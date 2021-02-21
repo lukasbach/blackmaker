@@ -32,7 +32,7 @@ export const SimpleMultiSelect = () => (
     renderText={(selectedItems, isOpen) => `${selectedItems.length} items selected`}
   />
 );
-documentStory(SimpleMultiSelect, "Description");
+documentStory(SimpleMultiSelect, "Description 2");
 
 export const SimpleSuggest = () => (
   <Suggest
