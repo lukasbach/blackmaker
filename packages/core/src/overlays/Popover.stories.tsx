@@ -200,31 +200,27 @@ export const DeeplyNested: React.FC<Partial<PopoverProps>> = props => {
 };
 
 export const PopoverInteractiveBorderDefinedInTheme: React.FC = () => (
-  <div>
-    <ThemeProvider
-      themeDefinition={{
-        ...darkTheme,
-        popoverInteractiveBorder: 100,
-      }}
-    >
-      <Popover content={<div>I've got a 100px interactive border</div>}>
-        <Button>Hover over me!</Button>
-      </Popover>
-    </ThemeProvider>
-  </div>
+  <ThemeProvider
+    themeDefinition={{
+      ...darkTheme,
+      popoverInteractiveBorder: 100,
+    }}
+  >
+    <Popover content={<div>I've got a 100px interactive border</div>}>
+      <Button>Hover over me!</Button>
+    </Popover>
+  </ThemeProvider>
 );
 
 export const PopoverInteractiveDebounceDefinedInTheme: React.FC = () => (
-  <div>
-    <ThemeProvider
-      themeDefinition={{
-        ...darkTheme,
-        popoverInteractiveDebounce: 2000,
-      }}
-    >
-      <Popover content={<div>I've got a 2s interactive debounce</div>}>
-        <Button>Hover over me!</Button>
-      </Popover>
-    </ThemeProvider>
-  </div>
+  <ThemeProvider
+    themeDefinition={{
+      ...darkTheme,
+      popoverInteractiveDebounce: 2000,
+    }}
+  >
+    <Popover content={<div>I've got a 2s interactive debounce</div>}>
+      <Button>Hover over me!</Button>
+    </Popover>
+  </ThemeProvider>
 );

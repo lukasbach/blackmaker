@@ -8,14 +8,15 @@ import { Instance } from 'tippy.js';
 import { getPopoverInitialTransform } from './getPopoverInitialTransform';
 
 export enum PopoverOpenTrigger {
-  HoverReference,
-  ClickReference,
-  Manually,
+  HoverReference = 'mouseenter focus focusin',
+  FocusReference = 'focus focusin',
+  ClickReference = 'click',
+  Manually = 'manual',
 }
 
 export interface PopoverProps extends HtmlElementProps {
   isOpen?: boolean;
-  trigger?: PopoverOpenTrigger;
+  trigger?: PopoverOpenTrigger | string;
   placement?: TooltipPlacement;
   content: React.ReactNode | string;
   noLeftPadding?: boolean;
@@ -47,7 +48,8 @@ export const Popover: React.FC<PopoverProps> = props => {
   const [visible, setVisible] = useState(false);
   const [visibleDelayed, setVisibleDelayed] = useState(false);
 
-  useEffect(() => setVisibleDelayed(visible), [visible]);
+  useEffect(() => {setTimeout(() => setVisibleDelayed(visible))}, [visible]);
+
 
   useHotKey(
     {
@@ -81,17 +83,7 @@ export const Popover: React.FC<PopoverProps> = props => {
     <Tippy
       onMount={i => (instance.current = i)}
       arrow={false}
-      trigger={(() => {
-        switch (props.trigger) {
-          case PopoverOpenTrigger.Manually:
-            return 'manual';
-          case PopoverOpenTrigger.ClickReference:
-            return 'click';
-          case PopoverOpenTrigger.HoverReference:
-          default:
-            return 'mouseenter focus focusin';
-        }
-      })()}
+      trigger={props.trigger ?? PopoverOpenTrigger.HoverReference}
       onShow={instance => {
         setVisible(true);
         props.tippyProps?.onShow?.(instance);

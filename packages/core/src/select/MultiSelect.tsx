@@ -1,30 +1,21 @@
 import * as React from 'react';
 import { Button, ButtonProps, IconName, useTheme } from '..';
-import cxs from 'cxs';
 import { ComplexSelect, ComplexSelectProps } from './ComplexSelect';
 import { SelectDefaultItemRenderer } from './SelectDefaultItemRenderer';
+import { SimpleSelectObject, SimpleSelectObjectMatcher } from './Select';
 import { AnyElement } from '../common/AnyElement';
 
-export interface SimpleSelectObject {
-  value: string;
-  label?: string;
-}
-
-export const SimpleSelectObjectMatcher = (query: string, item: SimpleSelectObject) => (
-  item.value.toLowerCase().includes(query)
-);
-
-export interface SelectProps
-  extends Omit<ComplexSelectProps<false, SimpleSelectObject>, 'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'>,
-  Pick<Partial<ComplexSelectProps<false, SimpleSelectObject>>, 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'> {
-  defaultText?: AnyElement;
+export interface MultiSelectProps
+  extends Omit<ComplexSelectProps<true, SimpleSelectObject>, 'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'>,
+    Pick<Partial<ComplexSelectProps<true, SimpleSelectObject>>, 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual'> {
+  renderText: (selectedItems: SimpleSelectObject[], isOpen: boolean) => AnyElement;
   buttonProps?: ButtonProps;
 }
 
-export const Select: React.FC<SelectProps> = props => {
+export const MultiSelect: React.FC<MultiSelectProps> = props => {
   return (
-    <ComplexSelect<SimpleSelectObject, false>
-      multi={false}
+    <ComplexSelect<SimpleSelectObject, true>
+      multi={true}
       embedSearch={true}
       isMatching={SimpleSelectObjectMatcher}
       itemsEqual={(a, b) => a.value === b.value}
@@ -35,7 +26,7 @@ export const Select: React.FC<SelectProps> = props => {
       )}
       renderState={({ selected, isOpen }) => (
         <Button active={isOpen} rightIcon={isOpen ? IconName.ExpandLess : IconName.ExpandMore} {...props.buttonProps}>
-          {selected?.value ?? props.defaultText ?? 'Click to select...'}
+          {props.renderText(selected, isOpen)}
         </Button>
       )}
       {...props}

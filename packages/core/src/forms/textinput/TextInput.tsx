@@ -16,7 +16,7 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   readonly?: boolean;
   intent?: Intent;
   fill?: boolean;
-  inputElementProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> | Falsy;
+  inputElementProps?: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
   inputCss?: cxs.CSSObject | Falsy;
   inputId?: string;
   placeholder?: string | number;
@@ -24,6 +24,7 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   defaultValue?: string | number;
   onChange?: (e: ChangeEvent<HTMLInputElement>, value: string, valueAsNumber: number) => any;
   autoFocus?: boolean;
+  selectAllOnClick?: boolean;
 }
 
 export const TextInput: React.FC<TextInputProps> = componentProps => {
@@ -32,7 +33,6 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
   const props: TextInputProps = { ...ctxProps, ...componentProps };
   const inputRef = useRef<HTMLInputElement>();
   const [hasFocus, setHasFocus] = useState(false);
-  useEffect(() => inputRef.current?.focus(), []);
 
   // TODO we dont need logic for that, do it in css
   const borderColor = hasFocus
@@ -75,6 +75,10 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
         onChange={e => {
           props.onChange?.(e, e.target.value, parseFloat(e.target.value));
         }}
+        onClick={props.selectAllOnClick ? e => {
+          props.inputElementProps?.onClick(e);
+          inputRef.current?.select();
+        } : props.inputElementProps?.onClick}
         placeholder={props.placeholder ? '' + props.placeholder : undefined}
         value={props.value}
         defaultValue={props.defaultValue}

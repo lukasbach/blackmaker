@@ -4,6 +4,7 @@ import cxs from 'cxs';
 import { ThemeDefinition } from './ThemeDefinition';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
+import { darken } from '../common';
 
 export const ThemeProvider: React.FC<{
   themeDefinition: ThemeDefinition;
@@ -26,6 +27,21 @@ export const ThemeProvider: React.FC<{
           @import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
           @import "https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap";
           @import "https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700,800&display=swap";
+          
+          ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+          }
+          ::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          ::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            background: ${darken(theme.primaryBackgroundColor, theme.isDark ? -.2 : .2)};
+          }
+          ::-webkit-scrollbar-thumb:hover {
+            background: ${darken(theme.primaryBackgroundColor, theme.isDark ? -.3 : .3)};
+          }
         `}</style>
       </Helmet>
       <div

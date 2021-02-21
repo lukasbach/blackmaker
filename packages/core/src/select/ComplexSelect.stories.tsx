@@ -1,16 +1,17 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import { Select } from './Select';
+import { ComplexSelect } from './ComplexSelect';
 import { SelectDefaultItemRenderer } from './SelectDefaultItemRenderer';
 import { Button } from '../button';
 import { IconName } from '../../out';
 
 export default {
-  title: 'Core/Select/Select Component',
-  component: Select,
+  title: 'Core/Select/Complex Select',
+  component: ComplexSelect,
+  excludeStories: ['items']
 } as Meta;
 
-const items = [
+export const items = [
   { value: 'Skywalker and Solo families' },
   { value: 'Force-wielders' },
   { value: 'Mandalorians' },
@@ -29,8 +30,9 @@ const items = [
   { value: 'Uncategorized humans' },
 ] as const;
 
+
 export const SingleSelect = () => (
-  <Select<{ value: string }, false>
+  <ComplexSelect<{ value: string }, false>
     multi={false}
     embedSearch={true}
     items={items}
@@ -50,7 +52,7 @@ export const SingleSelect = () => (
 );
 
 export const MultiSelect = () => (
-  <Select<{ value: string }, true>
+  <ComplexSelect<{ value: string }, true>
     multi={true}
     embedSearch={true}
     items={items}

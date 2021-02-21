@@ -21,6 +21,7 @@ export interface MenuItemProps extends HtmlElementProps<HTMLButtonElement> {
   minimal?: boolean;
   compact?: boolean;
   interactive?: boolean;
+  canFocus?: boolean;
 }
 
 const truncateCode: CSSObject = {
@@ -53,13 +54,14 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
       };
 
   const interactive = props.interactive ?? (!props.disabled && !props.selected);
+  const canFocus = props.canFocus ?? interactive;
   const selected = props.selected || isExpanded;
 
   const itemContent = (
-    <MaybeFocusRing canFocus={interactive}>
+    <MaybeFocusRing canFocus={canFocus}>
       <button
         role="listitem"
-        tabIndex={!interactive ? -1 : undefined}
+        tabIndex={!canFocus ? -1 : undefined}
         onClick={interactive ? props.onClick : undefined}
         className={cxs({
           border: 'none',
@@ -78,6 +80,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           display: 'flex',
           alignItems: 'center',
           justifyItems: 'center',
+          overflow: 'hidden',
           color: theme.getBrandTextColor(props.intent),
           ...(selected
             ? hoverStyles
@@ -117,7 +120,11 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
             maxWidth: '100%',
           })}
         >
-          <div className={!props.dontTruncate && cxs(truncateCode)}>{props.text}</div>
+          <div className={!props.dontTruncate && cxs({
+            ...truncateCode,
+            // TODO paddingRight: '10px',
+            boxSizing: 'border-box',
+          })}>{props.text}</div>
           {props.subText && <div className={subTextClass}>{props.subText}</div>}
         </div>
         <RenderMaybeIcon
