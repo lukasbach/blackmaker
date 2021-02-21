@@ -45,6 +45,13 @@ export interface ComplexSelectProps<M extends boolean, T extends object> {
   isMatching: (query: string, item: T) => boolean;
   renderItem: (item: T, props: RenderItemProps) => JSX.Element;
   items: ReadonlyArray<T>;
+
+  /**
+   * Control which items are selected. Should be used in conjunction with ``onChange``. If set to
+   * ``undefined``, the component is controlled. Use ``null`` for non-multi selects to specify that
+   * no item is selected, or ``[]`` for multi selects.
+   */
+  selectedItems?: SingleOrMulti<M, T, false> | null;
   renderNoResults?: (query: string) => JSX.Element;
   onChange?: (items: SingleOrMulti<M, T, true>) => void;
   onSelect?: (item: T, isSelected: boolean) => void;
@@ -90,11 +97,24 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
   const renderContentContainer = props.renderContentContainer ?? DefaultRenderContentContainer;
   const NoResults = props.renderNoResults ? props.renderNoResults(query) : DefaultRenderNoResults;
 
+  const isQueryControlled = !props.embedSearch;
+  const isSelectedItemsControlled = props.selectedItems !== undefined;
+
   useEffect(() => {
     if (props.query !== undefined) {
       setQuery(props.query);
     }
   }, [props.query]);
+
+  useEffect(() => {
+    if (props.selectedItems !== undefined) {
+      if (multi) {
+        setSelectedItems(props.selectedItems as any[]);
+      } else {
+        setSelectedItems(props.selectedItems ? [props.selectedItems] : []);
+      }
+    }
+  }, [props.selectedItems]);
 
   useEffect(() => {
     setIsInitial(false);
@@ -106,7 +126,9 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
 
   useEffect(() => {
     if (!isOpen) {
-      setQuery('');
+      if (!isQueryControlled) {
+        setQuery('');
+      }
       setActiveItem(items[0]);
     }
   }, [isOpen]);
@@ -131,7 +153,9 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
     }
 
     props.onChange?.(multi ? newSelectedItems : (newSelectedItems[0] ?? (undefined as any)));
-    setSelectedItems(newSelectedItems);
+    if (!isSelectedItemsControlled) {
+      setSelectedItems(newSelectedItems);
+    }
   };
 
   useHotKey({ combination: 'enter' }, () => clickItem(activeItem)); // TODO scope to list container ref
@@ -181,6 +205,9 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
           leftElement={IconName.Search}
           fill={true}
           placeholder="Search for items..."
+          css={{
+            marginBottom: '1em',
+          }}
           {...props.embeddedSearchProps}
         />
       ))

@@ -14,6 +14,8 @@ export interface SuggestProps
 
 export const Suggest: React.FC<SuggestProps> = props => {
   const [query, setQuery] = useState('');
+  const [value, setValue] = useState<SimpleSelectObject>(undefined);
+
   return (
     <ComplexSelect<SimpleSelectObject, false>
       popoverProps={{
@@ -25,23 +27,23 @@ export const Suggest: React.FC<SuggestProps> = props => {
       embedSearch={false}
       isMatching={SimpleSelectObjectMatcher}
       itemsEqual={(a, b) => a.value === b.value}
+      selectedItems={value ?? null}
       renderItem={(item, props) => (
         <SelectDefaultItemRenderer {...props} key={item.value}>
           {item.value}
         </SelectDefaultItemRenderer>
       )}
       query={query}
-      onChangeQuery={setQuery}
+      // onChangeQuery={setQuery}
       onChange={item => {
+        console.log("change", item)
         setQuery(item?.label ?? item?.value);
+        setValue(item);
         props.onChange?.(item);
       }}
       renderState={({ selected, isOpen }) => (
-        /*<Button active={isOpen} rightIcon={isOpen ? IconName.ExpandLess : IconName.ExpandMore} {...props.buttonProps}>
-          {selected?.value ?? props.defaultText ?? 'Click to select...'}
-        </Button>*/
         <TextInput
-          value={query}
+          value={isOpen ? query : value?.value ?? ''}
           onChange={(e, value) => setQuery(value)}
           selectAllOnClick={true}
           {...props.inputProps}

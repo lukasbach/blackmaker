@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Button, ButtonProps, IconName, useTheme } from '..';
-import cxs from 'cxs';
 import { ComplexSelect, ComplexSelectProps } from './ComplexSelect';
 import { SelectDefaultItemRenderer } from './SelectDefaultItemRenderer';
 import { AnyElement } from '../common/AnyElement';
@@ -11,7 +10,7 @@ export interface SimpleSelectObject {
 }
 
 export const SimpleSelectObjectMatcher = (query: string, item: SimpleSelectObject) => (
-  item.value.toLowerCase().includes(query)
+  item.value.toLowerCase().includes(query.toLowerCase())
 );
 
 export interface SelectProps

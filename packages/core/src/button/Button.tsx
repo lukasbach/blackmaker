@@ -2,7 +2,6 @@ import * as React from 'react';
 import { darken, Falsy, HtmlElementProps, Intent, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 import { Alignment } from '../common/Alignment';
-import { IconName, Icon } from '..';
 import { Property } from 'csstype';
 import { Spinner } from '../spinner/Spinner';
 import { useContext } from 'react';

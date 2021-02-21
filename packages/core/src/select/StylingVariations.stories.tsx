@@ -4,7 +4,7 @@ import { Select } from './Select';
 import { items } from './ComplexSelect.stories';
 import { ComplexSelect } from './ComplexSelect';
 import { SelectDefaultItemRenderer } from './SelectDefaultItemRenderer';
-import { Intent } from '../common';
+import { IconName, Intent } from '../../out';
 
 export default {
   title: 'Core/Select/Styling Variations',
@@ -59,5 +59,17 @@ export const CompactSelect = () => (
         {item.value}
       </SelectDefaultItemRenderer>
     )}
+  />
+);
+
+export const SelectWithDifferentButtonDesign = () => (
+  <Select
+    buttonProps={{
+      minimal: true,
+      small: true,
+      icon: IconName.ColorLens,
+      intent: Intent.Info
+    }}
+    items={items}
   />
 );
