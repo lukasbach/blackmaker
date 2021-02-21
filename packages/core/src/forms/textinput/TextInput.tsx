@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Falsy, HtmlElementProps, IconName, Intent, RenderMaybeIcon, useTheme } from '../..';
 import cxs from 'cxs';
 import Color from 'color';
@@ -27,12 +27,14 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   selectAllOnClick?: boolean;
 }
 
-export const TextInput: React.FC<TextInputProps> = componentProps => {
+export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((componentProps, ref) => {
   const theme = useTheme();
   const ctxProps = useFormInputProps();
   const props: TextInputProps = { ...ctxProps, ...componentProps };
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
+
+  useImperativeHandle(ref, () => inputRef.current);
 
   // TODO we dont need logic for that, do it in css
   const borderColor = hasFocus
@@ -113,4 +115,4 @@ export const TextInput: React.FC<TextInputProps> = componentProps => {
       />
     </div>
   );
-};
+});

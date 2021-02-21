@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { IconName, TooltipPlacement } from '..';
 import { TextInput, TextInputProps } from '../forms/textinput/TextInput';
 import { Menu } from '../menu/Menu';
@@ -84,6 +84,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
   const [matchedItems, setMatchedItems] = useState([]);
   const [activeItem, setActiveItem] = useState(items[0]);
   const [isOpen, setIsOpen] = useState(false);
+  const embeddedInputRef = useRef<HTMLInputElement>(null);
   const renderContentContainer = props.renderContentContainer ?? DefaultRenderContentContainer;
   const NoResults = props.renderNoResults ? props.renderNoResults(query) : DefaultRenderNoResults;
 
@@ -123,6 +124,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
         newSelectedItems = [...selectedItems, item];
       } else {
         newSelectedItems = [item];
+        // TODO retrieve popover ref and close popover
       }
     }
 
@@ -171,6 +173,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
           elementProps={{
             onClick: e => e.stopPropagation(),
           }}
+          ref={embeddedInputRef}
           autoFocus={true}
           round={true}
           small={true}
@@ -189,8 +192,13 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
       animated={true}
       trigger={PopoverOpenTrigger.ClickReference}
       placement={TooltipPlacement.BottomStart}
-      onOpen={() => setIsOpen(true)}
-      onClose={() => setIsOpen(false)}
+      onOpen={() => {
+        setIsOpen(true);
+        setTimeout(() => embeddedInputRef?.current?.focus());
+      }}
+      onClose={() => {
+        setIsOpen(false)
+      }}
       content={content}
       closeOnClickInside={!multi}
       closeOnClick={true}
