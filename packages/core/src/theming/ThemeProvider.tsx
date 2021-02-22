@@ -37,19 +37,19 @@ export const ThemeProvider: React.FC<{
           }
           ::-webkit-scrollbar-thumb {
             border-radius: 999px;
-            background: ${darken(theme.primaryBackgroundColor, theme.isDark ? -.2 : .2)};
+            background: ${darken(theme.primaryBackgroundColor, theme.isDark ? -0.2 : 0.2)};
           }
           ::-webkit-scrollbar-thumb:hover {
-            background: ${darken(theme.primaryBackgroundColor, theme.isDark ? -.3 : .3)};
+            background: ${darken(theme.primaryBackgroundColor, theme.isDark ? -0.3 : 0.3)};
           }
         `}</style>
       </Helmet>
       <div
         className={cxs({
-          backgroundColor: !props.noRoot && theme.primaryBackgroundColor,
-          width: !props.noRoot && '100%',
-          height: !props.noRoot && '100%',
-          overflow: !props.noRoot && 'auto',
+          backgroundColor: !props.noRoot ? theme.primaryBackgroundColor : undefined,
+          width: !props.noRoot ? '100%' : undefined,
+          height: !props.noRoot ? '100%' : undefined,
+          overflow: !props.noRoot ? 'auto' : undefined,
           color: theme.textColor,
           fontFamily: "'Manrope', sans-serif",
           position: 'relative',

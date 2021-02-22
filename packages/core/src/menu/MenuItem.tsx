@@ -120,11 +120,19 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
             maxWidth: '100%',
           })}
         >
-          <div className={!props.dontTruncate && cxs({
-            ...truncateCode,
-            // TODO paddingRight: '10px',
-            boxSizing: 'border-box',
-          })}>{props.text}</div>
+          <div
+            className={
+              !props.dontTruncate
+                ? cxs({
+                    ...truncateCode,
+                    // TODO paddingRight: '10px',
+                    boxSizing: 'border-box',
+                  })
+                : undefined
+            }
+          >
+            {props.text}
+          </div>
           {props.subText && <div className={subTextClass}>{props.subText}</div>}
         </div>
         <RenderMaybeIcon

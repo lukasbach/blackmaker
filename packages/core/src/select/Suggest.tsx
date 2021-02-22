@@ -7,21 +7,27 @@ import { TextInput, TextInputProps } from '../forms/textinput/TextInput';
 import { PopoverOpenTrigger } from '../overlays/Popover';
 
 export interface SuggestProps
-  extends Omit<ComplexSelectProps<false, SimpleSelectObject>, 'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'>,
-  Pick<Partial<ComplexSelectProps<false, SimpleSelectObject>>, 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual'> {
+  extends Omit<
+      ComplexSelectProps<false, SimpleSelectObject>,
+      'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'
+    >,
+    Pick<
+      Partial<ComplexSelectProps<false, SimpleSelectObject>>,
+      'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual'
+    > {
   inputProps?: TextInputProps;
 }
 
 export const Suggest: React.FC<SuggestProps> = props => {
   const [query, setQuery] = useState('');
-  const [value, setValue] = useState<SimpleSelectObject>(undefined);
+  const [value, setValue] = useState<SimpleSelectObject | undefined>(undefined);
 
   return (
     <ComplexSelect<SimpleSelectObject, false>
       popoverProps={{
         trigger: PopoverOpenTrigger.FocusReference,
         closeOnClick: false,
-        ...props.popoverProps
+        ...props.popoverProps,
       }}
       multi={false}
       embedSearch={false}
@@ -34,10 +40,8 @@ export const Suggest: React.FC<SuggestProps> = props => {
         </SelectDefaultItemRenderer>
       )}
       query={query}
-      // onChangeQuery={setQuery}
       onChange={item => {
-        console.log("change", item)
-        setQuery(item?.label ?? item?.value);
+        setQuery(item?.label ?? item?.value ?? '');
         setValue(item);
         props.onChange?.(item);
       }}

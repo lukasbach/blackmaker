@@ -4,11 +4,11 @@ import { ThemeDefinition } from '../theming';
 import { ContextMenuComponent, ContextMenuComponentProps } from './ContextMenuComponent';
 
 class ContextMenuManagerClass {
-  private component: ContextMenuComponent;
+  private component?: ContextMenuComponent;
   private ctxPositionElement?: HTMLElement;
 
   public show(menu: JSX.Element, offset: [number, number], theme?: ThemeDefinition) {
-    if (!this.ctxPositionElement) {
+    if (!this.ctxPositionElement || !this.component) {
       this.ctxPositionElement = document.createElement('div');
       this.ctxPositionElement.classList.add('blackmaker-contextmenu');
       document.body.appendChild(this.ctxPositionElement);

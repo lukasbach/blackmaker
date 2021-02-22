@@ -34,7 +34,7 @@ const OverlayInner: React.FC<OverlayProps> = props => {
     },
     () => {
       if (props.closeOnEscape ?? true) {
-        props.onClose();
+        props.onClose?.();
       }
     }
   );
@@ -42,7 +42,7 @@ const OverlayInner: React.FC<OverlayProps> = props => {
   const onMouseDown = useCallback(
     e => {
       if (props.closeOnClickBackdrop) {
-        props.onClose();
+        props.onClose?.();
       }
       props.handleBackdropMouseDown?.(e);
     },

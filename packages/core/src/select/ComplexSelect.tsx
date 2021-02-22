@@ -65,7 +65,7 @@ export interface ComplexSelectProps<M extends boolean, T extends object> {
   query?: string;
 }
 
-const DefaultRenderContentContainer = (itemContent: JSX.Element, embeddedSearch?: JSX.Element) => (
+const DefaultRenderContentContainer = (itemContent: AnyElement | AnyElement[], embeddedSearch?: AnyElement) => (
   <FocusTrap>
     <Menu>
       {embeddedSearch}
@@ -83,19 +83,21 @@ const DefaultRenderContentContainer = (itemContent: JSX.Element, embeddedSearch?
 
 const DefaultRenderNoResults = (query: string) => <p>No results.</p>;
 
-export const ComplexSelect: <T extends object, M extends boolean>(props: ComplexSelectProps<M, T>) => React.ReactElement = props => {
+export const ComplexSelect: <T extends object, M extends boolean>(
+  props: ComplexSelectProps<M, T>
+) => React.ReactElement = props => {
   const childIdPrefix = useUniqueId('__blackmaker_select_child_');
   const { multi, items } = props;
   const [isInitial, setIsInitial] = useState(true);
   const [query, setQuery] = useState('');
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [matchedItems, setMatchedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [matchedItems, setMatchedItems] = useState<any[]>([]);
   const [activeItem, setActiveItem] = useState(items[0]);
   const [isOpen, setIsOpen] = useState(false);
   const embeddedInputRef = useRef<HTMLInputElement>(null);
   const popoverRef = useRef<Instance>(null);
   const renderContentContainer = props.renderContentContainer ?? DefaultRenderContentContainer;
-  const NoResults = props.renderNoResults ? props.renderNoResults(query) : DefaultRenderNoResults;
+  const NoResults = props.renderNoResults ? props.renderNoResults(query) : DefaultRenderNoResults(query);
 
   const isQueryControlled = !props.embedSearch;
   const isSelectedItemsControlled = props.selectedItems !== undefined;
@@ -133,7 +135,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
     }
   }, [isOpen]);
 
-  const clickItem = item => {
+  const clickItem = (item: any) => {
     if (!item) return;
 
     const isSelected = selectedItems.includes(item);
@@ -152,7 +154,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
       }
     }
 
-    props.onChange?.(multi ? newSelectedItems : (newSelectedItems[0] ?? (undefined as any)));
+    props.onChange?.(multi ? newSelectedItems : newSelectedItems[0] ?? (undefined as any));
     if (!isSelectedItemsControlled) {
       setSelectedItems(newSelectedItems);
     }
@@ -172,7 +174,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
     setActiveItem(matchedItems[newIndex]);
     const activeElement = document.getElementById(childIdPrefix + newIndex);
     activeElement?.scrollIntoView({ behavior: 'auto', inline: 'nearest' });
-  })
+  });
 
   let itemsList: JSX.Element[] = [];
 
@@ -186,7 +188,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
         onHover: () => setActiveItem(item),
         onClick: () => clickItem(item),
         query: query,
-        id: childIdPrefix + index
+        id: childIdPrefix + index,
       })
     );
   }
@@ -224,7 +226,7 @@ export const ComplexSelect: <T extends object, M extends boolean>(props: Complex
         setTimeout(() => embeddedInputRef?.current?.focus());
       }}
       onClose={() => {
-        setIsOpen(false)
+        setIsOpen(false);
       }}
       content={content}
       closeOnClick={true}

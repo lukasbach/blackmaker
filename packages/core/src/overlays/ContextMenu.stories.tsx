@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 import { brightTheme, darkTheme, IconName, TooltipPlacement } from '..';
-import { Popover, PopoverOpenTrigger, PopoverProps } from './Popover';
 import { MenuItem } from '../menu/MenuItem';
 import { Menu } from '../menu/Menu';
 import { Button } from '../button/Button';

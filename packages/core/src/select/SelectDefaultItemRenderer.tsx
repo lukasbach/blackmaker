@@ -3,7 +3,9 @@ import { IconName } from '..';
 import { RenderItemProps } from './ComplexSelect';
 import { MenuItem, MenuItemProps } from '../menu/MenuItem';
 
-export const SelectDefaultItemRenderer: React.FC<RenderItemProps & { key: string, menuItemProps?: MenuItemProps }> = props => {
+export const SelectDefaultItemRenderer: React.FC<
+  RenderItemProps & { key: string; menuItemProps?: MenuItemProps }
+> = props => {
   return (
     <MenuItem
       interactive={true}
@@ -14,7 +16,7 @@ export const SelectDefaultItemRenderer: React.FC<RenderItemProps & { key: string
       elementProps={{
         id: props.id,
         onMouseOver: props.onHover,
-        ...props.menuItemProps?.elementProps
+        ...props.menuItemProps?.elementProps,
       }}
       text={props.children}
       {...props.menuItemProps}

@@ -24,7 +24,12 @@ export const useHotKey = (
   }
 
   const combination =
-    globalHotkeys.userSetting?.[currentConfigNotUndefined.id] ?? currentConfigNotUndefined.combination;
+    (currentConfigNotUndefined.id && globalHotkeys.userSetting?.[currentConfigNotUndefined.id]) ??
+    currentConfigNotUndefined.combination;
+
+  if (combination === '' || !combination) {
+    throw Error(`Hotkey ${hotkey} does not provide a combination.`);
+  }
 
   useHotkeyHook((currentConfigNotUndefined as any).ref ?? document, combination, e => {
     handler?.(e);

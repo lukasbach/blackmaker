@@ -56,7 +56,7 @@ export const Tag: React.FC<TagProps> = props => {
             transitionDuration: '.02s',
             backgroundColor:
               !props.minimal && !props.outlined
-                ? theme.getColorLighten(props.intent, 0.2)
+                ? theme.getColorLighten(props.intent ?? Intent.Default, 0.2)
                 : theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.4),
           },
         }),
@@ -105,7 +105,7 @@ export const Tag: React.FC<TagProps> = props => {
               size: '.9em',
               color:
                 !props.minimal && !props.outlined
-                  ? theme.getColorLighten(props.intent, 0.7)
+                  ? theme.getColorLighten(props.intent ?? Intent.Default, 0.7)
                   : theme.colorWithAlpha(theme.getColor(props.intent), 0.85),
             }}
           />

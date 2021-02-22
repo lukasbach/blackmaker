@@ -32,7 +32,7 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
   return (
     <p
       className={cxs({
-        lineHeight: props.running && '1.5em',
+        lineHeight: props.running ? '1.5em' : undefined,
         fontSize: props.small ? '.8em' : props.large ? '1.2em' : '1em',
         margin: '0',
         ...(props.noSelect ? noSelect : {}),
@@ -41,7 +41,7 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
       })}
       {...props.elementProps}
     >
-      <MaybeTruncate content={typeof props.content === 'string' && props.content} truncate={props.truncate}>
+      <MaybeTruncate content={typeof props.content === 'string' ? props.content : undefined} truncate={props.truncate}>
         {props.children}
       </MaybeTruncate>
     </p>

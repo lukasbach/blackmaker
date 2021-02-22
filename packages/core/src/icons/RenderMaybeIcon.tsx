@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Icon, useTheme } from '..';
-import cxs from 'cxs';
+import { Icon, IconName, useTheme } from '..';
 import { IconProps } from './Icon';
 import { MaybeIcon } from './MaybeIcon';
 
@@ -15,7 +14,11 @@ export const RenderMaybeIcon: React.FC<RenderMaybeIconProps> = props => {
   return (
     <>
       {props.icon &&
-        (typeof props.icon === 'string' ? <Icon name={props.icon} {...(props.iconProps ?? {})} /> : props.icon)}
+        (typeof props.icon === 'string' ? (
+          <Icon name={props.icon as IconName} {...(props.iconProps ?? {})} />
+        ) : (
+          props.icon
+        ))}
     </>
   );
 };

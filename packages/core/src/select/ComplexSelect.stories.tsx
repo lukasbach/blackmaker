@@ -8,7 +8,7 @@ import { IconName } from '../../out';
 export default {
   title: 'Core/Select/Complex Select',
   component: ComplexSelect,
-  excludeStories: ['items']
+  excludeStories: ['items'],
 } as Meta;
 
 export const items = [
@@ -29,7 +29,6 @@ export const items = [
   { value: 'Versio family' },
   { value: 'Uncategorized humans' },
 ] as const;
-
 
 export const SingleSelect = () => (
   <ComplexSelect<{ value: string }, false>

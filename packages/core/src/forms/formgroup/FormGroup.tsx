@@ -42,11 +42,11 @@ export const FormGroup: React.FC<FormGroupProps> = props => {
     >
       {props.label && (
         <label
-          htmlFor={!props.dontAutomapLabel && automapLabel}
+          htmlFor={!props.dontAutomapLabel ? automapLabel : undefined}
           className={cxs({
             cursor: formInputProps.disabled ? 'not-allowed' : !props.dontAutomapLabel ? 'pointer' : undefined,
             display: 'block',
-            color: formInputProps.disabled && `${theme.definition.textDisabledColor} !important`,
+            color: formInputProps.disabled ? `${theme.definition.textDisabledColor} !important` : undefined,
           })}
         >
           {props.label}

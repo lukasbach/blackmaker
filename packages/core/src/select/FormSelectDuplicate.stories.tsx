@@ -13,13 +13,12 @@ export * from '../select/SimpleSelects.stories';
 export default {
   title: 'Core/Components/Forms/Select',
   component: Select,
-  subcomponents: {MultiSelect, Suggest, ComplexSelect},
+  subcomponents: { MultiSelect, Suggest, ComplexSelect },
   parameters: {
     docs: {
       description: {
-        component: 'Selection Components which are part of the *Core/Select* subpackage, shown here for convenience.'
-      }
-    }
-  }
+        component: 'Selection Components which are part of the *Core/Select* subpackage, shown here for convenience.',
+      },
+    },
+  },
 } as Meta;
-

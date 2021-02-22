@@ -17,7 +17,7 @@ export interface RadioCardProps
 export const RadioCard: React.FC<RadioCardProps> = props => {
   const theme = useTheme();
   const containerProps = useContext(RadioContainerContext);
-  const radioButton = useRef<HTMLInputElement>();
+  const radioButton = useRef<HTMLInputElement>(null);
   const checked = containerProps.currentValue === props.value;
 
   return (

@@ -17,22 +17,27 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
   const theme = useTheme();
   const ctxProps = useFormInputProps();
   const props: CheckboxBlockProps = { ...ctxProps, ...componentProps };
-  const checkbox = useRef<HTMLInputElement>();
+  const checkbox = useRef<HTMLInputElement>(null);
   const [checked, setChecked] = useState(props.checked);
 
   useEffect(() => {
-    setChecked(props.checked);
-    if (props.checked === undefined) {
-      checkbox.current.indeterminate = true;
-      checkbox.current.checked = false;
-    } else if (props.checked === false) {
-      checkbox.current.indeterminate = false;
-      checkbox.current.checked = false;
-    } else {
-      checkbox.current.indeterminate = false;
-      checkbox.current.checked = true;
+    if (checkbox.current) {
+      setChecked(props.checked);
+      if (props.checked === undefined) {
+        checkbox.current.indeterminate = true;
+        checkbox.current.checked = false;
+      } else {
+        // noinspection PointlessBooleanExpressionJS
+        if (props.checked === false) {
+          checkbox.current.indeterminate = false;
+          checkbox.current.checked = false;
+        } else {
+          checkbox.current.indeterminate = false;
+          checkbox.current.checked = true;
+        }
+      }
     }
-  }, [props.checked]);
+  }, [props.checked, checkbox.current]);
 
   const size = props.large ? '1.4em' : '1em';
   const intent = props.intent ?? Intent.Primary;

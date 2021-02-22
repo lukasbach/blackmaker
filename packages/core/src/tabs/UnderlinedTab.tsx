@@ -19,7 +19,7 @@ export const UnderlinedTab: React.FC<TabProps> = props => {
         fontWeight: 'bold',
         border: 'none',
         borderBottom: '4px solid transparent',
-        cursor: props.id !== currentTab && 'pointer',
+        cursor: props.id !== currentTab ? 'pointer' : undefined,
         color: theme.definition.textMutedColor,
         outline: 'none',
         padding: '.5em .7em .3em .7em',

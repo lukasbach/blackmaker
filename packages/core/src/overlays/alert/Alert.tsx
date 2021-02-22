@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Button, Icon, IconName, Intent, useTheme } from '../..';
 import { Dialog } from '../Dialog';
-import cxs from 'cxs';
 import { CardArea } from '../../card/CardArea';
-import { Paragraph } from '../../typography/Paragraph';
 
 export interface AlertProps {
   title?: string;
@@ -45,7 +43,7 @@ export const Alert: React.FC<AlertProps> = props => {
         <>
           <Button
             minimal={!!props.onConfirm}
-            intent={!props.onConfirm && Intent.Primary}
+            intent={!props.onConfirm ? Intent.Primary : undefined}
             onClick={() => {
               props.onClose?.();
               props.onCancel?.();

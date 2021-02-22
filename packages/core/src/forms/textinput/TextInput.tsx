@@ -27,14 +27,14 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   selectAllOnClick?: boolean;
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((componentProps, ref) => {
+export const TextInput = React.forwardRef<HTMLInputElement | null, TextInputProps>((componentProps, ref) => {
   const theme = useTheme();
   const ctxProps = useFormInputProps();
   const props: TextInputProps = { ...ctxProps, ...componentProps };
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
 
-  useImperativeHandle(ref, () => inputRef.current);
+  useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(ref, () => inputRef.current);
 
   // TODO we dont need logic for that, do it in css
   const borderColor = hasFocus
@@ -47,10 +47,10 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((com
         display: props.fill ? 'flex' : 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: !props.fill && '340px',
+        width: !props.fill ? '340px' : undefined,
         borderRadius: props.round ? '999px' : theme.definition.borderRadiusSmall,
         border: `1px solid ${borderColor}`,
-        boxShadow: hasFocus && `0 0 0 1px ${borderColor}`,
+        boxShadow: hasFocus ? `0 0 0 1px ${borderColor}` : undefined,
         transition: '.2s border-color ease, .2s box-shadow ease',
         backgroundColor: new Color(theme.definition.primaryBackgroundColor)
           .darken(theme.isDark ? 0.1 : -0.1)
@@ -77,10 +77,14 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((com
         onChange={e => {
           props.onChange?.(e, e.target.value, parseFloat(e.target.value));
         }}
-        onClick={props.selectAllOnClick ? e => {
-          props.inputElementProps?.onClick(e);
-          inputRef.current?.select();
-        } : props.inputElementProps?.onClick}
+        onClick={
+          props.selectAllOnClick
+            ? e => {
+                props.inputElementProps?.onClick?.(e);
+                inputRef.current?.select();
+              }
+            : props.inputElementProps?.onClick
+        }
         placeholder={props.placeholder ? '' + props.placeholder : undefined}
         value={props.value}
         defaultValue={props.defaultValue}
@@ -100,7 +104,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>((com
             ? theme.definition.textMutedColor
             : theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor),
           fontSize: '1em',
-          cursor: props.disabled && 'not-allowed',
+          cursor: props.disabled ? 'not-allowed' : undefined,
           ...props.inputCss,
         })}
         {...props.inputElementProps}

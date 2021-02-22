@@ -9,13 +9,18 @@ export interface SimpleSelectObject {
   label?: string;
 }
 
-export const SimpleSelectObjectMatcher = (query: string, item: SimpleSelectObject) => (
-  item.value.toLowerCase().includes(query.toLowerCase())
-);
+export const SimpleSelectObjectMatcher = (query: string, item: SimpleSelectObject) =>
+  item.value.toLowerCase().includes(query.toLowerCase());
 
 export interface SelectProps
-  extends Omit<ComplexSelectProps<false, SimpleSelectObject>, 'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'>,
-  Pick<Partial<ComplexSelectProps<false, SimpleSelectObject>>, 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'> {
+  extends Omit<
+      ComplexSelectProps<false, SimpleSelectObject>,
+      'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'
+    >,
+    Pick<
+      Partial<ComplexSelectProps<false, SimpleSelectObject>>,
+      'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'
+    > {
   defaultText?: AnyElement;
   buttonProps?: ButtonProps;
 }

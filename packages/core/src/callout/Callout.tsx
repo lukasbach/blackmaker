@@ -49,7 +49,7 @@ export const Callout: React.FC<CalloutProps> = props => {
         borderStyle: 'solid',
         marginBottom: '.8em',
         borderRadius: theme.definition.borderRadiusRegular,
-        borderLeft: props.style === CalloutStyle.LeftBorder && `6px solid ${theme.getColor(props.intent)}`,
+        borderLeft: props.style === CalloutStyle.LeftBorder ? `6px solid ${theme.getColor(props.intent)}` : undefined,
         fontSize: switchEnum(
           props.size,
           [
@@ -65,15 +65,16 @@ export const Callout: React.FC<CalloutProps> = props => {
     >
       <NotificationContent
         {...props}
-        closeButtonIntent={props.style !== CalloutStyle.Heavy && props.intent}
+        closeButtonIntent={props.style !== CalloutStyle.Heavy ? props.intent : undefined}
         iconColor={
           props.style === CalloutStyle.Heavy
             ? theme.getTextColorOnBrandColors(props.intent)
             : theme.getColor(props.intent, theme.definition.textHightlightColor)
         }
         titleColor={
-          props.style !== CalloutStyle.Heavy &&
-          theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor)
+          props.style !== CalloutStyle.Heavy
+            ? theme.getBrandTextColor(props.intent, theme.definition.textHightlightColor)
+            : undefined
         }
         textColor={
           props.style === CalloutStyle.Heavy

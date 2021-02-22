@@ -16,7 +16,7 @@ export interface RadioProps extends HtmlElementProps<HTMLInputElement> {
 export const Radio: React.FC<RadioProps> = props => {
   const theme = useTheme();
   const containerProps = useContext(RadioContainerContext);
-  const radioButton = useRef<HTMLInputElement>();
+  const radioButton = useRef<HTMLInputElement>(null);
 
   const radioSize = props.large ? '32px' : props.small ? '16px' : '22px';
   const radioInnerSize = props.large ? '16px' : props.small ? '8px' : '10px';

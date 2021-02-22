@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { darken, HtmlElementProps, Intent, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
-import { Heading } from '../typography/Heading';
 import { Paragraph } from '../typography/Paragraph';
 import { useContext, useState } from 'react';
 import { CardContainerContext } from './CardContainer';
 import Color from 'color';
-import { ButtonGroup } from '../button/ButtonGroup';
 
 export interface CardAreaProps extends HtmlElementProps {
   muted?: boolean;
@@ -63,7 +61,7 @@ export const CardArea: React.FC<CardAreaProps> = props => {
         backgroundColor: hovering ? backgroundColorHover : backgroundColor,
         textAlign: props.header && !props.highlighted ? 'center' : undefined,
         transition: '.1s background-color ease',
-        cursor: props.onClick && props.interactive && 'pointer',
+        cursor: props.onClick && props.interactive ? 'pointer' : undefined,
         ':hover': {
           backgroundColor: props.interactive ? backgroundColorHover : undefined,
         },
@@ -73,7 +71,9 @@ export const CardArea: React.FC<CardAreaProps> = props => {
           ':active': {
             transition: '.01s background-color ease',
             backgroundColor:
-              props.onClick && props.interactive && lighten(backgroundColorHover, theme.isDark ? 0.1 : -0.05),
+              props.onClick && props.interactive
+                ? lighten(backgroundColorHover, theme.isDark ? 0.1 : -0.05)
+                : undefined,
           },
         }),
         ...props.css,

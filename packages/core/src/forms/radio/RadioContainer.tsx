@@ -11,7 +11,7 @@ export interface RadioContainerProps {
 }
 
 export const RadioContainer: React.FC<RadioContainerProps> = props => {
-  const [value, setValue] = useState<string>(props.value ?? props.defaultValue);
+  const [value, setValue] = useState<string | undefined>(props.value ?? props.defaultValue);
   const groupName = useUniqueId(props.groupNamePrefix ?? '__blackmaker_radiogroup');
   useEffect(() => {
     if (props.value) {

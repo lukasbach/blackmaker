@@ -79,13 +79,16 @@ export const Button: React.FC<ButtonProps> = componentProps => {
           fontFamily: 'inherit',
           backgroundColor: backgroundColor,
           color: color,
-          borderRadius:
-            !grouped && (props.large ? theme.definition.borderRadiusRegular : theme.definition.borderRadiusSmall),
+          borderRadius: !grouped
+            ? props.large
+              ? theme.definition.borderRadiusRegular
+              : theme.definition.borderRadiusSmall
+            : undefined,
           border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
           boxShadow:
-            !props.minimal &&
-            !props.outlined &&
-            `0 ${bottomBorderSize} 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`,
+            !props.minimal && !props.outlined
+              ? `0 ${bottomBorderSize} 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`
+              : undefined,
           fontSize: props.small ? '.8em' : props.large ? '1em' : '.8em',
           fontWeight: 'bold',
           cursor: props.disabled ? 'not-allowed' : 'pointer',
@@ -121,7 +124,9 @@ export const Button: React.FC<ButtonProps> = componentProps => {
               ':active': {
                 transitionDuration: '.02s',
                 backgroundColor:
-                  !props.minimal && !props.outlined ? theme.getColorLighten(props.intent, 0.13) : minimalActiveBg,
+                  !props.minimal && !props.outlined
+                    ? theme.getColorLighten(props.intent ?? Intent.Default, 0.13)
+                    : minimalActiveBg,
                 ...(!props.minimal &&
                   !props.outlined && {
                     boxShadow: 'none',
@@ -150,7 +155,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
               iconProps={{
                 marginRight: hasContent,
                 css: {
-                  marginLeft: hasContent && '-.3em',
+                  marginLeft: hasContent ? '-.3em' : undefined,
                 },
               }}
             />
@@ -161,7 +166,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
               iconProps={{
                 marginLeft: hasContent,
                 css: {
-                  marginRight: hasContent && '-.3em',
+                  marginRight: hasContent ? '-.3em' : undefined,
                 },
               }}
             />

@@ -18,12 +18,12 @@ export const Menu: React.FC<MenuProps> = props => {
       role="list"
       className={cxs({
         display: props.fill ? 'block' : 'inline-block',
-        backgroundColor: (props.background ?? true) && theme.definition.menuBackgroundColor,
-        borderRadius: (props.background ?? true) && theme.definition.borderRadiusSmall,
-        boxShadow: (props.background ?? true) && 'rgba(0, 0, 0, 0.15) 0px 2px 6px 2px',
+        backgroundColor: props.background ?? true ? theme.definition.menuBackgroundColor : undefined,
+        borderRadius: props.background ?? true ? theme.definition.borderRadiusSmall : undefined,
+        boxShadow: props.background ?? true ? 'rgba(0, 0, 0, 0.15) 0px 2px 6px 2px' : undefined,
         padding: '8px',
         minWidth: '120px',
-        maxWidth: !props.fill && '240px',
+        maxWidth: !props.fill ? '240px' : undefined,
         fontSize: props.small ? '.85em' : props.large ? '1.2em' : '1em',
         ...noSelect,
         ...props.css,

@@ -41,7 +41,7 @@ export interface PopoverProps extends HtmlElementProps {
   contentCss?: cxs.CSSObject | Falsy;
 }
 
-export const Popover = React.forwardRef<Instance, React.PropsWithChildren<PopoverProps>>((props, ref) => {
+export const Popover = React.forwardRef<Instance | undefined, React.PropsWithChildren<PopoverProps>>((props, ref) => {
   const theme = useTheme();
   const instance = useRef<Instance>();
   const buttonContextProps = useContext(ButtonGroupContext) ?? {};
@@ -49,7 +49,9 @@ export const Popover = React.forwardRef<Instance, React.PropsWithChildren<Popove
   const [visibleDelayed, setVisibleDelayed] = useState(false);
 
   useImperativeHandle(ref, () => instance.current);
-  useEffect(() => {setTimeout(() => setVisibleDelayed(visible))}, [visible]);
+  useEffect(() => {
+    setTimeout(() => setVisibleDelayed(visible));
+  }, [visible]);
 
   useHotKey(
     {
@@ -64,13 +66,14 @@ export const Popover = React.forwardRef<Instance, React.PropsWithChildren<Popove
     }
   );
 
+  const placement = props.placement ?? TooltipPlacement.Bottom;
   const animated = props.animated ?? true;
   const animationDuration = props.animationDuration ?? 80;
   const animationHiddenStyles =
     animated &&
     (props.animationHiddenStyles ?? {
       opacity: 0,
-      transform: getPopoverInitialTransform(props.placement),
+      transform: getPopoverInitialTransform(placement),
     });
   const animationDisplayStyles =
     animated &&
@@ -95,7 +98,7 @@ export const Popover = React.forwardRef<Instance, React.PropsWithChildren<Popove
         props.onClose?.();
       }}
       visible={props.isOpen}
-      placement={props.placement ?? TooltipPlacement.Bottom}
+      placement={placement}
       hideOnClick={props.closeOnClick ?? true}
       interactive={true}
       interactiveDebounce={props.interactiveDebounce ?? theme.definition.popoverInteractiveDebounce ?? 75}

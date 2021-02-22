@@ -2,11 +2,12 @@ import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import { Falsy } from './Falsy';
 
-type ProviderType<T> = (providerProps: PropsWithChildren<T>) => React.ReactElement;
-type ProviderDataWithProps<T = {}> = [ProviderType<T>, T];
+type ProviderWithoutProps<T> = ((providerProps: PropsWithChildren<T>) => React.ReactElement) | React.FC<{}>;
+type ProviderWithPropsInner<T> = ProviderWithoutProps<T> | React.FC<T> | React.Provider<T>;
+type ProviderWithProps<T = any> = [ProviderWithPropsInner<T>, T];
 
 export const StackedProviders: React.FC<{
-  providers: Array<Falsy | ProviderType<{}> | ProviderDataWithProps>;
+  providers: Array<Falsy | ProviderWithoutProps<{}> | ProviderWithProps>;
 }> = props => {
   return (
     <>

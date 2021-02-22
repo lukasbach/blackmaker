@@ -19,7 +19,7 @@ interface State {
 }
 
 export class ContextMenuComponent extends React.Component<ContextMenuComponentProps, State> {
-  constructor(props) {
+  constructor(props: ContextMenuComponentProps) {
     super(props);
     this.state = {
       ...props,
@@ -27,7 +27,7 @@ export class ContextMenuComponent extends React.Component<ContextMenuComponentPr
     };
   }
 
-  public open(menu: JSX.Element, theme: ThemeDefinition, offset: [number, number]) {
+  public open(menu: JSX.Element, theme: ThemeDefinition | undefined, offset: [number, number]) {
     this.setState({ menu, theme, offset, isOpen: true });
   }
 

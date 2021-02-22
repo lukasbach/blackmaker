@@ -37,8 +37,12 @@ export const Icon: React.FC<IconProps> = props => {
         direction: 'ltr',
         verticalAlign: 'middle',
         padding: props.padding,
-        marginLeft: props.marginLeft && (typeof props.marginLeft === 'boolean' ? '.2em' : props.marginLeft),
-        marginRight: props.marginRight && (typeof props.marginRight === 'boolean' ? '.2em' : props.marginRight),
+        marginLeft: props.marginLeft ? (typeof props.marginLeft === 'boolean' ? '.2em' : props.marginLeft) : undefined,
+        marginRight: props.marginRight
+          ? typeof props.marginRight === 'boolean'
+            ? '.2em'
+            : props.marginRight
+          : undefined,
         ['-webkit-font-smoothing']: 'antialiased',
         ['text-rendering']: 'optimizeLegibility',
         ['-moz-osx-font-smoothing']: 'grayscale',

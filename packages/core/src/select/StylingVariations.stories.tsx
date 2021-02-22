@@ -11,12 +11,7 @@ export default {
   component: ComplexSelect,
 } as Meta;
 
-export const SelectWithoutSearch = () => (
-  <Select
-    embedSearch={false}
-    items={items}
-  />
-);
+export const SelectWithoutSearch = () => <Select embedSearch={false} items={items} />;
 
 export const MinimalSelect = () => (
   <Select
@@ -68,7 +63,7 @@ export const SelectWithDifferentButtonDesign = () => (
       minimal: true,
       small: true,
       icon: IconName.ColorLens,
-      intent: Intent.Info
+      intent: Intent.Info,
     }}
     items={items}
   />

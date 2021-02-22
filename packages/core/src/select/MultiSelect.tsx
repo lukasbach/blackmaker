@@ -6,8 +6,14 @@ import { SimpleSelectObject, SimpleSelectObjectMatcher } from './Select';
 import { AnyElement } from '../common/AnyElement';
 
 export interface MultiSelectProps
-  extends Omit<ComplexSelectProps<true, SimpleSelectObject>, 'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'>,
-    Pick<Partial<ComplexSelectProps<true, SimpleSelectObject>>, 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual'> {
+  extends Omit<
+      ComplexSelectProps<true, SimpleSelectObject>,
+      'multi' | 'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual' | 'embedSearch'
+    >,
+    Pick<
+      Partial<ComplexSelectProps<true, SimpleSelectObject>>,
+      'isMatching' | 'renderItem' | 'renderState' | 'itemsEqual'
+    > {
   renderText: (selectedItems: SimpleSelectObject[], isOpen: boolean) => AnyElement;
   buttonProps?: ButtonProps;
 }

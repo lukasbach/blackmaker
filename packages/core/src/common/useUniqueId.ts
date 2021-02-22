@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
-const idCounter = {};
+const idCounter: { [key: string]: number } = {};
 
 export const useUniqueId = (name = '__blackmaker_element') => {
-  const [id, setId] = useState<string>();
+  const [id, setId] = useState<string>('__unset');
 
   useEffect(() => {
     if (name in idCounter) {

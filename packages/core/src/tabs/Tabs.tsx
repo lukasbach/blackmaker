@@ -28,7 +28,7 @@ export const Tabs: React.FC<TabsProps> = props => {
     e => {
       const currentTabIndex = tabIds.findIndex(tab => tab === props.currentTab);
       if (currentTabIndex !== undefined) {
-        props.onChangeTab(tabIds[(currentTabIndex + 1) % tabIds.length]);
+        props.onChangeTab?.(tabIds[(currentTabIndex + 1) % tabIds.length]);
       }
     }
   );
@@ -41,7 +41,7 @@ export const Tabs: React.FC<TabsProps> = props => {
     e => {
       const currentTabIndex = tabIds.findIndex(tab => tab === props.currentTab);
       if (currentTabIndex !== undefined) {
-        props.onChangeTab(tabIds[currentTabIndex === 0 ? tabIds.length - 1 : currentTabIndex - 1]);
+        props.onChangeTab?.(tabIds[currentTabIndex === 0 ? tabIds.length - 1 : currentTabIndex - 1]);
       }
     }
   );
