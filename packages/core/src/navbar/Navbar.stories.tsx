@@ -10,10 +10,23 @@ import { TextInput } from '../forms/textinput/TextInput';
 import { BreadCrumbs } from '../breadcrumbs/BreadCrumbs';
 import { IconName, Intent } from '..';
 import { ToolTip } from '../overlays/ToolTip';
+import { documentStory } from '../../../../.storybook/utils/documentStory';
 
 export default {
   title: 'Core/Components/Navbar',
   component: Navbar,
+  subcomponents: { NavbarGroup, NavbarText },
+  parameters: {
+    docs: {
+      description: {
+        component: `
+Use a \`Navbar\` element to render a navbar. It renders as a \`nav\` HTML element.
+Use \`<NavbarText element="h1">\` children to render a title, and \`NavbarGroup\` elements
+to render button groups. To both you can provide a \`grow\` attribute to make it grow.
+`,
+      },
+    },
+  },
 } as Meta;
 
 export const MinimalisticNavbar = () => (
@@ -24,6 +37,11 @@ export const MinimalisticNavbar = () => (
     </Navbar>
   </div>
 );
+// documentStory(MinimalisticNavbar, `
+// Use a \`Navbar\` element to render a navbar. It renders as a \`nav\` HTML element.
+// Use \`<NavbarText element="h1">\` children to render a title, and \`NavbarGroup\` elements
+// to render button groups. To both you can provide a \`grow\` attribute to make it grow.
+// `);
 
 export const NavbarSingleChild = () => (
   <div>
@@ -34,6 +52,14 @@ export const NavbarSingleChild = () => (
       </NavbarGroup>
     </Navbar>
   </div>
+);
+documentStory(
+  NavbarSingleChild,
+  `
+All buttons within a \`NavbarGroup\`'s hierarchy are automtically turned into \`minimal\` Buttons.
+Set the \`minimal\`-attribute on a button explicitly to \`false\` to render a regular button
+within a navbar.
+`
 );
 
 export const NavbarMultipleChildren = () => (
@@ -47,6 +73,13 @@ export const NavbarMultipleChildren = () => (
       </NavbarGroup>
     </Navbar>
   </div>
+);
+documentStory(
+  NavbarMultipleChildren,
+  `
+Children of a \`NavbarGroup\` are automatically each wrapped in a \`li\` element.
+The \`NavbarGroup\` element turns into a \`ul\` element.
+`
 );
 
 export const NavbarGrowingChildren = () => (
