@@ -4,6 +4,7 @@ import { darken, HtmlElementProps, Icon, IconName, Intent, useTheme } from '../.
 import cxs from 'cxs';
 import { useFormInputProps } from '../useFormInputProps';
 import { VisuallyHidden } from '../../common/components/VisuallyHidden';
+import { MaybeFocusRing } from '../../accessibility/MaybeFocusRing';
 
 export interface CheckboxBlockProps extends HtmlElementProps<HTMLInputElement> {
   intent?: Intent;
@@ -43,58 +44,60 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = componentProps => {
   const intent = props.intent ?? Intent.Primary;
 
   return (
-    <div
-      className={cxs({
-        display: 'inline-block',
-        width: '1em',
-        height: '1em',
-        fontSize: size,
-        border: `1px solid ${darken(theme.definition.primaryBackgroundColor, 0.2)}`,
-        backgroundColor:
-          checked !== false ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
-        borderRadius: theme.definition.borderRadiusSmall,
-        textAlign: 'center',
-        cursor: 'pointer',
-        transition: '.15s background-color ease',
-        ':hover': {
+    <MaybeFocusRing within={true}>
+      <div
+        className={cxs({
+          display: 'inline-block',
+          width: '1em',
+          height: '1em',
+          fontSize: size,
+          border: `1px solid ${darken(theme.definition.primaryBackgroundColor, 0.2)}`,
           backgroundColor:
-            checked !== false
-              ? theme.getColorDarken(intent, 0.05)
-              : darken(theme.definition.primaryBackgroundColor, 0.12),
-        },
-        ':active': {
-          backgroundColor:
-            checked !== false
-              ? theme.getColorDarken(intent, 0.1)
-              : darken(theme.definition.primaryBackgroundColor, 0.2),
-        },
-      })}
-      onClick={() => {
-        props.onChange?.(!checked);
-        setChecked(!checked);
-      }}
-    >
-      <VisuallyHidden>
-        <input
-          type="checkbox"
-          ref={checkbox}
-          onChange={e => {
-            const value = e.target.indeterminate ? undefined : e.target.checked;
-            props.onChange?.(value, e);
-            setChecked(value);
-          }}
-          id={props.inputId}
-          {...props.elementProps}
-        />
-      </VisuallyHidden>
-      <Icon
-        name={checked ? IconName.Check : IconName.HorizontalRule}
-        size=".9em"
-        css={{
-          marginTop: '-.4em',
-          opacity: checked === false ? 0 : 1,
+            checked !== false ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
+          borderRadius: theme.definition.borderRadiusSmall,
+          textAlign: 'center',
+          cursor: 'pointer',
+          transition: '.15s background-color ease',
+          ':hover': {
+            backgroundColor:
+              checked !== false
+                ? theme.getColorDarken(intent, 0.05)
+                : darken(theme.definition.primaryBackgroundColor, 0.12),
+          },
+          ':active': {
+            backgroundColor:
+              checked !== false
+                ? theme.getColorDarken(intent, 0.1)
+                : darken(theme.definition.primaryBackgroundColor, 0.2),
+          },
+        })}
+        onClick={() => {
+          props.onChange?.(!checked);
+          setChecked(!checked);
         }}
-      />
-    </div>
+      >
+        <VisuallyHidden>
+          <input
+            type="checkbox"
+            ref={checkbox}
+            onChange={e => {
+              const value = e.target.indeterminate ? undefined : e.target.checked;
+              props.onChange?.(value, e);
+              setChecked(value);
+            }}
+            id={props.inputId}
+            {...props.elementProps}
+          />
+        </VisuallyHidden>
+        <Icon
+          name={checked ? IconName.Check : IconName.HorizontalRule}
+          size=".9em"
+          css={{
+            marginTop: '-.4em',
+            opacity: checked === false ? 0 : 1,
+          }}
+        />
+      </div>
+    </MaybeFocusRing>
   );
 };

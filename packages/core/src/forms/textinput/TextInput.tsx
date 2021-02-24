@@ -23,6 +23,8 @@ export interface TextInputProps extends HtmlElementProps<HTMLDivElement> {
   value?: string | number;
   defaultValue?: string | number;
   onChange?: (e: ChangeEvent<HTMLInputElement>, value: string, valueAsNumber: number) => any;
+  onBlur?: (e: ChangeEvent<HTMLInputElement>) => any;
+  onFocus?: (e: ChangeEvent<HTMLInputElement>) => any;
   autoFocus?: boolean;
   selectAllOnClick?: boolean;
 }
@@ -88,8 +90,14 @@ export const TextInput = React.forwardRef<HTMLInputElement | null, TextInputProp
         placeholder={props.placeholder ? '' + props.placeholder : undefined}
         value={props.value}
         defaultValue={props.defaultValue}
-        onFocus={() => setHasFocus(true)}
-        onBlur={() => setHasFocus(false)}
+        onFocus={(e) => {
+          setHasFocus(true);
+          props.onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setHasFocus(false);
+          props.onBlur?.(e);
+        }}
         type={props.type ?? 'text'}
         disabled={props.disabled}
         readOnly={props.readonly}

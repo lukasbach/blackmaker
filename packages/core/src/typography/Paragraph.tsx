@@ -2,6 +2,7 @@ import * as React from 'react';
 import { HtmlElementProps, Intent, noSelect, useTheme } from '..';
 import cxs from 'cxs';
 import { MaybeTruncate } from '../common/MaybeTruncate';
+import { AnyElement } from '../common/AnyElement';
 
 export interface ParagraphProps extends HtmlElementProps<HTMLParagraphElement> {
   small?: boolean;
@@ -10,7 +11,7 @@ export interface ParagraphProps extends HtmlElementProps<HTMLParagraphElement> {
   disabled?: boolean;
   highlighted?: boolean;
   truncate?: boolean;
-  content?: string | JSX.Element;
+  content?: string | AnyElement;
   running?: boolean;
   noSelect?: boolean;
   intent?: Intent;

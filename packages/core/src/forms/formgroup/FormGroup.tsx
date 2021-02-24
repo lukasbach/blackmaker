@@ -5,15 +5,17 @@ import { FormInputPropsContext, useFormInputProps } from '../useFormInputProps';
 import { FormInputProps } from '../FormInputProps';
 import { useUniqueId } from '../../common/useUniqueId';
 import { Paragraph } from '../../typography/Paragraph';
+import { AnyElement } from '../../common/AnyElement';
 
 export interface FormGroupProps {
-  helperText?: string | JSX.Element;
-  label?: string | JSX.Element;
-  labelInfo?: string | JSX.Element;
+  helperText?: string | AnyElement;
+  label?: string | AnyElement;
+  labelInfo?: string | AnyElement;
   intent?: Intent;
   inputProps?: Partial<FormInputProps>;
   dontAutomapLabel?: boolean;
   labelIdPrefix?: string;
+  inputId?: string;
   small?: boolean;
   large?: boolean;
   disabled?: boolean;
@@ -24,11 +26,12 @@ export const FormGroup: React.FC<FormGroupProps> = props => {
   const theme = useTheme();
   const automapLabel = useUniqueId(props.labelIdPrefix ?? '__blackmaker_formgroup');
   const parentFormInputProps = useFormInputProps();
+  const inputId = props.inputId ?? (!props.dontAutomapLabel ? automapLabel : undefined);
   const formInputProps: FormInputProps = {
     ...parentFormInputProps,
     small: props.small,
     large: props.large,
-    inputId: !props.dontAutomapLabel ? automapLabel : undefined,
+    inputId: inputId,
     intent: props.intent,
     disabled: props.disabled,
     ...props.inputProps,
@@ -37,12 +40,12 @@ export const FormGroup: React.FC<FormGroupProps> = props => {
   return (
     <div
       className={cxs({
-        margin: '.5em 0 1.75em 0',
+        margin: '.5em 0 1em 0',
       })}
     >
       {props.label && (
         <label
-          htmlFor={!props.dontAutomapLabel ? automapLabel : undefined}
+          htmlFor={inputId}
           className={cxs({
             cursor: formInputProps.disabled ? 'not-allowed' : !props.dontAutomapLabel ? 'pointer' : undefined,
             display: 'block',
