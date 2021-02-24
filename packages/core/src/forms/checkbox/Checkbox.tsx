@@ -2,7 +2,7 @@ import * as React from 'react';
 import { noSelect, useTheme } from '../..';
 import cxs from 'cxs';
 import { CheckboxBlock, CheckboxBlockProps } from './CheckboxBlock';
-import { Slider } from './Slider';
+import { Switch } from './Switch';
 import { useFormInputProps } from '../useFormInputProps';
 
 export interface CheckboxProps extends CheckboxBlockProps {
@@ -15,7 +15,7 @@ export const Checkbox: React.FC<CheckboxProps> = componentProps => {
   const ctxProps = useFormInputProps();
   const props: CheckboxProps = { ...ctxProps, ...componentProps };
 
-  const box = <div>{props.switch ? <Slider {...props} /> : <CheckboxBlock {...props} />}</div>;
+  const box = <div>{props.switch ? <Switch {...props} /> : <CheckboxBlock {...props} />}</div>;
 
   return (
     <label

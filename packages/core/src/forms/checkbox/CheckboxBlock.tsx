@@ -1,10 +1,5 @@
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { darken, HtmlElementProps, Icon, IconName, Intent, useTheme } from '../..';
-import cxs from 'cxs';
-import { useFormInputProps } from '../useFormInputProps';
-import { VisuallyHidden } from '../../common/components/VisuallyHidden';
-import { MaybeFocusRing } from '../../accessibility/MaybeFocusRing';
+import { darken, Icon, IconName, Intent, useTheme } from '../..';
 import { Checkable, CheckableProps } from './Checkable';
 
 export interface CheckboxBlockProps extends Omit<CheckableProps, 'renderContent' | 'containerCss'> {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { CheckboxBlock } from './CheckboxBlock';
 import { intents } from '../../common/intents';
-import { Slider } from './Slider';
+import { Switch } from './Switch';
 import { Checkbox } from './Checkbox';
 import { Checkable } from './Checkable';
 import { MenuItem } from '../../menu/MenuItem';
@@ -41,27 +41,27 @@ export const CheckboxBlockComponentIntents = () => (
   </div>
 );
 
-export const SliderComponent = () => (
+export const SwitchComponent = () => (
   <div>
-    <Slider checked={false} />
-    <Slider />
-    <Slider checked={true} />
-    <Slider large={true} checked={false} />
-    <Slider large={true} />
-    <Slider large={true} checked={true} />
+    <Switch checked={false} />
+    <Switch />
+    <Switch checked={true} />
+    <Switch large={true} checked={false} />
+    <Switch large={true} />
+    <Switch large={true} checked={true} />
   </div>
 );
 
-export const SliderComponentIntents = () => (
+export const SwitchComponentIntents = () => (
   <div>
     {intents.map(intent => (
       <div key={intent}>
-        <Slider intent={intent} checked={false} />
-        <Slider intent={intent} />
-        <Slider intent={intent} checked={true} />
-        <Slider intent={intent} large={true} checked={false} />
-        <Slider intent={intent} large={true} />
-        <Slider intent={intent} large={true} checked={true} />
+        <Switch intent={intent} checked={false} />
+        <Switch intent={intent} />
+        <Switch intent={intent} checked={true} />
+        <Switch intent={intent} large={true} checked={false} />
+        <Switch intent={intent} large={true} />
+        <Switch intent={intent} large={true} checked={true} />
       </div>
     ))}
   </div>

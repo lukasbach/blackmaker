@@ -2,11 +2,9 @@ import * as React from 'react';
 import { darken, Intent, lighten, useTheme } from '../..';
 import cxs from 'cxs';
 import { CheckboxBlockProps } from './CheckboxBlock';
-import { VisuallyHidden } from '../../common/components/VisuallyHidden';
-import { MaybeFocusRing } from '../../accessibility/MaybeFocusRing';
 import { Checkable } from './Checkable';
 
-export const Slider: React.FC<CheckboxBlockProps> = props => {
+export const Switch: React.FC<CheckboxBlockProps> = props => {
   const theme = useTheme();
 
   const intent = props.intent ?? Intent.Primary;
