@@ -160,7 +160,11 @@ export const ComplexSelect: <T extends object, M extends boolean>(
     }
   };
 
-  useHotKey({ combination: 'enter' }, () => clickItem(activeItem)); // TODO scope to list container ref
+  useHotKey({ combination: 'enter' }, () => {
+    if (isOpen) {
+      clickItem(activeItem);
+    }
+  }); // TODO scope to list container ref
   useHotKey({ combination: 'down' }, () => {
     const currentIndex = matchedItems.indexOf(activeItem);
     const newIndex = (currentIndex + 1) % matchedItems.length;

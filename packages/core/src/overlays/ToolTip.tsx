@@ -24,6 +24,7 @@ export const ToolTip: React.FC<ToolTipProps> = props => {
 
   return (
     <Popover
+      interactiveBorder={0}
       inline={props.inline ?? true}
       trigger={PopoverOpenTrigger.HoverReference}
       placement={props.placement ?? TooltipPlacement.Bottom}

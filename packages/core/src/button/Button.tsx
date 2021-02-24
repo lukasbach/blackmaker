@@ -28,6 +28,7 @@ export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   href?: string;
   target?: string;
   text?: string | JSX.Element;
+  margin?: boolean | string;
 }
 
 export const Button: React.FC<ButtonProps> = componentProps => {
@@ -99,7 +100,14 @@ export const Button: React.FC<ButtonProps> = componentProps => {
           alignItems: 'center',
           justifyContent: 'center',
           width: props.fill ? '100%' : undefined,
-          margin: !grouped ? '2px 4px' : '2px 0 0 1px',
+          margin:
+            props.margin === undefined || props.margin === true
+              ? !grouped
+                ? '2px 4px'
+                : '2px 0 0 1px'
+              : typeof props.margin === 'string'
+              ? props.margin
+              : undefined,
           verticalAlign: 'middle',
           height: props.small ? '2.2em' : '2.8em',
           padding: props.large

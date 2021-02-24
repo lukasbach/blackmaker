@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 export const BoxComponent = () => (
-  <Box backgroundColor="red" width={400} height={200} border="2px solid blue">
+  <Box backgroundColor="red" width="400px" height="200px" border="2px solid blue">
     Content
   </Box>
 );

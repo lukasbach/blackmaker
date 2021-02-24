@@ -115,7 +115,7 @@ export class Theme {
     return { boxShadow: `rgba(0, 0, 0, ${this.isDark ? 0.2 : 0.1}) 0 ${level + 1}px ${level * 2}px ${level}px` };
   }
 
-  public getBackgroundColor(backgroundColor: BackgroundColor) {
+  public getBackgroundColor(backgroundColor: BackgroundColor | string) {
     switch (backgroundColor) {
       case BackgroundColor.Primary:
         return this.definition.primaryBackgroundColor;
@@ -126,7 +126,7 @@ export class Theme {
       case BackgroundColor.Menu:
         return this.definition.menuBackgroundColor;
       default:
-        throw Error(`Unknown backgroundcolor code ${backgroundColor}`);
+        return backgroundColor;
     }
   }
 }
