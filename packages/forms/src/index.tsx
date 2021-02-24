@@ -33,6 +33,8 @@ export const Form = withTheme({
         label={props.label || props.schema.description || ''}
         checked={props.value}
         onChange={props.onChange}
+        required={props.required}
+        disabled={props.disabled}
       />
     ),
   },

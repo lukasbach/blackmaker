@@ -6,7 +6,7 @@ export const VisuallyHidden: React.FC = props => {
   return (
     <div
       className={cxs({
-        display: 'inline-block',
+        height: '0',
         position: 'relative',
         '> *': {
           position: 'absolute',
