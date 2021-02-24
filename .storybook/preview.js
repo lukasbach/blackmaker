@@ -11,8 +11,8 @@ import { Theme } from '@blackmaker/core';
 
 function ThemeWrapper(Story, context) {
   const isDark = useDarkMode();
-  const themeColor = context.globals.themeColor;
-  const backgroundColor = context.globals.backgroundColor;
+  const themeColor = context.globals.themeColor ?? 'default';
+  const backgroundColor = context.globals.backgroundColor ?? BackgroundColor.Primary;
   let theme = isDark ? darkTheme : brightTheme;
 
   if (themeColor !== 'default' || !themeColor) {
@@ -95,9 +95,9 @@ export const globalTypes = {
       title: 'Background Color',
       items: [
         { title: 'Primary Background (default)', value: BackgroundColor.Primary },
-        { title: 'Secondary Background (default)', value: BackgroundColor.Secondary },
-        { title: 'Tertiary Background (default)', value: BackgroundColor.Tertiary },
-        { title: 'Menu Background (default)', value: BackgroundColor.Menu },
+        { title: 'Secondary Background', value: BackgroundColor.Secondary },
+        { title: 'Tertiary Background', value: BackgroundColor.Tertiary },
+        { title: 'Menu Background', value: BackgroundColor.Menu },
       ],
     },
   },

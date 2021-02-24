@@ -1,6 +1,6 @@
 export enum BackgroundColor {
-  Primary,
-  Secondary,
-  Tertiary,
-  Menu,
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Tertiary = 'tertiary',
+  Menu = 'menu',
 }
