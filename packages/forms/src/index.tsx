@@ -13,19 +13,23 @@ export const Form = withTheme({
   widgets: {
     ...widgets,
     TextWidget: props => (
-        <TextInput
-          inputId={props.id}
-          intent={props.rawErrors?.length > 0 ? Intent.Danger : undefined}
-          placeholder={props.placeholder}
-          autoFocus={props.autofocus}
-          disabled={props.disabled}
-          readonly={props.readonly}
-          type={((props as any).type || props.schema.type) === 'string' ?  'text' : `${(props as any).type || props.schema.type}`}
-          value={props.value}
-          onChange={(e, value) => props.onChange(value === '' ? props.options?.emptyValue : value)}
-          onBlur={(e) => props.onBlur(props.id, e.target.value)}
-          onFocus={(e) => props.onFocus(props.id, e.target.value)}
-        />
+      <TextInput
+        inputId={props.id}
+        intent={props.rawErrors?.length > 0 ? Intent.Danger : undefined}
+        placeholder={props.placeholder}
+        autoFocus={props.autofocus}
+        disabled={props.disabled}
+        readonly={props.readonly}
+        type={
+          ((props as any).type || props.schema.type) === 'string'
+            ? 'text'
+            : `${(props as any).type || props.schema.type}`
+        }
+        value={props.value}
+        onChange={(e, value) => props.onChange(value === '' ? props.options?.emptyValue : value)}
+        onBlur={e => props.onBlur(props.id, e.target.value)}
+        onFocus={e => props.onFocus(props.id, e.target.value)}
+      />
     ),
     CheckboxWidget: props => (
       <Checkbox
@@ -39,14 +43,18 @@ export const Form = withTheme({
     ),
   },
   fields: {
-    ...fields
+    ...fields,
   },
   FieldTemplate: props => (
     <FormGroup
       label={props.label}
       inputId={props.id}
       intent={props.rawErrors?.length > 0 ? Intent.Danger : undefined}
-      helperText={props.rawErrors?.length > 0 ? props.rawErrors.map(error => <div key={error}>{error}</div>) : props.rawDescription}
+      helperText={
+        props.rawErrors?.length > 0
+          ? props.rawErrors.map(error => <div key={error}>{error}</div>)
+          : props.rawDescription
+      }
     >
       {props.children}
     </FormGroup>
@@ -60,5 +68,5 @@ export const Form = withTheme({
         Submit
       </Button>
     </div>
-  )
+  ),
 }) as any;
