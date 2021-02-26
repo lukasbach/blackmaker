@@ -90,11 +90,11 @@ export const TextInput = React.forwardRef<HTMLInputElement | null, TextInputProp
         placeholder={props.placeholder ? '' + props.placeholder : undefined}
         value={props.value}
         defaultValue={props.defaultValue}
-        onFocus={(e) => {
+        onFocus={e => {
           setHasFocus(true);
           props.onFocus?.(e);
         }}
-        onBlur={(e) => {
+        onBlur={e => {
           setHasFocus(false);
           props.onBlur?.(e);
         }}

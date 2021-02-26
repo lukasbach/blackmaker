@@ -7,12 +7,7 @@ import { useUniqueId } from '../common/useUniqueId';
 export interface ToolTipProps
   extends Omit<
     PopoverProps,
-    | 'noLeftPadding'
-    | 'trigger'
-    | 'isOpen'
-    | 'animationDefaultStyles'
-    | 'animationDisplayStyles'
-    | 'animationHiddenStyles'
+    'noLeftPadding' | 'trigger' | 'animationDefaultStyles' | 'animationDisplayStyles' | 'animationHiddenStyles'
   > {
   intent?: Intent;
   tooltipIdPrefix?: string;
@@ -32,6 +27,7 @@ export const ToolTip: React.FC<ToolTipProps> = props => {
       interactiveDebounce={0}
       closeOnClick={false}
       closeOnEscape={false}
+      isOpen={props.isOpen}
       elementProps={{
         ['aria-describedby']: tooltipId,
         ...props.elementProps,
