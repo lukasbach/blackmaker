@@ -21,8 +21,8 @@ export const brightTheme: ThemeDefinition = {
   },
 
   primaryBackgroundColor: '#ffffff',
-  secondaryBackgroundColor: '#eeeff1',
-  tertiaryBackgroundColor: '#bababa',
+  secondaryBackgroundColor: '#f2f4f7',
+  tertiaryBackgroundColor: '#ebedf0',
   menuBackgroundColor: '#f8f8f8',
 
   textColor: '#515151',

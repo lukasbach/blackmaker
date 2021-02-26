@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { Callout, CalloutProps, CalloutStyle } from './Callout';
 import { intents } from '../common/intents';
-import { IconName } from '..';
+import { IconName, Intent } from '..';
 
 export default {
   title: 'Core/Components/Callout',
@@ -17,6 +17,7 @@ const props: Partial<CalloutProps> = {
   icon: IconName.AccessAlarm,
   onClose: () => alert('Close!'),
   title: 'Title',
+  actions: [{ text: 'Save', intent: Intent.Primary, icon: IconName.Save }, { text: 'Discard' }],
 };
 
 export const VariousCalloutOptions = () => (

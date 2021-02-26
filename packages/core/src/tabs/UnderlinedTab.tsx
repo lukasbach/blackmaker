@@ -30,7 +30,7 @@ export const UnderlinedTab: React.FC<TabProps> = props => {
 
         ...(props.id === currentTab
           ? {
-              borderColor: theme.getColor(intent),
+              borderColor: theme.getColor(intent) + ' !important',
               color: theme.getBrandTextColor(intent),
             }
           : {

@@ -47,7 +47,7 @@ export const Checkable: React.FC<CheckableProps> = componentProps => {
     }
   }, [props.checked]);
 
-  const renderProps = {...props, checked};
+  const renderProps = { ...props, checked };
 
   return (
     <MaybeFocusRing within={true} canFocus={props.canFocus ?? true}>

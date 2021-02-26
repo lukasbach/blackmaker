@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MouseEvent, useState } from 'react';
-import { HtmlElementProps, useTheme } from '..';
+import { darken, HtmlElementProps, useTheme } from '..';
 import cxs from 'cxs';
 import Color from 'color';
 import { BackgroundColor } from '../theming/BackgroundColor';
@@ -17,6 +17,8 @@ export interface CardContainerProps extends HtmlElementProps {
 
 export const CardContainerContext = React.createContext({
   hovering: false,
+  borderColor: '#000',
+  backgroundColor: '#fff',
 });
 
 export const CardContainer: React.FC<CardContainerProps> = props => {
@@ -24,6 +26,7 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
   const [isHovering, setIsHovering] = useState(false);
 
   const backgroundColor = theme.getBackgroundColor(props.background ?? BackgroundColor.Primary);
+  const borderColor = darken(backgroundColor, 0.2);
 
   return (
     <div
@@ -41,8 +44,9 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
       }}
       className={cxs({
         display: props.fill ? 'block' : 'inline-block',
+        boxSizing: 'border-box',
         backgroundColor: backgroundColor,
-        border: `1px solid ${new Color(backgroundColor).darken(0.2)}`,
+        border: `1px solid ${borderColor}`,
         borderRadius: theme.definition.borderRadiusRegular,
         cursor: props.interactive ? 'pointer' : undefined,
         '> :first-child': {
@@ -58,11 +62,11 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
       })}
       {...props.elementProps}
     >
-      {props.interactive ? (
-        <CardContainerContext.Provider value={{ hovering: isHovering }}>{props.children}</CardContainerContext.Provider>
-      ) : (
-        props.children
-      )}
+      <CardContainerContext.Provider
+        value={{ hovering: (props.interactive && isHovering) ?? false, borderColor, backgroundColor }}
+      >
+        {props.children}
+      </CardContainerContext.Provider>
     </div>
   );
 };

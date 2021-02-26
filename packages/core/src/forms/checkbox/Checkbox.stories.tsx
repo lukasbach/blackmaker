@@ -136,8 +136,12 @@ export const CheckboxLinesRightAligned = () => (
 export const CheckableComponent = () => (
   <div>
     <Checkable
-      renderContainerCss={({checked}) => ({ border: '1px solid blue', background: checked ? 'red' : undefined, color: checked ? 'yellow' : undefined })}
-      renderContent={({checked}) => checked === undefined ? 'No state' : checked ? 'Active' : 'Deactive'}
+      renderContainerCss={({ checked }) => ({
+        border: '1px solid blue',
+        background: checked ? 'red' : undefined,
+        color: checked ? 'yellow' : undefined,
+      })}
+      renderContent={({ checked }) => (checked === undefined ? 'No state' : checked ? 'Active' : 'Deactive')}
     />
   </div>
 );
@@ -146,11 +150,17 @@ export const ExampleForMenuItemAsCheckable = () => (
   <Menu>
     <MenuItem text="Other items..." />
     <Checkable
-      renderContainerCss={({checked}) => ({})}
-      renderContent={({checked}) => (
+      renderContainerCss={({ checked }) => ({})}
+      renderContent={({ checked }) => (
         <MenuItem
           canFocus={false}
-          iconRight={checked === undefined ? IconName.IndeterminateCheckBox : checked ? IconName.CheckBox : IconName.CheckBoxOutlineBlank}
+          iconRight={
+            checked === undefined
+              ? IconName.IndeterminateCheckBox
+              : checked
+              ? IconName.CheckBox
+              : IconName.CheckBoxOutlineBlank
+          }
           intent={checked === undefined || checked ? Intent.Primary : undefined}
           selected={checked === undefined || checked}
           interactive={true}

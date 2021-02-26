@@ -22,6 +22,18 @@ export const SimpleBreadCrumbs = () => (
   />
 );
 
+export const BreadCrumbsAsAnchors = () => (
+  <BreadCrumbs
+    items={[
+      { title: 'C:', icon: IconName.FolderOpen, href: '#' },
+      { title: 'Users', icon: IconName.FolderOpen, href: '#' },
+      { title: 'JDoe', icon: IconName.FolderOpen, href: '#' },
+      { title: 'My Documents', icon: IconName.FolderOpen, href: '#' },
+      { title: 'tax_return.pdf', icon: IconName.AttachFile, current: true, href: '#' },
+    ]}
+  />
+);
+
 export const BreadCrumbsWithoutIcons = () => (
   <BreadCrumbs
     items={[
@@ -42,6 +54,19 @@ export const BreadCrumbsWithIntents = () => (
       { title: 'JDoe', intent: Intent.Warning, onClick: () => {} },
       { title: 'My Documents', intent: Intent.Success, onClick: () => {} },
       { title: 'tax_return.pdf', intent: Intent.Info, onClick: () => {} },
+    ]}
+  />
+);
+
+export const SmallBreadCrumbs = () => (
+  <BreadCrumbs
+    small={true}
+    items={[
+      { title: 'C:', icon: IconName.FolderOpen, onClick: () => {} },
+      { title: 'Users', icon: IconName.FolderOpen, onClick: () => {} },
+      { title: 'JDoe', icon: IconName.FolderOpen, onClick: () => {} },
+      { title: 'My Documents', icon: IconName.FolderOpen, onClick: () => {} },
+      { title: 'tax_return.pdf', icon: IconName.AttachFile, current: true, onClick: () => {} },
     ]}
   />
 );

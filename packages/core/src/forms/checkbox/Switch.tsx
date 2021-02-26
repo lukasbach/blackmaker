@@ -23,7 +23,7 @@ export const Switch: React.FC<CheckboxBlockProps> = props => {
         backgroundColor: checked ? theme.getColor(intent) : darken(theme.definition.tertiaryBackgroundColor, 0),
         borderRadius: '9999px',
         textAlign: 'center',
-        cursor: (readonly || disabled) ? 'disallowed' : 'pointer',
+        cursor: readonly || disabled ? 'disallowed' : 'pointer',
         transition: '.2s all ease',
         ':hover': {
           backgroundColor: checked

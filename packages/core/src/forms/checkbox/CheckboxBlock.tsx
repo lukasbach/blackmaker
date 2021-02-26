@@ -2,8 +2,7 @@ import * as React from 'react';
 import { darken, Icon, IconName, Intent, useTheme } from '../..';
 import { Checkable, CheckableProps } from './Checkable';
 
-export interface CheckboxBlockProps extends Omit<CheckableProps, 'renderContent' | 'containerCss'> {
-}
+export interface CheckboxBlockProps extends Omit<CheckableProps, 'renderContent' | 'containerCss'> {}
 
 export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
   const theme = useTheme();
@@ -24,7 +23,7 @@ export const CheckboxBlock: React.FC<CheckboxBlockProps> = props => {
           checked !== false ? theme.getColor(intent) : darken(theme.definition.primaryBackgroundColor, 0.08),
         borderRadius: theme.definition.borderRadiusSmall,
         textAlign: 'center',
-        cursor: (readonly || disabled) ? 'disallowed' : 'pointer',
+        cursor: readonly || disabled ? 'disallowed' : 'pointer',
         transition: '.15s background-color ease',
         ':hover': {
           backgroundColor:

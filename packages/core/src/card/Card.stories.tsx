@@ -7,6 +7,8 @@ import { Intent } from '../common';
 import { IconName } from '..';
 import { intents } from '../common/intents';
 import { BackgroundColor } from '../theming/BackgroundColor';
+import { TextAlign } from '../common/TextAlign';
+import { HorizontalRule } from '../typography/HorizontalRule';
 
 export default {
   title: 'Core/Components/Cards',
@@ -33,19 +35,35 @@ export const ComplexCard: React.FC = () => (
     >
       Header Area
     </CardArea>
-    <CardArea header={true} subtitle="Subtitle">
+    <CardArea header={true} subtitle="Subtitle" align={TextAlign.Center}>
       Another title
     </CardArea>
     <CardArea>Regular Area</CardArea>
+    <CardArea actions={actions}>Non-Interactive Area with actions</CardArea>
     <CardArea actions={actions} interactive={true} onClick={() => alert('You clicked!')}>
-      Interactive Area 1
+      Interactive Area 1 with actions
     </CardArea>
     <CardArea actions={actions} interactive={true} onClick={() => alert('You clicked!')}>
-      Interactive Area 2
+      Interactive Area 2 with actions
     </CardArea>
     <CardArea css={{ textAlign: 'right' }} muted={true}>
       <Button>Abort</Button>
       <Button intent={Intent.Primary}>Okay</Button>
+    </CardArea>
+  </CardContainer>
+);
+
+export const CardWithBorderedHeader: React.FC = () => (
+  <CardContainer css={{ minWidth: '400px' }}>
+    <CardArea header={true} borderBottom={true}>
+      Card header
+    </CardArea>
+    <CardArea actions={actions} interactive={true} onClick={() => alert('You clicked!')}>
+      Interactive Area 2
+    </CardArea>
+    <HorizontalRule verticalSpace="0" />
+    <CardArea actions={actions} interactive={true} onClick={() => alert('You clicked!')}>
+      Interactive Area 2
     </CardArea>
   </CardContainer>
 );
