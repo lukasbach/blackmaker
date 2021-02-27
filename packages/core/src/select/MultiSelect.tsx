@@ -26,8 +26,8 @@ export const MultiSelect: React.FC<MultiSelectProps> = props => {
       isMatching={SimpleSelectObjectMatcher}
       itemsEqual={(a, b) => a.value === b.value}
       renderItem={(item, props) => (
-        <SelectDefaultItemRenderer {...props} key={item.value}>
-          {item.value}
+        <SelectDefaultItemRenderer {...props} key={item.value.toString()}>
+          {item.label}
         </SelectDefaultItemRenderer>
       )}
       renderState={({ selected, isOpen }) => (

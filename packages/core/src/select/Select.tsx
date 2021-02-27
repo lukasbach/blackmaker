@@ -5,12 +5,12 @@ import { SelectDefaultItemRenderer } from './SelectDefaultItemRenderer';
 import { AnyElement } from '../common/AnyElement';
 
 export interface SimpleSelectObject {
-  value: string;
+  value: string | number | boolean;
   label?: string;
 }
 
 export const SimpleSelectObjectMatcher = (query: string, item: SimpleSelectObject) =>
-  item.value.toLowerCase().includes(query.toLowerCase());
+  (item.label ?? item.value.toString()).toLowerCase().includes(query.toLowerCase());
 
 export interface SelectProps
   extends Omit<
@@ -33,8 +33,8 @@ export const Select: React.FC<SelectProps> = props => {
       isMatching={SimpleSelectObjectMatcher}
       itemsEqual={(a, b) => a.value === b.value}
       renderItem={(item, props) => (
-        <SelectDefaultItemRenderer {...props} key={item.value}>
-          {item.value}
+        <SelectDefaultItemRenderer {...props} key={item.value.toString()}>
+          {item.label}
         </SelectDefaultItemRenderer>
       )}
       renderState={({ selected, isOpen }) => (

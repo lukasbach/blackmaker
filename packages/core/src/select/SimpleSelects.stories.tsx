@@ -4,8 +4,6 @@ import { Select } from './Select';
 import { items } from './ComplexSelect.stories';
 import { MultiSelect } from './MultiSelect';
 import { Suggest } from './Suggest';
-import { SelectDefaultItemRenderer } from './SelectDefaultItemRenderer';
-import { ComplexSelect } from './ComplexSelect';
 import { documentStory } from '../../../../.storybook/utils/documentStory';
 
 export default {

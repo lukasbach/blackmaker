@@ -8,5 +8,5 @@ addons.setConfig({
   enableShortcuts: true,
   isToolshown: true,
   initialActive: 'sidebar',
-  showRoots: false,
+  showRoots: true,
 });

@@ -8,9 +8,9 @@ import { VisuallyHidden } from '../common/components/VisuallyHidden';
 import { CopyToClipboardProps } from './CopyToClipboardProps';
 
 export interface CopyToClipboardButtonProps extends CopyToClipboardProps {
-  toolTipProps?: ToolTipProps;
-  innerToolTipProps?: ToolTipProps;
-  buttonProps?: RoundButtonProps;
+  toolTipProps?: Partial<ToolTipProps>;
+  innerToolTipProps?: Partial<ToolTipProps>;
+  buttonProps?: Partial<RoundButtonProps>;
 }
 
 export const CopyToClipboardButton: React.FC<CopyToClipboardButtonProps> = props => {
@@ -36,6 +36,8 @@ export const CopyToClipboardButton: React.FC<CopyToClipboardButtonProps> = props
       closeOnClickInside={false}
       closeOnClick={false}
       placement={TooltipPlacement.Right}
+      interactiveDebounce={0}
+      interactiveBorder={0}
       css={{
         cursor: props.cloneOnClick ? 'pointer' : undefined,
         ...props.toolTipProps?.css,
