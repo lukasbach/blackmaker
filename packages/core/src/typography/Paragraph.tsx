@@ -35,7 +35,7 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
       className={cxs({
         lineHeight: props.running ? '1.5em' : undefined,
         fontSize: props.small ? '.8em' : props.large ? '1.2em' : '1em',
-        margin: '0',
+        margin: '0 0 .5em 0',
         ...(props.noSelect ? noSelect : {}),
         ...props.css,
         color: (props.css || {}).color ?? color,

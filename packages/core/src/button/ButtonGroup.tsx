@@ -2,15 +2,23 @@ import * as React from 'react';
 import { useTheme } from '..';
 import cxs from 'cxs';
 import { ButtonProps } from './Button';
+import { useMemo } from 'react';
 
 export interface ButtonGroupProps extends Partial<ButtonProps> {}
 
 export const ButtonGroupContext = React.createContext<ButtonGroupProps & { grouped?: boolean }>({});
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = props => {
+  const context = {
+    ...props,
+    grouped: true,
+    fill: !!props.fill,
+    children: undefined
+  };
+
   if (props.fill) {
     return (
-      <ButtonGroupContext.Provider value={{ ...props, grouped: true, fill: false }}>
+      <ButtonGroupContext.Provider value={context}>
         <div
           className={cxs({
             display: 'flex',
@@ -25,7 +33,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = props => {
     );
   } else {
     return (
-      <ButtonGroupContext.Provider value={{ ...props, grouped: true }}>{props.children}</ButtonGroupContext.Provider>
+      <ButtonGroupContext.Provider value={context}>{props.children}</ButtonGroupContext.Provider>
     );
   }
 };

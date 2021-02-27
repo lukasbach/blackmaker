@@ -1,9 +1,14 @@
-import { utils, withTheme } from '@rjsf/core';
+import { ArrayFieldTemplateProps, ObjectFieldTemplateProps, utils, withTheme } from '@rjsf/core';
 import React from 'react';
-import { Button, Intent } from '@blackmaker/core';
+import { Button, ButtonGroup, IconName, Intent } from '@blackmaker/core';
 import { TextInput } from '@blackmaker/core/out/forms/textinput/TextInput';
 import { FormGroup } from '@blackmaker/core/out/forms/formgroup/FormGroup';
 import { Checkbox } from '@blackmaker/core/out/forms/checkbox/Checkbox';
+import { Heading } from '@blackmaker/core/out/typography/Heading';
+import { Paragraph } from '@blackmaker/core/out/typography/Paragraph';
+import cxs from 'cxs';
+import { Flex } from '@blackmaker/core/out/common/components/Flex';
+import { Box } from '@blackmaker/core/out/common/components/Box';
 
 const { getDefaultRegistry } = utils;
 
@@ -14,6 +19,7 @@ export const Form = withTheme({
     ...widgets,
     TextWidget: props => (
       <TextInput
+        fill={true}
         inputId={props.id}
         intent={props.rawErrors?.length > 0 ? Intent.Danger : undefined}
         placeholder={props.placeholder}
@@ -44,6 +50,11 @@ export const Form = withTheme({
   },
   fields: {
     ...fields,
+    TitleField: props => (
+      <Heading level={3}>
+        {props.title}
+      </Heading>
+    )
   },
   FieldTemplate: props => (
     <FormGroup
@@ -59,8 +70,105 @@ export const Form = withTheme({
       {props.children}
     </FormGroup>
   ),
-  ArrayFieldTemplate: undefined,
-  ObjectFieldTemplate: undefined,
+  ArrayFieldTemplate: ({
+    schema, registry, uiSchema, TitleField, idSchema, title, items, required, canAdd, onAddClick, disabled
+  }: ArrayFieldTemplateProps) => {
+    const titleComplete = uiSchema["ui:title"] || title;
+    const description = uiSchema["ui:description"] || schema.description;
+    const titleId = `${idSchema.$id}__title`;
+    console.log({titleComplete, description, items, idSchema, TitleField})
+
+    if (utils.isMultiSelect(schema, (registry as any || getDefaultRegistry()).rootSchema)) {
+      return (
+        <>
+          isMultiSelect
+        </>
+      );
+    } else {
+      return (
+        <>
+          <TitleField id={titleId} title={titleComplete} required={required} />
+          {items.map(item => (
+            <Flex key={item.key}>
+              <Box flexGrow={1}>
+                { item.children }
+              </Box>
+              {(item.hasRemove || item.hasMoveUp || item.hasMoveDown) && (
+                <Box minWidth="100px" textAlign="right">
+                  <ButtonGroup small={true} minimal={true}>
+                    {!item.disabled && !item.readonly && item.hasMoveUp && (
+                      <Button
+                        ariaLabel="Move item up"
+                        icon={IconName.ArrowUpward}
+                        onClick={item.onReorderClick(item.index, item.index - 1)}
+                      />
+                    )}
+                    {!item.disabled && !item.readonly && item.hasMoveDown && (
+                      <>
+                        <Button
+                          ariaLabel="Move item down"
+                          icon={IconName.ArrowDownward}
+                          onClick={item.onReorderClick(item.index, item.index + 1)}
+                        />
+                      </>
+                    )}
+                    {!item.disabled && !item.readonly && item.hasRemove && (
+                      <Button
+                        ariaLabel="Remove item"
+                        icon={IconName.Delete}
+                        onClick={item.onDropIndexClick(item.index)}
+                      />
+                    )}
+                  </ButtonGroup>
+                </Box>
+              )}
+            </Flex>
+          ))}
+          {canAdd && (
+            <div>
+              <Button
+                css={{ float: 'right' }}
+                disabled={disabled}
+                onClick={onAddClick}
+                icon={IconName.Add}
+              >
+                Add item
+              </Button>
+            </div>
+          )}
+        </>
+      );
+    }
+  },
+  ObjectFieldTemplate: ({
+    uiSchema, title, required, idSchema, description, properties
+  }: ObjectFieldTemplateProps) => (
+    <>
+      {(uiSchema["ui:title"] || title) && (
+        <Heading
+          level={4}
+          elementProps={{
+            id: `${idSchema.$id}-title`,
+          }}
+        >
+          {title || uiSchema["ui:title"]}
+        </Heading>
+      )}
+      {description && (
+        <Paragraph
+          elementProps={{
+            id: `${idSchema.$id}-description`
+          }}
+          children={description}
+        />
+      )}
+      {properties.map((element: any, index: number) => (
+        <div key={index} className={cxs({ marginBottom: "10px" })}>
+          {element.content}
+        </div>
+      ))}
+    </>
+  ),
   ErrorList: undefined,
   children: () => (
     <div>

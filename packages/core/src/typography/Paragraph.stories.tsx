@@ -1,10 +1,13 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
 import { Paragraph } from './Paragraph';
+import { intents } from '../common/intents';
+import { MaybeTruncate } from '../common/MaybeTruncate';
 
 export default {
   title: 'Core/Typography/Paragraph',
   component: Paragraph,
+  subcomponents: {MaybeTruncate}
 } as Meta;
 
 const loremIpsum =
@@ -24,6 +27,15 @@ export const MutedText = () => <Paragraph content={loremIpsum} muted={true} />;
 
 export const DisabledText = () => <Paragraph content={loremIpsum} disabled={true} />;
 
+export const TextWithIntent = () => intents.map(i => (<Paragraph content={loremIpsum} intent={i} key={i} />));
+
 export const TruncatedText = () => <Paragraph content={loremIpsum} truncate={true} />;
+
+export const SmartTruncatedText = () => (
+  <div>
+    <Paragraph content={"This is long and truncates, so a title attribute is set. " + loremIpsum} truncate={true} />
+    <Paragraph content={"If the paragraph does not overflow, a title attribute is automatically omitted."} truncate={true} />
+  </div>
+)
 
 export const UnselectableText = () => <Paragraph content={loremIpsum} noSelect={true} />;

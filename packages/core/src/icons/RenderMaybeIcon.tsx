@@ -9,8 +9,6 @@ export interface RenderMaybeIconProps {
 }
 
 export const RenderMaybeIcon: React.FC<RenderMaybeIconProps> = props => {
-  const theme = useTheme();
-
   return (
     <>
       {props.icon &&

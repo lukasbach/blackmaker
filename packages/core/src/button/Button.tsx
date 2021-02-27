@@ -4,7 +4,7 @@ import cxs from 'cxs';
 import { Alignment } from '../common/Alignment';
 import { Property } from 'csstype';
 import { Spinner } from '../spinner/Spinner';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ButtonGroupContext } from './ButtonGroup';
 import Color from 'color';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
@@ -29,9 +29,16 @@ export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   target?: string;
   text?: string | JSX.Element;
   margin?: boolean | string;
+  ariaLabel?: string;
 }
 
 export const Button: React.FC<ButtonProps> = componentProps => {
+  useEffect(() => {
+    if (!props.children && !props.text && !props.ariaLabel) {
+      console.warn(`Blackmaker: Button has no text or aria label.`);
+    }
+  }, []);
+
   const theme = useTheme();
   const ctxProps = useContext(ButtonGroupContext) ?? {};
   const props = { ...ctxProps, ...componentProps };
@@ -73,6 +80,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
   return (
     <MaybeFocusRing>
       <Element
+        aria-label={props.ariaLabel}
         onClick={props.onClick}
         href={props.href}
         target={props.target}
