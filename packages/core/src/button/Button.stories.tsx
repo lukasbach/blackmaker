@@ -5,10 +5,12 @@ import { intents } from '../common/intents';
 import { IconName, Intent } from '..';
 import { RoundButton } from './RoundButton';
 import { ButtonGroup } from './ButtonGroup';
+import { ButtonWithTooltip } from './ButtonWithTooltip';
 
 export default {
   title: 'Core/Components/Button',
   component: Button,
+  subcomponents: {ButtonWithTooltip, RoundButton}
 } as Meta;
 
 const Template = (args: ButtonProps) => <Button {...args} />;
@@ -155,3 +157,10 @@ export const RoundButtons: React.FC = () => (
     </div>
   </div>
 );
+
+export const ButtonWithTooltipExample: React.FC = () => (
+  <div>
+    <ButtonWithTooltip>I've got no tooltip :(</ButtonWithTooltip><br />
+    <ButtonWithTooltip tooltip="Aw yiss">I've got one!</ButtonWithTooltip><br />
+  </div>
+)
