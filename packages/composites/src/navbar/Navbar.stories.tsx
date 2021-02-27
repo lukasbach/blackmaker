@@ -2,18 +2,18 @@ import React from 'react';
 import { Meta } from '@storybook/react';
 import { Navbar } from './Navbar';
 import { NavbarGroup } from './NavbarGroup';
-import { Button } from '../button';
 import { NavbarText } from './NavbarText';
-import { BackgroundColor } from '../theming/BackgroundColor';
+import { BackgroundColor } from '@blackmaker/core/out/theming/BackgroundColor';
 import { Helmet } from 'react-helmet';
-import { TextInput } from '../forms/textinput/TextInput';
-import { BreadCrumbs } from '../breadcrumbs/BreadCrumbs';
-import { IconName, Intent } from '..';
-import { ToolTip } from '../overlays/ToolTip';
+import { TextInput } from '@blackmaker/core/out/forms/textinput/TextInput';
+import { BreadCrumbs } from '@blackmaker/core/out/breadcrumbs/BreadCrumbs';
+import { ToolTip } from '@blackmaker/core/out/overlays/ToolTip';
 import { documentStory } from '../../../../.storybook/utils/documentStory';
+import { Button } from '@blackmaker/core/out/button/Button';
+import { IconName } from '@blackmaker/core/out/icons/IconName';
 
 export default {
-  title: 'Core/Components/Navbar',
+  title: 'Composites/Navbar',
   component: Navbar,
   subcomponents: { NavbarGroup, NavbarText },
   parameters: {

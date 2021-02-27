@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { HtmlElementProps, useTheme } from '..';
 import cxs from 'cxs';
+import { useTheme } from '@blackmaker/core/out/theming/ThemeContext';
+import { HtmlElementProps } from '@blackmaker/core/out/common/HtmlElementProps';
 
 export interface NavbarGroupProps extends HtmlElementProps {
   grow?: boolean;

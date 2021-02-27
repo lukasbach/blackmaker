@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { HtmlElementProps, useTheme } from '..';
 import cxs from 'cxs';
 import { NavbarGroupProps } from './NavbarGroup';
+import { useTheme } from '@blackmaker/core/out/theming/ThemeContext';
 
 export interface NavbarTextProps extends NavbarGroupProps {
   element?: string;
