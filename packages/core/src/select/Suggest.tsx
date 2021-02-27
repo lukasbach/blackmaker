@@ -35,19 +35,19 @@ export const Suggest: React.FC<SuggestProps> = props => {
       itemsEqual={(a, b) => a.value === b.value}
       selectedItems={value ?? null}
       renderItem={(item, props) => (
-        <SelectDefaultItemRenderer {...props} key={item.value}>
+        <SelectDefaultItemRenderer {...props} key={item.value.toString()}>
           {item.value}
         </SelectDefaultItemRenderer>
       )}
       query={query}
       onChange={item => {
-        setQuery(item?.label ?? item?.value ?? '');
+        setQuery((item?.label ?? item?.value ?? '').toString());
         setValue(item);
         props.onChange?.(item);
       }}
       renderState={({ selected, isOpen }) => (
         <TextInput
-          value={isOpen ? query : value?.value ?? ''}
+          value={(isOpen ? query : value?.value ?? '').toString()}
           onChange={(e, value) => setQuery(value)}
           selectAllOnClick={true}
           {...props.inputProps}
