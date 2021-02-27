@@ -7,7 +7,7 @@ import { useUniqueId } from '../common/useUniqueId';
 export interface ToolTipProps
   extends Omit<
     PopoverProps,
-    'noLeftPadding' | 'trigger' | 'animationDefaultStyles' | 'animationDisplayStyles' | 'animationHiddenStyles'
+    'noLeftPadding' | 'animationDefaultStyles' | 'animationDisplayStyles' | 'animationHiddenStyles'
   > {
   intent?: Intent;
   tooltipIdPrefix?: string;

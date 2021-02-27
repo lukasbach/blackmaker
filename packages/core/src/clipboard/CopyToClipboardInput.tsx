@@ -38,7 +38,6 @@ export const CopyToClipboardInput: React.FC<CopyToClipboardInputProps> = props =
       }}
       rightElement={
         <ToolTip
-          isOpen={hasCopied || undefined}
           content={
             hasCopied ? props.tooltipTextDone ?? 'Copied to clipboard!' : props.tooltipText ?? 'Copy to clipboard'
           }

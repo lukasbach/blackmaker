@@ -11,7 +11,7 @@ export interface VerticalRuleProps {
 
 export const VerticalRule: React.FC<VerticalRuleProps> = props => {
   const theme = useTheme();
-  const color = props.color ?? darken(theme.getBackgroundColor(BackgroundColor.Primary), 0.2);
+  const color = props.color ?? darken(theme.getBackgroundColor(BackgroundColor.Primary), theme.isDark ? -.3 : 0.2);
 
   return (
     <hr
