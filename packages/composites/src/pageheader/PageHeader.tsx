@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { AnyElement } from '@blackmaker/core/out/common/AnyElement';
 import { BreadCrumbProps } from '@blackmaker/core/out/breadcrumbs/BreadCrumb';
-import { MenuItemProps } from '@blackmaker/core/out/menu/MenuItem';
 import { TagProps } from '@blackmaker/core/out/tags/Tag';
 import { Flex } from '@blackmaker/core/out/common/components/Flex';
 import { Box } from '@blackmaker/core/out/common/components/Box';
@@ -9,12 +8,14 @@ import { ButtonWithTooltip, ButtonWithTooltipProps } from '@blackmaker/core/out/
 import { BreadCrumbs } from '@blackmaker/core/out/breadcrumbs/BreadCrumbs';
 import { MaybeIcon } from '@blackmaker/core/out/icons/MaybeIcon';
 import { useTheme } from '@blackmaker/core/out/theming/ThemeContext';
+import { Heading, Paragraph, RenderMaybeIcon, TabProps, Tabs, TabsProps, TabsStyle } from '@blackmaker/core';
 
-export interface PageHeaderProps {
-  leftUpperActions?: JSX.Element | ButtonWithTooltipProps[];
-  rightUpperActions?: JSX.Element | ButtonWithTooltipProps[];
-  moreActions?: MenuItemProps[];
-  breadcrumbs?: BreadCrumbProps[];
+export interface PageHeaderProps extends Pick<TabsProps, 'currentTab' | 'onChangeTab'> {
+  actionsLeft?: JSX.Element | ButtonWithTooltipProps[];
+  actionsRight?: JSX.Element | ButtonWithTooltipProps[];
+  actionsRight2?: JSX.Element | ButtonWithTooltipProps[];
+  breadcrumbs?: JSX.Element | BreadCrumbProps[];
+  tabs?: JSX.Element | TabProps[];
   icon?: MaybeIcon;
   title?: AnyElement;
   description?: AnyElement;
@@ -25,22 +26,64 @@ export const PageHeader: React.FC<PageHeaderProps> = props => {
   const theme = useTheme();
 
   return (
-    <>
-      <Flex>
+    <Box padding=".5em">
+      <Flex marginBottom=".5em">
         <Flex flexGrow={1} alignItems={'center'}>
-          {Array.isArray(props.leftUpperActions) ? (
+          {Array.isArray(props.actionsLeft) ? (
             <Box marginRight=".5em">
-              {props.leftUpperActions.map((action, index) => (
+              {props.actionsLeft.map((action, index) => (
                 <ButtonWithTooltip key={index} minimal={true} {...action} />
               ))}
             </Box>
-          ) : props.leftUpperActions}
-          {props.breadcrumbs?.length && (
-            <BreadCrumbs items={props.breadcrumbs} />
-          )}
+          ) : props.actionsLeft}
+          {(props.breadcrumbs && Array.isArray(props.breadcrumbs) && props.breadcrumbs?.length) ? (
+            <BreadCrumbs items={props.breadcrumbs} small={true} />
+          ) : props.breadcrumbs}
         </Flex>
-        {theme.isDark ? "dunkel" : "hell"}
+        <div>
+          {Array.isArray(props.actionsRight) ? props.actionsRight.map((action, index) => (
+            <ButtonWithTooltip key={index} {...action} />
+          )) : props.actionsRight}
+        </div>
       </Flex>
-    </>
+      <Flex alignItems="center">
+        {props.icon && (
+          <Box margin="0 1em">
+            <RenderMaybeIcon icon={props.icon} iconProps={{ size: '4em' }} />
+          </Box>
+        )}
+        <Box flexGrow={1}>
+          {props.title && (
+            <Heading level={1} css={{ margin: '0' }}>
+              {props.title}
+            </Heading>
+          )}
+          {props.title && (
+            <Paragraph muted={true}>
+              {props.description}
+            </Paragraph>
+          )}
+        </Box>
+        {props.actionsRight2 && (
+          <Box alignSelf="flex-start">
+            {Array.isArray(props.actionsRight2) ? props.actionsRight2.map((action, index) => (
+              <ButtonWithTooltip key={index} {...action} />
+            )) : props.actionsRight2}
+          </Box>
+        )}
+      </Flex>
+      {props.tabs && (
+        <div>
+          {Array.isArray(props.tabs) ? (
+            <Tabs
+              tabs={props.tabs}
+              currentTab={props.currentTab}
+              onChangeTab={props.onChangeTab}
+              tabStyle={TabsStyle.Underlined}
+            />
+          ) : props.tabs}
+        </div>
+      )}
+    </Box>
   );
 };
