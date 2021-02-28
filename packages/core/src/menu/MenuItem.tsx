@@ -17,6 +17,7 @@ export interface MenuItemProps extends HtmlElementProps<HTMLButtonElement> {
   onClick?: React.MouseEventHandler<HTMLElement>;
   text?: string | AnyElement;
   subText?: string | AnyElement;
+  directContent?: AnyElement;
   dontTruncate?: boolean;
   minimal?: boolean;
   compact?: boolean;
@@ -62,7 +63,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
       <button
         role="listitem"
         tabIndex={!canFocus ? -1 : undefined}
-        onClick={interactive ? props.onClick : undefined}
+        onClick={props.onClick}
         className={cxs({
           border: 'none',
           backgroundColor: 'transparent',
@@ -104,6 +105,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         })}
         {...props.elementProps}
       >
+        {props.directContent}
         <RenderMaybeIcon
           icon={props.icon}
           iconProps={{
@@ -113,28 +115,30 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
             },
           }}
         />
-        <div
-          className={cxs({
-            flexGrow: 1,
-            marginRight: '1em',
-            maxWidth: '100%',
-          })}
-        >
+        {props.text && (
           <div
-            className={
-              !props.dontTruncate
-                ? cxs({
+            className={cxs({
+              flexGrow: 1,
+              marginRight: '1em',
+              maxWidth: '100%',
+            })}
+          >
+            <div
+              className={
+                !props.dontTruncate
+                  ? cxs({
                     ...truncateCode,
                     // TODO paddingRight: '10px',
                     boxSizing: 'border-box',
                   })
-                : undefined
-            }
-          >
-            {props.text}
+                  : undefined
+              }
+            >
+              {props.text}
+            </div>
+            {props.subText && <div className={subTextClass}>{props.subText}</div>}
           </div>
-          {props.subText && <div className={subTextClass}>{props.subText}</div>}
-        </div>
+        )}
         <RenderMaybeIcon
           icon={props.iconRight}
           iconProps={{
