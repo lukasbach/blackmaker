@@ -2,3 +2,4 @@
 
 export * from './fields';
 export * from './widgets';
+export * from './Form';

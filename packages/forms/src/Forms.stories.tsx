@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react';
-import { Form } from './index';
+import { Form } from '.';
 import { samples } from './samples.storyhelper';
 
 export default {
