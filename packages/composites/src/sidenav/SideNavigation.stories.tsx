@@ -29,9 +29,7 @@ export const CompleteExample = () => {
         <Flex height="5em" alignItems="center" justifyContent="center">
           <Icon name={IconName.Face} size="3em" />
         </Flex>,
-        (
-          <TextInput placeholder="Search" leftElement={IconName.Search} fill={true} small={true} />
-        ),
+        <TextInput placeholder="Search" leftElement={IconName.Search} fill={true} small={true} />,
         'Hello there!',
         { text: 'Home', icon: IconName.Home },
         { text: 'Backups', icon: IconName.Backup },
@@ -75,7 +73,7 @@ export const DifferentBackgroundColors = () => {
           isCollapsed={!!collapsed[color]}
           onChangeCollapsed={c => setCollapsed({ ...collapsed, [color]: c })}
           width={200}
-          css={color === '#0c7e8c' && { ' *': {color: '#fff !important'} }}
+          css={color === '#0c7e8c' && { ' *': { color: '#fff !important' } }}
         />
       ))}
     </Flex>

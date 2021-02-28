@@ -2,7 +2,8 @@ import * as React from 'react';
 import cxs from 'cxs';
 import {
   AnyElement,
-  BackgroundColor, HtmlElementProps,
+  BackgroundColor,
+  HtmlElementProps,
   Icon,
   IconName,
   Intent,
@@ -65,7 +66,13 @@ const Item: React.FC<{
       return <MenuHeader>{props.item}</MenuHeader>;
     } else if (!props.collapsed) {
       const itemAsMenuItem = props.item as SideNavigationItem;
-      return <MenuItem minimal={!itemAsMenuItem.selected} intent={!itemAsMenuItem.selected ? Intent.Default : undefined} {...itemAsMenuItem} />;
+      return (
+        <MenuItem
+          minimal={!itemAsMenuItem.selected}
+          intent={!itemAsMenuItem.selected ? Intent.Default : undefined}
+          {...itemAsMenuItem}
+        />
+      );
     } else {
       return null;
     }
@@ -86,7 +93,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
         boxSizing: 'border-box',
         overflow: 'auto',
         transition: '.1s width ease',
-        ...props.css
+        ...props.css,
       })}
       {...props.elementProps}
     >
