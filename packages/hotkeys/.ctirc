@@ -33,7 +33,7 @@
     ],
     nonull: true,
   },
-  includeCWD: false,
+  includeCWD: true,
   output: 'index.ts',
   quote: "'",
   targetExts: [

@@ -1,13 +1,12 @@
 import { useDarkMode } from 'storybook-dark-mode';
-import { brightTheme, darkTheme, lighten, ThemeProvider } from '@blackmaker/core/src';
+import { BackgroundColor, brightTheme, darkTheme, lighten, Theme } from '@blackmaker/core';
 import * as React from 'react';
 import cxs from 'cxs';
 import { sortStories } from './utils/story-helpers';
 import { storyOrder } from './utils/storyOrder';
-import { BlackmakerProvider } from '../packages/core/src/globalProvider/BlackmakerProvider';
 import { Helmet } from 'react-helmet';
-import { BackgroundColor } from '@blackmaker/core/out/theming/BackgroundColor';
-import { Theme } from '@blackmaker/core';
+import { BlackmakerProvider } from "@blackmaker/core";
+import { BlackmakerProvider as RelativeBlackmakerProvider } from "../packages/core/src";
 
 function ThemeWrapper(Story, context) {
   const isDark = useDarkMode();
@@ -33,39 +32,48 @@ function ThemeWrapper(Story, context) {
     };
   }
 
+  /*
+   * We use two blackmaker providers, BlackmakerProvider imported from the compiled package,
+   * and RelativeBlackmakerProvider from sources, because stories within the core package
+   * use the theme context from the sources and stories from other packages use the context
+   * from the compiled core package.
+   */
+
   return (
     <>
       <BlackmakerProvider theme={theme}>
-        <Helmet>
-          <style>{`
-            html, body, #root {
-              margin: 0;
-              padding: 0 !important;
-              height: 100%;
-            }
-            
-            .story-inner {
-              padding: 24px;
-              height: 100%;
-              box-sizing: border-box;
-            }
-          `}</style>
-        </Helmet>
-        <div
-          className={cxs({
-            backgroundColor: new Theme(theme).getBackgroundColor(backgroundColor),
-            color: theme.textColor,
-            width: '100%',
-            height: '100%',
-            overflow: 'auto',
-            fontFamily: "'Manrope', sans-serif",
-            position: 'relative',
-          })}
-        >
-          <div className="story-inner">
-            <Story />
+        <RelativeBlackmakerProvider theme={theme}>
+          <Helmet>
+            <style>{`
+              html, body, #root {
+                margin: 0;
+                padding: 0 !important;
+                height: 100%;
+              }
+              
+              .story-inner {
+                padding: 24px;
+                height: 100%;
+                box-sizing: border-box;
+              }
+            `}</style>
+          </Helmet>
+          <div
+            className={cxs({
+              backgroundColor: new Theme(theme).getBackgroundColor(backgroundColor),
+              color: theme.textColor,
+              width: '100%',
+              height: '100%',
+              overflow: 'auto',
+              fontFamily: "'Manrope', sans-serif",
+              position: 'relative',
+            })}
+          >
+            <div className="story-inner">
+              <Story />
+            </div>
           </div>
-        </div>
+        </RelativeBlackmakerProvider>
       </BlackmakerProvider>
     </>
   );
