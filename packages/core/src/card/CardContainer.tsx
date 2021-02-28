@@ -2,7 +2,6 @@ import * as React from 'react';
 import { MouseEvent, useState } from 'react';
 import { darken, HtmlElementProps, useTheme } from '..';
 import cxs from 'cxs';
-import Color from 'color';
 import { BackgroundColor } from '../theming/BackgroundColor';
 
 export interface CardContainerProps extends HtmlElementProps {
@@ -11,7 +10,7 @@ export interface CardContainerProps extends HtmlElementProps {
   onClick?: () => any;
   onMouseOver?: (e: MouseEvent<HTMLDivElement>) => any;
   onMouseOut?: (e: MouseEvent<HTMLDivElement>) => any;
-  background?: BackgroundColor;
+  background?: BackgroundColor | string;
   fill?: boolean;
 }
 
@@ -26,7 +25,7 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
   const [isHovering, setIsHovering] = useState(false);
 
   const backgroundColor = theme.getBackgroundColor(props.background ?? BackgroundColor.Primary);
-  const borderColor = darken(backgroundColor, theme.isDark ? -.3 : 0.2);
+  const borderColor = darken(backgroundColor, theme.isDark ? -.25 : 0.1);
 
   return (
     <div

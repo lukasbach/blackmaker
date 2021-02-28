@@ -11,7 +11,7 @@ export interface HorizontalRuleProps {
 
 export const HorizontalRule: React.FC<HorizontalRuleProps> = props => {
   const theme = useTheme();
-  const color = props.color ?? darken(theme.getBackgroundColor(BackgroundColor.Primary), theme.isDark ? -.3 : 0.2);
+  const color = props.color ?? darken(theme.getBackgroundColor(BackgroundColor.Primary), theme.isDark ? -.25 : 0.1);
 
   return (
     <hr

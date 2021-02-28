@@ -4,9 +4,8 @@ import { CardContainer } from './CardContainer';
 import { CardArea } from './CardArea';
 import { Button } from '../button/Button';
 import { Intent } from '../common';
-import { IconName } from '..';
+import { BackgroundColor, IconName } from '..';
 import { intents } from '../common/intents';
-import { BackgroundColor } from '../theming/BackgroundColor';
 import { TextAlign } from '../common/TextAlign';
 import { HorizontalRule } from '../typography/HorizontalRule';
 
@@ -259,3 +258,25 @@ export const NestedCard: React.FC = () => (
     </CardArea>
   </CardContainer>
 );
+
+const CardWithBackground: React.FC<{background: BackgroundColor | string}> = props => (
+  <CardContainer background={props.background} css={{ marginRight: '20px' }}>
+    <CardArea header={true} subtitle={`Color ${props.background}`} highlighted={true}>
+      Highlighted element
+    </CardArea>
+    <CardArea>
+      Normal element
+    </CardArea>
+    <CardArea muted={true}>
+      Muted element
+    </CardArea>
+  </CardContainer>
+);
+
+export const CardsWithBackground = () => (
+  <div>
+    {[BackgroundColor.Primary, BackgroundColor.Secondary, BackgroundColor.Tertiary, BackgroundColor.Menu, '#c0ffee'].map(color => (
+      <CardWithBackground background={color} key={color} />
+    ))}
+  </div>
+)
