@@ -9,7 +9,7 @@ import { Button, ButtonGroup } from '..';
 export default {
   title: 'Core/Typography/Rule',
   component: HorizontalRule,
-  subcomponents: {VerticalRule}
+  subcomponents: { VerticalRule },
 } as Meta;
 
 const loremIpsum =

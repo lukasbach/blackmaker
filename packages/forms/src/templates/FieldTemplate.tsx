@@ -5,7 +5,6 @@ import { Intent } from '@blackmaker/core';
 import { Paragraph } from '@blackmaker/core/out/typography/Paragraph';
 
 export const FieldTemplate: React.FC<FieldTemplateProps> = props => {
-
   return (
     <>
       {props.rawDescription && <Paragraph children={props.rawDescription} />}
@@ -17,7 +16,9 @@ export const FieldTemplate: React.FC<FieldTemplateProps> = props => {
       >
         {props.children}
       </FormGroup>
-      {props.rawErrors?.map(error => <Paragraph children={error} intent={Intent.Danger} key={error} />)}
+      {props.rawErrors?.map(error => (
+        <Paragraph children={error} intent={Intent.Danger} key={error} />
+      ))}
     </>
   );
 };

@@ -7,7 +7,7 @@ import { Paragraph } from '@blackmaker/core/out/typography/Paragraph';
 
 export const SelectWidget: React.FC<WidgetProps> = props => {
   const { enumOptions, enumDisabled }: any = props.options;
-  console.log(props)
+  console.log(props);
 
   const selectProps = {
     // TODO id
@@ -18,20 +18,23 @@ export const SelectWidget: React.FC<WidgetProps> = props => {
     buttonProps: {
       intent: props.rawErrors?.length > 0 ? Intent.Danger : undefined,
     },
-  }
+  };
 
   if (props.multiple) {
     return (
       <MultiSelect
         {...selectProps}
         onChange={items => {
-          props.onChange(items.map(item => item.value))
+          props.onChange(items.map(item => item.value));
         }}
         selectedItems={props.value.map((value: any) => ({ value }))}
         items={enumOptions.map((option: any, index: number) => ({
-          value: option.value, label: option.label // TODO disabled
+          value: option.value,
+          label: option.label, // TODO disabled
         }))}
-        renderText={selectedItems => <Paragraph children={selectedItems.map(item => item.label).join(', ')} truncate={true} />}
+        renderText={selectedItems => (
+          <Paragraph children={selectedItems.map(item => item.label).join(', ')} truncate={true} />
+        )}
       />
     );
   } else {
@@ -44,7 +47,8 @@ export const SelectWidget: React.FC<WidgetProps> = props => {
         selectedItems={{ value: props.value }}
         embedSearch={true}
         items={enumOptions.map((option: any, index: number) => ({
-          value: option.value, label: option.label // TODO disabled
+          value: option.value,
+          label: option.label, // TODO disabled
         }))}
       />
     );

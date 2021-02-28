@@ -88,9 +88,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
           fontFamily: 'inherit',
           backgroundColor: backgroundColor,
           color: color,
-          borderRadius: props.large
-              ? theme.definition.borderRadiusRegular
-              : theme.definition.borderRadiusSmall,
+          borderRadius: props.large ? theme.definition.borderRadiusRegular : theme.definition.borderRadiusSmall,
           border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
           boxShadow:
             !props.minimal && !props.outlined
@@ -159,7 +157,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
             },
             ':not(:first-child):not(:last-child)': {
               borderRadius: 0,
-            }
+            },
           }),
           ...props.css,
         })}

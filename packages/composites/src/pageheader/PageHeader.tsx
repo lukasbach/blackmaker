@@ -35,15 +35,19 @@ export const PageHeader: React.FC<PageHeaderProps> = props => {
                 <ButtonWithTooltip key={index} minimal={true} {...action} />
               ))}
             </Box>
-          ) : props.actionsLeft}
-          {(props.breadcrumbs && Array.isArray(props.breadcrumbs) && props.breadcrumbs?.length) ? (
+          ) : (
+            props.actionsLeft
+          )}
+          {props.breadcrumbs && Array.isArray(props.breadcrumbs) && props.breadcrumbs?.length ? (
             <BreadCrumbs items={props.breadcrumbs} small={true} />
-          ) : props.breadcrumbs}
+          ) : (
+            props.breadcrumbs
+          )}
         </Flex>
         <div>
-          {Array.isArray(props.actionsRight) ? props.actionsRight.map((action, index) => (
-            <ButtonWithTooltip key={index} {...action} />
-          )) : props.actionsRight}
+          {Array.isArray(props.actionsRight)
+            ? props.actionsRight.map((action, index) => <ButtonWithTooltip key={index} {...action} />)
+            : props.actionsRight}
         </div>
       </Flex>
       <Flex alignItems="center">
@@ -58,17 +62,13 @@ export const PageHeader: React.FC<PageHeaderProps> = props => {
               {props.title}
             </Heading>
           )}
-          {props.title && (
-            <Paragraph muted={true}>
-              {props.description}
-            </Paragraph>
-          )}
+          {props.title && <Paragraph muted={true}>{props.description}</Paragraph>}
         </Box>
         {props.actionsRight2 && (
           <Box alignSelf="flex-start">
-            {Array.isArray(props.actionsRight2) ? props.actionsRight2.map((action, index) => (
-              <ButtonWithTooltip key={index} {...action} />
-            )) : props.actionsRight2}
+            {Array.isArray(props.actionsRight2)
+              ? props.actionsRight2.map((action, index) => <ButtonWithTooltip key={index} {...action} />)
+              : props.actionsRight2}
           </Box>
         )}
       </Flex>
@@ -81,7 +81,9 @@ export const PageHeader: React.FC<PageHeaderProps> = props => {
               onChangeTab={props.onChangeTab}
               tabStyle={TabsStyle.Underlined}
             />
-          ) : props.tabs}
+          ) : (
+            props.tabs
+          )}
         </div>
       )}
     </Box>

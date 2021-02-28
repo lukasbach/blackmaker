@@ -259,24 +259,26 @@ export const NestedCard: React.FC = () => (
   </CardContainer>
 );
 
-const CardWithBackground: React.FC<{background: BackgroundColor | string}> = props => (
+const CardWithBackground: React.FC<{ background: BackgroundColor | string }> = props => (
   <CardContainer background={props.background} css={{ marginRight: '20px' }}>
     <CardArea header={true} subtitle={`Color ${props.background}`} highlighted={true}>
       Highlighted element
     </CardArea>
-    <CardArea>
-      Normal element
-    </CardArea>
-    <CardArea muted={true}>
-      Muted element
-    </CardArea>
+    <CardArea>Normal element</CardArea>
+    <CardArea muted={true}>Muted element</CardArea>
   </CardContainer>
 );
 
 export const CardsWithBackground = () => (
   <div>
-    {[BackgroundColor.Primary, BackgroundColor.Secondary, BackgroundColor.Tertiary, BackgroundColor.Menu, '#c0ffee'].map(color => (
+    {[
+      BackgroundColor.Primary,
+      BackgroundColor.Secondary,
+      BackgroundColor.Tertiary,
+      BackgroundColor.Menu,
+      '#c0ffee',
+    ].map(color => (
       <CardWithBackground background={color} key={color} />
     ))}
   </div>
-)
+);

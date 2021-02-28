@@ -14,8 +14,7 @@ import {
   useTheme,
 } from '@blackmaker/core';
 
-export interface SideNavigationItem extends MenuItemProps {
-}
+export interface SideNavigationItem extends MenuItemProps {}
 
 export interface SideNavigationProps {
   items: Array<SideNavigationItem | JSX.Element | string>;
@@ -29,12 +28,12 @@ export interface SideNavigationProps {
 }
 
 const Item: React.FC<{
-  item: SideNavigationItem | JSX.Element | string,
-  collapsed: boolean
+  item: SideNavigationItem | JSX.Element | string;
+  collapsed: boolean;
 }> = props => {
   if (props.collapsed && (props.item as JSX.Element).type === undefined && typeof props.item !== 'string') {
     const itemAsMenuItem = props.item as SideNavigationItem;
-    console.log("Collapsed")
+    console.log('Collapsed');
     return (
       <ToolTip content={itemAsMenuItem.text} placement={TooltipPlacement.Right}>
         <MenuItem
@@ -50,14 +49,14 @@ const Item: React.FC<{
             height: '3em',
           }}
           elementProps={{
-            'aria-label': typeof itemAsMenuItem.text === 'string' ? itemAsMenuItem.text : undefined
+            'aria-label': typeof itemAsMenuItem.text === 'string' ? itemAsMenuItem.text : undefined,
           }}
-          directContent={(
+          directContent={
             <RenderMaybeIcon icon={itemAsMenuItem.icon ?? IconName.FirstPage} iconProps={{ size: '1.5em' }} />
-          )}
+          }
         />
       </ToolTip>
-    )
+    );
   } else {
     if ((props.item as JSX.Element).type !== undefined && !props.collapsed) {
       return props.item as JSX.Element;
@@ -65,23 +64,18 @@ const Item: React.FC<{
       return <MenuHeader>{props.item}</MenuHeader>;
     } else if (!props.collapsed) {
       const itemAsMenuItem = props.item as SideNavigationItem;
-      return (
-        <MenuItem
-          minimal={!itemAsMenuItem.selected}
-          {...itemAsMenuItem}
-        />
-      );
+      return <MenuItem minimal={!itemAsMenuItem.selected} {...itemAsMenuItem} />;
     } else {
       return null;
     }
   }
-}
+};
 
 export const SideNavigation: React.FC<SideNavigationProps> = props => {
   const theme = useTheme();
   return (
     <div
-      className={ cxs({
+      className={cxs({
         width: props.isCollapsed ? '80px' : typeof props.width === 'number' ? `${props.width}px` : props.width,
         backgroundColor: theme.getBackgroundColor(props.background ?? BackgroundColor.Tertiary),
         height: '100%',
@@ -90,36 +84,46 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
         flexDirection: 'column',
         boxSizing: 'border-box',
         overflow: 'auto',
-        transition: '.1s width ease'
-      }) }
+        transition: '.1s width ease',
+      })}
     >
-      <div className={cxs({
-        flexGrow: !props.contentAfterItems ? 1 : undefined,
-        display: 'flex',
-        flexDirection: 'column',
-      })}>
-        {props.items.map((item, index) => <Item item={item} collapsed={props.isCollapsed} key={index} />)}
+      <div
+        className={cxs({
+          flexGrow: !props.contentAfterItems ? 1 : undefined,
+          display: 'flex',
+          flexDirection: 'column',
+        })}
+      >
+        {props.items.map((item, index) => (
+          <Item item={item} collapsed={props.isCollapsed} key={index} />
+        ))}
       </div>
 
       {props.contentAfterItems && (
-        <div className={cxs({
-          flexGrow: 1
-        })}>
+        <div
+          className={cxs({
+            flexGrow: 1,
+          })}
+        >
           {props.contentAfterItems}
         </div>
       )}
 
-      <div className={cxs({
-        display: 'flex',
-        flexDirection: 'column',
-      })}>
-        {props.bottomItems?.map((item, index) => <Item item={item} collapsed={props.isCollapsed} key={index} />)}
+      <div
+        className={cxs({
+          display: 'flex',
+          flexDirection: 'column',
+        })}
+      >
+        {props.bottomItems?.map((item, index) => (
+          <Item item={item} collapsed={props.isCollapsed} key={index} />
+        ))}
         <MenuItem
           elementProps={{
             'aria-label': props.isCollapsed ? 'Expand' : 'Collapse',
           }}
           iconRight={!props.isCollapsed ? IconName.ChevronLeft : undefined}
-          text={!props.isCollapsed ? " " : undefined}
+          text={!props.isCollapsed ? ' ' : undefined}
           directContent={props.isCollapsed ? <Icon name={IconName.ChevronRight} /> : undefined}
           css={props.isCollapsed ? { alignItems: 'center', justifyContent: 'center' } : undefined}
           minimal={true}

@@ -21,12 +21,12 @@ export const Form = withTheme({
     TextWidget,
     CheckboxWidget,
     CheckboxesWidget,
-    SelectWidget
+    SelectWidget,
   },
   fields: {
     ...fields,
     DescriptionField,
-    TitleField
+    TitleField,
   },
   FieldTemplate,
   ArrayFieldTemplate,

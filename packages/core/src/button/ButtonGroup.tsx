@@ -13,7 +13,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = props => {
     ...props,
     grouped: true,
     fill: !!props.fill,
-    children: undefined
+    children: undefined,
   };
 
   if (props.fill) {
@@ -32,8 +32,6 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = props => {
       </ButtonGroupContext.Provider>
     );
   } else {
-    return (
-      <ButtonGroupContext.Provider value={context}>{props.children}</ButtonGroupContext.Provider>
-    );
+    return <ButtonGroupContext.Provider value={context}>{props.children}</ButtonGroupContext.Provider>;
   }
 };

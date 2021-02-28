@@ -127,10 +127,10 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
               className={
                 !props.dontTruncate
                   ? cxs({
-                    ...truncateCode,
-                    // TODO paddingRight: '10px',
-                    boxSizing: 'border-box',
-                  })
+                      ...truncateCode,
+                      // TODO paddingRight: '10px',
+                      boxSizing: 'border-box',
+                    })
                   : undefined
               }
             >

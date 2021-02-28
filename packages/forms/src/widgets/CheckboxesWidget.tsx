@@ -18,11 +18,7 @@ const deselectValue = (value: any, selected: any) => {
 
 export const CheckboxesWidget: React.FC<WidgetProps> = props => {
   return (
-    <FormGroup
-      label={props.label || props.schema.title}
-      dontAutomapLabel={true}
-      inputId={props.id}
-    >
+    <FormGroup label={props.label || props.schema.title} dontAutomapLabel={true} inputId={props.id}>
       <div id={props.id}>
         {(props.options.enumOptions as any).map((option: any, index: number) => {
           return (
@@ -49,7 +45,7 @@ export const CheckboxesWidget: React.FC<WidgetProps> = props => {
                 onBlur: e => props.onBlur(props.id, props.value),
               }}
             />
-          )
+          );
         })}
       </div>
     </FormGroup>

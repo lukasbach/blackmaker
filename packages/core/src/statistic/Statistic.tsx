@@ -21,14 +21,14 @@ export const Statistic: React.FC<StatisticProps> = props => {
 
   let valueElement = (
     <>
-      { props.value }
+      {props.value}
       {props.metric && (
         <span
-          className={ cxs({
-            color: theme.definition.textMutedColor
-          }) }
+          className={cxs({
+            color: theme.definition.textMutedColor,
+          })}
         >
-          { props.metric }
+          {props.metric}
         </span>
       )}
     </>
@@ -37,48 +37,48 @@ export const Statistic: React.FC<StatisticProps> = props => {
   if (props.canCopy) {
     valueElement = (
       <CopyToClipboardButton
-        textToCopy={(props.copyMetric && props.metric) ? ('' + props.value + props.metric) : '' + props.value}
+        textToCopy={props.copyMetric && props.metric ? '' + props.value + props.metric : '' + props.value}
         innerToolTipProps={{
           // TODO maybe move to tooltip directly
           css: { fontSize: '1rem', ...props.copyToClipboardButtonProps?.innerToolTipProps?.css },
           contentCss: { fontSize: '1rem', ...props.copyToClipboardButtonProps?.innerToolTipProps?.contentCss },
-          ...props.copyToClipboardButtonProps?.innerToolTipProps
+          ...props.copyToClipboardButtonProps?.innerToolTipProps,
         }}
         {...props.copyToClipboardButtonProps}
       >
         {valueElement}
       </CopyToClipboardButton>
-    )
+    );
   }
 
   let content = (
     <div
-      className={ cxs({
+      className={cxs({
         display: 'flex',
         flexDirection: props.inline ? 'row' : 'column',
         alignItems: props.inline ? 'center' : undefined,
         flexGrow: props.icon ? 1 : undefined,
-        ...props.css
-      }) }
+        ...props.css,
+      })}
       {...props.elementProps}
     >
       <em
-        className={ cxs({
+        className={cxs({
           flexGrow: 1,
           fontSize: '1em',
           fontWeight: 'bold',
           fontStyle: 'none',
           textTransform: 'capitalize',
-          marginBottom: '-.1em'
-        }) }
+          marginBottom: '-.1em',
+        })}
       >
-        { props.title }
+        {props.title}
       </em>
       <div
-        className={ cxs({
-          fontSize: (props.bigValue ?? true) ? '1.8em' : undefined,
-          fontWeight: 'lighter'
-        }) }
+        className={cxs({
+          fontSize: props.bigValue ?? true ? '1.8em' : undefined,
+          fontWeight: 'lighter',
+        })}
       >
         {valueElement}
       </div>
@@ -87,14 +87,19 @@ export const Statistic: React.FC<StatisticProps> = props => {
 
   if (props.icon) {
     content = (
-      <div className={cxs({
-        display: 'flex',
-        alignItems: props.inline ? 'center' : undefined,
-      })}>
-        <RenderMaybeIcon icon={props.icon} iconProps={{ marginRight: props.inline ? '.3em' : '.5em', size: props.inline ? '1.5em' : '2em' }} />
+      <div
+        className={cxs({
+          display: 'flex',
+          alignItems: props.inline ? 'center' : undefined,
+        })}
+      >
+        <RenderMaybeIcon
+          icon={props.icon}
+          iconProps={{ marginRight: props.inline ? '.3em' : '.5em', size: props.inline ? '1.5em' : '2em' }}
+        />
         {content}
       </div>
-    )
+    );
   }
 
   return content;

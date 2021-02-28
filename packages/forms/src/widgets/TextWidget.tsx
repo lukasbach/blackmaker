@@ -14,9 +14,7 @@ export const TextWidget: React.FC<WidgetProps> = props => {
       disabled={props.disabled}
       readonly={props.readonly}
       type={
-        ((props as any).type || props.schema.type) === 'string'
-          ? 'text'
-          : `${(props as any).type || props.schema.type}`
+        ((props as any).type || props.schema.type) === 'string' ? 'text' : `${(props as any).type || props.schema.type}`
       }
       value={props.value}
       onChange={(e, value) => props.onChange(value === '' ? props.options?.emptyValue : value)}

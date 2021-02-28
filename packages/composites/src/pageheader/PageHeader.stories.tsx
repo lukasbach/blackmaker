@@ -17,12 +17,12 @@ export default {
           <Story />
         </>
       );
-    }
-  ]
+    },
+  ],
 } as Meta;
 
 export const CompleteExample = () => {
-  const [tab, setTab] = useState("tab1");
+  const [tab, setTab] = useState('tab1');
 
   return (
     <PageHeader
@@ -36,21 +36,16 @@ export const CompleteExample = () => {
         { title: 'Millenium Falcon', current: true },
       ]}
       actionsLeft={[
-        { icon: IconName.ArrowBack, tooltip: "Go back" },
-        { icon: IconName.ArrowUpward, tooltip: "Go up" }
+        { icon: IconName.ArrowBack, tooltip: 'Go back' },
+        { icon: IconName.ArrowUpward, tooltip: 'Go up' },
       ]}
-      actionsRight={[
-        { text: "Cancel" },
-        { icon: IconName.Save, text: "Save", intent: Intent.Primary },
-      ]}
-      actionsRight2={[
-        { icon: IconName.Help, tooltip: "Open documentation", minimal: true }
-      ]}
+      actionsRight={[{ text: 'Cancel' }, { icon: IconName.Save, text: 'Save', intent: Intent.Primary }]}
+      actionsRight2={[{ icon: IconName.Help, tooltip: 'Open documentation', minimal: true }]}
       tabs={[
-        { id: "tab1", title: "Overview" },
-        { id: "tab2", title: "Data Sheet" },
-        { id: "tab3", title: "Images" },
-        { id: "tab4", title: "Drivers" },
+        { id: 'tab1', title: 'Overview' },
+        { id: 'tab2', title: 'Data Sheet' },
+        { id: 'tab3', title: 'Images' },
+        { id: 'tab4', title: 'Drivers' },
       ]}
       currentTab={tab}
       onChangeTab={setTab}
@@ -71,19 +66,18 @@ export const PageHeaderOverview = () => (
   />
 );
 
-export const OnlyTitleAndIcon = () => (
-  <PageHeader
-    icon={IconName.Portrait}
-    title="Millenium Falcon"
-  />
-);
+export const OnlyTitleAndIcon = () => <PageHeader icon={IconName.Portrait} title="Millenium Falcon" />;
 
 export const WithCloseButton = () => (
   <PageHeader
     icon={IconName.Portrait}
     title="Millenium Falcon"
-    actionsRight2={[{
-      icon: IconName.Close, tooltip: 'Close', minimal: true
-    }]}
+    actionsRight2={[
+      {
+        icon: IconName.Close,
+        tooltip: 'Close',
+        minimal: true,
+      },
+    ]}
   />
 );

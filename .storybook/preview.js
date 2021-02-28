@@ -5,8 +5,8 @@ import cxs from 'cxs';
 import { sortStories } from './utils/story-helpers';
 import { storyOrder } from './utils/storyOrder';
 import { Helmet } from 'react-helmet';
-import { BlackmakerProvider } from "@blackmaker/core";
-import { BlackmakerProvider as RelativeBlackmakerProvider } from "../packages/core/src";
+import { BlackmakerProvider } from '@blackmaker/core';
+import { BlackmakerProvider as RelativeBlackmakerProvider } from '../packages/core/src';
 
 function ThemeWrapper(Story, context) {
   const isDark = useDarkMode();

@@ -17,77 +17,38 @@ export default {
 
 export const CompleteExample = () => (
   <div style={{ maxWidth: '300px' }}>
-    <Statistic
-      title="Statistic title"
-      value={1337}
-      metric="ms"
-      canCopy={true}
-      icon={IconName.Feedback}
-    />
+    <Statistic title="Statistic title" value={1337} metric="ms" canCopy={true} icon={IconName.Feedback} />
   </div>
 );
 
 export const CompleteExampleInline = () => (
   <div style={{ maxWidth: '300px' }}>
-    <Statistic
-      inline={true}
-      title="Statistic title"
-      value={1337}
-      metric="ms"
-      canCopy={true}
-      icon={IconName.Feedback}
-    />
+    <Statistic inline={true} title="Statistic title" value={1337} metric="ms" canCopy={true} icon={IconName.Feedback} />
   </div>
 );
 
 export const NoIcon = () => (
   <div style={{ maxWidth: '300px' }}>
-    <Statistic
-      title="Statistic title"
-      value={1337}
-      metric="ms"
-      canCopy={true}
-    />
+    <Statistic title="Statistic title" value={1337} metric="ms" canCopy={true} />
   </div>
 );
 
 export const CannotCopy = () => (
   <div style={{ maxWidth: '300px' }}>
-    <Statistic
-      title="Statistic title"
-      value={1337}
-      metric="ms"
-    />
+    <Statistic title="Statistic title" value={1337} metric="ms" />
   </div>
 );
 
 export const NoMetric = () => (
   <div style={{ maxWidth: '300px' }}>
-    <Statistic
-      title="Statistic title"
-      value={1337}
-      canCopy={true}
-    />
+    <Statistic title="Statistic title" value={1337} canCopy={true} />
   </div>
 );
 
-const CompleteStatistic = () => (
-  <Statistic
-    title="Statistic title"
-    value={1337}
-    metric="ms"
-    icon={IconName.Feedback}
-  />
-);
+const CompleteStatistic = () => <Statistic title="Statistic title" value={1337} metric="ms" icon={IconName.Feedback} />;
 
 const CompleteStatisticInline = () => (
-  <Statistic
-    title="Statistic title"
-    value={1337}
-    metric="ms"
-    icon={IconName.Feedback}
-    inline={true}
-  />
+  <Statistic title="Statistic title" value={1337} metric="ms" icon={IconName.Feedback} inline={true} />
 );
 
 export const MultipleStatisticsExample = () => (
@@ -128,8 +89,8 @@ export const CardExample = () => (
         canCopy={true}
         copyToClipboardButtonProps={{
           toolTipProps: {
-            placement: TooltipPlacement.Left
-          }
+            placement: TooltipPlacement.Left,
+          },
         }}
         bigValue={false}
       />
@@ -142,8 +103,8 @@ export const CardExample = () => (
         canCopy={true}
         copyToClipboardButtonProps={{
           toolTipProps: {
-            placement: TooltipPlacement.Left
-          }
+            placement: TooltipPlacement.Left,
+          },
         }}
         bigValue={false}
       />
@@ -156,8 +117,8 @@ export const CardExample = () => (
         canCopy={true}
         copyToClipboardButtonProps={{
           toolTipProps: {
-            placement: TooltipPlacement.Left
-          }
+            placement: TooltipPlacement.Left,
+          },
         }}
         bigValue={false}
       />
@@ -170,8 +131,8 @@ export const CardExample = () => (
         canCopy={true}
         copyToClipboardButtonProps={{
           toolTipProps: {
-            placement: TooltipPlacement.Left
-          }
+            placement: TooltipPlacement.Left,
+          },
         }}
         bigValue={false}
       />
@@ -185,11 +146,11 @@ export const CardExample = () => (
         canCopy={true}
         copyToClipboardButtonProps={{
           toolTipProps: {
-            placement: TooltipPlacement.Left
-          }
+            placement: TooltipPlacement.Left,
+          },
         }}
         bigValue={false}
       />
     </CardArea>
   </CardContainer>
-)
+);

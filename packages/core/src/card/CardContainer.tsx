@@ -25,7 +25,7 @@ export const CardContainer: React.FC<CardContainerProps> = props => {
   const [isHovering, setIsHovering] = useState(false);
 
   const backgroundColor = theme.getBackgroundColor(props.background ?? BackgroundColor.Primary);
-  const borderColor = darken(backgroundColor, theme.isDark ? -.25 : 0.1);
+  const borderColor = darken(backgroundColor, theme.isDark ? -0.25 : 0.1);
 
   return (
     <div
