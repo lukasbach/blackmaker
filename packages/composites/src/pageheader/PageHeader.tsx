@@ -50,7 +50,7 @@ export const PageHeader: React.FC<PageHeaderProps> = props => {
             : props.actionsRight}
         </div>
       </Flex>
-      <Flex alignItems="center">
+      <Flex alignItems="center" marginBottom="1.5em">
         {props.icon && (
           <Box margin="0 1em">
             <RenderMaybeIcon icon={props.icon} iconProps={{ size: '4em' }} />

@@ -2,9 +2,10 @@ import * as React from 'react';
 import cxs from 'cxs';
 import {
   AnyElement,
-  BackgroundColor,
+  BackgroundColor, HtmlElementProps,
   Icon,
   IconName,
+  Intent,
   MenuHeader,
   MenuItem,
   MenuItemProps,
@@ -16,7 +17,7 @@ import {
 
 export interface SideNavigationItem extends MenuItemProps {}
 
-export interface SideNavigationProps {
+export interface SideNavigationProps extends HtmlElementProps<HTMLDivElement> {
   items: Array<SideNavigationItem | JSX.Element | string>;
   bottomItems?: Array<SideNavigationItem | JSX.Element | string>;
   contentAfterItems?: AnyElement;
@@ -64,7 +65,7 @@ const Item: React.FC<{
       return <MenuHeader>{props.item}</MenuHeader>;
     } else if (!props.collapsed) {
       const itemAsMenuItem = props.item as SideNavigationItem;
-      return <MenuItem minimal={!itemAsMenuItem.selected} {...itemAsMenuItem} />;
+      return <MenuItem minimal={!itemAsMenuItem.selected} intent={!itemAsMenuItem.selected ? Intent.Default : undefined} {...itemAsMenuItem} />;
     } else {
       return null;
     }
@@ -85,7 +86,9 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
         boxSizing: 'border-box',
         overflow: 'auto',
         transition: '.1s width ease',
+        ...props.css
       })}
+      {...props.elementProps}
     >
       <div
         className={cxs({

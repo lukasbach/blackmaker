@@ -4,7 +4,7 @@ import cxs from 'cxs';
 import { AnyElement } from '../common/AnyElement';
 import { CopyToClipboardButton, CopyToClipboardButtonProps } from '../clipboard/CopyToClipboardButton';
 
-export interface StatisticProps extends HtmlElementProps<HTMLDivElement> {
+export interface StatisticProps extends HtmlElementProps<HTMLDListElement> {
   title: AnyElement;
   value: string | number;
   metric?: string;
@@ -52,17 +52,19 @@ export const Statistic: React.FC<StatisticProps> = props => {
   }
 
   let content = (
-    <div
+    <dl
       className={cxs({
         display: 'flex',
         flexDirection: props.inline ? 'row' : 'column',
         alignItems: props.inline ? 'center' : undefined,
         flexGrow: props.icon ? 1 : undefined,
+        marginBlock: '0',
+        marginInline: '0',
         ...props.css,
       })}
       {...props.elementProps}
     >
-      <em
+      <dt
         className={cxs({
           flexGrow: 1,
           fontSize: '1em',
@@ -73,16 +75,18 @@ export const Statistic: React.FC<StatisticProps> = props => {
         })}
       >
         {props.title}
-      </em>
-      <div
+      </dt>
+      <dd
         className={cxs({
           fontSize: props.bigValue ?? true ? '1.8em' : undefined,
           fontWeight: 'lighter',
+          marginBlock: '0',
+          marginInline: '0',
         })}
       >
         {valueElement}
-      </div>
-    </div>
+      </dd>
+    </dl>
   );
 
   if (props.icon) {
