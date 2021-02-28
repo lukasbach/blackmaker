@@ -15,7 +15,8 @@
     "start": "tsc -w",
     "build": "tsc",
     "test": "jest --passWithNoTests",
-    "forms:samples": "ts-node ./scripts/grabExamples.ts"
+    "forms:samples": "ts-node ./scripts/grabExamples.ts",
+    "create-indexes": "cti create ./src"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",

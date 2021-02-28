@@ -16,7 +16,8 @@
     "build": "yarn build-icons && yarn build-package",
     "test": "jest --passWithNoTests",
     "build-icons": "node ./scripts/compileIcons.js",
-    "build-package": "tsc"
+    "build-package": "tsc",
+    "create-indexes": "cti create ./src"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",

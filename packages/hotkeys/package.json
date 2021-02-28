@@ -14,7 +14,8 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "create-indexes": "cti create ./src"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
