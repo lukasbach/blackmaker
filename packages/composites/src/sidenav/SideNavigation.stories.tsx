@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 import { SideNavigation } from './SideNavigation';
-import { BackgroundColor, Flex, Icon, IconName, TextInput } from '@blackmaker/core';
+import { BackgroundColor, Flex, Icon, IconName, Paragraph, Tag, TextInput } from '@blackmaker/core';
 import { Helmet } from 'react-helmet';
 
 export default {
@@ -29,12 +29,28 @@ export const CompleteExample = () => {
         <Flex height="5em" alignItems="center" justifyContent="center">
           <Icon name={IconName.Face} size="3em" />
         </Flex>,
-        <TextInput placeholder="Search" leftElement={IconName.Search} fill={true} small={true} />,
+        <TextInput
+          placeholder="Search"
+          leftElement={IconName.Search}
+          rightElement={<Tag content="&nbsp;/&nbsp;" />}
+          fill={true}
+          small={true}
+        />,
         'Hello there!',
         { text: 'Home', icon: IconName.Home },
         { text: 'Backups', icon: IconName.Backup },
         { text: 'Data Usage', icon: IconName.DataUsage, selected: true },
         'More items',
+        { text: 'Settings', icon: IconName.Settings },
+        { text: 'Builds', icon: IconName.Build },
+      ]}
+      contentAfterItems={
+        <Paragraph small={true} muted={true} css={{ marginTop: '.5em', textAlign: 'center' }}>
+          &copy; 2021 John Doe
+        </Paragraph>
+      }
+      bottomItems={[
+        'Items at the bottom',
         { text: 'Settings', icon: IconName.Settings },
         { text: 'Builds', icon: IconName.Build },
       ]}

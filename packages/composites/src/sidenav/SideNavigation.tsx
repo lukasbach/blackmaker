@@ -65,12 +65,7 @@ const Item: React.FC<{
       return <MenuHeader>{props.item}</MenuHeader>;
     } else if (!props.collapsed) {
       const itemAsMenuItem = props.item as SideNavigationItem;
-      return (
-        <MenuItem
-          minimal={!itemAsMenuItem.selected}
-          {...itemAsMenuItem}
-        />
-      );
+      return <MenuItem minimal={!itemAsMenuItem.selected} {...itemAsMenuItem} />;
     } else {
       return null;
     }
@@ -97,7 +92,6 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
     >
       <div
         className={cxs({
-          flexGrow: !props.contentAfterItems ? 1 : undefined,
           display: 'flex',
           flexDirection: 'column',
         })}
@@ -105,17 +99,15 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
         {props.items.map((item, index) => (
           <Item item={item} collapsed={props.isCollapsed} key={index} />
         ))}
+        {!props.isCollapsed && props.contentAfterItems}
       </div>
 
-      {props.contentAfterItems && (
-        <div
-          className={cxs({
-            flexGrow: 1,
-          })}
-        >
-          {props.contentAfterItems}
-        </div>
-      )}
+      <div
+        className={cxs({
+          // I'm a grow-er, not a show-er!
+          flexGrow: 1,
+        })}
+      />
 
       <div
         className={cxs({
@@ -128,7 +120,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
         ))}
         <MenuItem
           elementProps={{
-            'aria-label': props.isCollapsed ? 'Expand' : 'Collapse',
+            'aria-label': props.isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar',
           }}
           iconRight={!props.isCollapsed ? IconName.ChevronLeft : undefined}
           text={!props.isCollapsed ? ' ' : undefined}

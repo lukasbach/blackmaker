@@ -32,8 +32,8 @@ function ThemeWrapper(Story, context) {
       },
       brandButtonShadowColors: {
         ...theme.brandButtonShadowColors,
-        primary: lighten(themeColor, isDark ? -.5 : .2),
-      }
+        primary: lighten(themeColor, isDark ? -0.5 : 0.2),
+      },
     };
   }
 

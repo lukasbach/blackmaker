@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { IconName, Intent, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
+import { HtmlElementProps, IconName, Intent, lighten, MaybeIcon, RenderMaybeIcon, useTheme } from '..';
 import cxs from 'cxs';
 
-export interface TagProps {
+export interface TagProps extends HtmlElementProps {
   fill?: boolean;
   large?: boolean;
   small?: boolean;
@@ -60,7 +60,10 @@ export const Tag: React.FC<TagProps> = props => {
                 : theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.4),
           },
         }),
+
+        ...props.css,
       })}
+      {...props.elementProps}
     >
       <RenderMaybeIcon
         icon={props.icon}
