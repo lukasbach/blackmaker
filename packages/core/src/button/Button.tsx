@@ -92,7 +92,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
           border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
           boxShadow:
             !props.minimal && !props.outlined
-              ? `0 ${bottomBorderSize} 0 0px ${darken(backgroundColor, theme.isDark ? 0.4 : -0.5)}`
+              ? `0 ${bottomBorderSize} 0 0px ${theme.getBrandButtonShadowColor(props.intent)}`
               : undefined,
           fontSize: props.small ? '.8em' : props.large ? '1em' : '.8em',
           fontWeight: 'bold',

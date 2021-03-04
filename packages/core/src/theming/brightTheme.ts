@@ -2,10 +2,15 @@ import { ThemeDefinition } from './ThemeDefinition';
 import { darkTheme } from './darkTheme';
 import { darken, lighten } from '../common';
 
-const brandColors = darkTheme.brandColors;
+const brandColors = {
+  ...darkTheme.brandColors,
+  default: lighten(darkTheme.brandColors.default, .9),
+};
 
 export const brightTheme: ThemeDefinition = {
   ...darkTheme,
+
+  brandColors,
 
   brandTextColors: {
     ...darkTheme.brandTextColors,
@@ -18,6 +23,15 @@ export const brightTheme: ThemeDefinition = {
   },
   minimalBrandBaseColors: {
     ...darkTheme.minimalBrandBaseColors,
+  },
+  brandButtonShadowColors: {
+    ...darkTheme.brandButtonShadowColors,
+    default: darken(brandColors.default, 0.2),
+    primary: darken(brandColors.primary, 0.2),
+    info: darken(brandColors.info, 0.2),
+    success: darken(brandColors.success, 0.2),
+    warning: darken(brandColors.warning, 0.2),
+    danger: darken(brandColors.danger, 0.3),
   },
 
   primaryBackgroundColor: '#ffffff',

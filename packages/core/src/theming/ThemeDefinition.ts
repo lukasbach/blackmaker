@@ -12,6 +12,7 @@ export interface ThemeDefinition {
   brandTextColors: BrandColorSet;
   textColorOnBrandColors: BrandColorSet;
   minimalBrandBaseColors: BrandColorSet;
+  brandButtonShadowColors: BrandColorSet;
 
   primaryBackgroundColor: string;
   secondaryBackgroundColor: string;

@@ -82,6 +82,24 @@ export class Theme {
     }
   }
 
+  public getBrandButtonShadowColor(intent?: Intent, defaultColor?: string) {
+    switch (intent) {
+      case Intent.Primary:
+        return this.definition.brandButtonShadowColors.primary;
+      case Intent.Warning:
+        return this.definition.brandButtonShadowColors.warning;
+      case Intent.Danger:
+        return this.definition.brandButtonShadowColors.danger;
+      case Intent.Info:
+        return this.definition.brandButtonShadowColors.info;
+      case Intent.Success:
+        return this.definition.brandButtonShadowColors.success;
+      case Intent.Default:
+      default:
+        return defaultColor ?? this.definition.brandButtonShadowColors.default;
+    }
+  }
+
   public get isDark() {
     return this.definition.isDark;
   }

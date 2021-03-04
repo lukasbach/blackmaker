@@ -1,5 +1,5 @@
 import { BrandColorSet, ThemeDefinition } from './ThemeDefinition';
-import { lighten } from '../common';
+import { darken, lighten } from '../common';
 
 const brandColors: BrandColorSet = {
   default: '#464d5a',
@@ -37,6 +37,15 @@ export const darkTheme: ThemeDefinition = {
     success: '#27ae60',
     warning: '#e8a318',
     danger: '#e74c3c',
+  },
+  brandButtonShadowColors: {
+    ...brandColors,
+    default: darken(brandColors.default, 0.45),
+    primary: darken(brandColors.primary, 0.4),
+    info: darken(brandColors.info, 0.4),
+    success: darken(brandColors.success, 0.4),
+    warning: darken(brandColors.warning, 0.4),
+    danger: darken(brandColors.danger, 0.45),
   },
 
   primaryBackgroundColor: '#36393F',

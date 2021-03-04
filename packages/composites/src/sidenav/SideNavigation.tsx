@@ -35,7 +35,6 @@ const Item: React.FC<{
 }> = props => {
   if (props.collapsed && (props.item as JSX.Element).type === undefined && typeof props.item !== 'string') {
     const itemAsMenuItem = props.item as SideNavigationItem;
-    console.log('Collapsed');
     return (
       <ToolTip content={itemAsMenuItem.text} placement={TooltipPlacement.Right}>
         <MenuItem
@@ -69,7 +68,6 @@ const Item: React.FC<{
       return (
         <MenuItem
           minimal={!itemAsMenuItem.selected}
-          intent={!itemAsMenuItem.selected ? Intent.Default : undefined}
           {...itemAsMenuItem}
         />
       );
@@ -82,7 +80,7 @@ const Item: React.FC<{
 export const SideNavigation: React.FC<SideNavigationProps> = props => {
   const theme = useTheme();
   return (
-    <div
+    <nav
       className={cxs({
         width: props.isCollapsed ? '80px' : typeof props.width === 'number' ? `${props.width}px` : props.width,
         backgroundColor: theme.getBackgroundColor(props.background ?? BackgroundColor.Tertiary),
@@ -140,6 +138,6 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
           onClick={() => props.onChangeCollapsed(!props.isCollapsed)}
         />
       </div>
-    </div>
+    </nav>
   );
 };

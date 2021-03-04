@@ -29,6 +29,10 @@ function ThemeWrapper(Story, context) {
         ...theme.minimalBrandBaseColors,
         primary: themeColor,
       },
+      brandButtonShadowColors: {
+        ...theme.brandButtonShadowColors,
+        primary: lighten(themeColor, isDark ? -.5 : .2),
+      }
     };
   }
 
