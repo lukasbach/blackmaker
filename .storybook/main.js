@@ -6,6 +6,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-a11y',
     '@storybook/addon-toolbars',
+    '@storybook/addon-viewport',
     'storybook-dark-mode',
   ],
   typescript: {

@@ -7,6 +7,7 @@ import { storyOrder } from './utils/storyOrder';
 import { Helmet } from 'react-helmet';
 import { BlackmakerProvider } from '@blackmaker/core';
 import { BlackmakerProvider as RelativeBlackmakerProvider } from '../packages/core/src';
+import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 function ThemeWrapper(Story, context) {
   const isDark = useDarkMode();
@@ -92,7 +93,8 @@ export const globalTypes = {
       title: 'Theme Colors',
       items: [
         { title: 'Default', value: 'default' },
-        { title: 'Blue (#6C5FC7)', value: '#6C5FC7' },
+        { title: 'Blue (#3182EB)', value: '#3182EB' },
+        { title: 'Purple (#6C5FC7)', value: '#6C5FC7' },
         { title: 'Red (#d4335e)', value: '#d4335e' },
         { title: 'Lime (#87d132)', value: '#87d132' },
         { title: 'Orange (#db8137)', value: '#db8137' },
@@ -118,6 +120,9 @@ export const globalTypes = {
 export const parameters = {
   options: {
     storySort: sortStories(storyOrder),
+  },
+  viewport: {
+    viewports: MINIMAL_VIEWPORTS,
   },
   //   backgrounds: {
   //     values: [
