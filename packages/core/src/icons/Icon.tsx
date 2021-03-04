@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Falsy, Intent, noSelect, useTheme } from '..';
 import { IconName } from './IconName';
 import cxs from 'cxs';
+import Color from 'color';
 
 export interface IconProps {
   name: IconName;
@@ -18,12 +19,14 @@ export interface IconProps {
 export const Icon: React.FC<IconProps> = props => {
   const theme = useTheme();
   const color = props.color || (props.intent ? theme.getColor(props.intent) : undefined);
+  // const isColorDark = color ? new Color(color).isDark() : !theme.isDark;
 
   return (
     <span
       aria-hidden="true"
       className={cxs({
-        fontFamily: 'Material Icons Outlined',
+        // fontFamily: isColorDark ? 'Material Icons Outlined' : 'Material Icons',
+        fontFamily: 'Material Icons',
         // fontWeight: 'normal',
         fontStyle: 'normal',
         fontSize: props.size || '1.5em',

@@ -40,7 +40,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
   const hoverStyles: CSSObject = !props.minimal
     ? {
         backgroundColor: theme.getColor(props.intent ?? Intent.Primary),
-        color: theme.getTextColorOnBrandColors(props.intent),
+        color: theme.getTextColorOnBrandColors(props.intent ?? Intent.Primary),
       }
     : {
         backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.2),
@@ -48,7 +48,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
   const activeStyles: CSSObject = !props.minimal
     ? {
         backgroundColor: theme.getColorLighten(props.intent ?? Intent.Primary, 0.15),
-        color: theme.getTextColorOnBrandColors(props.intent),
+        color: theme.getTextColorOnBrandColors(props.intent ?? Intent.Primary),
       }
     : {
         backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.3),

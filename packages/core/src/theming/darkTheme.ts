@@ -10,6 +10,8 @@ const brandColors: BrandColorSet = {
   danger: '#e74c3c',
 };
 
+const textColor = '#dedede';
+
 export const darkTheme: ThemeDefinition = {
   brandColors: brandColors,
   textColorOnBrandColors: {
@@ -22,7 +24,7 @@ export const darkTheme: ThemeDefinition = {
   },
   brandTextColors: {
     ...brandColors,
-    default: '#ffffff',
+    default: textColor,
     primary: lighten(brandColors.primary, 0.2),
     info: lighten(brandColors.info, 0),
     success: lighten(brandColors.success, 0.1),
@@ -55,7 +57,7 @@ export const darkTheme: ThemeDefinition = {
 
   focusRingColor: '#3498db',
 
-  textColor: '#dedede',
+  textColor: textColor,
   textHightlightColor: '#ffffff',
   textMutedColor: '#a2a2a2',
   textDisabledColor: '#7e7e7e',

@@ -77,6 +77,8 @@ export const Button: React.FC<ButtonProps> = componentProps => {
 
   const bottomBorderSize = props.large ? '3px' : '2px';
 
+  const backgroundColorHoverSign = new Color(backgroundColor).lighten(.17).lightness() === 100 ? -1 : 1;
+
   return (
     <MaybeFocusRing>
       <Element
@@ -90,10 +92,10 @@ export const Button: React.FC<ButtonProps> = componentProps => {
           color: color,
           borderRadius: props.large ? theme.definition.borderRadiusRegular : theme.definition.borderRadiusSmall,
           border: !props.outlined ? 'none' : `1px solid ${theme.getColor(props.intent)}`,
-          boxShadow:
-            !props.minimal && !props.outlined
-              ? `0 ${bottomBorderSize} 0 0px ${theme.getBrandButtonShadowColor(props.intent)}`
-              : undefined,
+          // boxShadow:
+          //   !props.minimal && !props.outlined
+          //     ? `0 ${bottomBorderSize} 0 0px ${theme.getBrandButtonShadowColor(props.intent)}`
+          //     : undefined,
           fontSize: props.small ? '.8em' : props.large ? '1em' : '.8em',
           fontWeight: 'bold',
           cursor: props.disabled ? 'not-allowed' : 'pointer',
@@ -130,14 +132,14 @@ export const Button: React.FC<ButtonProps> = componentProps => {
               ':hover': {
                 backgroundColor:
                   !props.minimal && !props.outlined
-                    ? theme.getColorLighten(props.intent ?? Intent.Default, 0.09)
+                    ? theme.getColorLighten(props.intent ?? Intent.Default, backgroundColorHoverSign * 0.09)
                     : minimalHoverBg,
               },
               ':active': {
                 transitionDuration: '.02s',
                 backgroundColor:
                   !props.minimal && !props.outlined
-                    ? theme.getColorLighten(props.intent ?? Intent.Default, 0.13)
+                    ? theme.getColorLighten(props.intent ?? Intent.Default, backgroundColorHoverSign * 0.13)
                     : minimalActiveBg,
                 ...(!props.minimal &&
                   !props.outlined && {
