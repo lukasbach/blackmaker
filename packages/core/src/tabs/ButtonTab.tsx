@@ -4,11 +4,12 @@ import { Button, Intent } from '..';
 import { TabProps } from './Tab';
 import { TabsContext } from './TabsContext';
 
-export const ButtonTab: React.FC<TabProps> = props => {
+export const ButtonTab = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, React.PropsWithChildren<TabProps>>((props, ref) => {
   const { onChangeTab, currentTab, onRegisterTab } = useContext(TabsContext);
   useEffect(() => onRegisterTab(props.id), [props.id, onRegisterTab]);
   return (
     <Button
+      ref={ref}
       small={true}
       minimal={true}
       onClick={() => onChangeTab?.(props.id)}
@@ -20,4 +21,4 @@ export const ButtonTab: React.FC<TabProps> = props => {
       {props.title ?? props.id}
     </Button>
   );
-};
+});

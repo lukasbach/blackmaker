@@ -32,7 +32,7 @@ export interface ButtonProps extends HtmlElementProps<HTMLButtonElement> {
   ariaLabel?: string;
 }
 
-export const Button: React.FC<ButtonProps> = componentProps => {
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, React.PropsWithChildren<ButtonProps>>((componentProps, ref) => {
   useEffect(() => {
     if (!props.children && !props.text && !props.ariaLabel) {
       console.warn(`Blackmaker: Button has no text or aria label.`);
@@ -82,6 +82,7 @@ export const Button: React.FC<ButtonProps> = componentProps => {
   return (
     <MaybeFocusRing>
       <Element
+        ref={ref}
         aria-label={props.ariaLabel}
         onClick={props.onClick}
         href={props.href}
@@ -193,4 +194,4 @@ export const Button: React.FC<ButtonProps> = componentProps => {
       </Element>
     </MaybeFocusRing>
   );
-};
+});

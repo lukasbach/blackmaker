@@ -3,7 +3,7 @@ import { ButtonProps, Intent } from '..';
 import { TabsStyle } from './TabsStyle';
 import { ButtonTab } from './ButtonTab';
 import { UnderlinedTab } from './UnderlinedTab';
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { TabsContext } from './TabsContext';
 
 export interface TabProps {
@@ -18,12 +18,19 @@ export interface TabProps {
 export const Tab: React.FC<TabProps> = props => {
   const ctxProps = useContext(TabsContext);
   const tabStyle = props.tabStyle ?? ctxProps.tabStyle;
+  const tabRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (ctxProps.currentTab === props.id) {
+      tabRef.current?.focus();
+    }
+  }, [ctxProps.currentTab]);
 
   switch (tabStyle) {
     case TabsStyle.Buttons:
-      return <ButtonTab {...ctxProps} children={undefined} {...props} />;
+      return <ButtonTab {...ctxProps} ref={tabRef} children={undefined} {...props} />;
     case TabsStyle.Underlined:
     default:
-      return <UnderlinedTab {...ctxProps} children={undefined} {...props} />;
+      return <UnderlinedTab {...ctxProps} ref={tabRef as any} children={undefined} {...props} />;
   }
 };
