@@ -52,7 +52,7 @@ export const ThemeProvider: React.FC<{
           height: !props.noRoot ? '100%' : undefined,
           overflow: !props.noRoot ? 'auto' : undefined,
           color: theme.textColor,
-          fontFamily: "'Manrope', sans-serif",
+          fontFamily: "'Roboto', sans-serif",
           position: 'relative',
         })}
       >

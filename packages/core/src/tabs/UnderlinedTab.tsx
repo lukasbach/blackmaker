@@ -20,19 +20,25 @@ export const UnderlinedTab = React.forwardRef<HTMLButtonElement, React.PropsWith
           fontSize: '.9em',
           fontWeight: 'bold',
           border: 'none',
-          borderBottom: '4px solid transparent',
+          // borderBottom: '4px solid transparent',
           cursor: props.id !== currentTab ? 'pointer' : undefined,
           color: theme.definition.textMutedColor,
           outline: 'none',
-          padding: '.5em .7em .3em .7em',
+          padding: '1em .7em 0 .7em',
           marginRight: '.2em',
           borderTopRightRadius: theme.definition.borderRadiusRegular,
           borderTopLeftRadius: theme.definition.borderRadiusRegular,
           transition: '.2s all ease',
+          display: 'inline-flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          '> :first-child': {
+            flexGrow: 1,
+            paddingBottom: '.7em',
+          },
 
           ...(props.id === currentTab
             ? {
-                borderColor: theme.getColor(intent) + ' !important',
                 color: theme.getBrandTextColor(intent),
               }
             : {
@@ -47,8 +53,19 @@ export const UnderlinedTab = React.forwardRef<HTMLButtonElement, React.PropsWith
         })}
         onClick={() => (props.id !== currentTab ? onChangeTab?.(props.id) : {})}
       >
-        {props.children}
-        {props.title ?? props.id}
+        <div>
+          {props.children}
+          {props.title ?? props.id}
+        </div>
+        <div
+          className={cxs({
+            height: '4px',
+            backgroundColor: props.id === currentTab ? theme.getColor(intent) : undefined,
+            width: '80%',
+            borderTopRightRadius: theme.definition.borderRadiusSmall,
+            borderTopLeftRadius: theme.definition.borderRadiusSmall,
+          })}
+        />
       </button>
     </MaybeFocusRing>
   );
