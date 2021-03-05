@@ -1,8 +1,9 @@
 import * as React from 'react';
 import cxs, { CSSProperties } from 'cxs';
+import { Falsy } from '../Falsy';
 
 export interface BoxProps extends CSSProperties {
-  elementProps?: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLElement>, HTMLElement>;
+  elementProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> | Falsy;
   element?: keyof JSX.IntrinsicElements;
 }
 
@@ -18,7 +19,7 @@ export const Box: React.FC<BoxProps> = props => {
           elementProps: undefined,
           children: undefined,
         }),
-        props.elementProps?.className,
+        props.elementProps ? props.elementProps.className || '' : '',
       ].join(' ')}
     >
       {props.children}

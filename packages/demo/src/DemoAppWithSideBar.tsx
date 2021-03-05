@@ -55,6 +55,9 @@ export const DemoAppWithSideBar: React.FC = props => {
       />
       <Box flexGrow={1} overflowY="auto">
         <PageHeader
+          css={{
+            backgroundColor: theme.getBackgroundColor(BackgroundColor.Primary),
+          }}
           icon={IconName.Portrait}
           title="Millenium Falcon"
           description="Spaceship that can take the Kessel run in very few parsecs."

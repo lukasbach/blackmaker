@@ -8,9 +8,18 @@ import { ButtonWithTooltip, ButtonWithTooltipProps } from '@blackmaker/core/out/
 import { BreadCrumbs } from '@blackmaker/core/out/breadcrumbs/BreadCrumbs';
 import { MaybeIcon } from '@blackmaker/core/out/icons/MaybeIcon';
 import { useTheme } from '@blackmaker/core/out/theming/ThemeContext';
-import { Heading, Paragraph, RenderMaybeIcon, TabProps, Tabs, TabsProps, TabsStyle } from '@blackmaker/core';
+import {
+  Heading,
+  HtmlElementProps,
+  Paragraph,
+  RenderMaybeIcon,
+  TabProps,
+  Tabs,
+  TabsProps,
+  TabsStyle,
+} from '@blackmaker/core';
 
-export interface PageHeaderProps extends Pick<TabsProps, 'currentTab' | 'onChangeTab'> {
+export interface PageHeaderProps extends Pick<TabsProps, 'currentTab' | 'onChangeTab'>, HtmlElementProps<HTMLElement> {
   actionsLeft?: JSX.Element | ButtonWithTooltipProps[];
   actionsRight?: JSX.Element | ButtonWithTooltipProps[];
   actionsRight2?: JSX.Element | ButtonWithTooltipProps[];
@@ -23,10 +32,8 @@ export interface PageHeaderProps extends Pick<TabsProps, 'currentTab' | 'onChang
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = props => {
-  const theme = useTheme();
-
   return (
-    <Box padding=".5em" paddingBottom="0">
+    <Box padding=".5em" paddingBottom="0" {...props.css} elementProps={props.elementProps}>
       <Flex marginBottom=".5em">
         <Flex flexGrow={1} alignItems={'center'}>
           {Array.isArray(props.actionsLeft) ? (
