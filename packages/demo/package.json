@@ -1,0 +1,31 @@
+{
+  "name": "@blackmaker/demo",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukasbach/blackmaker.git"
+  },
+  "private": true,
+  "description": "Demo code",
+  "author": "Lukas Bach <lbach@outlook.de>",
+  "homepage": "https://github.com/lukasbach/blackmaker#readme",
+  "license": "ISC",
+  "main": "out/index.js",
+  "typings": "out/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc",
+    "test": "jest --passWithNoTests",
+    "create-indexes": "cti create ./src"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@blackmaker/composites": "^0.0.1",
+    "@blackmaker/core": "^0.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/lukasbach/blackmaker/issues"
+  }
+}
