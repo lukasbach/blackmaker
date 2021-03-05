@@ -74,10 +74,12 @@ const Item: React.FC<{
 
 export const SideNavigation: React.FC<SideNavigationProps> = props => {
   const theme = useTheme();
+  const width = props.isCollapsed ? '80px' : typeof props.width === 'number' ? `${props.width}px` : props.width;
   return (
     <nav
       className={cxs({
-        width: props.isCollapsed ? '80px' : typeof props.width === 'number' ? `${props.width}px` : props.width,
+        width,
+        minWidth: width,
         backgroundColor: theme.getBackgroundColor(props.background ?? BackgroundColor.Tertiary),
         height: '100%',
         padding: '.8em',
@@ -86,6 +88,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
         boxSizing: 'border-box',
         overflow: 'auto',
         transition: '.1s width ease',
+        alignSelf: 'stretch',
         ...props.css,
       })}
       {...props.elementProps}

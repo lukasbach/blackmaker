@@ -45,7 +45,7 @@ export const CopyToClipboardInput: React.FC<CopyToClipboardInputProps> = props =
         >
           <Button
             minimal={true}
-            icon={hasCopied ? IconName.Done : IconName.Copy}
+            icon={hasCopied ? IconName.Done : IconName.ContentCopy}
             intent={hasCopied ? Intent.Success : undefined}
             onClick={handler}
             {...props.buttonProps}

@@ -2,23 +2,12 @@ import React, { useState } from 'react';
 import { Meta } from '@storybook/react';
 import { SideNavigation } from './SideNavigation';
 import { BackgroundColor, Flex, Icon, IconName, Paragraph, Tag, TextInput } from '@blackmaker/core';
-import { Helmet } from 'react-helmet';
+import { NoPaddingDecorator } from '../../../../.storybook/utils/NoPaddingDecorator';
 
 export default {
   title: 'Composites/SideNavigation',
   component: SideNavigation,
-  decorators: [
-    Story => {
-      return (
-        <>
-          <Helmet>
-            <style>{' .story-inner { padding: 0 !important; } '}</style>
-          </Helmet>
-          <Story />
-        </>
-      );
-    },
-  ],
+  decorators: [NoPaddingDecorator],
 } as Meta;
 
 export const CompleteExample = () => {

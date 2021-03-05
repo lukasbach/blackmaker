@@ -26,7 +26,7 @@ export const PageHeader: React.FC<PageHeaderProps> = props => {
   const theme = useTheme();
 
   return (
-    <Box padding=".5em">
+    <Box padding=".5em" paddingBottom="0">
       <Flex marginBottom=".5em">
         <Flex flexGrow={1} alignItems={'center'}>
           {Array.isArray(props.actionsLeft) ? (

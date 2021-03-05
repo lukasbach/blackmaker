@@ -54,7 +54,7 @@ export const CopyToClipboardButton: React.FC<CopyToClipboardButtonProps> = props
           {...props.innerToolTipProps}
         >
           <RoundButton
-            icon={hasCopied ? IconName.Done : IconName.Copy}
+            icon={hasCopied ? IconName.Done : IconName.ContentCopy}
             intent={hasCopied ? Intent.Success : undefined}
             onClick={handler}
             {...props.buttonProps}
