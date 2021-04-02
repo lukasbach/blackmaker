@@ -15,6 +15,7 @@ export interface ParagraphProps extends HtmlElementProps<HTMLParagraphElement> {
   running?: boolean;
   noSelect?: boolean;
   intent?: Intent;
+  singleBlock?: boolean;
 }
 
 export const Paragraph: React.FC<ParagraphProps> = props => {
@@ -35,7 +36,7 @@ export const Paragraph: React.FC<ParagraphProps> = props => {
       className={cxs({
         lineHeight: props.running ? '1.5em' : undefined,
         fontSize: props.small ? '.8em' : props.large ? '1.2em' : '1em',
-        margin: '0 0 .5em 0',
+        margin: !props.singleBlock ? '0 0 .5em 0' : undefined,
         ...(props.noSelect ? noSelect : {}),
         ...props.css,
         color: (props.css || {}).color ?? color,

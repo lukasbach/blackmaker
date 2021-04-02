@@ -3,7 +3,7 @@ import { darken, lighten } from '../common';
 
 const brandColors: BrandColorSet = {
   default: '#464d5a',
-  primary: '#1abc9c',
+  primary: '#26ac91',
   info: '#3498db',
   success: '#27ae60',
   warning: '#e8a318',
@@ -33,7 +33,7 @@ export const darkTheme: ThemeDefinition = {
   },
   minimalBrandBaseColors: {
     ...brandColors,
-    default: '#5f6570',
+    default: '#666a72',
     primary: '#089479',
     info: '#3498db',
     success: '#27ae60',
@@ -59,7 +59,7 @@ export const darkTheme: ThemeDefinition = {
 
   textColor: textColor,
   textHightlightColor: '#ffffff',
-  textMutedColor: '#a2a2a2',
+  textMutedColor: '#b7b7b7',
   textDisabledColor: '#7e7e7e',
 
   borderRadiusBig: '14px',

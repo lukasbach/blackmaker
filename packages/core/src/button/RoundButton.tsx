@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Icon, IconName, Intent, switchEnum, useTheme } from '..';
+import { HtmlElementProps, Icon, IconName, Intent, switchEnum, useTheme } from '..';
 import cxs from 'cxs';
 import { MaybeFocusRing } from '../accessibility/MaybeFocusRing';
 
-export interface RoundButtonProps {
+export interface RoundButtonProps extends HtmlElementProps<HTMLButtonElement> {
   icon: IconName;
   intent?: Intent;
   size?: string | 1 | 2 | 3 | 4;
@@ -44,7 +44,9 @@ export const RoundButton: React.FC<RoundButtonProps> = props => {
             transition: '.05s background-color ease',
             backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent), 0.35),
           },
+          ...props.css,
         })}
+        {...props.elementProps}
       >
         <Icon name={props.icon} />
       </button>

@@ -30,12 +30,12 @@ to render button groups. To both you can provide a \`grow\` attribute to make it
 } as Meta;
 
 export const MinimalisticNavbar = () => (
-  <div>
+  <>
     <Navbar>
       <NavbarText element="h1">Page Title</NavbarText>
       <NavbarGroup>Content</NavbarGroup>
     </Navbar>
-  </div>
+  </>
 );
 // documentStory(MinimalisticNavbar, `
 // Use a \`Navbar\` element to render a navbar. It renders as a \`nav\` HTML element.
@@ -44,14 +44,14 @@ export const MinimalisticNavbar = () => (
 // `);
 
 export const NavbarSingleChild = () => (
-  <div>
+  <>
     <Navbar>
       <NavbarText element="h1">Page Title</NavbarText>
       <NavbarGroup>
         <Button>Button</Button>
       </NavbarGroup>
     </Navbar>
-  </div>
+  </>
 );
 documentStory(
   NavbarSingleChild,
@@ -63,7 +63,7 @@ within a navbar.
 );
 
 export const NavbarMultipleChildren = () => (
-  <div>
+  <>
     <Navbar>
       <NavbarText element="h1">Page Title</NavbarText>
       <NavbarGroup>
@@ -72,7 +72,7 @@ export const NavbarMultipleChildren = () => (
         <Button>Button</Button>
       </NavbarGroup>
     </Navbar>
-  </div>
+  </>
 );
 documentStory(
   NavbarMultipleChildren,
@@ -83,7 +83,7 @@ The \`NavbarGroup\` element turns into a \`ul\` element.
 );
 
 export const NavbarGrowingChildren = () => (
-  <div>
+  <>
     <Navbar>
       <NavbarText element="h1">Page Title</NavbarText>
       <NavbarGroup grow={true}>
@@ -94,11 +94,11 @@ export const NavbarGrowingChildren = () => (
         <Button>Button</Button>
       </NavbarGroup>
     </Navbar>
-  </div>
+  </>
 );
 
 export const CondensedNavbar = () => (
-  <div>
+  <>
     <Navbar condensed={true}>
       <NavbarText element="h1">Page Title</NavbarText>
       <NavbarGroup grow={true}>
@@ -109,11 +109,11 @@ export const CondensedNavbar = () => (
         <Button>Button</Button>
       </NavbarGroup>
     </Navbar>
-  </div>
+  </>
 );
 
 export const NavbarsWithDifferentBackgrounds = () => (
-  <div>
+  <>
     {[
       BackgroundColor.Primary,
       BackgroundColor.Secondary,
@@ -132,11 +132,11 @@ export const NavbarsWithDifferentBackgrounds = () => (
         </NavbarGroup>
       </Navbar>
     ))}
-  </div>
+  </>
 );
 
 export const ComplexExample = () => (
-  <div>
+  <>
     <Helmet>
       <style>{' .story-inner { padding: 0 !important; } '}</style>
     </Helmet>
@@ -188,5 +188,5 @@ export const ComplexExample = () => (
         <Button outlined={true}>Save</Button>
       </NavbarGroup>
     </Navbar>
-  </div>
+  </>
 );

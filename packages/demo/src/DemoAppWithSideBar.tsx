@@ -23,7 +23,7 @@ export const DemoAppWithSideBar: React.FC = props => {
   const [collapsed, setCollapsed] = useState(false);
   const theme = useTheme();
   return (
-    <Flex height="100%" backgroundColor={theme.getBackgroundColor(BackgroundColor.Secondary)}>
+    <Flex height="100%" backgroundColor={theme.getBackgroundColor(BackgroundColor.Primary)}>
       <SideNavigation
         items={[
           <Flex height="5em" alignItems="center" justifyContent="center">

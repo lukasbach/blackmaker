@@ -25,6 +25,7 @@ export const brightTheme: ThemeDefinition = {
   },
   minimalBrandBaseColors: {
     ...darkTheme.minimalBrandBaseColors,
+    default: '#9299a2',
   },
   brandButtonShadowColors: {
     ...darkTheme.brandButtonShadowColors,
@@ -42,11 +43,11 @@ export const brightTheme: ThemeDefinition = {
 
   primaryBackgroundColor: '#ffffff',
   secondaryBackgroundColor: '#f2f4f7',
-  tertiaryBackgroundColor: '#ebedf0',
+  tertiaryBackgroundColor: '#d6d8db',
   menuBackgroundColor: '#f8f8f8',
 
   textColor: textColor,
-  textHightlightColor: '#3c3c3c',
+  textHightlightColor: '#1d1d1d',
   textMutedColor: '#7e7e7e',
   textDisabledColor: '#bababa',
 

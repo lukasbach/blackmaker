@@ -43,7 +43,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         color: theme.getTextColorOnBrandColors(props.intent ?? Intent.Primary),
       }
     : {
-        backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.2),
+        backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.1),
       };
   const activeStyles: CSSObject = !props.minimal
     ? {
@@ -51,7 +51,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
         color: theme.getTextColorOnBrandColors(props.intent ?? Intent.Primary),
       }
     : {
-        backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.3),
+        backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(props.intent ?? Intent.Primary), 0.2),
       };
 
   const interactive = props.interactive ?? (!props.disabled && !props.selected);
@@ -72,7 +72,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
           fontSize: 'inherit',
           textAlign: 'inherit',
           outline: 'none',
-          padding: !props.compact ? '8px 12px' : '2px 12px',
+          padding: !props.compact ? '7px 12px' : '4px 12px',
           marginBottom: '2px',
           borderRadius: theme.definition.borderRadiusSmall,
           cursor: props.disabled ? 'not-allowed' : interactive ? 'pointer' : undefined,
@@ -91,7 +91,7 @@ export const MenuItem: React.FC<MenuItemProps> = props => {
                 ':active': activeStyles,
               }
             : {
-                color: theme.definition.textMutedColor,
+                color: theme.definition.textDisabledColor,
               }),
           [` .${subTextClass}`]: {
             ...(!props.dontTruncate && truncateCode),

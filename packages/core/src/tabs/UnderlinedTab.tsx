@@ -46,7 +46,7 @@ export const UnderlinedTab = React.forwardRef<HTMLButtonElement, React.PropsWith
                   color: theme.definition.textHightlightColor,
                 },
                 ':active': {
-                  backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(intent), 0.2),
+                  backgroundColor: theme.colorWithAlpha(theme.getMinimalBrandBaseColor(intent), 0.1),
                   transition: '.05s all ease',
                 },
               }),

@@ -40,6 +40,7 @@ const Item: React.FC<{
         <MenuItem
           {...itemAsMenuItem}
           minimal={!itemAsMenuItem.selected}
+          intent={!itemAsMenuItem.selected ? Intent.Default : undefined}
           iconRight={undefined}
           icon={undefined}
           text={undefined}
@@ -65,7 +66,13 @@ const Item: React.FC<{
       return <MenuHeader>{props.item}</MenuHeader>;
     } else if (!props.collapsed) {
       const itemAsMenuItem = props.item as SideNavigationItem;
-      return <MenuItem minimal={!itemAsMenuItem.selected} {...itemAsMenuItem} />;
+      return (
+        <MenuItem
+          minimal={!itemAsMenuItem.selected}
+          intent={!itemAsMenuItem.selected ? Intent.Default : undefined}
+          {...itemAsMenuItem}
+        />
+      );
     } else {
       return null;
     }
@@ -74,13 +81,13 @@ const Item: React.FC<{
 
 export const SideNavigation: React.FC<SideNavigationProps> = props => {
   const theme = useTheme();
-  const width = props.isCollapsed ? '80px' : typeof props.width === 'number' ? `${props.width}px` : props.width;
+  const width = props.isCollapsed ? '5em' : typeof props.width === 'number' ? `${props.width}px` : props.width;
   return (
     <nav
       className={cxs({
         width,
         minWidth: width,
-        backgroundColor: theme.getBackgroundColor(props.background ?? BackgroundColor.Tertiary),
+        backgroundColor: theme.getBackgroundColor(props.background ?? BackgroundColor.Secondary),
         height: '100%',
         padding: '.8em',
         display: 'flex',
@@ -130,6 +137,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = props => {
           directContent={props.isCollapsed ? <Icon name={IconName.ChevronRight} /> : undefined}
           css={props.isCollapsed ? { alignItems: 'center', justifyContent: 'center' } : undefined}
           minimal={true}
+          intent={Intent.Default}
           onClick={() => props.onChangeCollapsed(!props.isCollapsed)}
         />
       </div>

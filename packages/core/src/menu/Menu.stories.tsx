@@ -165,9 +165,13 @@ export const MinimalMenuWithSubtext = () => (
 
 export const MenuWithoutBackground = () => (
   <Menu background={false}>
-    <MenuItem text="Some Text" />
-    <MenuItem text="Some Text" />
-    <MenuItem icon={IconName.Check} text="Some Text" />
-    <MenuItem text="Some Text" />
+    <MenuHeader>Wiki</MenuHeader>
+    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.Home} text="Home" />
+    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.Face} text="Characters" />
+    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.LocalShipping} text="Vehicles" />
+    <MenuItem selected={true} icon={IconName.Flight} text="Starships" />
+    <MenuHeader>Wiki</MenuHeader>
+    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.Bookmark} text="Bookmarks" />
+    <MenuItem intent={Intent.Default} minimal={true} icon={IconName.AttachFile} text="Files" />
   </Menu>
 );

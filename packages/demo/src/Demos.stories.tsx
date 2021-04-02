@@ -8,3 +8,4 @@ export default {
 } as Meta;
 
 export * from './DemoAppWithSideBar';
+export * from './DemoAppWithNavbar';

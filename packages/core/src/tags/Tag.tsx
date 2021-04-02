@@ -68,7 +68,7 @@ export const Tag: React.FC<TagProps> = props => {
       <RenderMaybeIcon
         icon={props.icon}
         iconProps={{
-          size: '18px',
+          size: '15px',
           marginRight: true,
         }}
       />
@@ -77,7 +77,7 @@ export const Tag: React.FC<TagProps> = props => {
       <RenderMaybeIcon
         icon={props.rightIcon}
         iconProps={{
-          size: '18px',
+          size: '15px',
           marginLeft: true,
         }}
       />
